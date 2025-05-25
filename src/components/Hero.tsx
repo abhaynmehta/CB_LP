@@ -1,6 +1,5 @@
 
 import { motion } from 'framer-motion';
-import { useSpring, animated } from '@react-spring/web';
 import { Button } from '@/components/ui/button';
 import { Play } from 'lucide-react';
 import { useState } from 'react';
@@ -8,21 +7,68 @@ import { useState } from 'react';
 const Hero = () => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const springProps = useSpring({
-    transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-    config: { tension: 300, friction: 10 }
-  });
-
   return (
-    <section className="relative min-h-screen bg-black text-white overflow-hidden">
-      {/* Background Image */}
+    <section className="relative min-h-screen bg-brand-black text-white overflow-hidden">
+      {/* Animated Background */}
       <div className="absolute inset-0">
-        <img 
-          src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-          alt="Fashion model"
-          className="w-full h-full object-cover opacity-60"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-black via-brand-cod-gray to-brand-black"></div>
+        
+        {/* Floating geometric shapes */}
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            className="absolute top-20 left-10 w-32 h-32 bg-brand-mountain-meadow/10 rounded-full blur-xl"
+            animate={{
+              x: [0, 100, 0],
+              y: [0, -50, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute top-40 right-20 w-24 h-24 bg-brand-gossamer/15 rounded-full blur-lg"
+            animate={{
+              x: [0, -80, 0],
+              y: [0, 60, 0],
+              scale: [1, 0.8, 1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}
+          />
+          <motion.div
+            className="absolute bottom-32 left-1/3 w-40 h-40 bg-brand-mountain-meadow/5 rounded-full blur-2xl"
+            animate={{
+              x: [0, 120, 0],
+              y: [0, -80, 0],
+              scale: [1, 1.3, 1],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+          />
+        </div>
+
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="w-full h-full" style={{
+            backgroundImage: `
+              linear-gradient(${isHovered ? '#15cea0' : '#1a1a1a'} 1px, transparent 1px),
+              linear-gradient(90deg, ${isHovered ? '#15cea0' : '#1a1a1a'} 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px',
+            transition: 'all 0.3s ease'
+          }}></div>
+        </div>
       </div>
 
       <div className="relative z-10 container mx-auto px-6 py-20 min-h-screen flex items-center">
@@ -35,7 +81,7 @@ const Hero = () => {
           >
             We Craft Brands
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer">
               Like Haute Couture.
             </span>
           </motion.h1>
@@ -55,25 +101,33 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 1 }}
             className="flex flex-col sm:flex-row gap-6"
           >
-            <Button 
-              size="lg"
-              className="bg-white text-black hover:bg-gray-100 font-inter font-semibold px-8 py-4 text-lg transition-all duration-300"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              EXPLORE OUR WORK
-            </Button>
+              <Button 
+                size="lg"
+                className="bg-brand-mountain-meadow text-brand-black hover:bg-brand-gossamer font-inter font-semibold px-8 py-4 text-lg transition-all duration-300"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                EXPLORE OUR WORK
+              </Button>
+            </motion.div>
 
-            <animated.div style={springProps}>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-white text-white hover:bg-white hover:text-black font-inter font-semibold px-8 py-4 text-lg transition-all duration-300"
+                className="border-brand-mountain-meadow text-brand-mountain-meadow hover:bg-brand-mountain-meadow hover:text-brand-black font-inter font-semibold px-8 py-4 text-lg transition-all duration-300"
               >
                 <Play className="mr-2 h-5 w-5" />
                 WATCH OUR STORY
               </Button>
-            </animated.div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
@@ -85,8 +139,8 @@ const Hero = () => {
         transition={{ duration: 1, delay: 1.5 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
-        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-bounce"></div>
+        <div className="w-6 h-10 border-2 border-brand-mountain-meadow rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-brand-mountain-meadow rounded-full mt-2 animate-bounce"></div>
         </div>
       </motion.div>
     </section>
