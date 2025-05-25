@@ -56,7 +56,7 @@ const BookCall = () => {
             className="font-inter text-sm text-gray-400 mt-6"
           >
             30-minute strategy session • No commitment required
-          </p>
+          </motion.p>
         </motion.div>
       </div>
     </section>
