@@ -21,8 +21,8 @@ const Hero = () => {
     <section className="relative min-h-screen bg-brand-black text-white overflow-hidden">
       <AnimatedBackground />
 
-      <div className="relative z-10 container mx-auto px-6 py-20 min-h-screen flex items-center">
-        <div className="max-w-4xl">
+      <div className="relative z-10 container mx-auto px-6 py-20 min-h-screen flex items-center justify-center">
+        <div className="max-w-4xl text-center">
           <motion.h1 
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -40,7 +40,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="font-inter text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl leading-relaxed"
+            className="font-inter text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed"
           >
             Premium content creation and brand strategy that transforms businesses into luxury experiences.
           </motion.p>
@@ -49,7 +49,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1 }}
-            className="flex flex-col sm:flex-row gap-6"
+            className="flex flex-col sm:flex-row gap-6 justify-center"
           >
             <animated.div style={buttonSpring}>
               <Button 
