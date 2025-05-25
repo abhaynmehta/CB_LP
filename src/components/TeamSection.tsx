@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -24,7 +25,7 @@ const teamMembers = [
   }
 ];
 
-const AboutUs = () => {
+const TeamSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -53,30 +54,40 @@ const AboutUs = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
             {teamMembers.map((member, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.9 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="text-center group"
               >
-                <div className="relative mb-6 mx-auto w-48 h-48">
+                <motion.div 
+                  className="relative mb-6 mx-auto w-56 h-56"
+                  whileHover={{ scale: 1.1, rotateY: 15 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <img 
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full rounded-full object-cover border-4 border-brand-mountain-meadow group-hover:border-brand-gossamer transition-colors duration-300"
+                    className="w-full h-full rounded-full object-cover border-4 border-brand-mountain-meadow group-hover:border-brand-gossamer transition-colors duration-300 shadow-2xl"
                   />
-                  <div className="absolute inset-0 rounded-full bg-brand-mountain-meadow/0 group-hover:bg-brand-mountain-meadow/10 transition-all duration-300"></div>
-                </div>
-                <h3 className="font-playfair text-2xl font-semibold text-white mb-2 group-hover:text-brand-mountain-meadow transition-colors duration-300">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-t from-brand-mountain-meadow/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+                </motion.div>
+                
+                <motion.h3 
+                  className="font-playfair text-2xl font-semibold text-white mb-2 group-hover:text-brand-mountain-meadow transition-colors duration-300"
+                  whileHover={{ scale: 1.05 }}
+                >
                   {member.name}
-                </h3>
-                <p className="font-inter text-brand-mountain-meadow uppercase tracking-wider text-sm mb-3">
+                </motion.h3>
+                
+                <p className="font-inter text-brand-mountain-meadow uppercase tracking-wider text-sm mb-4 font-semibold">
                   {member.role}
                 </p>
-                <p className="font-inter text-gray-300 text-sm leading-relaxed">
+                
+                <p className="font-inter text-gray-300 text-sm leading-relaxed max-w-xs mx-auto">
                   {member.bio}
                 </p>
               </motion.div>
@@ -86,10 +97,10 @@ const AboutUs = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
             className="text-center"
           >
-            <div className="bg-brand-mountain-meadow/10 rounded-2xl p-8 border border-brand-mountain-meadow/20">
+            <div className="bg-gradient-to-r from-brand-mountain-meadow/10 to-brand-gossamer/10 rounded-2xl p-8 border border-brand-mountain-meadow/20 backdrop-blur-sm">
               <h3 className="font-playfair text-3xl font-bold text-white mb-4">
                 Our Mission
               </h3>
@@ -105,4 +116,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default TeamSection;
