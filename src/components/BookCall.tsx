@@ -16,7 +16,7 @@ const BookCall = () => {
   };
 
   return (
-    <section ref={ref} className="py-20 bg-gradient-to-br from-gray-900 to-black text-white">
+    <section ref={ref} className="py-20 bg-gradient-to-br from-brand-cod-gray to-brand-black text-white">
       <div className="container mx-auto px-6 text-center">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
@@ -41,7 +41,7 @@ const BookCall = () => {
             <Button 
               size="lg"
               onClick={openCalendly}
-              className="bg-white text-black hover:bg-gray-100 font-inter font-semibold px-8 py-4 text-lg transition-all duration-300 group"
+              className="bg-brand-mountain-meadow text-brand-black hover:bg-brand-gossamer font-inter font-semibold px-8 py-4 text-lg transition-all duration-300 group"
             >
               <Calendar className="mr-2 h-5 w-5" />
               BOOK A DISCOVERY CALL

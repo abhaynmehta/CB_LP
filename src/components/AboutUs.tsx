@@ -1,0 +1,107 @@
+
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
+
+const teamMembers = [
+  {
+    name: "Alex Johnson",
+    role: "Creative Director",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    bio: "10+ years crafting luxury brand experiences"
+  },
+  {
+    name: "Sarah Chen", 
+    role: "Strategy Lead",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    bio: "Expert in digital transformation and brand positioning"
+  },
+  {
+    name: "Marcus Rivera",
+    role: "Tech Director",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    bio: "Full-stack architect building scalable solutions"
+  },
+  {
+    name: "Emma Thompson",
+    role: "Content Specialist",
+    image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    bio: "Storyteller with a passion for visual narratives"
+  }
+];
+
+const AboutUs = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  return (
+    <section ref={ref} className="py-20 bg-brand-cod-gray">
+      <div className="container mx-auto px-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="font-playfair text-4xl md:text-6xl font-bold text-white mb-8">
+            About Us
+          </h2>
+          <p className="font-inter text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            We are a team of passionate creatives, strategists, and technologists dedicated to 
+            transforming brands into luxury experiences. Our approach combines artistic vision 
+            with strategic thinking to deliver exceptional results.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          {teamMembers.map((member, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="text-center group"
+            >
+              <div className="relative mb-6 mx-auto w-48 h-48">
+                <img 
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full rounded-full object-cover border-4 border-brand-mountain-meadow group-hover:border-brand-gossamer transition-colors duration-300"
+                />
+                <div className="absolute inset-0 rounded-full bg-brand-mountain-meadow/0 group-hover:bg-brand-mountain-meadow/10 transition-all duration-300"></div>
+              </div>
+              <h3 className="font-playfair text-2xl font-semibold text-white mb-2 group-hover:text-brand-mountain-meadow transition-colors duration-300">
+                {member.name}
+              </h3>
+              <p className="font-inter text-brand-mountain-meadow uppercase tracking-wider text-sm mb-3">
+                {member.role}
+              </p>
+              <p className="font-inter text-gray-300 text-sm leading-relaxed">
+                {member.bio}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="text-center"
+        >
+          <div className="bg-brand-mountain-meadow/10 rounded-2xl p-8 border border-brand-mountain-meadow/20">
+            <h3 className="font-playfair text-3xl font-bold text-white mb-4">
+              Our Mission
+            </h3>
+            <p className="font-inter text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
+              To elevate brands through innovative design, strategic thinking, and cutting-edge technology. 
+              We believe every brand has the potential to become extraordinary.
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default AboutUs;
