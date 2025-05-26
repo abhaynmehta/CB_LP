@@ -83,8 +83,21 @@ const LiveScrollGallery = () => {
   // Create enough repeated items for seamless infinite scroll
   const repeatedItems = [...clientWork, ...clientWork, ...clientWork, ...clientWork];
 
+  // CSS animation keyframes as a string
+  const scrollAnimation = `
+    @keyframes scroll-infinite {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-${clientWork.length * totalItemWidth}px);
+      }
+    }
+  `;
+
   return (
     <section ref={ref} className="py-20 bg-brand-black overflow-hidden">
+      <style dangerouslySetInnerHTML={{ __html: scrollAnimation }} />
       <div className="container mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
@@ -121,7 +134,7 @@ const LiveScrollGallery = () => {
           <div 
             className="flex gap-6 w-max"
             style={{
-              animation: `scroll-infinite 40s linear infinite ${isHovered ? 'paused' : 'running'}`,
+              animation: `scroll-infinite 25s linear infinite ${isHovered ? 'paused' : 'running'}`,
               width: `${repeatedItems.length * totalItemWidth}px`
             }}
           >
@@ -339,17 +352,6 @@ const LiveScrollGallery = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style jsx>{`
-        @keyframes scroll-infinite {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-${clientWork.length * totalItemWidth}px);
-          }
-        }
-      `}</style>
     </section>
   );
 };
