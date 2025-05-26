@@ -17,9 +17,24 @@ const Hero = () => {
     config: { tension: 300, friction: 10 }
   });
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative min-h-screen bg-brand-black text-white overflow-hidden">
       <AnimatedBackground />
+
+      {/* Gradient Overlay */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2 }}
+        className="absolute inset-0 bg-gradient-to-br from-brand-mountain-meadow/10 via-transparent to-brand-gossamer/10 z-5"
+      />
 
       <div className="relative z-10 container mx-auto px-6 py-20 min-h-screen flex items-center justify-center">
         <div className="max-w-4xl text-center">
@@ -31,9 +46,13 @@ const Hero = () => {
           >
             We Craft Brands
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer">
+            <motion.span 
+              className="text-transparent bg-clip-text bg-gradient-to-r from-brand-mountain-meadow via-brand-gossamer to-brand-mountain-meadow bg-300% animate-gradient"
+              animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            >
               Like Haute Couture.
-            </span>
+            </motion.span>
           </motion.h1>
 
           <motion.p 
@@ -54,7 +73,8 @@ const Hero = () => {
             <animated.div style={buttonSpring}>
               <Button 
                 size="lg"
-                className="bg-brand-mountain-meadow text-brand-black hover:bg-brand-gossamer font-inter font-semibold px-8 py-4 text-lg transition-all duration-300"
+                onClick={() => scrollToSection('portfolio')}
+                className="bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer text-brand-black hover:from-brand-gossamer hover:to-brand-mountain-meadow font-inter font-semibold px-8 py-4 text-lg transition-all duration-300 rounded-full"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
@@ -69,7 +89,8 @@ const Hero = () => {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="border-brand-mountain-meadow text-brand-mountain-meadow hover:bg-brand-mountain-meadow hover:text-brand-black font-inter font-semibold px-8 py-4 text-lg transition-all duration-300"
+                onClick={() => scrollToSection('videos')}
+                className="border-2 border-brand-mountain-meadow text-brand-mountain-meadow hover:bg-gradient-to-r hover:from-brand-mountain-meadow/20 hover:to-brand-gossamer/20 hover:text-white font-inter font-semibold px-8 py-4 text-lg transition-all duration-300 rounded-full backdrop-blur-sm"
               >
                 <Play className="mr-2 h-5 w-5" />
                 WATCH OUR STORY
@@ -84,15 +105,19 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
+        onClick={() => scrollToSection('portfolio')}
       >
-        <div className="w-6 h-10 border-2 border-brand-mountain-meadow rounded-full flex justify-center">
+        <motion.div 
+          className="w-6 h-10 border-2 border-brand-mountain-meadow rounded-full flex justify-center"
+          whileHover={{ scale: 1.1 }}
+        >
           <motion.div 
-            className="w-1 h-3 bg-brand-mountain-meadow rounded-full mt-2"
+            className="w-1 h-3 bg-gradient-to-b from-brand-mountain-meadow to-brand-gossamer rounded-full mt-2"
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   );

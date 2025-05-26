@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -75,6 +74,9 @@ export default {
 					'gossamer': '#0c9a77'
 				}
 			},
+			backgroundSize: {
+				'300%': '300%',
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
@@ -134,6 +136,17 @@ export default {
 					'100%': {
 						transform: 'translateX(-50%)'
 					}
+				},
+				'gradient': {
+					'0%': {
+						backgroundPosition: '0% 50%'
+					},
+					'50%': {
+						backgroundPosition: '100% 50%'
+					},
+					'100%': {
+						backgroundPosition: '0% 50%'
+					}
 				}
 			},
 			animation: {
@@ -142,7 +155,8 @@ export default {
 				'fade-in': 'fade-in 0.6s ease-out',
 				'slide-up': 'slide-up 0.8s ease-out',
 				'scale-in': 'scale-in 0.5s ease-out',
-				'scroll-x': 'scroll-x 30s linear infinite'
+				'scroll-x': 'scroll-x 30s linear infinite',
+				'gradient': 'gradient 6s ease infinite'
 			}
 		}
 	},
