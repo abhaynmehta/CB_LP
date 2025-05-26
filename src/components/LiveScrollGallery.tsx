@@ -71,13 +71,26 @@ const LiveScrollGallery = () => {
   const [selectedClient, setSelectedClient] = useState<typeof clientWork[0] | null>(null);
   const [scrollX, setScrollX] = useState(0);
 
+  // Calculate total width of one set of items (including gaps)
+  const itemWidth = 320; // 80 * 4 (w-80 = 320px)
+  const gap = 24; // gap-6 = 24px
+  const totalItemWidth = itemWidth + gap;
+  const totalSetWidth = clientWork.length * totalItemWidth;
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setScrollX(prev => prev - 1);
-    }, 50);
+      setScrollX(prev => {
+        const newValue = prev - 2; // Increased from 1 to 2 for faster scrolling
+        // Reset to 0 when we've scrolled one complete set
+        if (Math.abs(newValue) >= totalSetWidth) {
+          return 0;
+        }
+        return newValue;
+      });
+    }, 16); // Reduced from 50 to 16 for smoother animation (60fps)
 
     return () => clearInterval(interval);
-  }, []);
+  }, [totalSetWidth]);
 
   const springProps = useSpring({
     transform: `translateX(${scrollX}px)`,
@@ -87,6 +100,9 @@ const LiveScrollGallery = () => {
   const openVideo = (videoId: string) => {
     window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
   };
+
+  // Create multiple sets for seamless looping
+  const repeatedItems = [...clientWork, ...clientWork, ...clientWork];
 
   return (
     <section ref={ref} className="py-20 bg-brand-black overflow-hidden">
@@ -116,10 +132,10 @@ const LiveScrollGallery = () => {
             style={springProps}
             className="flex gap-6 w-max"
           >
-            {[...clientWork, ...clientWork].map((client, index) => (
+            {repeatedItems.map((client, index) => (
               <motion.div
                 key={`${client.id}-${index}`}
-                className="relative cursor-pointer group w-80 h-96 overflow-hidden bg-brand-cod-gray rounded-lg"
+                className="relative cursor-pointer group w-80 h-96 overflow-hidden bg-brand-cod-gray rounded-lg flex-shrink-0"
                 whileHover={{ scale: 1.05, y: -10 }}
                 transition={{ duration: 0.3 }}
                 onClick={() => setSelectedClient(client)}
