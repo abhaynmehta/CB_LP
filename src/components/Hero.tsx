@@ -8,20 +8,11 @@ import AnimatedBackground from './AnimatedBackground';
 
 const Hero = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isBrewingHovered, setIsBrewingHovered] = useState(false);
 
   const buttonSpring = useSpring({
     transform: isHovered ? 'scale(1.05) translateY(-2px)' : 'scale(1) translateY(0px)',
     boxShadow: isHovered 
       ? '0 20px 40px rgba(21, 206, 160, 0.3)' 
-      : '0 10px 20px rgba(0, 0, 0, 0.1)',
-    config: { tension: 300, friction: 10 }
-  });
-
-  const brewingButtonSpring = useSpring({
-    transform: isBrewingHovered ? 'scale(1.05) rotateY(5deg)' : 'scale(1) rotateY(0deg)',
-    boxShadow: isBrewingHovered 
-      ? '0 15px 30px rgba(196, 113, 64, 0.3)' 
       : '0 10px 20px rgba(0, 0, 0, 0.1)',
     config: { tension: 300, friction: 10 }
   });
@@ -37,12 +28,12 @@ const Hero = () => {
     <section className="relative min-h-screen bg-brand-black text-white overflow-hidden">
       <AnimatedBackground />
 
-      {/* Enhanced Gradient Overlay with brewing colors */}
+      {/* Gradient Overlay */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
-        className="absolute inset-0 bg-gradient-to-br from-brand-mountain-meadow/10 via-transparent to-amber-800/5 z-5"
+        className="absolute inset-0 bg-gradient-to-br from-brand-mountain-meadow/10 via-transparent to-brand-gossamer/10 z-5"
       />
 
       <div className="relative z-10 container mx-auto px-6 py-20 min-h-screen flex items-center justify-center">
@@ -56,7 +47,7 @@ const Hero = () => {
             We Craft Brands
             <br />
             <motion.span 
-              className="text-transparent bg-clip-text bg-gradient-to-r from-brand-mountain-meadow via-brand-gossamer to-amber-600 bg-300% animate-gradient"
+              className="text-transparent bg-clip-text bg-gradient-to-r from-brand-mountain-meadow via-brand-gossamer to-brand-mountain-meadow bg-300% animate-gradient"
               animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
               transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
             >
@@ -91,24 +82,25 @@ const Hero = () => {
               </Button>
             </animated.div>
 
-            <animated.div style={brewingButtonSpring}>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <Button 
                 variant="outline" 
                 size="lg"
                 onClick={() => scrollToSection('videos')}
-                className="border-2 border-brand-mountain-meadow text-brand-mountain-meadow hover:bg-gradient-to-r hover:from-brand-mountain-meadow/20 hover:to-amber-600/20 hover:text-white font-inter font-semibold px-8 py-4 text-lg transition-all duration-300 rounded-full backdrop-blur-sm"
-                onMouseEnter={() => setIsBrewingHovered(true)}
-                onMouseLeave={() => setIsBrewingHovered(false)}
+                className="border-2 border-brand-mountain-meadow text-brand-mountain-meadow hover:bg-gradient-to-r hover:from-brand-mountain-meadow/20 hover:to-brand-gossamer/20 hover:text-white font-inter font-semibold px-8 py-4 text-lg transition-all duration-300 rounded-full backdrop-blur-sm"
               >
                 <Play className="mr-2 h-5 w-5" />
                 WATCH OUR STORY
               </Button>
-            </animated.div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
 
-      {/* Enhanced Scroll Indicator with brewing theme */}
+      {/* Scroll Indicator */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -117,26 +109,13 @@ const Hero = () => {
         onClick={() => scrollToSection('portfolio')}
       >
         <motion.div 
-          className="w-6 h-10 border-2 border-brand-mountain-meadow rounded-full flex justify-center relative overflow-hidden"
+          className="w-6 h-10 border-2 border-brand-mountain-meadow rounded-full flex justify-center"
           whileHover={{ scale: 1.1 }}
         >
           <motion.div 
-            className="w-1 h-3 bg-gradient-to-b from-brand-mountain-meadow to-amber-600 rounded-full mt-2"
+            className="w-1 h-3 bg-gradient-to-b from-brand-mountain-meadow to-brand-gossamer rounded-full mt-2"
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-          />
-          {/* Steam effect on scroll indicator */}
-          <motion.div
-            className="absolute -top-2 left-1/2 w-px h-4 bg-white opacity-20 transform -translate-x-1/2"
-            animate={{
-              height: [0, 8, 0],
-              opacity: [0, 0.3, 0],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              delay: 0.5
-            }}
           />
         </motion.div>
       </motion.div>

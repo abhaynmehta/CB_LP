@@ -2,7 +2,6 @@
 import { motion } from 'framer-motion';
 import { useSpring, animated } from '@react-spring/web';
 import { useState, useEffect } from 'react';
-import BrewingElements from './BrewingElements';
 
 const AnimatedBackground = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -28,7 +27,7 @@ const AnimatedBackground = () => {
     <div className="absolute inset-0">
       <div className="absolute inset-0 bg-gradient-to-br from-brand-black via-brand-cod-gray to-brand-black"></div>
       
-      {/* Enhanced floating geometric shapes with brewing theme */}
+      {/* Floating geometric shapes */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute top-20 left-10 w-32 h-32 bg-brand-mountain-meadow/10 rounded-full blur-xl"
@@ -36,7 +35,6 @@ const AnimatedBackground = () => {
             x: [0, 100, 0],
             y: [0, -50, 0],
             scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
           }}
           transition={{
             duration: 8,
@@ -56,7 +54,6 @@ const AnimatedBackground = () => {
             x: [0, 120, 0],
             y: [0, -80, 0],
             scale: [1, 1.3, 1],
-            rotate: [0, -90, 0],
           }}
           transition={{
             duration: 10,
@@ -65,28 +62,9 @@ const AnimatedBackground = () => {
             delay: 2
           }}
         />
-
-        {/* New brewing-themed shapes */}
-        <motion.div
-          className="absolute top-1/2 right-1/4 w-20 h-20 bg-amber-800/10 blur-lg"
-          style={{
-            clipPath: 'ellipse(50% 60% at 50% 40%)',
-          }}
-          animate={{
-            scale: [1, 1.1, 1],
-            rotate: [0, 360],
-            y: [0, -30, 0],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-        />
       </div>
 
-      {/* Enhanced interactive grid pattern with brewing theme */}
+      {/* Interactive grid pattern */}
       <motion.div 
         className="absolute inset-0 opacity-5"
         animate={{
@@ -100,39 +78,11 @@ const AnimatedBackground = () => {
         style={{
           backgroundImage: `
             linear-gradient(#15cea0 1px, transparent 1px),
-            linear-gradient(90deg, #15cea0 1px, transparent 1px),
-            radial-gradient(circle at 25% 25%, rgba(21, 206, 160, 0.1) 1px, transparent 1px),
-            radial-gradient(circle at 75% 75%, rgba(196, 113, 64, 0.1) 1px, transparent 1px)
+            linear-gradient(90deg, #15cea0 1px, transparent 1px)
           `,
-          backgroundSize: '50px 50px, 50px 50px, 25px 25px, 25px 25px',
+          backgroundSize: '50px 50px',
         }}
       />
-
-      {/* Coffee aroma waves */}
-      <div className="absolute inset-0 overflow-hidden">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute bottom-0 left-0 right-0 h-32 opacity-5"
-            style={{
-              background: `radial-gradient(ellipse at center bottom, rgba(196, 113, 64, 0.3) 0%, transparent 70%)`,
-            }}
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.05, 0.1, 0.05],
-            }}
-            transition={{
-              duration: 4 + i,
-              repeat: Infinity,
-              delay: i * 0.5,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Brewing Elements Integration */}
-      <BrewingElements />
     </div>
   );
 };
