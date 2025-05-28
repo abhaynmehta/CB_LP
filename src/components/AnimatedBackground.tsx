@@ -7,21 +7,43 @@ import ThreeScene from './ThreeScene';
 
 const AnimatedBackground = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isInteracting, setIsInteracting] = useState(false);
 
   useEffect(() => {
+    let interactionTimer: NodeJS.Timeout;
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: e.clientX / window.innerWidth,
         y: e.clientY / window.innerHeight,
       });
+      setIsInteracting(true);
+      clearTimeout(interactionTimer);
+      interactionTimer = setTimeout(() => {
+        setIsInteracting(false);
+      }, 1000);
+    };
+
+    const handleScroll = () => {
+      setIsInteracting(true);
+      clearTimeout(interactionTimer);
+      interactionTimer = setTimeout(() => {
+        setIsInteracting(false);
+      }, 1000);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(interactionTimer);
+    };
   }, []);
 
   const springProps = useSpring({
-    transform: `translate3d(${mousePosition.x * 30}px, ${mousePosition.y * 30}px, 0)`,
+    transform: `translate3d(${mousePosition.x * (isInteracting ? 10 : 30)}px, ${mousePosition.y * (isInteracting ? 10 : 30)}px, 0)`,
     config: { tension: 200, friction: 50 }
   });
 
@@ -46,7 +68,7 @@ const AnimatedBackground = () => {
             rotate: [0, 180, 360],
           }}
           transition={{
-            duration: 12,
+            duration: isInteracting ? 20 : 12,
             repeat: Infinity,
             ease: "easeInOut"
           }}
@@ -66,7 +88,7 @@ const AnimatedBackground = () => {
             rotate: [0, -180, -360],
           }}
           transition={{
-            duration: 15,
+            duration: isInteracting ? 25 : 15,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 2
@@ -89,7 +111,7 @@ const AnimatedBackground = () => {
               y: [0, Math.random() * 100 - 50],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: isInteracting ? 5 : 3 + Math.random() * 2,
               delay: index * 0.3,
               repeat: Infinity,
               ease: "easeInOut"
@@ -105,7 +127,7 @@ const AnimatedBackground = () => {
           backgroundPosition: ['0% 0%', '100% 100%'],
         }}
         transition={{
-          duration: 25,
+          duration: isInteracting ? 40 : 25,
           repeat: Infinity,
           ease: "linear"
         }}
