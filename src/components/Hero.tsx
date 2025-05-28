@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Play } from 'lucide-react';
 import { useState } from 'react';
 import AnimatedBackground from './AnimatedBackground';
+import TypewriterText from './TypewriterText';
 
 const Hero = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -28,7 +29,7 @@ const Hero = () => {
     <section className="relative min-h-screen bg-brand-black text-white overflow-hidden">
       <AnimatedBackground />
 
-      {/* Gradient Overlay */}
+      {/* Enhanced Gradient Overlay */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -46,13 +47,13 @@ const Hero = () => {
           >
             We Craft Brands
             <br />
-            <motion.span 
-              className="text-transparent bg-clip-text bg-gradient-to-r from-brand-mountain-meadow via-brand-gossamer to-brand-mountain-meadow bg-300% animate-gradient"
-              animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            >
-              Like Haute Couture.
-            </motion.span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-mountain-meadow via-brand-gossamer to-brand-mountain-meadow">
+              Like{' '}
+              <TypewriterText 
+                texts={['Haute Couture.', 'Fine Art.', 'Premium Luxury.', 'Digital Magic.']}
+                className="text-transparent bg-clip-text bg-gradient-to-r from-brand-mountain-meadow via-brand-gossamer to-brand-mountain-meadow"
+              />
+            </span>
           </motion.h1>
 
           <motion.p 
@@ -100,7 +101,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Enhanced Scroll Indicator */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
