@@ -5,6 +5,8 @@ import LiveScrollServices from '@/components/LiveScrollServices';
 import LiveScrollGallery from '@/components/LiveScrollGallery';
 import VideoSection from '@/components/VideoSection';
 import TeamSection from '@/components/TeamSection';
+import Testimonials from '@/components/Testimonials';
+import CaseStudies from '@/components/CaseStudies';
 import BookCall from '@/components/BookCall';
 import Footer from '@/components/Footer';
 
@@ -26,6 +28,10 @@ const Index = () => {
       </section>
       <section id="team">
         <TeamSection />
+      </section>
+      <Testimonials />
+      <section id="case-studies">
+        <CaseStudies />
       </section>
       <section id="contact">
         <BookCall />
