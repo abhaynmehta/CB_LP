@@ -15,8 +15,7 @@ const services = [
     title: "App/Web",
     subtitle: "Development", 
     description: "Custom web and mobile applications with modern tech stack and responsive design",
-    icon: "💻",
-    hasBackgroundImage: true
+    icon: "💻"
   },
   {
     title: "Content-Driven",
@@ -81,24 +80,8 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
       }}
       className="w-full min-w-[300px] max-w-[350px] flex-shrink-0"
     >
-      <div 
-        className={`h-full bg-gradient-to-br from-brand-mountain-meadow/5 via-brand-gossamer/5 to-brand-mountain-meadow/10 backdrop-blur-sm border border-brand-mountain-meadow/20 hover:border-brand-mountain-meadow/40 transition-all duration-300 shadow-lg hover:shadow-2xl rounded-lg p-6 relative overflow-hidden ${
-          service.hasBackgroundImage ? 'text-white' : ''
-        }`}
-      >
-        {service.hasBackgroundImage && (
-          <>
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80')`
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-black/70 via-brand-cod-gray/80 to-brand-black/70" />
-          </>
-        )}
-        
-        <div className="text-center pb-4 relative z-10">
+      <div className="h-full bg-gradient-to-br from-brand-mountain-meadow/5 via-brand-gossamer/5 to-brand-mountain-meadow/10 backdrop-blur-sm border border-brand-mountain-meadow/20 hover:border-brand-mountain-meadow/40 transition-all duration-300 shadow-lg hover:shadow-2xl rounded-lg p-6">
+        <div className="text-center pb-4">
           <motion.div 
             className="text-4xl mb-3"
             whileHover={{ scale: 1.1, rotate: 5 }}
@@ -125,9 +108,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
           </div>
         </div>
         <motion.p 
-          className={`leading-relaxed font-inter text-center relative z-10 ${
-            service.hasBackgroundImage ? 'text-gray-200' : 'text-gray-300'
-          }`}
+          className="text-gray-300 leading-relaxed font-inter text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: index * 0.1 + 0.4 }}
@@ -143,37 +124,41 @@ const LiveScrollServices = () => {
   const ref = useRef(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
-  const cardsPerView = 3;
-  const maxIndex = Math.max(0, services.length - cardsPerView);
+  const itemWidth = 320;
+  const gap = 24;
+  const totalItemWidth = itemWidth + gap;
+
+  const repeatedItems = [...services, ...services, ...services];
+
+  const scrollAnimation = `
+    @keyframes scroll-services {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-${services.length * totalItemWidth}px);
+      }
+    }
+  `;
 
   const scrollLeft = () => {
-    const newIndex = Math.max(0, currentIndex - 1);
-    setCurrentIndex(newIndex);
     if (scrollRef.current) {
-      const cardWidth = 320 + 24; // card width + gap
-      scrollRef.current.scrollTo({
-        left: newIndex * cardWidth,
-        behavior: 'smooth'
-      });
+      scrollRef.current.scrollBy({ left: -totalItemWidth, behavior: 'smooth' });
     }
   };
 
   const scrollRight = () => {
-    const newIndex = Math.min(maxIndex, currentIndex + 1);
-    setCurrentIndex(newIndex);
     if (scrollRef.current) {
-      const cardWidth = 320 + 24; // card width + gap
-      scrollRef.current.scrollTo({
-        left: newIndex * cardWidth,
-        behavior: 'smooth'
-      });
+      scrollRef.current.scrollBy({ left: totalItemWidth, behavior: 'smooth' });
     }
   };
 
   return (
     <section ref={ref} className="py-20 bg-brand-cod-gray relative overflow-hidden">
+      <style dangerouslySetInnerHTML={{ __html: scrollAnimation }} />
+      
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div 
@@ -240,20 +225,18 @@ const LiveScrollServices = () => {
           {/* Navigation Buttons */}
           <Button
             onClick={scrollLeft}
-            disabled={currentIndex === 0}
             variant="outline"
             size="icon"
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-brand-mountain-meadow/20 border-brand-mountain-meadow/40 hover:bg-brand-mountain-meadow/30 text-white disabled:opacity-50"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-brand-mountain-meadow/20 border-brand-mountain-meadow/40 hover:bg-brand-mountain-meadow/30 text-white"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
           
           <Button
             onClick={scrollRight}
-            disabled={currentIndex >= maxIndex}
             variant="outline"
             size="icon"
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-brand-mountain-meadow/20 border-brand-mountain-meadow/40 hover:bg-brand-mountain-meadow/30 text-white disabled:opacity-50"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-brand-mountain-meadow/20 border-brand-mountain-meadow/40 hover:bg-brand-mountain-meadow/30 text-white"
           >
             <ChevronRight className="h-4 w-4" />
           </Button>
@@ -264,52 +247,26 @@ const LiveScrollServices = () => {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="overflow-hidden"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
             <div 
-              className="flex gap-6 px-16 transition-transform duration-500"
+              className="flex gap-6 w-max px-16"
               style={{
-                width: `${services.length * 344}px` // 320px card width + 24px gap
+                animation: `scroll-services 20s linear infinite ${isHovered ? 'paused' : 'running'}`,
+                width: `${repeatedItems.length * totalItemWidth + 128}px`
               }}
             >
-              {services.map((service, index) => (
+              {repeatedItems.map((service, index) => (
                 <ServiceCard
-                  key={service.title}
+                  key={`${service.title}-${Math.floor(index / services.length)}-${index}`}
                   service={service}
-                  index={index}
+                  index={index % services.length}
                 />
               ))}
             </div>
           </motion.div>
         </div>
-
-        {/* Pagination Indicators */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ delay: 1 }}
-          className="flex justify-center mt-8 space-x-2"
-        >
-          {Array.from({ length: maxIndex + 1 }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setCurrentIndex(index);
-                if (scrollRef.current) {
-                  const cardWidth = 320 + 24;
-                  scrollRef.current.scrollTo({
-                    left: index * cardWidth,
-                    behavior: 'smooth'
-                  });
-                }
-              }}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                currentIndex === index 
-                  ? 'bg-brand-mountain-meadow w-6' 
-                  : 'bg-brand-mountain-meadow/30'
-              }`}
-            />
-          ))}
-        </motion.div>
       </div>
     </section>
   );

@@ -14,7 +14,7 @@ const FloatingShapes = ({ isMouseActive }: { isMouseActive?: boolean }) => {
 
   useFrame((state) => {
     if (groupRef.current) {
-      const speed = isMouseActive ? 0.049 : 0.1; // Reduced from 0.07 to 0.049 (30% reduction)
+      const speed = isMouseActive ? 0.07 : 0.1;
       groupRef.current.rotation.y = state.clock.elapsedTime * speed;
       groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * (speed * 2)) * 0.1;
     }
@@ -49,10 +49,10 @@ const FloatingCube = ({ position, isMouseActive }: { position: [number, number, 
 
   useFrame((state) => {
     if (meshRef.current) {
-      const speed = isMouseActive ? 0.0049 : 0.01; // Reduced from 0.007 to 0.0049
+      const speed = isMouseActive ? 0.007 : 0.01;
       meshRef.current.rotation.x += speed;
       meshRef.current.rotation.y += speed;
-      meshRef.current.position.y += Math.sin(state.clock.elapsedTime + position[0]) * (isMouseActive ? 0.00098 : 0.002); // Reduced from 0.0014 to 0.00098
+      meshRef.current.position.y += Math.sin(state.clock.elapsedTime + position[0]) * (isMouseActive ? 0.0014 : 0.002);
     }
   });
 
@@ -75,10 +75,10 @@ const FloatingSphere = ({ position, isMouseActive }: { position: [number, number
 
   useFrame((state) => {
     if (meshRef.current) {
-      const speed = isMouseActive ? 0.00245 : 0.005; // Reduced from 0.0035 to 0.00245
+      const speed = isMouseActive ? 0.0035 : 0.005;
       meshRef.current.rotation.x += speed;
       meshRef.current.rotation.z += speed;
-      meshRef.current.position.x += Math.sin(state.clock.elapsedTime * 0.5 + position[1]) * (isMouseActive ? 0.00049 : 0.001); // Reduced from 0.0007 to 0.00049
+      meshRef.current.position.x += Math.sin(state.clock.elapsedTime * 0.5 + position[1]) * (isMouseActive ? 0.0007 : 0.001);
     }
   });
 
@@ -100,7 +100,7 @@ const DigitalParticles = ({ isMouseActive }: { isMouseActive?: boolean }) => {
 
   useFrame((state) => {
     if (groupRef.current) {
-      const speed = isMouseActive ? 0.0245 : 0.05; // Reduced from 0.035 to 0.0245
+      const speed = isMouseActive ? 0.035 : 0.05;
       groupRef.current.rotation.y = state.clock.elapsedTime * speed;
     }
   });
@@ -124,9 +124,9 @@ const Particle = ({ position, isMouseActive }: { position: [number, number, numb
 
   useFrame((state) => {
     if (meshRef.current) {
-      const speed = isMouseActive ? 0.00049 : 0.001; // Reduced from 0.0007 to 0.00049
+      const speed = isMouseActive ? 0.0007 : 0.001;
       meshRef.current.position.y += Math.sin(state.clock.elapsedTime * 2 + position[0]) * speed;
-      meshRef.current.rotation.z = state.clock.elapsedTime * (isMouseActive ? 0.245 : 0.5); // Reduced from 0.35 to 0.245
+      meshRef.current.rotation.z = state.clock.elapsedTime * (isMouseActive ? 0.35 : 0.5);
     }
   });
 
