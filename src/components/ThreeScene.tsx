@@ -4,14 +4,19 @@ import { Suspense, useRef } from 'react';
 import { Mesh } from 'three';
 import { useFrame } from '@react-three/fiber';
 
+interface ThreeSceneProps {
+  isMouseActive?: boolean;
+}
+
 // Floating geometric shapes component
-const FloatingShapes = () => {
+const FloatingShapes = ({ isMouseActive }: { isMouseActive?: boolean }) => {
   const groupRef = useRef<any>();
 
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.1;
-      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
+      const speed = isMouseActive ? 0.07 : 0.1;
+      groupRef.current.rotation.y = state.clock.elapsedTime * speed;
+      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * (speed * 2)) * 0.1;
     }
   });
 
@@ -23,7 +28,7 @@ const FloatingShapes = () => {
           (Math.random() - 0.5) * 20,
           (Math.random() - 0.5) * 15,
           (Math.random() - 0.5) * 10
-        ]} />
+        ]} isMouseActive={isMouseActive} />
       ))}
       
       {/* Floating spheres */}
@@ -32,21 +37,22 @@ const FloatingShapes = () => {
           (Math.random() - 0.5) * 18,
           (Math.random() - 0.5) * 12,
           (Math.random() - 0.5) * 8
-        ]} />
+        ]} isMouseActive={isMouseActive} />
       ))}
     </group>
   );
 };
 
 // Individual floating cube
-const FloatingCube = ({ position }: { position: [number, number, number] }) => {
+const FloatingCube = ({ position, isMouseActive }: { position: [number, number, number], isMouseActive?: boolean }) => {
   const meshRef = useRef<Mesh>(null);
 
   useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.x += 0.01;
-      meshRef.current.rotation.y += 0.01;
-      meshRef.current.position.y += Math.sin(state.clock.elapsedTime + position[0]) * 0.002;
+      const speed = isMouseActive ? 0.007 : 0.01;
+      meshRef.current.rotation.x += speed;
+      meshRef.current.rotation.y += speed;
+      meshRef.current.position.y += Math.sin(state.clock.elapsedTime + position[0]) * (isMouseActive ? 0.0014 : 0.002);
     }
   });
 
@@ -64,14 +70,15 @@ const FloatingCube = ({ position }: { position: [number, number, number] }) => {
 };
 
 // Individual floating sphere
-const FloatingSphere = ({ position }: { position: [number, number, number] }) => {
+const FloatingSphere = ({ position, isMouseActive }: { position: [number, number, number], isMouseActive?: boolean }) => {
   const meshRef = useRef<Mesh>(null);
 
   useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.x += 0.005;
-      meshRef.current.rotation.z += 0.005;
-      meshRef.current.position.x += Math.sin(state.clock.elapsedTime * 0.5 + position[1]) * 0.001;
+      const speed = isMouseActive ? 0.0035 : 0.005;
+      meshRef.current.rotation.x += speed;
+      meshRef.current.rotation.z += speed;
+      meshRef.current.position.x += Math.sin(state.clock.elapsedTime * 0.5 + position[1]) * (isMouseActive ? 0.0007 : 0.001);
     }
   });
 
@@ -88,12 +95,13 @@ const FloatingSphere = ({ position }: { position: [number, number, number] }) =>
 };
 
 // Digital particles effect
-const DigitalParticles = () => {
+const DigitalParticles = ({ isMouseActive }: { isMouseActive?: boolean }) => {
   const groupRef = useRef<any>();
 
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.05;
+      const speed = isMouseActive ? 0.035 : 0.05;
+      groupRef.current.rotation.y = state.clock.elapsedTime * speed;
     }
   });
 
@@ -104,20 +112,21 @@ const DigitalParticles = () => {
           (Math.random() - 0.5) * 30,
           (Math.random() - 0.5) * 20,
           (Math.random() - 0.5) * 15
-        ]} />
+        ]} isMouseActive={isMouseActive} />
       ))}
     </group>
   );
 };
 
 // Individual particle
-const Particle = ({ position }: { position: [number, number, number] }) => {
+const Particle = ({ position, isMouseActive }: { position: [number, number, number], isMouseActive?: boolean }) => {
   const meshRef = useRef<Mesh>(null);
 
   useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.position.y += Math.sin(state.clock.elapsedTime * 2 + position[0]) * 0.001;
-      meshRef.current.rotation.z = state.clock.elapsedTime * 0.5;
+      const speed = isMouseActive ? 0.0007 : 0.001;
+      meshRef.current.position.y += Math.sin(state.clock.elapsedTime * 2 + position[0]) * speed;
+      meshRef.current.rotation.z = state.clock.elapsedTime * (isMouseActive ? 0.35 : 0.5);
     }
   });
 
@@ -133,7 +142,7 @@ const Particle = ({ position }: { position: [number, number, number] }) => {
   );
 };
 
-const ThreeScene = () => {
+const ThreeScene = ({ isMouseActive = false }: ThreeSceneProps) => {
   return (
     <div className="absolute inset-0 pointer-events-none">
       <Canvas
@@ -145,8 +154,8 @@ const ThreeScene = () => {
           <pointLight position={[10, 10, 10]} intensity={0.5} color="#15cea0" />
           <pointLight position={[-10, -10, -10]} intensity={0.3} color="#0c9a77" />
           
-          <FloatingShapes />
-          <DigitalParticles />
+          <FloatingShapes isMouseActive={isMouseActive} />
+          <DigitalParticles isMouseActive={isMouseActive} />
         </Suspense>
       </Canvas>
     </div>

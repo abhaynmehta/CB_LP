@@ -7,21 +7,34 @@ import ThreeScene from './ThreeScene';
 
 const AnimatedBackground = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isMouseActive, setIsMouseActive] = useState(false);
 
   useEffect(() => {
+    let mouseTimeout: NodeJS.Timeout;
+    
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: e.clientX / window.innerWidth,
         y: e.clientY / window.innerHeight,
       });
+      
+      setIsMouseActive(true);
+      clearTimeout(mouseTimeout);
+      
+      mouseTimeout = setTimeout(() => {
+        setIsMouseActive(false);
+      }, 150);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      clearTimeout(mouseTimeout);
+    };
   }, []);
 
   const springProps = useSpring({
-    transform: `translate3d(${mousePosition.x * 30}px, ${mousePosition.y * 30}px, 0)`,
+    transform: `translate3d(${mousePosition.x * (isMouseActive ? 21 : 30)}px, ${mousePosition.y * (isMouseActive ? 21 : 30)}px, 0)`,
     config: { tension: 200, friction: 50 }
   });
 
@@ -30,7 +43,7 @@ const AnimatedBackground = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-brand-black via-brand-cod-gray to-brand-black"></div>
       
       {/* Three.js 3D Scene */}
-      <ThreeScene />
+      <ThreeScene isMouseActive={isMouseActive} />
       
       {/* Floating Typography */}
       <FloatingTypography />
@@ -46,7 +59,7 @@ const AnimatedBackground = () => {
             rotate: [0, 180, 360],
           }}
           transition={{
-            duration: 12,
+            duration: isMouseActive ? 17 : 12,
             repeat: Infinity,
             ease: "easeInOut"
           }}
@@ -66,7 +79,7 @@ const AnimatedBackground = () => {
             rotate: [0, -180, -360],
           }}
           transition={{
-            duration: 15,
+            duration: isMouseActive ? 21 : 15,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 2
@@ -85,11 +98,11 @@ const AnimatedBackground = () => {
             animate={{
               opacity: [0, 1, 0],
               scale: [0, 1, 0],
-              x: [0, Math.random() * 100 - 50],
-              y: [0, Math.random() * 100 - 50],
+              x: [0, (Math.random() * 100 - 50) * (isMouseActive ? 0.7 : 1)],
+              y: [0, (Math.random() * 100 - 50) * (isMouseActive ? 0.7 : 1)],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: (3 + Math.random() * 2) * (isMouseActive ? 1.4 : 1),
               delay: index * 0.3,
               repeat: Infinity,
               ease: "easeInOut"
@@ -105,7 +118,7 @@ const AnimatedBackground = () => {
           backgroundPosition: ['0% 0%', '100% 100%'],
         }}
         transition={{
-          duration: 25,
+          duration: isMouseActive ? 35 : 25,
           repeat: Infinity,
           ease: "linear"
         }}

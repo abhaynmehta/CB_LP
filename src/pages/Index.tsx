@@ -1,7 +1,7 @@
 
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import EnhancedServices from '@/components/EnhancedServices';
+import LiveScrollServices from '@/components/LiveScrollServices';
 import LiveScrollGallery from '@/components/LiveScrollGallery';
 import VideoSection from '@/components/VideoSection';
 import TeamSection from '@/components/TeamSection';
@@ -19,7 +19,7 @@ const Index = () => {
         <LiveScrollGallery />
       </section>
       <section id="services">
-        <EnhancedServices />
+        <LiveScrollServices />
       </section>
       <section id="videos">
         <VideoSection />
