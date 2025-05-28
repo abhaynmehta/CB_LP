@@ -1,100 +1,153 @@
 
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Float, Text3D, Center } from '@react-three/drei';
-import { useRef } from 'react';
+import { Suspense, useRef } from 'react';
 import { Mesh } from 'three';
 import { useFrame } from '@react-three/fiber';
 
-const GeometricShape = ({ position, color, shape = 'box' }: { position: [number, number, number], color: string, shape?: string }) => {
-  const meshRef = useRef<Mesh>(null);
+// Floating geometric shapes component
+const FloatingShapes = () => {
+  const groupRef = useRef<any>();
 
-  useFrame((state, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x += delta * 0.5;
-      meshRef.current.rotation.y += delta * 0.3;
+  useFrame((state) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y = state.clock.elapsedTime * 0.1;
+      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
     }
   });
 
   return (
-    <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-      <mesh ref={meshRef} position={position}>
-        {shape === 'sphere' ? (
-          <sphereGeometry args={[0.5, 32, 32]} />
-        ) : shape === 'octahedron' ? (
-          <octahedronGeometry args={[0.7]} />
-        ) : (
-          <boxGeometry args={[1, 1, 1]} />
-        )}
-        <meshStandardMaterial color={color} transparent opacity={0.6} />
-      </mesh>
-    </Float>
+    <group ref={groupRef}>
+      {/* Floating cubes */}
+      {Array.from({ length: 8 }).map((_, i) => (
+        <FloatingCube key={i} position={[
+          (Math.random() - 0.5) * 20,
+          (Math.random() - 0.5) * 15,
+          (Math.random() - 0.5) * 10
+        ]} />
+      ))}
+      
+      {/* Floating spheres */}
+      {Array.from({ length: 6 }).map((_, i) => (
+        <FloatingSphere key={i} position={[
+          (Math.random() - 0.5) * 18,
+          (Math.random() - 0.5) * 12,
+          (Math.random() - 0.5) * 8
+        ]} />
+      ))}
+    </group>
   );
 };
 
-const DigitalPixels = () => {
-  const particlesRef = useRef<Mesh[]>([]);
+// Individual floating cube
+const FloatingCube = ({ position }: { position: [number, number, number] }) => {
+  const meshRef = useRef<Mesh>(null);
 
   useFrame((state) => {
-    particlesRef.current.forEach((particle, index) => {
-      if (particle) {
-        particle.position.y = Math.sin(state.clock.elapsedTime + index) * 2;
-        particle.rotation.z = state.clock.elapsedTime * 0.5;
-      }
-    });
+    if (meshRef.current) {
+      meshRef.current.rotation.x += 0.01;
+      meshRef.current.rotation.y += 0.01;
+      meshRef.current.position.y += Math.sin(state.clock.elapsedTime + position[0]) * 0.002;
+    }
   });
 
   return (
-    <>
-      {Array.from({ length: 20 }).map((_, index) => (
-        <mesh
-          key={index}
-          ref={(el) => {
-            if (el) particlesRef.current[index] = el;
-          }}
-          position={[
-            (Math.random() - 0.5) * 20,
-            (Math.random() - 0.5) * 20,
-            (Math.random() - 0.5) * 20,
-          ]}
-        >
-          <boxGeometry args={[0.1, 0.1, 0.1]} />
-          <meshStandardMaterial color="#15cea0" />
-        </mesh>
+    <mesh ref={meshRef} position={position}>
+      <boxGeometry args={[0.5, 0.5, 0.5]} />
+      <meshStandardMaterial 
+        color="#15cea0" 
+        transparent 
+        opacity={0.6}
+        wireframe
+      />
+    </mesh>
+  );
+};
+
+// Individual floating sphere
+const FloatingSphere = ({ position }: { position: [number, number, number] }) => {
+  const meshRef = useRef<Mesh>(null);
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.x += 0.005;
+      meshRef.current.rotation.z += 0.005;
+      meshRef.current.position.x += Math.sin(state.clock.elapsedTime * 0.5 + position[1]) * 0.001;
+    }
+  });
+
+  return (
+    <mesh ref={meshRef} position={position}>
+      <sphereGeometry args={[0.3, 16, 16]} />
+      <meshStandardMaterial 
+        color="#0c9a77" 
+        transparent 
+        opacity={0.4}
+      />
+    </mesh>
+  );
+};
+
+// Digital particles effect
+const DigitalParticles = () => {
+  const groupRef = useRef<any>();
+
+  useFrame((state) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y = state.clock.elapsedTime * 0.05;
+    }
+  });
+
+  return (
+    <group ref={groupRef}>
+      {Array.from({ length: 50 }).map((_, i) => (
+        <Particle key={i} position={[
+          (Math.random() - 0.5) * 30,
+          (Math.random() - 0.5) * 20,
+          (Math.random() - 0.5) * 15
+        ]} />
       ))}
-    </>
+    </group>
+  );
+};
+
+// Individual particle
+const Particle = ({ position }: { position: [number, number, number] }) => {
+  const meshRef = useRef<Mesh>(null);
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.position.y += Math.sin(state.clock.elapsedTime * 2 + position[0]) * 0.001;
+      meshRef.current.rotation.z = state.clock.elapsedTime * 0.5;
+    }
+  });
+
+  return (
+    <mesh ref={meshRef} position={position}>
+      <boxGeometry args={[0.1, 0.1, 0.1]} />
+      <meshBasicMaterial 
+        color="#15cea0" 
+        transparent 
+        opacity={0.8}
+      />
+    </mesh>
   );
 };
 
 const ThreeScene = () => {
   return (
     <div className="absolute inset-0 pointer-events-none">
-      <Canvas camera={{ position: [0, 0, 10], fov: 75 }}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} />
-        
-        {/* Geometric Shapes */}
-        <GeometricShape position={[-3, 2, 0]} color="#15cea0" shape="box" />
-        <GeometricShape position={[3, -2, 0]} color="#0c9a77" shape="sphere" />
-        <GeometricShape position={[0, 3, -2]} color="#15cea0" shape="octahedron" />
-        <GeometricShape position={[-2, -3, 1]} color="#0c9a77" shape="box" />
-        
-        {/* Digital Pixels */}
-        <DigitalPixels />
-        
-        {/* Floating 3D Text */}
-        <Float speed={1} rotationIntensity={0.5} floatIntensity={1}>
-          <Center position={[0, 0, -3]}>
-            <Text3D
-              font="/fonts/helvetiker_regular.typeface.json"
-              size={0.5}
-              height={0.1}
-              curveSegments={12}
-            >
-              CRAFT
-              <meshStandardMaterial color="#15cea0" />
-            </Text3D>
-          </Center>
-        </Float>
+      <Canvas
+        camera={{ position: [0, 0, 10], fov: 75 }}
+        gl={{ alpha: true, antialias: true }}
+      >
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.3} />
+          <pointLight position={[10, 10, 10]} intensity={0.5} color="#15cea0" />
+          <pointLight position={[-10, -10, -10]} intensity={0.3} color="#0c9a77" />
+          
+          <FloatingShapes />
+          <DigitalParticles />
+        </Suspense>
       </Canvas>
     </div>
   );
