@@ -5,7 +5,7 @@ import { useSpring, animated } from '@react-spring/web';
 
 const teamMembers = [
   {
-    name: "Alex Johnson",
+    name: "Tanya Srivastava",
     role: "Creative Director & Founder",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     bio: "10+ years crafting luxury brand experiences with a passion for haute couture aesthetics"
