@@ -1,17 +1,33 @@
 
 import { motion } from 'framer-motion';
 import { useSpring, animated } from '@react-spring/web';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import FloatingTypography from './FloatingTypography';
 import ThreeScene from './ThreeScene';
 
+/**
+ * Enhanced animated background with optimized particle system
+ * Features responsive animations, particle effects, and interactive elements
+ */
 const AnimatedBackground = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isInteracting, setIsInteracting] = useState(false);
 
+  // Memoized particle configuration for performance
+  const particleConfig = useMemo(() => ({
+    count: 8,
+    baseSpeed: { interaction: 5, idle: 15 }, // Reduced interaction speed by 30%
+    size: { min: 2, max: 2 },
+    opacity: { min: 0, max: 0.3 }
+  }), []);
+
   useEffect(() => {
     let interactionTimer: NodeJS.Timeout;
 
+    /**
+     * Handle mouse movement with optimized position tracking
+     * Reduces particle speed during interaction for better UX
+     */
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: e.clientX / window.innerWidth,
@@ -42,13 +58,15 @@ const AnimatedBackground = () => {
     };
   }, []);
 
+  // Optimized spring animation with reduced interaction speed
   const springProps = useSpring({
-    transform: `translate3d(${mousePosition.x * (isInteracting ? 10 : 30)}px, ${mousePosition.y * (isInteracting ? 10 : 30)}px, 0)`,
+    transform: `translate3d(${mousePosition.x * (isInteracting ? 7 : 30)}px, ${mousePosition.y * (isInteracting ? 7 : 30)}px, 0)`,
     config: { tension: 200, friction: 50 }
   });
 
   return (
     <div className="absolute inset-0">
+      {/* Base gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-brand-black via-brand-cod-gray to-brand-black"></div>
       
       {/* Three.js 3D Scene */}
@@ -57,8 +75,9 @@ const AnimatedBackground = () => {
       {/* Floating Typography */}
       <FloatingTypography />
       
-      {/* Enhanced floating geometric shapes */}
+      {/* Enhanced floating geometric shapes with reduced interaction speed */}
       <div className="absolute inset-0 overflow-hidden">
+        {/* Primary floating orb */}
         <motion.div
           className="absolute top-20 left-10 w-32 h-32 bg-brand-mountain-meadow/10 rounded-full blur-xl"
           animate={{
@@ -68,17 +87,19 @@ const AnimatedBackground = () => {
             rotate: [0, 180, 360],
           }}
           transition={{
-            duration: isInteracting ? 20 : 12,
+            duration: isInteracting ? 25 : 12, // Slower during interaction
             repeat: Infinity,
             ease: "easeInOut"
           }}
         />
         
+        {/* Secondary interactive orb */}
         <animated.div 
           style={springProps}
           className="absolute top-40 right-20 w-24 h-24 bg-brand-gossamer/15 rounded-full blur-lg"
         />
         
+        {/* Tertiary floating orb */}
         <motion.div
           className="absolute bottom-32 left-1/3 w-40 h-40 bg-brand-mountain-meadow/5 rounded-full blur-2xl"
           animate={{
@@ -88,17 +109,17 @@ const AnimatedBackground = () => {
             rotate: [0, -180, -360],
           }}
           transition={{
-            duration: isInteracting ? 25 : 15,
+            duration: isInteracting ? 30 : 15, // Slower during interaction
             repeat: Infinity,
             ease: "easeInOut",
             delay: 2
           }}
         />
 
-        {/* Digital pixel-like elements */}
-        {Array.from({ length: 8 }).map((_, index) => (
+        {/* Optimized digital particles */}
+        {Array.from({ length: particleConfig.count }).map((_, index) => (
           <motion.div
-            key={index}
+            key={`particle-${index}`}
             className="absolute w-2 h-2 bg-brand-mountain-meadow/30"
             style={{
               left: `${Math.random() * 100}%`,
@@ -111,7 +132,9 @@ const AnimatedBackground = () => {
               y: [0, Math.random() * 100 - 50],
             }}
             transition={{
-              duration: isInteracting ? 5 : 3 + Math.random() * 2,
+              duration: isInteracting ? 
+                particleConfig.baseSpeed.interaction : 
+                particleConfig.baseSpeed.idle + Math.random() * 2,
               delay: index * 0.3,
               repeat: Infinity,
               ease: "easeInOut"
@@ -127,7 +150,7 @@ const AnimatedBackground = () => {
           backgroundPosition: ['0% 0%', '100% 100%'],
         }}
         transition={{
-          duration: isInteracting ? 40 : 25,
+          duration: isInteracting ? 50 : 25, // Slower during interaction
           repeat: Infinity,
           ease: "linear"
         }}
