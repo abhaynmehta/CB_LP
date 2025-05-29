@@ -4,42 +4,35 @@ import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Play, Pause } from 'lucide-react';
 import ReactPlayer from 'react-player';
-import { VIDEO_URLS, IMAGE_URLS } from '@/utils/mediaConstants';
-import { GRADIENTS, TRANSITIONS } from '@/utils/constants';
-import { useResponsive } from '@/hooks/useResponsive';
 
-/**
- * Video testimonials section with mobile optimization
- * Uses centralized media management and consistent gradients
- */
 const testimonialVideos = [
   {
     id: 1,
     title: "Client Success Story",
     client: "Luxury Fashion Brand",
-    youtubeId: VIDEO_URLS.casestudies.luxuryFashion,
-    thumbnail: IMAGE_URLS.casestudies.luxuryFashion
+    youtubeId: "dQw4w9WgXcQ",
+    thumbnail: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
   },
   {
     id: 2,
     title: "Brand Transformation",
     client: "Tech Startup",
-    youtubeId: VIDEO_URLS.casestudies.techStartup,
-    thumbnail: IMAGE_URLS.casestudies.techStartup
+    youtubeId: "dQw4w9WgXcQ",
+    thumbnail: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
   },
   {
     id: 3,
     title: "Digital Growth",
     client: "Wellness Brand",
-    youtubeId: VIDEO_URLS.casestudies.wellnessBrand,
-    thumbnail: IMAGE_URLS.casestudies.wellnessBrand
+    youtubeId: "dQw4w9WgXcQ",
+    thumbnail: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
   },
   {
     id: 4,
     title: "Creative Excellence",
     client: "Architecture Firm",
-    youtubeId: VIDEO_URLS.casestudies.architectureFirm,
-    thumbnail: IMAGE_URLS.casestudies.architectureFirm
+    youtubeId: "dQw4w9WgXcQ",
+    thumbnail: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
   }
 ];
 
@@ -48,68 +41,53 @@ const VideoSection = () => {
   const isInView = useInView(ref, { once: true });
   const [hoveredVideo, setHoveredVideo] = useState<number | null>(null);
   const [playingVideo, setPlayingVideo] = useState<number | null>(null);
-  const { isMobile, isTouchDevice } = useResponsive();
 
   const handleVideoHover = (videoId: number) => {
-    if (!isTouchDevice) {
-      setHoveredVideo(videoId);
-      setPlayingVideo(videoId);
-    }
-  };
-
-  const handleVideoClick = (videoId: number) => {
-    if (isTouchDevice) {
-      setHoveredVideo(hoveredVideo === videoId ? null : videoId);
-      setPlayingVideo(playingVideo === videoId ? null : videoId);
-    }
+    setHoveredVideo(videoId);
+    setPlayingVideo(videoId);
   };
 
   const handleVideoLeave = () => {
-    if (!isTouchDevice) {
-      setHoveredVideo(null);
-      setPlayingVideo(null);
-    }
+    setHoveredVideo(null);
+    setPlayingVideo(null);
   };
 
   return (
-    <section 
-      ref={ref} 
-      className={`py-12 md:py-20 ${GRADIENTS.backgroundAlt} relative overflow-hidden`}
-    >
-      {/* Enhanced animated background gradient */}
+    <section ref={ref} className="py-20 bg-gradient-to-br from-brand-cod-gray via-brand-black to-brand-cod-gray relative overflow-hidden">
+      {/* Animated Background Gradient */}
       <motion.div
-        className="absolute inset-0"
+        className="absolute inset-0 bg-gradient-to-r from-brand-mountain-meadow/5 via-transparent to-brand-gossamer/5"
         animate={{
           background: [
-            "linear-gradient(45deg, rgba(21, 206, 160, 0.08), transparent, rgba(12, 154, 119, 0.08))",
-            "linear-gradient(135deg, rgba(12, 154, 119, 0.08), transparent, rgba(21, 206, 160, 0.08))",
-            "linear-gradient(45deg, rgba(21, 206, 160, 0.08), transparent, rgba(12, 154, 119, 0.08))"
+            "linear-gradient(45deg, rgba(21, 206, 160, 0.05), transparent, rgba(12, 154, 119, 0.05))",
+            "linear-gradient(135deg, rgba(12, 154, 119, 0.05), transparent, rgba(21, 206, 160, 0.05))",
+            "linear-gradient(45deg, rgba(21, 206, 160, 0.05), transparent, rgba(12, 154, 119, 0.05))"
           ]
         }}
         transition={{ duration: 8, repeat: Infinity }}
       />
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={isMobile ? TRANSITIONS.mobileOptimized : TRANSITIONS.smooth}
-          className="text-center mb-12 md:mb-16"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
         >
           <motion.h2 
-            className="font-playfair text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-4"
-            whileHover={!isMobile ? { scale: 1.02 } : {}}
+            className="font-playfair text-4xl md:text-6xl font-bold text-white mb-4"
+            whileHover={{ scale: 1.02 }}
           >
             Watch How We
           </motion.h2>
           <motion.h3 
-            className={`font-playfair text-3xl md:text-4xl lg:text-6xl font-bold ${GRADIENTS.primary} bg-clip-text text-transparent mb-4 md:mb-6`}
-            whileHover={!isMobile ? { scale: 1.02 } : {}}
+            className="font-playfair text-4xl md:text-6xl font-bold bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer bg-clip-text text-transparent mb-6"
+            whileHover={{ scale: 1.02 }}
           >
             Create Impact
           </motion.h3>
           <motion.p 
-            className="font-inter text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4"
+            className="font-inter text-xl text-gray-300 max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -122,23 +100,18 @@ const VideoSection = () => {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className={`grid grid-cols-1 ${isMobile ? 'gap-6' : 'md:grid-cols-2 gap-8'}`}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
           {testimonialVideos.map((video, index) => (
             <motion.div
               key={video.id}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ 
-                duration: isMobile ? TRANSITIONS.mobileOptimized.duration : 0.6, 
-                delay: index * 0.1 
-              }}
-              className={`relative group cursor-pointer overflow-hidden rounded-xl ${GRADIENTS.background}`}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="relative group cursor-pointer overflow-hidden rounded-xl bg-gradient-to-br from-brand-black to-brand-cod-gray"
               onMouseEnter={() => handleVideoHover(video.id)}
               onMouseLeave={handleVideoLeave}
-              onClick={() => handleVideoClick(video.id)}
-              whileHover={!isMobile ? { scale: 1.02, y: -5 } : {}}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: 1.02, y: -5 }}
             >
               <div className="relative aspect-video">
                 {playingVideo === video.id ? (
@@ -158,19 +131,19 @@ const VideoSection = () => {
                       alt={video.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                    <div className={`absolute inset-0 ${GRADIENTS.overlay}`}></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-transparent"></div>
                     
                     {/* Play Button */}
                     <div className="absolute inset-0 flex items-center justify-center">
                       <motion.div
-                        whileHover={!isMobile ? { scale: 1.2, rotate: 360 } : {}}
+                        whileHover={{ scale: 1.2, rotate: 360 }}
                         whileTap={{ scale: 0.9 }}
-                        className={`w-12 h-12 md:w-16 md:h-16 ${GRADIENTS.primary} rounded-full flex items-center justify-center shadow-2xl group-hover:shadow-brand-mountain-meadow/50 transition-all duration-500`}
+                        className="w-16 h-16 bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer rounded-full flex items-center justify-center shadow-2xl group-hover:shadow-brand-mountain-meadow/50 transition-all duration-500"
                       >
                         {hoveredVideo === video.id ? (
-                          <Pause className="h-4 w-4 md:h-6 md:w-6 text-brand-black ml-0" fill="currentColor" />
+                          <Pause className="h-6 w-6 text-brand-black ml-0" fill="currentColor" />
                         ) : (
-                          <Play className="h-4 w-4 md:h-6 md:w-6 text-brand-black ml-1" fill="currentColor" />
+                          <Play className="h-6 w-6 text-brand-black ml-1" fill="currentColor" />
                         )}
                       </motion.div>
                     </div>
@@ -186,20 +159,20 @@ const VideoSection = () => {
                 transition={{ delay: 0.2 }}
               >
                 <motion.p 
-                  className="text-brand-mountain-meadow text-xs md:text-sm font-inter uppercase tracking-wider mb-1"
-                  whileHover={!isMobile ? { x: 5 } : {}}
+                  className="text-brand-mountain-meadow text-sm font-inter uppercase tracking-wider mb-1"
+                  whileHover={{ x: 5 }}
                 >
                   Testimonial
                 </motion.p>
                 <motion.h4 
-                  className="font-playfair text-lg md:text-xl font-semibold text-white mb-1"
-                  whileHover={!isMobile ? { x: 10 } : {}}
+                  className="font-playfair text-xl font-semibold text-white mb-1"
+                  whileHover={{ x: 10 }}
                 >
                   {video.title}
                 </motion.h4>
                 <motion.p 
                   className="text-gray-300 text-sm font-inter"
-                  whileHover={!isMobile ? { x: 5 } : {}}
+                  whileHover={{ x: 5 }}
                 >
                   {video.client}
                 </motion.p>
@@ -208,10 +181,10 @@ const VideoSection = () => {
               {/* Hover Border Effect */}
               <motion.div 
                 className="absolute inset-0 border-2 border-transparent group-hover:border-brand-mountain-meadow/50 transition-all duration-500 rounded-xl"
-                whileHover={!isMobile ? {
+                whileHover={{
                   borderColor: "rgba(21, 206, 160, 0.8)",
                   boxShadow: "0 0 30px rgba(21, 206, 160, 0.3)"
-                } : {}}
+                }}
               />
             </motion.div>
           ))}
