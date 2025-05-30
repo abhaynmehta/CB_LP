@@ -1,4 +1,3 @@
-
 import { Fragment } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -8,6 +7,7 @@ import VideoSection from '@/components/VideoSection';
 import TeamSection from '@/components/TeamSection';
 import BookCall from '@/components/BookCall';
 import Footer from '@/components/Footer';
+import CaseStudies from '@/components/CaseStudies';
 
 /**
  * Main landing page component
@@ -41,6 +41,11 @@ const Index = () => {
           {/* Video content */}
           <section id="videos" aria-label="Videos">
             <VideoSection />
+          </section>
+
+          {/* Case Studies section */}
+          <section id="case-studies" aria-label="Case Studies">
+            <CaseStudies />
           </section>
           
           {/* Team information */}

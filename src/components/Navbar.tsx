@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -9,6 +8,7 @@ const navItems = [
   { name: 'Portfolio', href: '#portfolio' },
   { name: 'Services', href: '#services' },
   { name: 'Videos', href: '#videos' },
+  { name: 'Case Studies', href: '#case-studies' },
   { name: 'Team', href: '#team' },
   { name: 'Contact', href: '#contact' }
 ];

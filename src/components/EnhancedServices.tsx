@@ -1,4 +1,3 @@
-
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -60,37 +59,41 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="w-full min-w-[300px] max-w-[350px]"
     >
-      <Card className="h-full bg-brand-cod-gray/80 backdrop-blur-sm border-brand-mountain-meadow/20 hover:border-brand-mountain-meadow/40 transition-all duration-300 hover:transform hover:scale-105">
-        <CardHeader className="text-center pb-4">
-          <CardTitle className="font-playfair text-xl text-white mb-2">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ delay: index * 0.1 + 0.3 }}
+      <div className="relative rounded-2xl overflow-hidden group">
+        <div className="absolute inset-0 z-0 before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-brand-mountain-meadow/40 before:via-brand-gossamer/30 before:to-brand-mountain-meadow/40 before:opacity-60 group-hover:before:opacity-90 before:transition-all before:duration-500" />
+        <Card className="relative z-10 h-full bg-white/10 backdrop-blur-xl border-none shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105 group-hover:ring-2 group-hover:ring-brand-mountain-meadow/40">
+          <CardHeader className="text-center pb-4">
+            <CardTitle className="font-playfair text-2xl text-white mb-2 drop-shadow-lg">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ delay: index * 0.1 + 0.3 }}
+                className="group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-mountain-meadow group-hover:to-brand-gossamer transition-all duration-500"
+              >
+                {service.title}
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ delay: index * 0.1 + 0.5 }}
+                className="text-brand-mountain-meadow group-hover:text-brand-gossamer transition-colors duration-500"
+              >
+                {service.subtitle}
+              </motion.div>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <motion.p 
+              className="text-gray-200 leading-relaxed font-inter group-hover:text-white transition-colors duration-500 text-base drop-shadow"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ delay: index * 0.1 + 0.7 }}
             >
-              {service.title}
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ delay: index * 0.1 + 0.5 }}
-              className="text-brand-mountain-meadow"
-            >
-              {service.subtitle}
-            </motion.div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <motion.p 
-            className="text-gray-300 leading-relaxed font-inter"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ delay: index * 0.1 + 0.7 }}
-          >
-            {service.description}
-          </motion.p>
-        </CardContent>
-      </Card>
+              {service.description}
+            </motion.p>
+          </CardContent>
+        </Card>
+      </div>
     </motion.div>
   );
 };
@@ -117,6 +120,21 @@ const EnhancedServices = () => {
 
   return (
     <section ref={ref} className="py-20 bg-brand-cod-gray relative overflow-hidden">
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-br from-brand-mountain-meadow/5 via-transparent to-brand-gossamer/5"
+        animate={{
+          background: [
+            'linear-gradient(135deg, rgba(21, 206, 160, 0.05) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 255, 204, 0.05) 100%)',
+            'linear-gradient(135deg, rgba(0, 255, 204, 0.05) 0%, rgba(0, 0, 0, 0) 50%, rgba(21, 206, 160, 0.05) 100%)',
+          ]
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          repeatType: "reverse"
+        }}
+      />
+
       <div className="container mx-auto px-6 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
@@ -133,57 +151,38 @@ const EnhancedServices = () => {
           >
             What We Do
           </motion.h2>
-          <motion.div
-            className="w-24 h-1 bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer mx-auto"
-            initial={{ width: 0, opacity: 0 }}
-            animate={isInView ? { width: 96, opacity: 1 } : { width: 0, opacity: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          />
         </motion.div>
 
-        <div className="relative">
-          <div className="flex justify-center items-center gap-6 min-h-[400px]">
-            <Button
-              onClick={prevSlide}
-              variant="outline"
-              size="icon"
-              className="bg-brand-mountain-meadow/20 border-brand-mountain-meadow/40 hover:bg-brand-mountain-meadow/30 text-white"
-              disabled={currentIndex === 0}
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </Button>
+        <div className="flex justify-center items-center gap-6 min-h-[400px]">
+          <button
+            onClick={prevSlide}
+            className="w-12 h-12 flex items-center justify-center rounded-full bg-transparent shadow-none hover:bg-brand-mountain-meadow/15 hover:shadow-lg transition-all duration-300 text-brand-mountain-meadow disabled:opacity-40 disabled:cursor-not-allowed focus:outline-none"
+            disabled={currentIndex === 0}
+            aria-label="Previous"
+            type="button"
+          >
+            <ChevronLeft className="h-7 w-7" />
+          </button>
 
-            <div className="flex gap-6 justify-center flex-1">
-              {visibleServices.map((service, index) => (
-                <ServiceCard 
-                  key={currentIndex + index} 
-                  service={service} 
-                  index={index} 
-                />
-              ))}
-            </div>
-
-            <Button
-              onClick={nextSlide}
-              variant="outline"
-              size="icon"
-              className="bg-brand-mountain-meadow/20 border-brand-mountain-meadow/40 hover:bg-brand-mountain-meadow/30 text-white"
-              disabled={currentIndex + cardsPerView >= services.length}
-            >
-              <ChevronRight className="h-6 w-6" />
-            </Button>
+          <div className="flex gap-6 justify-center flex-1">
+            {visibleServices.map((service, index) => (
+              <ServiceCard 
+                key={currentIndex + index} 
+                service={service} 
+                index={index} 
+              />
+            ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ delay: 1 }}
-            className="text-center mt-8"
+          <button
+            onClick={nextSlide}
+            className="w-12 h-12 flex items-center justify-center rounded-full bg-transparent shadow-none hover:bg-brand-mountain-meadow/15 hover:shadow-lg transition-all duration-300 text-brand-mountain-meadow disabled:opacity-40 disabled:cursor-not-allowed focus:outline-none"
+            disabled={currentIndex + cardsPerView >= services.length}
+            aria-label="Next"
+            type="button"
           >
-            <p className="text-brand-mountain-meadow font-inter">
-              {Math.floor(currentIndex / cardsPerView) + 1} of {Math.ceil(services.length / cardsPerView)}
-            </p>
-          </motion.div>
+            <ChevronRight className="h-7 w-7" />
+          </button>
         </div>
       </div>
     </section>
