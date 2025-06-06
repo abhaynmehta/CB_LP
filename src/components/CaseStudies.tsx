@@ -210,6 +210,37 @@ const CaseStudyModalContent = ({ selected }) => {
           {selected.summary}
         </motion.div>
       )}
+
+      {/* Video Section */}
+      {selected.videos && selected.videos.length > 0 && (
+        <motion.div
+          className="mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+        >
+          <h3 className="font-playfair text-2xl text-brand-mountain-meadow mb-4">Featured Videos</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {selected.videos.map((video, index) => {
+              return (
+                <div key={index} className="space-y-2">
+                  <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${video.id}`}
+                      title={video.label}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full"
+                    />
+                  </div>
+                  <p className="text-brand-gossamer text-sm font-medium">{video.label}</p>
+                </div>
+              );
+            })}
+          </div>
+        </motion.div>
+      )}
+
       <motion.div
         className="space-y-10"
         initial="hidden"
@@ -258,10 +289,6 @@ const CaseStudyModalContent = ({ selected }) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        {/*
-          CTA button styled to match the BookCall section and provided screenshot.
-          Uses brand colors, icons, and a large, inviting style.
-        */}
         <Button
           size="lg"
           onClick={openCalendly}

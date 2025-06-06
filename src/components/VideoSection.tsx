@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
@@ -6,34 +5,34 @@ import { Play, Pause } from 'lucide-react';
 import ReactPlayer from 'react-player';
 
 const testimonialVideos = [
-  {
-    id: 1,
-    title: "Client Success Story",
-    client: "Luxury Fashion Brand",
-    youtubeId: "dQw4w9WgXcQ",
-    thumbnail: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-  },
+  // {
+  //   id: 1,
+  //   title: "Our Creative Process",
+  //   client: "Behind the Scenes",
+  //   youtubeId: "QE_TUAQZzkI",
+  //   thumbnail: "https://img.youtube.com/vi/QE_TUAQZzkI/maxresdefault.jpg"
+  // },
   {
     id: 2,
-    title: "Brand Transformation",
-    client: "Tech Startup",
-    youtubeId: "dQw4w9WgXcQ",
-    thumbnail: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+    title: "Client Success Story",
+    client: "Featured Project",
+    youtubeId: "mdpQf7wVxN0",
+    thumbnail: "https://img.youtube.com/vi/mdpQf7wVxN0/maxresdefault.jpg"
   },
   {
     id: 3,
-    title: "Digital Growth",
-    client: "Wellness Brand",
-    youtubeId: "dQw4w9WgXcQ",
-    thumbnail: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+    title: "Brand Transformation",
+    client: "Case Study",
+    youtubeId: "EV4U9-GWJLk",
+    thumbnail: "https://img.youtube.com/vi/EV4U9-GWJLk/maxresdefault.jpg"
   },
-  {
-    id: 4,
-    title: "Creative Excellence",
-    client: "Architecture Firm",
-    youtubeId: "dQw4w9WgXcQ",
-    thumbnail: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-  }
+  // {
+  //   id: 4,
+  //   title: "Creative Excellence",
+  //   client: "Portfolio Showcase",
+  //   youtubeId: "QE_TUAQZzkI",
+  //   thumbnail: "https://img.youtube.com/vi/QE_TUAQZzkI/maxresdefault.jpg"
+  // }
 ];
 
 const VideoSection = () => {

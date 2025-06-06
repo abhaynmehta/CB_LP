@@ -1,59 +1,37 @@
-
 export const clientWork = [
   {
     id: 1,
-    name: "Luxury Fashion Brand",
-    category: "Fashion",
-    preview: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1483058712412-4245e9b90334?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1493397212122-2b85dda8106b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    ],
-    videos: ["dQw4w9WgXcQ", "dQw4w9WgXcQ"]
+    name: "Dohful",
+    category: "Food & Beverage",
+    preview: "/assests/Portfolio Gallery/Dohful.jpg",
+    videos: ["KWPdH7EUadM", "BZekleDx_5Y", "0ve87kLWit4", "YXMFMkIwTEY", "lfCH7XhdWi0", "vfoB_bRAq4k"]
   },
   {
     id: 2,
-    name: "Tech Startup",
-    category: "Technology", 
-    preview: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    ],
-    videos: ["dQw4w9WgXcQ"]
+    name: "Gym",
+    category: "Fitness", 
+    preview: "/assests/Portfolio Gallery/Gym.jpg",
+    videos: ["F3eDzq7arg0", "f2_0HqiwN68", "ABJQvM65uRk"]
   },
   {
     id: 3,
-    name: "Wellness Brand",
-    category: "Health",
-    preview: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    ],
-    videos: ["dQw4w9WgXcQ", "dQw4w9WgXcQ", "dQw4w9WgXcQ"]
+    name: "Digital Futur",
+    category: "Marketing",
+    preview: "/assests/Portfolio Gallery/Digital futur.jpg",
+    videos: ["-m6bpNDeROY", "wzqdufP2H4s", "vkwh5ttNej4", "RT9Ol_6M6Ng"]
   },
   {
     id: 4,
-    name: "Architecture Firm", 
-    category: "Architecture",
-    preview: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    ],
-    videos: ["dQw4w9WgXcQ"]
+    name: "Podcast", 
+    category: "Podcast",
+    preview: "/assests/Portfolio Gallery/Podcast .jpg",
+    videos: ["CJVbTdFlu2Q", "1eQvUdAAP3Q", "VEih4WloPlc", "n9_02JDWL5k", "5bf9xkHWOek"]
   },
   {
     id: 5,
-    name: "E-commerce Platform",
-    category: "E-commerce", 
-    preview: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    ],
-    videos: ["dQw4w9WgXcQ", "dQw4w9WgXcQ"]
+    name: "Samples",
+    category: "Sample Work", 
+    preview: "/assests/Portfolio Gallery/samples .jpg",
+    videos: ["9LHWAQiqq-8", "9AXUrSKdwsE", "8de-MlNqKE4", "8nlRpkLuNKw", "Uv3-49h9wos", "lc8sHrOsei0", "l8316iSlU34", "A0xeTSwEOcs"]
   }
 ];

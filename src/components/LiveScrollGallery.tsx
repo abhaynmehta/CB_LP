@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
@@ -16,7 +15,7 @@ const LiveScrollGallery = () => {
   const gap = 24;
   const totalItemWidth = itemWidth + gap;
 
-  const repeatedItems = [...clientWork, ...clientWork, ...clientWork, ...clientWork];
+  const repeatedItems = [...clientWork, ...clientWork];
 
   const scrollAnimation = `
     @keyframes scroll-infinite {
@@ -39,21 +38,12 @@ const LiveScrollGallery = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <motion.h2 
-            className="font-playfair text-4xl md:text-6xl font-bold text-white mb-4"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
+          <h2 className="font-playfair text-4xl md:text-6xl font-bold text-white mb-4">
             Portfolio Gallery
-          </motion.h2>
-          <motion.p 
-            className="font-inter text-xl text-gray-300 max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
+          </h2>
+          <p className="font-inter text-xl text-gray-300 max-w-2xl mx-auto">
             Explore our client work and creative solutions
-          </motion.p>
+          </p>
         </motion.div>
 
         <motion.div 
@@ -73,7 +63,7 @@ const LiveScrollGallery = () => {
           >
             {repeatedItems.map((client, index) => (
               <GalleryItem
-                key={`${client.id}-${Math.floor(index / clientWork.length)}-${index}`}
+                key={`${client.id}-${index}`}
                 client={client}
                 index={index}
                 onClick={() => setSelectedClient(client)}
@@ -83,7 +73,7 @@ const LiveScrollGallery = () => {
         </motion.div>
       </div>
 
-      <EnhancedGalleryModal
+      <EnhancedGalleryModal 
         selectedClient={selectedClient}
         onClose={() => setSelectedClient(null)}
       />

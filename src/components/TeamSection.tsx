@@ -6,21 +6,21 @@ import { useSpring, animated } from '@react-spring/web';
 
 const teamMembers = [
   {
-    name: "Alex Johnson",
-    role: "Creative Director & Founder",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    name: "Tanya Srivasatava",
+    role: "Founder",
+    image: "/assests/Team/tanya g.jpg",
     bio: "10+ years crafting luxury brand experiences with a passion for haute couture aesthetics"
   },
   {
-    name: "Sarah Chen", 
-    role: "Strategy Lead & Co-Founder",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    name: "Abhay Mehta", 
+    role: "Developer",
+    image: "/assests/Team/abhay.jpg",
     bio: "Expert in digital transformation and brand positioning with Fortune 500 experience"
   },
   {
-    name: "Marcus Rivera",
-    role: "Tech Director & Developer",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    name: "Sneha Mishra",
+    role: "Content Head",
+    image: "/assests/Team/sneha.jpg",
     bio: "Full-stack architect building scalable solutions and cutting-edge web applications"
   }
 ];

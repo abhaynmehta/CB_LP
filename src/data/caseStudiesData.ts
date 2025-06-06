@@ -6,7 +6,7 @@ const caseStudies = [
     id: 1,
     title: 'Dohful — Elevating a Cookie Brand on Social Media',
     subtitle: 'Social Media Strategy & Branding for Dohful',
-    image: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80',
+    image: '/assests/CaseStudyPre/Dohful.jpg',
     summary: 'How we transformed Dohful\'s Instagram presence and engagement.',
     details: `Client Overview
 Brand: Dohful
@@ -106,6 +106,10 @@ RESULTS:
     subtitle: 'Website, Branding, and LinkedIn for IONA.AI (B2B SaaS, London)',
     image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80',
     summary: 'How we transformed IONA.AI\'s digital presence and brand for enterprise clients.',
+    videos: [
+      { id: 'GmjSivS7wig', label: 'Before' },
+      { id: 'QxD0FdH1W0s', label: 'After' }
+    ],
     details: `👤 The Client
 IONA.AI is a B2B SaaS company that builds AI-powered hiring software for enterprise clients like Birla Group. Their platform streamlines recruitment for large-scale teams — but their online presence was not aligned with their product's value. It's a London based company.
 
@@ -151,6 +155,10 @@ We delivered a complete digital transformation in just 2 weeks — from scratch.
     subtitle: 'Branding, Content, and Growth for Author & Astrologer',
     image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
     summary: 'How we helped an author and celebrity astrologer grow their brand and client base.',
+    videos: [
+      { id: 'gKCYsztTXL8', label: 'Video 1' },
+      { id: 'UudOmPG-LBc', label: 'Video 2' }
+    ],
     details: `🔍 The Problems
 - Inconsistent posting & lack of strategy
 - Poorly edited video content
@@ -230,8 +238,12 @@ We worked with the client for 3 months, during which we acted as his dedicated c
     id: 5,
     title: 'Personal Branding & Social Presence for Actor-Model Adit Srivastava',
     subtitle: 'Instagram Branding & Content for Actor/Model',
-    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80',
+    image: '/assests/CaseStudyPre/Adit.jpg',
     summary: 'How we helped Adit Srivastava transform his Instagram and personal brand.',
+    videos: [
+      { id: 'saCgA8oXm3M', label: 'Video 1' },
+      { id: 'ehya0rCG-kc', label: 'Video 2' }
+    ],
     details: `👤 The Client
 Adit Srivastava, an established actor and model, had worked with top brands like Myntra, Reliance, Style Bazaar, Smart Bazaar, and Shriram. He also featured in Indian TV serials such as Durga, Kalash, and Janak.
 Despite having a strong portfolio, Aditya faced a common problem—a lack of clarity in how to showcase himself on social media.
@@ -318,8 +330,12 @@ The Challenges
     id: 7,
     title: 'Tattoo Studio – Boosting Engagement Through Performance Marketing',
     subtitle: 'Performance Marketing & Content for Tattoo Studio',
-    image: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80',
+    image: '/assests/CaseStudyPre/Tattoo.jpg',
     summary: 'How we helped a tattoo studio boost engagement and launch a new branch.',
+    videos: [
+      { id: 'yTbv7U1xWOo', label: 'Video 1' },
+      { id: 'F1_vXMnRub4', label: 'Video 2' }
+    ],
     details: `🧩 The Challenge
 The client, a tattoo artist and studio owner, approached us with a common issue:
 "My reels aren't getting any traction."
@@ -370,8 +386,13 @@ As they were opening a new location in Noida, the client trusted us with the loc
     id: 8,
     title: 'Building Albelee — A Modern Skincare Brand Rooted in Tradition',
     subtitle: 'Brand Strategy & Content for Albelee Skincare',
-    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80',
+    image: '/assests/CaseStudyPre/Albelee.jpg',
     summary: 'How we helped Albelee define its brand and launch with a story-driven approach.',
+    videos: [
+      { id: 'A5tYHWRoJAY', label: 'Video 1' },
+      { id: 'ZVzPuttdR38', label: 'Video 2' },
+      { id: 'tTitu7na1FU', label: 'Video 3' }
+    ],
     details: `🌿 Case Study: Building Albelee — A Modern Skincare Brand Rooted in Tradition
 Before even starting a formal engagement, we took the initiative to research skincare industry trends, analyze competitor strategies, and understand the cultural space Albelee could own.
 Based on our research, we created a sample content piece (visual + video) to showcase how Albelee could:
