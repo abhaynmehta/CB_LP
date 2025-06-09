@@ -4,14 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { 
-  Palette, 
-  Code, 
-  BarChart2, 
-  Share2, 
-  Camera, 
-  Search, 
-  ShoppingCart, 
-  Lightbulb 
+  Lightbulb, // For Content Creation & Personal Branding (idea, creativity)
+  Share2,    // For Social Media Management (sharing, social)
+  Code,      // For Website & App Development (coding, web)
+  Mic,       // For Podcast Production (microphone, audio)
+  Brain,     // For Content Strategy & Consulting (strategy, thinking)
 } from 'lucide-react';
 
 /**
@@ -25,60 +22,39 @@ import {
  */
 const services = [
   {
-    title: "Brand Strategy",
-    subtitle: "& Identity",
-    description: "Strategic brand asset identity and creation with comprehensive market research and positioning",
-    icon: Palette,
+    title: "Content Creation",
+    subtitle: "& Personal Branding",
+    description: "Build a magnetic presence through high-quality content tailored to your voice, values, and goals—designed to grow your audience and convert them into loyal advocates.",
+    icon: Lightbulb,
     color: "from-blue-500 to-cyan-400"
   },
   {
-    title: "App/Web",
-    subtitle: "Development", 
-    description: "Custom web and mobile applications with modern tech stack and responsive design",
-    icon: Code,
+    title: "Social Media",
+    subtitle: "Management", 
+    description: "We don't just post—we strategize, schedule, and engage. From planning to publishing, we turn your channels into brand-building powerhouses.",
+    icon: Share2,
     color: "from-purple-500 to-pink-500"
   },
   {
-    title: "Content-Driven",
-    subtitle: "Marketing", 
-    description: "Metrics-driven plan to strategic full strategy with data analytics and optimization",
-    icon: BarChart2,
+    title: "Website & App",
+    subtitle: "Development", 
+    description: "Custom-built websites and mobile apps that are fast, functional, and future-proof—designed to reflect your brand and maximize user experience.",
+    icon: Code,
     color: "from-green-500 to-emerald-400"
   },
   {
-    title: "Social Media",
-    subtitle: "Campaign Direction",
-    description: "Provide and set launch across channels with influencer partnerships and engagement",
-    icon: Share2,
+    title: "Podcast",
+    subtitle: "Production", 
+    description: "Your voice, amplified. From concept to launch, we handle scripting, recording, editing, and publishing to help you build thought leadership and connect deeply.",
+    icon: Mic,
     color: "from-orange-500 to-red-500"
   },
   {
-    title: "Content Production",
-    subtitle: "& Creative Shoots",
-    description: "Prioritize content unique to style with professional photography and videography",
-    icon: Camera,
+    title: "Content Strategy",
+    subtitle: "& Consulting",
+    description: "Get clarity, structure, and a 360° content plan. We work with you to align your content with your business goals and audience psychology.",
+    icon: Brain,
     color: "from-yellow-500 to-orange-400"
-  },
-  {
-    title: "SEO & Analytics",
-    subtitle: "Optimization",
-    description: "Search engine optimization and comprehensive analytics tracking for maximum visibility",
-    icon: Search,
-    color: "from-indigo-500 to-purple-400"
-  },
-  {
-    title: "E-commerce",
-    subtitle: "Solutions",
-    description: "Complete e-commerce platform development with payment integration and inventory management",
-    icon: ShoppingCart,
-    color: "from-pink-500 to-rose-400"
-  },
-  {
-    title: "Consulting",
-    subtitle: "& Strategy",
-    description: "Expert business consulting and strategic planning for digital transformation and growth",
-    icon: Lightbulb,
-    color: "from-cyan-500 to-blue-400"
   }
 ];
 
@@ -380,7 +356,7 @@ const EnhancedServices = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-gray-300 max-w-2xl mx-auto mb-8"
           >
-            Transforming ideas into exceptional digital experiences through innovative solutions and creative excellence
+            From Ideas to Execution—We're Your Creative Growth Partner
           </motion.p>
         </motion.div>
 

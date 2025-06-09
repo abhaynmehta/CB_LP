@@ -1,3 +1,7 @@
+/**
+ * Vite configuration file
+ * Configures build settings, development server, and plugins
+ */
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -8,6 +12,25 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    // Security headers
+    headers: {
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
+      'X-XSS-Protection': '1; mode=block',
+    },
+  },
+  build: {
+    // Production optimizations
+    minify: 'terser',
+    sourcemap: mode === 'development',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          ui: ['@radix-ui/react-*'],
+        },
+      },
+    },
   },
   plugins: [
     react(),

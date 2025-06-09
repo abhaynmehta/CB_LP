@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -29,8 +28,11 @@ const BookCall = () => {
             Your Brand?
           </h2>
           <p className="font-inter text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Let's discuss how we can elevate your brand to luxury status. 
-            Book a consultation call with our team.
+            Is your brand just making noise — or actually being heard?
+            <br />
+            At Content Brewer, we don't create content for the sake of content.
+            <br />
+            We craft experiences that make people pause, feel, and remember.
           </p>
 
           <motion.div

@@ -77,13 +77,13 @@ const VideoSection = () => {
             className="font-playfair text-4xl md:text-6xl font-bold text-white mb-4"
             whileHover={{ scale: 1.02 }}
           >
-            Watch How We
+            What Clients Say
           </motion.h2>
           <motion.h3 
             className="font-playfair text-4xl md:text-6xl font-bold bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer bg-clip-text text-transparent mb-6"
             whileHover={{ scale: 1.02 }}
           >
-            Create Impact
+            About Us
           </motion.h3>
           <motion.p 
             className="font-inter text-xl text-gray-300 max-w-2xl mx-auto"
@@ -91,7 +91,7 @@ const VideoSection = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            Hear directly from our clients about their transformation journey
+           At Content Brewer, our clients aren’t just clients — they’re co-creators, storytellers, and often
           </motion.p>
         </motion.div>
 

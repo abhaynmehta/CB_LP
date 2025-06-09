@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { useSpring, animated } from '@react-spring/web';
 import { Button } from '@/components/ui/button';
@@ -74,12 +73,12 @@ const Hero = () => {
             <animated.div style={buttonSpring}>
               <Button 
                 size="lg"
-                onClick={() => scrollToSection('portfolio')}
+                onClick={() => scrollToSection('contact')}
                 className="bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer text-brand-black hover:from-brand-gossamer hover:to-brand-mountain-meadow font-inter font-semibold px-8 py-4 text-lg transition-all duration-300 rounded-full"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
-                EXPLORE OUR WORK
+                BOOK A BREW CALL
               </Button>
             </animated.div>
 
@@ -90,11 +89,11 @@ const Hero = () => {
               <Button 
                 variant="outline" 
                 size="lg"
-                onClick={() => scrollToSection('videos')}
+                onClick={() => scrollToSection('portfolio')}
                 className="border-2 border-brand-mountain-meadow text-brand-mountain-meadow hover:bg-gradient-to-r hover:from-brand-mountain-meadow/20 hover:to-brand-gossamer/20 hover:text-white font-inter font-semibold px-8 py-4 text-lg transition-all duration-300 rounded-full backdrop-blur-sm"
               >
                 <Play className="mr-2 h-5 w-5" />
-                WATCH OUR STORY
+               EXPLORE OUR WORK
               </Button>
             </motion.div>
           </motion.div>

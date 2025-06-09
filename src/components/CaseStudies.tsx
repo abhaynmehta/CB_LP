@@ -346,7 +346,7 @@ const CaseStudies = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            Explore how we solve real-world problems and create impact for our clients.
+            Real Brands. Real Chaos. Real Growth.
           </motion.p>
         </motion.div>
         <motion.div
