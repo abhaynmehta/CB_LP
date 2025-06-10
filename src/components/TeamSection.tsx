@@ -7,20 +7,17 @@ const teamMembers = [
   {
     name: "Tanya Srivasatava",
     role: "Founder and creative head",
-    image: "/assests/Team/tanya g.jpg",
-    bio: "10+ years crafting luxury brand experiences with a passion for haute couture aesthetics"
+    image: "/assests/Team/tanya g.jpg"
   },
   {
     name: "Abhay Mehta", 
     role: "Developer",
-    image: "/assests/Team/abhay.jpg",
-    bio: "Expert in digital transformation and brand positioning with Fortune 500 experience"
+    image: "/assests/Team/abhay.jpg"
   },
   {
     name: "Sneha Mishra",
     role: "Content marketer",
-    image: "/assests/Team/sneha.jpg",
-    bio: "Full-stack architect building scalable solutions and cutting-edge web applications"
+    image: "/assests/Team/sneha.jpg"
   }
 ];
 
@@ -184,16 +181,6 @@ const TeamSection = () => {
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
                   {member.role}
-                </motion.p>
-                
-                <motion.p 
-                  className="font-inter text-gray-300 text-sm leading-relaxed max-w-xs mx-auto"
-                  whileHover={{ scale: 1.02 }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: index * 0.2 + 0.3 }}
-                >
-                  {member.bio}
                 </motion.p>
               </motion.div>
             ))}

@@ -42,14 +42,14 @@ const Hero = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8"
+            className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8"
           >
-            We Craft Brands
+            We Brew Brands
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-mountain-meadow via-brand-gossamer to-brand-mountain-meadow">
-              Like{' '}
+              That{' '}
               <TypewriterText 
-                texts={['Haute Couture.', 'Fine Art.', 'Premium Luxury.', 'Digital Magic.']}
+                texts={['Speak Before They Sell.', 'Connect Then Convert.', ' Are Worth Remembering.', 'Feel Human.']}
                 className="text-transparent bg-clip-text bg-gradient-to-r from-brand-mountain-meadow via-brand-gossamer to-brand-mountain-meadow"
               />
             </span>
@@ -61,7 +61,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="font-inter text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed"
           >
-            Premium content creation and brand strategy that transforms businesses into luxury experiences.
+            At Content Brewer, we craft premium, story-led content and podcasts that spark emotion, build trust, and drive results.
           </motion.p>
 
           <motion.div 
@@ -90,7 +90,7 @@ const Hero = () => {
                 variant="outline" 
                 size="lg"
                 onClick={() => scrollToSection('portfolio')}
-                className="border-2 border-brand-mountain-meadow text-brand-mountain-meadow hover:bg-gradient-to-r hover:from-brand-mountain-meadow/20 hover:to-brand-gossamer/20 hover:text-white font-inter font-semibold px-8 py-4 text-lg transition-all duration-300 rounded-full backdrop-blur-sm"
+                className="bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer text-brand-black hover:from-brand-gossamer hover:to-brand-mountain-meadow font-inter font-semibold px-8 py-4 text-lg transition-all duration-300 rounded-full"
               >
                 <Play className="mr-2 h-5 w-5" />
                EXPLORE OUR WORK

@@ -39,10 +39,10 @@ const LiveScrollGallery = () => {
           className="text-center mb-16"
         >
           <h2 className="font-playfair text-4xl md:text-6xl font-bold text-white mb-4">
-            Portfolio Gallery
+            See What We've Brewed
           </h2>
           <p className="font-inter text-xl text-gray-300 max-w-2xl mx-auto">
-            Explore our client work and creative solutions
+          We brew every brand with its own flavor. Here’s how our storytelling looks in motion.
           </p>
         </motion.div>
 

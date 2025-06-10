@@ -104,7 +104,7 @@ RESULTS:
     id: 2,
     title: 'Full-Scale Website & Branding Revamp for B2B SaaS Company IONA.AI',
     subtitle: 'Website, Branding, and LinkedIn for IONA.AI (B2B SaaS, London)',
-    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80',
+    image: '/assests/CaseStudyPre/iona.png',
     summary: 'How we transformed IONA.AI\'s digital presence and brand for enterprise clients.',
     videos: [
       { id: 'GmjSivS7wig', label: 'Before' },
@@ -153,7 +153,7 @@ We delivered a complete digital transformation in just 2 weeks — from scratch.
     id: 3,
     title: 'Personal Branding & Client Growth for Author & Celebrity Astrologer',
     subtitle: 'Branding, Content, and Growth for Author & Astrologer',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
+    image: '/assests/CaseStudyPre/Astrologer.jpg',
     summary: 'How we helped an author and celebrity astrologer grow their brand and client base.',
     videos: [
       { id: 'gKCYsztTXL8', label: 'Video 1' },
@@ -198,7 +198,7 @@ We delivered a complete digital transformation in just 2 weeks — from scratch.
     id: 4,
     title: 'High-Volume Content Creation for Chinese Creators Showcasing Indian Culture',
     subtitle: 'Content Production & Account Management for Chinese Creator in India',
-    image: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80',
+    image: '/assests/CaseStudyPre/Chinese.jpg',
     summary: 'How we delivered 400+ videos for a Chinese entrepreneur building a social presence in India.',
     details: `👤 The Client
 A Chinese content creator and entrepreneur, based in India, aimed to build a large social media presence by sharing content about Indian culture, food, and local experiences with his Chinese-speaking audience.
@@ -288,7 +288,7 @@ We helped Aditya transform his social presence from scattered to strategic, empo
     id: 6,
     title: 'LinkedIn Personal Branding for Ashish (Dubai-Based Marketer)',
     subtitle: 'LinkedIn Branding & Content for Dubai Marketer',
-    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80',
+    image: '/assests/CaseStudyPre/ashish.png',
     summary: 'How we helped Ashish build a professional, high-visibility LinkedIn presence.',
     details: `The Client
 Ashish, a marketing professional based in Dubai, wanted to stand out in the job market and grow his personal brand on LinkedIn. Despite having years of experience in marketing, his online presence lacked clarity, creativity, and strategic content.
