@@ -1,22 +1,12 @@
 import { motion } from 'framer-motion';
 import { useSpring, animated } from '@react-spring/web';
 import { Button } from '@/components/ui/button';
-import { Play } from 'lucide-react';
+import { Play, Calendar } from 'lucide-react';
 import { useState } from 'react';
 import AnimatedBackground from './AnimatedBackground';
 import TypewriterText from './TypewriterText';
 
 const Hero = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const buttonSpring = useSpring({
-    transform: isHovered ? 'scale(1.05) translateY(-2px)' : 'scale(1) translateY(0px)',
-    boxShadow: isHovered 
-      ? '0 20px 40px rgba(21, 206, 160, 0.3)' 
-      : '0 10px 20px rgba(0, 0, 0, 0.1)',
-    config: { tension: 300, friction: 10 }
-  });
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -25,7 +15,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-brand-black text-white overflow-hidden">
+    <section id="hero" className="relative min-h-screen bg-brand-black text-white overflow-hidden">
       <AnimatedBackground />
 
       {/* Enhanced Gradient Overlay */}
@@ -70,32 +60,23 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 1 }}
             className="flex flex-col sm:flex-row gap-6 justify-center"
           >
-            <animated.div style={buttonSpring}>
-              <Button 
-                size="lg"
-                onClick={() => scrollToSection('contact')}
-                className="bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer text-brand-black hover:from-brand-gossamer hover:to-brand-mountain-meadow font-inter font-semibold px-8 py-4 text-lg transition-all duration-300 rounded-full"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-              >
-                BOOK A BREW CALL
-              </Button>
-            </animated.div>
-
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <Button 
+              size="lg"
+              onClick={() => scrollToSection('contact')}
+              className="bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer text-brand-black font-inter font-semibold px-8 py-4 text-lg rounded-full"
             >
-              <Button 
-                variant="outline" 
-                size="lg"
-                onClick={() => scrollToSection('portfolio')}
-                className="bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer text-brand-black hover:from-brand-gossamer hover:to-brand-mountain-meadow font-inter font-semibold px-8 py-4 text-lg transition-all duration-300 rounded-full"
-              >
-                <Play className="mr-2 h-5 w-5" />
-               EXPLORE OUR WORK
-              </Button>
-            </motion.div>
+              <Calendar className="mr-2 h-5 w-5" />
+              BOOK A BREW CALL
+            </Button>
+
+            <Button 
+              size="lg"
+              onClick={() => scrollToSection('portfolio')}
+              className="bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer text-brand-black font-inter font-semibold px-8 py-4 text-lg rounded-full"
+            >
+              <Play className="mr-2 h-5 w-5" />
+              EXPLORE OUR WORK
+            </Button>
           </motion.div>
         </div>
       </div>

@@ -178,14 +178,14 @@ const CaseStudyModalContent = ({ selected }) => {
 
   return (
     <motion.div
-      className="p-8"
+      className="p-4 sm:p-6 md:p-8"
       initial="hidden"
       animate="visible"
       exit="exit"
       variants={modalContentVariants}
     >
       <motion.h2
-        className="font-playfair text-4xl md:text-5xl font-extrabold text-brand-mountain-meadow mb-2 tracking-tight leading-tight"
+        className="font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-brand-mountain-meadow mb-2 tracking-tight leading-tight"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
@@ -193,7 +193,7 @@ const CaseStudyModalContent = ({ selected }) => {
         {selected.title}
       </motion.h2>
       <motion.div
-        className="font-inter text-base md:text-lg text-brand-gossamer mb-4 uppercase tracking-widest font-semibold"
+        className="font-inter text-sm sm:text-base md:text-lg text-brand-gossamer mb-4 uppercase tracking-widest font-semibold"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.1 }}
@@ -202,7 +202,7 @@ const CaseStudyModalContent = ({ selected }) => {
       </motion.div>
       {selected.summary && (
         <motion.div
-          className="font-inter text-lg text-gray-200 mb-6"
+          className="font-inter text-base sm:text-lg text-gray-200 mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.18 }}
@@ -214,13 +214,13 @@ const CaseStudyModalContent = ({ selected }) => {
       {/* Video Section */}
       {selected.videos && selected.videos.length > 0 && (
         <motion.div
-          className="mb-10"
+          className="mb-8 sm:mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
         >
-          <h3 className="font-playfair text-2xl text-brand-mountain-meadow mb-4">Featured Videos</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <h3 className="font-playfair text-xl sm:text-2xl text-brand-mountain-meadow mb-4">Featured Videos</h3>
+          <div className="grid grid-cols-1 gap-4 sm:gap-6">
             {selected.videos.map((video, index) => {
               return (
                 <div key={index} className="space-y-2">
@@ -242,7 +242,7 @@ const CaseStudyModalContent = ({ selected }) => {
       )}
 
       <motion.div
-        className="space-y-10"
+        className="space-y-6 sm:space-y-10"
         initial="hidden"
         animate="visible"
         exit="exit"
@@ -260,7 +260,7 @@ const CaseStudyModalContent = ({ selected }) => {
             >
               {section.heading && (
                 <motion.h4
-                  className="font-playfair text-2xl text-brand-mountain-meadow mb-3 border-t border-brand-mountain-meadow/30 pt-6 first:mt-0 cursor-pointer transition-colors duration-200 relative"
+                  className="font-playfair text-xl sm:text-2xl text-brand-mountain-meadow mb-3 border-t border-brand-mountain-meadow/30 pt-4 sm:pt-6 first:mt-0 cursor-pointer transition-colors duration-200 relative"
                   whileHover={{
                     scale: 1.045,
                     color: '#15CEA0',
@@ -274,7 +274,7 @@ const CaseStudyModalContent = ({ selected }) => {
                 </motion.h4>
               )}
               {section.content && (
-                <div className="font-inter text-gray-200 text-base whitespace-pre-line mb-2" style={{lineHeight: '1.7'}}>
+                <div className="font-inter text-sm sm:text-base text-gray-200 whitespace-pre-line mb-2" style={{lineHeight: '1.7'}}>
                   {renderContentWithImages(section.content)}
                 </div>
               )}
@@ -284,7 +284,7 @@ const CaseStudyModalContent = ({ selected }) => {
       </motion.div>
       {/* CTA Section: Book a Discovery Call */}
       <motion.div
-        className="mt-12 flex flex-col items-center justify-center"
+        className="mt-8 sm:mt-12 flex flex-col items-center justify-center"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -292,13 +292,13 @@ const CaseStudyModalContent = ({ selected }) => {
         <Button
           size="lg"
           onClick={openCalendly}
-          className="bg-brand-mountain-meadow text-brand-black hover:bg-brand-gossamer font-inter font-semibold px-8 py-4 text-lg transition-all duration-300 group shadow-lg rounded-xl"
+          className="bg-brand-mountain-meadow text-brand-black hover:bg-brand-gossamer font-inter font-semibold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg transition-all duration-300 group shadow-lg rounded-xl w-full sm:w-auto"
         >
-          <Calendar className="mr-2 h-5 w-5" />
+          <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
           BOOK A DISCOVERY CALL
-          <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+          <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform duration-300" />
         </Button>
-        <span className="font-inter text-sm text-gray-400 mt-4">
+        <span className="font-inter text-xs sm:text-sm text-gray-400 mt-3 sm:mt-4 text-center">
           30-minute strategy session • No commitment required
         </span>
       </motion.div>
@@ -314,7 +314,7 @@ const CaseStudies = () => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   return (
-    <section className="py-20 bg-gradient-to-br from-brand-black via-brand-cod-gray to-brand-black text-white relative overflow-hidden">
+    <section className="py-12 sm:py-20 bg-gradient-to-br from-brand-black via-brand-cod-gray to-brand-black text-white relative overflow-hidden">
       <motion.div
         className="absolute inset-0 pointer-events-none"
         animate={{
@@ -326,31 +326,31 @@ const CaseStudies = () => {
         }}
         transition={{ duration: 10, repeat: Infinity }}
       />
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
           <motion.h2
-            className="font-playfair text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-brand-mountain-meadow to-white bg-clip-text text-transparent"
+            className="font-playfair text-3xl sm:text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-brand-mountain-meadow to-white bg-clip-text text-transparent"
             whileHover={{ scale: 1.02 }}
           >
             Case Studies
           </motion.h2>
           <motion.p
-            className="font-inter text-xl text-gray-300 max-w-2xl mx-auto"
+            className="font-inter text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            Real Brands. Real Chaos. Real Growth.
+            Explore how we solve real-world problems and create impact for our clients.
           </motion.p>
         </motion.div>
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8"
           variants={cardGridVariants}
           initial="hidden"
           whileInView="visible"
