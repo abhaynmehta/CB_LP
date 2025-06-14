@@ -23,8 +23,8 @@ const BookCall = () => {
    * environment variables for flexible configuration.
    */
   const openCalendly = () => {
-    // Retrieve Calendly URL from environment variable, with a fallback for development.
-    const calendlyUrl = process.env.REACT_APP_CALENDLY_URL || 'https://calendly.com/your-link';
+    // Directly use the Calendly URL.
+    const calendlyUrl = 'https://calendly.com/contentbrewer001/new-meeting';
     // Open the Calendly URL in a new browser tab.
     window.open(calendlyUrl, '_blank');
   };

@@ -172,7 +172,7 @@ const CaseStudyModalContent = ({ selected }) => {
    * Uses the same logic as BookCall for consistency.
    */
   const openCalendly = () => {
-    const calendlyUrl = process.env.REACT_APP_CALENDLY_URL || 'https://calendly.com/your-link';
+    const calendlyUrl = 'https://calendly.com/contentbrewer001/new-meeting';
     window.open(calendlyUrl, '_blank');
   };
 
