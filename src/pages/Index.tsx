@@ -4,7 +4,6 @@ import Hero from '@/components/Hero';
 import EnhancedServices from '@/components/EnhancedServices';
 import LiveScrollGallery from '@/components/LiveScrollGallery';
 import VideoSection from '@/components/VideoSection';
-import TeamSection from '@/components/TeamSection';
 import BookCall from '@/components/BookCall';
 import Footer from '@/components/Footer';
 import CaseStudies from '@/components/CaseStudies';
@@ -53,11 +52,6 @@ const Index = () => {
             {/* Case Studies section */}
             <section id="case-studies" aria-label="Case Studies">
               <CaseStudies />
-            </section>
-            
-            {/* Team information */}
-            <section id="team" aria-label="Team">
-              <TeamSection />
             </section>
             
             {/* Contact and conversion */}
