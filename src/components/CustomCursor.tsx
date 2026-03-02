@@ -5,7 +5,21 @@ const CustomCursor = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [isHovering, setIsHovering] = useState(false);
 
+    const [isMobile, setIsMobile] = useState(false);
+
     useEffect(() => {
+        // Check if device is mobile or touch-based
+        const checkMobile = () => {
+            setIsMobile(
+                window.innerWidth <= 768 ||
+                window.matchMedia('(pointer: coarse)').matches ||
+                'ontouchstart' in window
+            );
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
         const updateMousePosition = (e: MouseEvent) => {
             setMousePosition({ x: e.clientX, y: e.clientY });
         };
@@ -25,14 +39,19 @@ const CustomCursor = () => {
             }
         };
 
-        window.addEventListener('mousemove', updateMousePosition);
-        window.addEventListener('mouseover', handleMouseOver);
+        if (!isMobile) {
+            window.addEventListener('mousemove', updateMousePosition);
+            window.addEventListener('mouseover', handleMouseOver);
+        }
 
         return () => {
+            window.removeEventListener('resize', checkMobile);
             window.removeEventListener('mousemove', updateMousePosition);
             window.removeEventListener('mouseover', handleMouseOver);
         };
-    }, []);
+    }, [isMobile]);
+
+    if (isMobile) return null;
 
     return (
         <>

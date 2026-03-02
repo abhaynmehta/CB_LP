@@ -8,7 +8,6 @@ import VideoSection from '@/components/VideoSection';
 import BookCall from '@/components/BookCall';
 import Footer from '@/components/Footer';
 import CaseStudies from '@/components/CaseStudies';
-import Testimonials from '@/components/Testimonials';
 
 /**
  * Main landing page component
@@ -99,11 +98,6 @@ const Index = () => {
             {/* Video content */}
             <section id="videos" aria-label="Videos">
               <VideoSection />
-            </section>
-
-            {/* Testimonials */}
-            <section id="testimonials" aria-label="Testimonials">
-              <Testimonials />
             </section>
 
             {/* Case Studies section */}
