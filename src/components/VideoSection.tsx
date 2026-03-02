@@ -91,7 +91,7 @@ const VideoSection = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            I don't just write code—I partner with visionary leaders to push boundaries and build the future together. Here's what they have to say.
+            I don't just write code I partner with visionary leaders to push boundaries and build the future together. Here's what they have to say.
           </motion.p>
         </motion.div>
 
