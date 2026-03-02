@@ -49,16 +49,16 @@ export const TRANSITIONS = {
 
 // SEO-related constants
 export const SEO_CONFIG = {
-  siteName: 'Content Brewer',
-  siteDescription: 'Premium content creation and brand strategy agency',
-  siteUrl: 'https://contentbrewer.com',
-  twitterHandle: '@contentbrewer',
+  siteName: 'Abhay Mehta',
+  siteDescription: 'Digital Marketer & Brand Manager | IT & Frontend Developer',
+  siteUrl: 'https://abhaymehta.dev',
+  twitterHandle: '@abhaymehta',
   defaultImage: 'https://lovable.dev/opengraph-image-p98pqg.png',
 } as const;
 
 // Contact information
 export const CONTACT_INFO = {
-  email: 'hello@contentbrewer.com',
+  email: 'hello@abhaymehta.dev',
   phone: '+1 (555) 123-4567',
   address: 'San Francisco, CA',
 } as const;

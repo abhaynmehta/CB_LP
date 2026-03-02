@@ -1,8 +1,3 @@
-/**
- * Main application component that sets up the core providers and routing
- * @component
- * @returns {JSX.Element} The root application component
- */
 import React from 'react';
 // UI Components
 import { Toaster } from "@/components/ui/toaster";
@@ -15,6 +10,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Pages
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import CustomCursor from "./components/CustomCursor";
 
 // Initialize React Query client with default settings
 const queryClient = new QueryClient({
@@ -30,6 +26,8 @@ const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        {/* Custom Application Cursor */}
+        <CustomCursor />
         {/* Toast notifications */}
         <Toaster />
         <Sonner />

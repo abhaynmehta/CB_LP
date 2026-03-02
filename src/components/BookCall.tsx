@@ -34,24 +34,21 @@ const BookCall = () => {
     <section ref={ref} className="py-20 bg-gradient-to-br from-brand-cod-gray to-brand-black text-white">
       <div className="container mx-auto px-6 text-center">
         {/* Motion div for animating the main heading and paragraph. */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 50 }} // Initial animation state (hidden below and transparent).
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }} // Animate to visible when in view.
           transition={{ duration: 0.8 }} // Animation duration.
         >
           {/* Main heading for the section, with responsive font sizes. */}
           <h2 className="font-playfair text-4xl md:text-6xl font-bold mb-6">
-            Ready to Transform
+            Let's Build Something
             <br />
-            Your Brand?
+            Extraordinary
           </h2>
-          {/* Descriptive paragraph, with responsive text alignment and maximum width. */}
           <p className="font-inter text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            Is your brand just making noise — or actually being heard?
+            Ready to push the boundaries of the digital realm?
             <br />
-            At Content Brewer, we don't create content for the sake of content.
-            <br />
-            We craft experiences that make people pause, feel, and remember.
+            Whether you need a comprehensive digital marketing strategy, a viral content campaign, or a high-performance web app, I'm ready to bring your vision to life.
           </p>
 
           {/* Motion div for animating the call-to-action button. */}
@@ -79,7 +76,7 @@ const BookCall = () => {
           </motion.div>
 
           {/* Motion paragraph for animating the small disclaimer text. */}
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }} // Initial animation state (transparent).
             animate={isInView ? { opacity: 1 } : { opacity: 0 }} // Animate to visible when in view.
             transition={{ duration: 0.6, delay: 0.6 }} // Animation duration with a longer delay.

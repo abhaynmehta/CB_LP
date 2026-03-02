@@ -19,7 +19,7 @@ const Hero = () => {
       <AnimatedBackground />
 
       {/* Enhanced Gradient Overlay */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
@@ -28,72 +28,76 @@ const Hero = () => {
 
       <div className="relative z-10 container mx-auto px-6 py-20 min-h-screen flex items-center justify-center">
         <div className="max-w-4xl text-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8"
           >
-            We Brew Brands
+            Abhay Mehta
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-mountain-meadow via-brand-gossamer to-brand-mountain-meadow">
-              That{' '}
-              <TypewriterText 
-                texts={['Speak Before They Sell.', 'Connect Then Convert.', ' Are Worth Remembering.', 'Feel Human.']}
+              <TypewriterText
+                texts={['Digital Marketer.', 'Brand Manager.', 'Frontend Developer.', 'Tech-Savvy Strategist.']}
                 className="text-transparent bg-clip-text bg-gradient-to-r from-brand-mountain-meadow via-brand-gossamer to-brand-mountain-meadow"
               />
             </span>
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             className="font-inter text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed"
           >
-            At Content Brewer, we craft premium, story-led content and podcasts that spark emotion, build trust, and drive results.
+            I engineer high converting digital ecosystems fusing 4+ years of strategic brand mastery with precision frontend development to drive explosive growth.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1 }}
             className="flex flex-col sm:flex-row gap-6 justify-center"
           >
-            <Button 
+            <Button
               size="lg"
               onClick={() => scrollToSection('contact')}
-              className="bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer text-brand-black font-inter font-semibold px-8 py-4 text-lg rounded-full"
+              className="relative group overflow-hidden bg-brand-black text-brand-mountain-meadow border border-brand-mountain-meadow/50 font-inter font-semibold px-8 py-6 text-lg rounded-full hover:bg-brand-mountain-meadow/10 transition-all duration-300"
             >
-              <Calendar className="mr-2 h-5 w-5" />
-              BOOK A BREW CALL
+              <span className="relative z-10 flex items-center">
+                <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                LET'S CONNECT
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-mountain-meadow/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 pointer-events-none" />
             </Button>
 
-            <Button 
+            <Button
               size="lg"
               onClick={() => scrollToSection('portfolio')}
-              className="bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer text-brand-black font-inter font-semibold px-8 py-4 text-lg rounded-full"
+              className="relative group overflow-hidden bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer text-brand-black font-inter font-bold px-8 py-6 text-lg rounded-full shadow-[0_0_20px_rgba(45,212,191,0.3)] hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] transition-all duration-300"
             >
-              <Play className="mr-2 h-5 w-5" />
-              EXPLORE OUR WORK
+              <span className="relative z-10 flex items-center">
+                <Play className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
+                VIEW MY WORK
+              </span>
             </Button>
           </motion.div>
         </div>
       </div>
 
       {/* Enhanced Scroll Indicator */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.5 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
         onClick={() => scrollToSection('portfolio')}
       >
-        <motion.div 
+        <motion.div
           className="w-6 h-10 border-2 border-brand-mountain-meadow rounded-full flex justify-center"
           whileHover={{ scale: 1.1 }}
         >
-          <motion.div 
+          <motion.div
             className="w-1 h-3 bg-gradient-to-b from-brand-mountain-meadow to-brand-gossamer rounded-full mt-2"
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}

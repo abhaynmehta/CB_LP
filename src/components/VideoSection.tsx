@@ -67,35 +67,35 @@ const VideoSection = () => {
       />
 
       <div className="container mx-auto px-6 relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <motion.h2 
+          <motion.h2
             className="font-playfair text-4xl md:text-6xl font-bold text-white mb-4"
             whileHover={{ scale: 1.02 }}
           >
-            What Clients Say
+            Kind Words
           </motion.h2>
-          <motion.h3 
+          <motion.h3
             className="font-playfair text-4xl md:text-6xl font-bold bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer bg-clip-text text-transparent mb-6"
             whileHover={{ scale: 1.02 }}
           >
-            About Us
+            From Collaborators
           </motion.h3>
-          <motion.p 
+          <motion.p
             className="font-inter text-xl text-gray-300 max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-           At Content Brewer, our clients aren’t just clients — they’re co-creators, storytellers, and often
+            I don't just write code—I partner with visionary leaders to push boundaries and build the future together. Here's what they have to say.
           </motion.p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -125,13 +125,13 @@ const VideoSection = () => {
                   />
                 ) : (
                   <>
-                    <img 
+                    <img
                       src={video.thumbnail}
                       alt={video.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-transparent"></div>
-                    
+
                     {/* Play Button */}
                     <div className="absolute inset-0 flex items-center justify-center">
                       <motion.div
@@ -151,25 +151,25 @@ const VideoSection = () => {
               </div>
 
               {/* Video Info */}
-              <motion.div 
+              <motion.div
                 className="absolute bottom-4 left-4 right-4"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                <motion.p 
+                <motion.p
                   className="text-brand-mountain-meadow text-sm font-inter uppercase tracking-wider mb-1"
                   whileHover={{ x: 5 }}
                 >
                   Testimonial
                 </motion.p>
-                <motion.h4 
+                <motion.h4
                   className="font-playfair text-xl font-semibold text-white mb-1"
                   whileHover={{ x: 10 }}
                 >
                   {video.title}
                 </motion.h4>
-                <motion.p 
+                <motion.p
                   className="text-gray-300 text-sm font-inter"
                   whileHover={{ x: 5 }}
                 >
@@ -178,7 +178,7 @@ const VideoSection = () => {
               </motion.div>
 
               {/* Hover Border Effect */}
-              <motion.div 
+              <motion.div
                 className="absolute inset-0 border-2 border-transparent group-hover:border-brand-mountain-meadow/50 transition-all duration-500 rounded-xl"
                 whileHover={{
                   borderColor: "rgba(21, 206, 160, 0.8)",

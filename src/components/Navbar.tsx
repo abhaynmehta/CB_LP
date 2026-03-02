@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Hexagon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const navItems = [
@@ -20,7 +20,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      
+
       // Update active section based on scroll position
       const sections = navItems.map(item => item.href.replace('#', ''));
       const current = sections.find(section => {
@@ -31,7 +31,7 @@ const Navbar = () => {
         }
         return false;
       });
-      
+
       if (current) {
         setActiveSection(current);
       }
@@ -46,10 +46,10 @@ const Navbar = () => {
     if (element) {
       // Close mobile menu before scrolling
       setIsMobileMenuOpen(false);
-      
+
       // Add a small delay to ensure smooth transition
       setTimeout(() => {
-        element.scrollIntoView({ 
+        element.scrollIntoView({
           behavior: 'smooth',
           block: 'start'
         });
@@ -62,21 +62,21 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-brand-black/95 backdrop-blur-md border-b border-brand-mountain-meadow/20' 
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ? 'bg-brand-black/95 backdrop-blur-md border-b border-brand-mountain-meadow/20'
+        : 'bg-transparent'
+        }`}
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="font-playfair text-2xl font-bold text-white cursor-pointer"
+            whileHover={{ scale: 1.1, rotate: 90 }}
+            transition={{ duration: 0.4, type: "spring" }}
+            className="cursor-pointer"
             onClick={() => scrollToSection('#hero')}
           >
-            <span className="text-brand-mountain-meadow">Content</span>Brewer
+            <Hexagon className="w-8 h-8 text-brand-mountain-meadow stroke-[1.5] fill-brand-mountain-meadow/10" />
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -85,11 +85,10 @@ const Navbar = () => {
               <motion.button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className={`relative font-inter text-sm font-medium transition-colors duration-300 ${
-                  activeSection === item.href.replace('#', '')
-                    ? 'text-brand-mountain-meadow'
-                    : 'text-gray-300 hover:text-white'
-                }`}
+                className={`relative font-inter text-sm font-medium transition-colors duration-300 ${activeSection === item.href.replace('#', '')
+                  ? 'text-brand-mountain-meadow'
+                  : 'text-gray-300 hover:text-white'
+                  }`}
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 0 }}
               >
@@ -150,11 +149,10 @@ const Navbar = () => {
                     exit={{ x: -50, opacity: 0 }}
                     transition={{ delay: index * 0.1 }}
                     onClick={() => scrollToSection(item.href)}
-                    className={`block w-full text-left px-4 py-3 font-inter text-sm font-medium transition-colors duration-300 ${
-                      activeSection === item.href.replace('#', '')
-                        ? 'text-brand-mountain-meadow bg-brand-mountain-meadow/10'
-                        : 'text-gray-300 hover:text-white hover:bg-white/5'
-                    }`}
+                    className={`block w-full text-left px-4 py-3 font-inter text-sm font-medium transition-colors duration-300 ${activeSection === item.href.replace('#', '')
+                      ? 'text-brand-mountain-meadow bg-brand-mountain-meadow/10'
+                      : 'text-gray-300 hover:text-white hover:bg-white/5'
+                      }`}
                   >
                     {item.name}
                   </motion.button>
