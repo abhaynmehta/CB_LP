@@ -7,7 +7,7 @@ import ReactPlayer from 'react-player';
 
 const testimonials = [
   {
-    quote: "Their fashion-first approach transformed our brand.",
+    quote: "Their fashion first approach transformed our brand.",
     client: "CLIENT",
     youtubeId: "dQw4w9WgXcQ",
     thumbnail: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"

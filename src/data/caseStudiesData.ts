@@ -129,7 +129,7 @@ We delivered a complete digital transformation in just 2 weeks — from scratch.
 - Created a bold new color palette and brand identity that reflects trust, innovation, and scale
 - Wrote clear, conversion-driven marketing copy tailored to B2B buyers
 - Implemented on-page SEO and keyword-optimized content
-- Integrated custom animations to explain the product workflow in a clean, tech-savvy way
+- Integrated custom animations to explain the product workflow in a clean, tech savvy way
 
 🧠 Branding & Strategy
 - Developed a consistent brand language for all their digital touchpoints
@@ -168,7 +168,7 @@ We delivered a complete digital transformation in just 2 weeks — from scratch.
 
 🛠 What I Did
 🎥 Content Production & Editing
-- Filmed and edited high-quality videos tailored to each of their niches (health, politics, astrology)
+- Filmed and edited high quality videos tailored to each of their niches (health, politics, astrology)
 - Created visually cohesive reel covers to enhance Instagram grid appeal
 - Developed consistent posting schedules to keep their audience engaged and returning
 
@@ -196,7 +196,7 @@ We delivered a complete digital transformation in just 2 weeks — from scratch.
   },
   {
     id: 4,
-    title: 'High-Volume Content Creation for Chinese Creators Showcasing Indian Culture',
+    title: 'High Volume Content Creation for Chinese Creators Showcasing Indian Culture',
     subtitle: 'Content Production & Account Management for Chinese Creator in India',
     image: '/assests/CaseStudyPre/Chinese.jpg',
     summary: 'How we delivered 400+ videos for a Chinese entrepreneur building a social presence in India.',
@@ -205,7 +205,7 @@ A Chinese content creator and entrepreneur, based in India, aimed to build a lar
 He managed multiple TikTok accounts (5+), across different niches, and needed an Indian team to handle on-ground content creation, logistics, and account management.
 
 🧩 The Challenges
-- Needed consistent, high-volume video content from India
+- Needed consistent, high volume video content from India
 - Required support in filming, location planning, and BTS coverage
 - Was running multiple accounts with no central content system
 - Needed a local creative team who could execute fast and adapt to changing content themes
@@ -228,7 +228,7 @@ We worked with the client for 3 months, during which we acted as his dedicated c
 - Maintained posting consistency, formatting, and quality across all channels
 
 ✅ Results
-- Delivered 400+ high-quality short videos in 90 days
+- Delivered 400+ high quality short videos in 90 days
 - Increased engagement and followership on his TikTok accounts
 - Helped streamline his content pipeline and account management
 - Became the client's go-to content partner for Indian-based shoots
@@ -289,7 +289,7 @@ We helped Aditya transform his social presence from scattered to strategic, empo
     title: 'LinkedIn Personal Branding for Ashish (Dubai-Based Marketer)',
     subtitle: 'LinkedIn Branding & Content for Dubai Marketer',
     image: '/assests/CaseStudyPre/ashish.png',
-    summary: 'How we helped Ashish build a professional, high-visibility LinkedIn presence.',
+    summary: 'How we helped Ashish build a professional, high visibility LinkedIn presence.',
     details: `The Client
 Ashish, a marketing professional based in Dubai, wanted to stand out in the job market and grow his personal brand on LinkedIn. Despite having years of experience in marketing, his online presence lacked clarity, creativity, and strategic content.
 
@@ -371,7 +371,7 @@ As they were opening a new location in Noida, the client trusted us with the loc
 - Focused on brand visibility in the right demographic zones
 
 ✅ The Problems We Solved
-- Low Engagement → Replaced with high-retention content
+- Low Engagement → Replaced with high retention content
 - Unfocused Content → Brought in strategic scripting & creative direction
 - Poor Visual Quality → Elevated the studio's aesthetic through cinematic filming
 - No Campaign Direction → Delivered area-specific performance marketing with actual results

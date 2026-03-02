@@ -25,21 +25,21 @@ const services = [
   {
     title: "Brand Identity",
     subtitle: "& Strategy",
-    description: "I build cohesive brand identities and storytelling formats that blend traditional appeal with modern digital presence for high-retention engagement.",
+    description: "I build cohesive brand identities and storytelling formats that blend traditional appeal with modern digital presence for high retention engagement.",
     icon: Lightbulb,
     color: "from-blue-500 to-cyan-400"
   },
   {
     title: "Digital Marketing",
     subtitle: "& Social Media",
-    description: "End-to-end execution of high-engagement strategies across platforms. I leverage deep analytics and targeted content frameworks to drive explosive organic growth.",
+    description: "End to end execution of high engagement strategies across platforms. I leverage deep analytics and targeted content frameworks to drive explosive organic growth.",
     icon: Share2,
     color: "from-purple-500 to-pink-500"
   },
   {
     title: "Content Creation",
     subtitle: "& Production",
-    description: "From producing 400+ cross-cultural videos to managing complete podcast operations, I craft compelling visual and auditory experiences from ideation to final cut.",
+    description: "From producing 400+ cross cultural videos to managing complete podcast operations, I craft compelling visual and auditory experiences from ideation to final cut.",
     icon: Mic,
     color: "from-green-500 to-emerald-400"
   },

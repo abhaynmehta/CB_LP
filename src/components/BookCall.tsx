@@ -48,7 +48,7 @@ const BookCall = () => {
           <p className="font-inter text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
             Ready to push the boundaries of the digital realm?
             <br />
-            Whether you need a comprehensive digital marketing strategy, a viral content campaign, or a high-performance web app, I'm ready to bring your vision to life.
+            Whether you need a comprehensive digital marketing strategy, a viral content campaign, or a high performance web app, I'm ready to bring your vision to life.
           </p>
 
           {/* Motion div for animating the call-to-action button. */}

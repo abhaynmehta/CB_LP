@@ -38,7 +38,7 @@ const Hero = () => {
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-mountain-meadow via-brand-gossamer to-brand-mountain-meadow">
               <TypewriterText
-                texts={['Digital Marketer.', 'Brand Manager.', 'Frontend Developer.', 'Tech-Savvy Strategist.']}
+                texts={['Digital Marketer.', 'Brand Manager.', 'Frontend Developer.', 'Tech Savvy Strategist.']}
                 className="text-transparent bg-clip-text bg-gradient-to-r from-brand-mountain-meadow via-brand-gossamer to-brand-mountain-meadow"
               />
             </span>
