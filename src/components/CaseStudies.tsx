@@ -1,9 +1,9 @@
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Dialog, DialogContent } from './ui/dialog';
-import caseStudies from '@/data/caseStudiesData';
-import { Calendar, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Dialog, DialogContent } from "./ui/dialog";
+import caseStudies from "@/data/caseStudiesData";
+import { Calendar, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 /**
  * Splits a details string into sections for modal rendering.
@@ -13,13 +13,22 @@ import { Button } from '@/components/ui/button';
 function parseSections(details) {
   const rawSections = details.split(/\n{2,}/);
   return rawSections.map((block) => {
-    const headingMatch = block.match(/^([\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}]|[#*\w\d\s]+:|[A-Z][^\n:]+)$/u);
-    if (headingMatch) return { heading: block.trim(), content: '' };
-    const lines = block.split('\n');
-    if (lines.length > 1 && /[A-Za-z0-9 ]{3,}/.test(lines[0]) && lines[0].length < 60) {
-      return { heading: lines[0].trim(), content: lines.slice(1).join('\n').trim() };
+    const headingMatch = block.match(
+      /^([\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}]|[#*\w\d\s]+:|[A-Z][^\n:]+)$/u,
+    );
+    if (headingMatch) return { heading: block.trim(), content: "" };
+    const lines = block.split("\n");
+    if (
+      lines.length > 1 &&
+      /[A-Za-z0-9 ]{3,}/.test(lines[0]) &&
+      lines[0].length < 60
+    ) {
+      return {
+        heading: lines[0].trim(),
+        content: lines.slice(1).join("\n").trim(),
+      };
     }
-    return { heading: '', content: block.trim() };
+    return { heading: "", content: block.trim() };
   });
 }
 
@@ -31,28 +40,34 @@ function renderContentWithImages(content) {
   if (!content) return null;
   const imgRegex = /!\[([^\]]*)\]\(([^)]+)\)/g;
   const parts = [];
-  let lastIndex = 0, match, key = 0;
+  let lastIndex = 0,
+    match,
+    key = 0;
   while ((match = imgRegex.exec(content)) !== null) {
-    if (match.index > lastIndex) parts.push(content.slice(lastIndex, match.index));
+    if (match.index > lastIndex)
+      parts.push(content.slice(lastIndex, match.index));
     parts.push(
       <div key={`img-${key++}`} className="my-4 flex justify-center">
         <img
           src={match[2]}
           alt={match[1]}
           className="rounded-xl shadow-md border border-brand-gossamer max-h-40 mx-auto"
-          style={{ background: '#181818' }}
+          style={{ background: "#181818" }}
         />
-      </div>
+      </div>,
     );
     lastIndex = match.index + match[0].length;
   }
   if (lastIndex < content.length) parts.push(content.slice(lastIndex));
   return parts.map((part, i) =>
-    typeof part === 'string'
+    typeof part === "string"
       ? part.split(/\n/).map((line, j) => (
-          <span key={`txt-${i}-${j}`}>{line}{j < part.split(/\n/).length - 1 ? <br /> : null}</span>
+          <span key={`txt-${i}-${j}`}>
+            {line}
+            {j < part.split(/\n/).length - 1 ? <br /> : null}
+          </span>
         ))
-      : part
+      : part,
   );
 }
 
@@ -61,29 +76,48 @@ function renderContentWithImages(content) {
  */
 const overlayVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.22, ease: 'easeOut' } },
-  exit: { opacity: 0, transition: { duration: 0.18, ease: 'easeIn' } }
+  visible: { opacity: 1, transition: { duration: 0.22, ease: "easeOut" } },
+  exit: { opacity: 0, transition: { duration: 0.18, ease: "easeIn" } },
 };
 
 const modalContentVariants = {
   hidden: { opacity: 0, y: 40, scale: 0.97 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 340, damping: 28, mass: 0.7 } },
-  exit: { opacity: 0, y: 20, scale: 0.97, transition: { duration: 0.18 } }
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring", stiffness: 340, damping: 28, mass: 0.7 },
+  },
+  exit: { opacity: 0, y: 20, scale: 0.97, transition: { duration: 0.18 } },
 };
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 32 },
-  visible: (i) => ({ opacity: 1, y: 0, transition: { delay: i * 0.10, type: 'spring', stiffness: 180, damping: 22 } })
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.1, type: "spring", stiffness: 180, damping: 22 },
+  }),
 };
 
 const cardGridVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.09 } }
+  visible: { transition: { staggerChildren: 0.09 } },
 };
 
 const cardVariants = {
   hidden: { opacity: 0, y: 40, scale: 0.98 },
-  visible: (i) => ({ opacity: 1, y: 0, scale: 1, transition: { delay: i * 0.09, type: 'spring', stiffness: 220, damping: 18 } })
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: i * 0.09,
+      type: "spring",
+      stiffness: 220,
+      damping: 18,
+    },
+  }),
 };
 
 /**
@@ -104,13 +138,14 @@ const CaseStudyCard = ({ cs, i, onClick }) => {
     const rotateX = ((y - centerY) / centerY) * 7;
     const rotateY = ((x - centerX) / centerX) * -7;
     card.style.transform = `perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.045)`;
-    card.style.boxShadow = '0 8px 32px 0 rgba(21,206,160,0.13), 0 1.5px 8px 0 rgba(0,0,0,0.18)';
+    card.style.boxShadow =
+      "0 8px 32px 0 rgba(21,206,160,0.13), 0 1.5px 8px 0 rgba(0,0,0,0.18)";
   };
   const handleMouseLeave = () => {
     const card = cardRef.current;
     if (!card) return;
-    card.style.transform = '';
-    card.style.boxShadow = '';
+    card.style.transform = "";
+    card.style.boxShadow = "";
   };
   return (
     <motion.div
@@ -130,7 +165,11 @@ const CaseStudyCard = ({ cs, i, onClick }) => {
         <img
           src={cs.image}
           alt={cs.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className={`w-full h-full object-cover ${
+            cs.isFullPage
+              ? "object-top transition-[object-position] duration-[8000ms] ease-linear group-hover:object-bottom"
+              : "transition-transform duration-500 group-hover:scale-105"
+          }`}
         />
         <div className="absolute top-4 left-4 bg-brand-mountain-meadow text-brand-black text-xs font-bold px-3 py-1 rounded-full shadow-lg">
           Featured
@@ -143,16 +182,14 @@ const CaseStudyCard = ({ cs, i, onClick }) => {
         <p className="font-inter text-brand-mountain-meadow text-xs uppercase mb-2 font-semibold">
           {cs.subtitle}
         </p>
-        <p className="font-inter text-gray-300 text-sm mb-2">
-          {cs.summary}
-        </p>
+        <p className="font-inter text-gray-300 text-sm mb-2">{cs.summary}</p>
         <span className="inline-block mt-2 text-brand-gossamer font-bold text-xs group-hover:underline">
           Read Case Study →
         </span>
       </div>
       <motion.div
         className="absolute inset-0 border-2 border-transparent group-hover:border-brand-mountain-meadow/60 rounded-2xl pointer-events-none"
-        whileHover={{ borderColor: 'rgba(21, 206, 160, 0.8)' }}
+        whileHover={{ borderColor: "rgba(21, 206, 160, 0.8)" }}
         transition={{ duration: 0.4 }}
       />
     </motion.div>
@@ -172,8 +209,8 @@ const CaseStudyModalContent = ({ selected }) => {
    * Uses the same logic as BookCall for consistency.
    */
   const openCalendly = () => {
-    const calendlyUrl = 'https://calendly.com/contentbrewer001/new-meeting';
-    window.open(calendlyUrl, '_blank');
+    const calendlyUrl = "https://calendly.com/contentbrewer001/new-meeting";
+    window.open(calendlyUrl, "_blank");
   };
 
   return (
@@ -219,7 +256,9 @@ const CaseStudyModalContent = ({ selected }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
         >
-          <h3 className="font-playfair text-xl sm:text-2xl text-brand-mountain-meadow mb-4">Featured Videos</h3>
+          <h3 className="font-playfair text-xl sm:text-2xl text-brand-mountain-meadow mb-4">
+            Featured Videos
+          </h3>
           <div className="grid grid-cols-1 gap-4 sm:gap-6">
             {selected.videos.map((video, index) => {
               return (
@@ -233,7 +272,9 @@ const CaseStudyModalContent = ({ selected }) => {
                       className="absolute inset-0 w-full h-full"
                     />
                   </div>
-                  <p className="text-brand-gossamer text-sm font-medium">{video.label}</p>
+                  <p className="text-brand-gossamer text-sm font-medium">
+                    {video.label}
+                  </p>
                 </div>
               );
             })}
@@ -263,10 +304,10 @@ const CaseStudyModalContent = ({ selected }) => {
                   className="font-playfair text-xl sm:text-2xl text-brand-mountain-meadow mb-3 border-t border-brand-mountain-meadow/30 pt-4 sm:pt-6 first:mt-0 cursor-pointer transition-colors duration-200 relative"
                   whileHover={{
                     scale: 1.045,
-                    color: '#15CEA0',
-                    textShadow: '0 0 8px #15cea0cc',
+                    color: "#15CEA0",
+                    textShadow: "0 0 8px #15cea0cc",
                   }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 18 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 18 }}
                 >
                   <span className="inline-block border-b-2 border-transparent group-hover:border-brand-gossamer transition-all duration-200">
                     {section.heading}
@@ -274,7 +315,10 @@ const CaseStudyModalContent = ({ selected }) => {
                 </motion.h4>
               )}
               {section.content && (
-                <div className="font-inter text-sm sm:text-base text-gray-200 whitespace-pre-line mb-2" style={{lineHeight: '1.7'}}>
+                <div
+                  className="font-inter text-sm sm:text-base text-gray-200 whitespace-pre-line mb-2"
+                  style={{ lineHeight: "1.7" }}
+                >
                   {renderContentWithImages(section.content)}
                 </div>
               )}
@@ -319,10 +363,10 @@ const CaseStudies = () => {
         className="absolute inset-0 pointer-events-none"
         animate={{
           background: [
-            'radial-gradient(circle at 20% 80%, rgba(21, 206, 160, 0.08) 0%, transparent 60%)',
-            'radial-gradient(circle at 80% 20%, rgba(12, 154, 119, 0.08) 0%, transparent 60%)',
-            'radial-gradient(circle at 40% 40%, rgba(21, 206, 160, 0.08) 0%, transparent 60%)',
-          ]
+            "radial-gradient(circle at 20% 80%, rgba(21, 206, 160, 0.08) 0%, transparent 60%)",
+            "radial-gradient(circle at 80% 20%, rgba(12, 154, 119, 0.08) 0%, transparent 60%)",
+            "radial-gradient(circle at 40% 40%, rgba(21, 206, 160, 0.08) 0%, transparent 60%)",
+          ],
         }}
         transition={{ duration: 10, repeat: Infinity }}
       />
@@ -346,7 +390,8 @@ const CaseStudies = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            Explore how we solve real-world problems and create impact for our clients.
+            Explore how we solve real-world problems and create impact for our
+            clients.
           </motion.p>
         </motion.div>
         <motion.div
@@ -404,4 +449,4 @@ const CaseStudies = () => {
   );
 };
 
-export default CaseStudies; 
+export default CaseStudies;

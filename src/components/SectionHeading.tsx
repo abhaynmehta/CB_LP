@@ -20,12 +20,12 @@ interface SectionHeadingProps {
  * Reusable section heading component with consistent animations
  * Used across multiple sections for consistent typography and spacing
  */
-const SectionHeading = ({ 
-  title, 
-  subtitle, 
-  className = '', 
+const SectionHeading = ({
+  title,
+  subtitle,
+  className = '',
   showDecorator = true,
-  delay = 0.2 
+  delay = 0.2
 }: SectionHeadingProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -33,19 +33,19 @@ const SectionHeading = ({
   return (
     <div ref={ref} className={`text-center mb-16 ${className}`}>
       {/* Main title with enhanced animations */}
-      <motion.h2 
+      <motion.h2
         className="font-playfair text-4xl md:text-6xl font-bold text-white mb-6"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={fadeInFromBottom}
-        transition={{ 
+        transition={{
           ...standardTransition,
           delay,
           type: "spring",
           stiffness: 100,
           damping: 12
         }}
-        whileHover={{ 
+        whileHover={{
           scale: 1.05,
           textShadow: "0px 0px 8px rgb(21, 206, 160, 0.8)"
         }}
@@ -58,7 +58,7 @@ const SectionHeading = ({
           {title}
         </motion.span>
       </motion.h2>
-      
+
       {/* Optional subtitle */}
       {subtitle && (
         <motion.p
@@ -71,23 +71,23 @@ const SectionHeading = ({
           {subtitle}
         </motion.p>
       )}
-      
+
       {/* Decorative line */}
       {showDecorator && (
         <motion.div
           className="w-24 h-1 bg-gradient-to-r from-brand-mountain-meadow to-brand-gossamer mx-auto"
           initial={{ width: 0, opacity: 0, scale: 0 }}
-          animate={isInView ? { 
-            width: 96, 
-            opacity: 1, 
-            scale: 1 
-          } : { 
-            width: 0, 
-            opacity: 0, 
-            scale: 0 
+          animate={isInView ? {
+            width: 96,
+            opacity: 1,
+            scale: 1
+          } : {
+            width: 0,
+            opacity: 0,
+            scale: 0
           }}
-          transition={{ 
-            duration: 1.5, 
+          transition={{
+            duration: 1.5,
             delay: delay + 0.7,
             type: "spring",
             stiffness: 80

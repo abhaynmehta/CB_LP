@@ -4,10 +4,10 @@
 const caseStudies = [
   {
     id: 1,
-    title: 'Dohful — Elevating a Cookie Brand on Social Media',
-    subtitle: 'Social Media Strategy & Branding for Dohful',
-    image: '/assests/CaseStudyPre/Dohful.jpg',
-    summary: 'How we transformed Dohful\'s Instagram presence and engagement.',
+    title: "Dohful — Elevating a Cookie Brand on Social Media",
+    subtitle: "Social Media Strategy & Branding for Dohful",
+    image: "/assests/CaseStudyPre/Dohful.jpg",
+    summary: "How we transformed Dohful's Instagram presence and engagement.",
     details: `Client Overview
 Brand: Dohful
 Industry: Gourmet Cookies & Beverages
@@ -102,13 +102,15 @@ RESULTS:
   },
   {
     id: 2,
-    title: 'Full-Scale Website & Branding Revamp for B2B SaaS Company IONA.AI',
-    subtitle: 'Website, Branding, and LinkedIn for IONA.AI (B2B SaaS, London)',
-    image: '/assests/CaseStudyPre/iona.png',
-    summary: 'How we transformed IONA.AI\'s digital presence and brand for enterprise clients.',
+    title: "Full-Scale Website & Branding Revamp for B2B SaaS Company IONA.AI",
+    subtitle: "Website, Branding, and LinkedIn for IONA.AI (B2B SaaS, London)",
+    image: "/assests/CaseStudyPre/iona_full.jpg",
+    isFullPage: true,
+    summary:
+      "How we transformed IONA.AI's digital presence and brand for enterprise clients.",
     videos: [
-      { id: 'GmjSivS7wig', label: 'Before' },
-      { id: 'QxD0FdH1W0s', label: 'After' }
+      { id: "GmjSivS7wig", label: "Before" },
+      { id: "QxD0FdH1W0s", label: "After" },
     ],
     details: `👤 The Client
 IONA.AI is a B2B SaaS company that builds AI-powered hiring software for enterprise clients like Birla Group. Their platform streamlines recruitment for large-scale teams — but their online presence was not aligned with their product's value. It's a London based company.
@@ -151,13 +153,15 @@ We delivered a complete digital transformation in just 2 weeks — from scratch.
   },
   {
     id: 3,
-    title: 'Personal Branding & Client Growth for Author & Celebrity Astrologer',
-    subtitle: 'Branding, Content, and Growth for Author & Astrologer',
-    image: '/assests/CaseStudyPre/Astrologer.jpg',
-    summary: 'How we helped an author and celebrity astrologer grow their brand and client base.',
+    title:
+      "Personal Branding & Client Growth for Author & Celebrity Astrologer",
+    subtitle: "Branding, Content, and Growth for Author & Astrologer",
+    image: "/assests/CaseStudyPre/Astrologer.jpg",
+    summary:
+      "How we helped an author and celebrity astrologer grow their brand and client base.",
     videos: [
-      { id: 'gKCYsztTXL8', label: 'Video 1' },
-      { id: 'UudOmPG-LBc', label: 'Video 2' }
+      { id: "gKCYsztTXL8", label: "Video 1" },
+      { id: "UudOmPG-LBc", label: "Video 2" },
     ],
     details: `🔍 The Problems
 - Inconsistent posting & lack of strategy
@@ -196,10 +200,13 @@ We delivered a complete digital transformation in just 2 weeks — from scratch.
   },
   {
     id: 4,
-    title: 'High Volume Content Creation for Chinese Creators Showcasing Indian Culture',
-    subtitle: 'Content Production & Account Management for Chinese Creator in India',
-    image: '/assests/CaseStudyPre/Chinese.jpg',
-    summary: 'How we delivered 400+ videos for a Chinese entrepreneur building a social presence in India.',
+    title:
+      "High Volume Content Creation for Chinese Creators Showcasing Indian Culture",
+    subtitle:
+      "Content Production & Account Management for Chinese Creator in India",
+    image: "/assests/CaseStudyPre/Chinese.jpg",
+    summary:
+      "How we delivered 400+ videos for a Chinese entrepreneur building a social presence in India.",
     details: `👤 The Client
 A Chinese content creator and entrepreneur, based in India, aimed to build a large social media presence by sharing content about Indian culture, food, and local experiences with his Chinese-speaking audience.
 He managed multiple TikTok accounts (5+), across different niches, and needed an Indian team to handle on-ground content creation, logistics, and account management.
@@ -236,13 +243,15 @@ We worked with the client for 3 months, during which we acted as his dedicated c
   },
   {
     id: 5,
-    title: 'Personal Branding & Social Presence for Actor-Model Adit Srivastava',
-    subtitle: 'Instagram Branding & Content for Actor/Model',
-    image: '/assests/CaseStudyPre/Adit.jpg',
-    summary: 'How we helped Adit Srivastava transform his Instagram and personal brand.',
+    title:
+      "Personal Branding & Social Presence for Actor-Model Adit Srivastava",
+    subtitle: "Instagram Branding & Content for Actor/Model",
+    image: "/assests/CaseStudyPre/Adit.jpg",
+    summary:
+      "How we helped Adit Srivastava transform his Instagram and personal brand.",
     videos: [
-      { id: 'saCgA8oXm3M', label: 'Video 1' },
-      { id: 'ehya0rCG-kc', label: 'Video 2' }
+      { id: "saCgA8oXm3M", label: "Video 1" },
+      { id: "ehya0rCG-kc", label: "Video 2" },
     ],
     details: `👤 The Client
 Adit Srivastava, an established actor and model, had worked with top brands like Myntra, Reliance, Style Bazaar, Smart Bazaar, and Shriram. He also featured in Indian TV serials such as Durga, Kalash, and Janak.
@@ -286,10 +295,11 @@ We helped Aditya transform his social presence from scattered to strategic, empo
   },
   {
     id: 6,
-    title: 'LinkedIn Personal Branding for Ashish (Dubai-Based Marketer)',
-    subtitle: 'LinkedIn Branding & Content for Dubai Marketer',
-    image: '/assests/CaseStudyPre/ashish.png',
-    summary: 'How we helped Ashish build a professional, high visibility LinkedIn presence.',
+    title: "LinkedIn Personal Branding for Ashish (Dubai-Based Marketer)",
+    subtitle: "LinkedIn Branding & Content for Dubai Marketer",
+    image: "/assests/CaseStudyPre/ashish.png",
+    summary:
+      "How we helped Ashish build a professional, high visibility LinkedIn presence.",
     details: `The Client
 Ashish, a marketing professional based in Dubai, wanted to stand out in the job market and grow his personal brand on LinkedIn. Despite having years of experience in marketing, his online presence lacked clarity, creativity, and strategic content.
 
@@ -328,13 +338,14 @@ The Challenges
   },
   {
     id: 7,
-    title: 'Tattoo Studio – Boosting Engagement Through Performance Marketing',
-    subtitle: 'Performance Marketing & Content for Tattoo Studio',
-    image: '/assests/CaseStudyPre/Tattoo.jpg',
-    summary: 'How we helped a tattoo studio boost engagement and launch a new branch.',
+    title: "Tattoo Studio – Boosting Engagement Through Performance Marketing",
+    subtitle: "Performance Marketing & Content for Tattoo Studio",
+    image: "/assests/CaseStudyPre/Tattoo.jpg",
+    summary:
+      "How we helped a tattoo studio boost engagement and launch a new branch.",
     videos: [
-      { id: 'yTbv7U1xWOo', label: 'Video 1' },
-      { id: 'F1_vXMnRub4', label: 'Video 2' }
+      { id: "yTbv7U1xWOo", label: "Video 1" },
+      { id: "F1_vXMnRub4", label: "Video 2" },
     ],
     details: `🧩 The Challenge
 The client, a tattoo artist and studio owner, approached us with a common issue:
@@ -384,14 +395,15 @@ As they were opening a new location in Noida, the client trusted us with the loc
   },
   {
     id: 8,
-    title: 'Building Albelee — A Modern Skincare Brand Rooted in Tradition',
-    subtitle: 'Brand Strategy & Content for Albelee Skincare',
-    image: '/assests/CaseStudyPre/Albelee.jpg',
-    summary: 'How we helped Albelee define its brand and launch with a story-driven approach.',
+    title: "Building Albelee — A Modern Skincare Brand Rooted in Tradition",
+    subtitle: "Brand Strategy & Content for Albelee Skincare",
+    image: "/assests/CaseStudyPre/Albelee.jpg",
+    summary:
+      "How we helped Albelee define its brand and launch with a story-driven approach.",
     videos: [
-      { id: 'A5tYHWRoJAY', label: 'Video 1' },
-      { id: 'ZVzPuttdR38', label: 'Video 2' },
-      { id: 'tTitu7na1FU', label: 'Video 3' }
+      { id: "A5tYHWRoJAY", label: "Video 1" },
+      { id: "ZVzPuttdR38", label: "Video 2" },
+      { id: "tTitu7na1FU", label: "Video 3" },
     ],
     details: `🌿 Case Study: Building Albelee — A Modern Skincare Brand Rooted in Tradition
 Before even starting a formal engagement, we took the initiative to research skincare industry trends, analyze competitor strategies, and understand the cultural space Albelee could own.
@@ -413,6 +425,83 @@ We acted as strategic brand consultants, not just content creators. Our early in
 - Move forward with confidence and creative clarity.
 `,
   },
+  {
+    id: 9,
+    title: "Complete Digital Transformation for The Digital Futur",
+    subtitle: "Website Revamp, Marketing & Content for The Digital Futur",
+    image: "/assests/CaseStudyPre/digitalfutur_full.jpg",
+    isFullPage: true,
+    summary:
+      "How we modernized The Digital Futur website and executed a full-scale marketing and content strategy.",
+    details: `👤 The Client
+The Digital Futur is a forward-thinking marketing and digital solutions agency. They needed their own digital presence to reflect the high-end, futuristic, and results-driven services they offered to their clients. 
+
+🧩 The Challenge
+While they were delivering excellent results, their online brand didn't match their expertise:
+- The website felt dated and lacked a modern "tech-forward" aesthetic.
+- User experience (UX) and navigation were clunky, making it hard to find key services.
+- The marketing copy didn't clearly state their unique value proposition.
+- Social media content was inconsistent and lacked a unified brand voice.
+
+🛠 Our Solution
+We partnered with them for an end-to-end revamp encompassing web design, content creation, and a renewed marketing strategy.
+
+🌐 Website Revamp
+- Designed and migrated them to a sleek, modern UI with a futuristic dark-mode aesthetic that resonates with their brand name.
+- Created custom landing pages optimized for performance and lead generation.
+- Implemented smooth parallax scrolling and engaging micro-animations to create a premium feel.
+- Enhanced site speed and on-page SEO.
+
+📈 Marketing & Content Creation
+- Developed a highly engaging, high-volume content pipeline for their social platforms.
+- Curated case studies and thought leadership posts to position them as industry experts.
+- Designed visually cohesive graphics, reel covers, and brand assets.
+- Setup analytical tracking to monitor funnel performance.
+
+✅ Results
+- The new site saw a massive drop in bounce rate and increased session durations.
+- Enhanced brand credibility which directly led to larger retainer clients.
+- A consistent, high-engagement content strategy that acts as a magnet for inbound leads.
+`,
+  },
+  {
+    id: 10,
+    title: "Brand Refresh & Driving Bookings for Earavat Resort",
+    subtitle: "Website Revamp & Hospitality Marketing for Earavat Resort",
+    image: "/assests/CaseStudyPre/earavat_full.jpg",
+    isFullPage: true,
+    summary:
+      "Showcasing the luxury of Earavat Resort through a stunning website revamp and comprehensive marketing.",
+    details: `👤 The Client
+Earavat Resort is a premium hospitality destination focusing on luxury experiences, scenic views, and world-class amenities. They wanted to attract high-ticket guests and corporate events, but their online presence felt generic and did not reflect the true majesty of the resort.
+
+🧩 The Challenge
+- The website was non-responsive and failed to capture the resort's premium ambiance.
+- The booking funnel was convoluted, causing high abandonment rates.
+- Marketing materials and content lacked visual storytelling and emotional connection.
+- They needed a massive push in content creation to populate their social media handles with high-quality visual assets.
+
+🛠 Our Solution
+Our goal was to bridge the gap between their actual luxurious on-ground experience and their digital footprint.
+
+🌐 Luxury Website Revamp
+- Rebuilt the website from scratch with a focus on immersive visuals, grand typography, and elegant UI/UX.
+- Created beautiful, high-resolution galleries and dedicated pages for rooms, dinings, and event venues (weddings & corporate).
+- Integrated a seamless, user-friendly direct booking system to maximize conversions and reduce dependency on OTAs.
+- Embedded ambient video backgrounds to give visitors a "feel" of the resort right from the homepage.
+
+📸 Content Creation & Social Media
+- Planned and directed extensive property shoots (drone shots, luxury lifestyle videos, and culinary showcases).
+- Authored compelling copy portraying the resort as a sanctuary for relaxation and grand celebrations.
+- Managed their social handles, creating reels that highlighted the "Earavat Experience"—from morning tea views to sunset dinners.
+
+✅ Results
+- A breathtaking digital presence that instantly elevates the brand value.
+- Significant increase in direct online bookings and wedding inquiries.
+- A vibrant, highly engaging social media profile showcasing premium aesthetic content.
+- Established Earavat Resort as a top-tier luxury destination in its region.
+`,
+  },
 ];
 
-export default caseStudies; 
+export default caseStudies;
