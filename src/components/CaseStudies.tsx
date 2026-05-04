@@ -51,7 +51,8 @@ function renderContentWithImages(content) {
         <img
           src={match[2]}
           alt={match[1]}
-          className="rounded-xl shadow-md border border-brand-gossamer max-h-40 mx-auto"
+          loading="lazy"
+          className="rounded-xl shadow-md border border-brand-gossamer max-h-96 mx-auto"
           style={{ background: "#181818" }}
         />
       </div>,

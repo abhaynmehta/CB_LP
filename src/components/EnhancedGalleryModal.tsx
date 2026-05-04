@@ -61,7 +61,10 @@ const EnhancedGalleryModal = ({ selectedClient, onClose }: EnhancedGalleryModalP
               Project Videos
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {selectedClient.videos?.map((videoId, index) => (
+              {selectedClient.videos?.map((videoId, index) => {
+                const isLocalMp4 = videoId.endsWith('.mp4');
+                const isLocalImage = videoId.match(/\.(jpeg|jpg|gif|png)$/i);
+                return (
                 <motion.div
                   key={videoId}
                   initial={{ opacity: 0, y: 20 }}
@@ -75,7 +78,23 @@ const EnhancedGalleryModal = ({ selectedClient, onClose }: EnhancedGalleryModalP
                   onMouseEnter={() => setHoveredVideo(videoId)}
                   onMouseLeave={() => setHoveredVideo(null)}
                 >
-                  {hoveredVideo === videoId ? (
+                  {isLocalMp4 ? (
+                    <video
+                      src={`/assests/portfolio/${videoId}`}
+                      className="w-full h-full object-cover"
+                      autoPlay={hoveredVideo === videoId}
+                      loop
+                      muted={hoveredVideo !== videoId}
+                      controls={hoveredVideo === videoId}
+                      style={{ borderRadius: '12px' }}
+                    />
+                  ) : isLocalImage ? (
+                    <img
+                      src={`/assests/portfolio/${videoId}`}
+                      alt={`${selectedClient.name} Proof ${index + 1}`}
+                      className="w-full h-full object-contain bg-brand-black"
+                    />
+                  ) : hoveredVideo === videoId ? (
                     <ReactPlayer
                       url={`https://www.youtube.com/watch?v=${videoId}`}
                       width="100%"
@@ -110,7 +129,7 @@ const EnhancedGalleryModal = ({ selectedClient, onClose }: EnhancedGalleryModalP
                     </div>
                   )}
                 </motion.div>
-              ))}
+              )})}
             </div>
           </div>
         </motion.div>

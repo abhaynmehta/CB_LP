@@ -33,5 +33,19 @@ export const clientWork = [
     category: "Sample Work", 
     preview: "/assests/Portfolio Gallery/samples .jpg",
     videos: ["9LHWAQiqq-8", "9AXUrSKdwsE", "8de-MlNqKE4", "8nlRpkLuNKw", "Uv3-49h9wos", "lc8sHrOsei0", "l8316iSlU34", "A0xeTSwEOcs"]
+  },
+  {
+    id: 10,
+    name: "Avinash Kumar",
+    category: "YouTube Growth",
+    preview: "/assests/portfolio/Avinash/cover_yt.jpg",
+    videos: [
+      "Avinash/WhatsApp_Image_2026-04-10_at_11.04.49_PM_3.jpeg",
+      "Avinash/WhatsApp_Image_2026-04-10_at_11.04.49_PM_4.jpeg",
+      "Avinash/WhatsApp_Image_2026-04-10_at_11.04.49_PM_6.jpeg",
+      "Avinash/WhatsApp_Image_2026-04-10_at_11.04.49_PM_7.jpeg",
+      "Avinash/WhatsApp_Image_2026-04-10_at_11.04.49_PM_9.jpeg",
+      "Avinash/cover_yt.jpg"
+    ]
   }
 ];

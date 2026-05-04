@@ -502,6 +502,104 @@ Our goal was to bridge the gap between their actual luxurious on-ground experien
 - Established Earavat Resort as a top-tier luxury destination in its region.
 `,
   },
+  {
+    id: 14,
+    title: "Print Culture & Corporate Culture: Social Media Strategy",
+    subtitle: "Social Media Strategist",
+    image: "/assests/portfolio/Print_Culture/cover.jpg",
+    summary: "Worked with brands to build structured content systems and improve their presence across Meta platforms.",
+    details: `Overview
+Worked with brands to build structured content systems and improve their presence across Meta platforms.
+
+What I Handled
+- Complete social media management
+- Content planning and execution
+- Brand positioning through content
+- Performance-focused optimization
+
+Impact
+- Built consistent content frameworks
+- Improved brand visibility and engagement
+- Established scalable content strategies
+
+![Proof 1](/assests/portfolio/Print_Culture/Screenshot_20260503_233234_Instagram.jpg)
+`
+  },
+  {
+    id: 15,
+    title: "Explorer Academy: Independent Brand Strategy & Social Media",
+    subtitle: "Social Media & Content Strategist",
+    image: "/assests/portfolio/Explorer_Academy/Screenshot_2026-05-03_at_11.34.33_PM.png",
+    summary: "Worked as a separate engagement to build and execute social media strategies tailored to the brand’s positioning and audience.",
+    details: `Overview
+Worked as a separate engagement to build and execute social media strategies tailored to the brand’s positioning and audience.
+
+What I Handled
+- Content strategy development
+- Platform-specific content planning
+- Execution across social channels
+- Audience-focused content structuring
+
+Impact
+- Strengthened digital presence
+- Created a clear and consistent brand voice
+- Improved overall content direction
+
+![Proof 1](/assests/portfolio/Explorer_Academy/Screenshot_2026-05-03_at_11.34.39_PM.png)
+![Proof 2](/assests/portfolio/Explorer_Academy/Screenshot_2026-05-03_at_11.34.44_PM.png)
+![Proof 3](/assests/portfolio/Explorer_Academy/Screenshot_2026-05-03_at_11.34.57_PM.png)
+`
+  },
+  {
+    id: 17,
+    title: "Let’s Confront Podcast: Creation, Growth & Distribution",
+    subtitle: "Co-Founder, Producer & Strategist",
+    image: "/assests/Portfolio Gallery/Podcast .jpg",
+    summary: "Co-created and scaled a podcast focused on real, unfiltered conversations—handling everything from concept to distribution.",
+    details: `Overview
+Co-created and scaled a podcast focused on real, unfiltered conversations—handling everything from concept to distribution.
+
+What I Built
+- Podcast from scratch to multi-platform presence
+- Managed production, content, and distribution
+- Developed content themes and episode structures
+- Created supporting short-form content strategy
+
+Results
+- Ranked in Top 10 on Apple Podcasts (category-specific)
+- Built presence across all major platforms
+- Established strong foundation for long-term growth
+
+PODCAST OPERATIONS EXPERTISE
+End-to-end podcast production systems
+- Pre-production: topic ideation, hooks, narrative flow
+- Post-production: editing for retention & clarity
+- Content repurposing: long-form → viral short-form
+- Multi-platform distribution (YouTube, Spotify, Apple Podcasts)
+- Audience retention & watch-time optimization
+- Building repeatable content engines`
+  },
+  {
+    id: 18,
+    title: "Avinash Kumar: YouTube Growth & Channel Management",
+    subtitle: "YouTube Strategist & Manager",
+    image: "/assests/portfolio/Avinash/cover_yt.jpg",
+    summary: "Managed growth and content strategy for a leading independent creator with 4.2M+ subscribers, optimizing for massive reach and retention.",
+    details: `Overview
+Managed growth and content strategy for a leading independent creator with 4.2M+ subscribers, optimizing for massive reach and retention.
+
+What I Handled
+- YouTube channel management and growth strategy
+- Content optimization for high-retention storytelling
+- Strategic distribution and platform-specific positioning
+- Coordinating with a large-scale creative team
+
+Impact
+- Maintained consistent high-performance across 900+ videos
+- Supported growth to 4.28M+ subscribers
+- Optimized content for a global audience of millions
+- Built scalable systems for massive-scale YouTube production`
+  }
 ];
 
 export default caseStudies;
