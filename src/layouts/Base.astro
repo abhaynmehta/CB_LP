@@ -36,7 +36,7 @@ const person = {
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={new URL('/og.jpg', Astro.site).href} />
   <meta name="twitter:card" content="summary_large_image" />
-  {[person, ...schema].map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+  {[{ ...person, sameAs: [me.linkedin] }, ...schema].map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
   <script is:inline>document.documentElement.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion');</script>
 </head>
 <body>
@@ -44,14 +44,14 @@ const person = {
   <header class="hd" data-hd>
     <a href="/" class="hd-mark" aria-label="Abhay Mehta, home">AM<span>.</span></a>
     <nav class="hd-nav" aria-label="Main">
-      <a href="/#record">Experience</a><a href="/#work">Work</a><a href="/#build">Build</a><a href="/#contact">Contact</a>
+      <a href="/#record">Experience</a><a href="/#work">Work</a><a href="/#build">Build</a><a href="/#contact">Contact</a><a href={me.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
     </nav>
     <a class="pill" href={me.cv} download>CV ↓</a>
   </header>
   <main id="main"><slot /></main>
   <footer class="ft">
     <p class="ft-big" aria-hidden="true">Abhay Mehta</p>
-    <div class="ft-row"><span>© {new Date().getFullYear()} {me.name} · {me.city}</span><a href={`mailto:${me.email}`}>{me.email}</a></div>
+    <div class="ft-row"><span>© {new Date().getFullYear()} {me.name} · {me.city}</span><span><a href={me.linkedin} target="_blank" rel="noopener">LinkedIn</a> · <a href={`mailto:${me.email}`}>{me.email}</a></span></div>
   </footer>
   <div class="cursor" aria-hidden="true" data-cursor><span></span></div>
   <script>

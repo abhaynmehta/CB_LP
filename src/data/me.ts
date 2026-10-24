@@ -8,7 +8,7 @@ export const me = {
   email: 'abhaynmehta03@gmail.com',
   phone: '+91 95996 49609',
   wa: '919599649609',
-  linkedin: '', // CONFIRM: LinkedIn profile URL
+  linkedin: 'https://www.linkedin.com/in/abhay-mehta-4b93a2206/',
   city: 'Delhi NCR, India',
   cv: '/Abhay_Mehta_CV.pdf',
   summary:

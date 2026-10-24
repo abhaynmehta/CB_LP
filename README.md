@@ -16,5 +16,5 @@ npm run deploy:preview # noindex build to Cloudflare
 ```
 
 ## Before launch
-- Set the domain in `astro.config.mjs` and add the LinkedIn URL in `src/data/me.ts` (both marked CONFIRM).
-- Build without NOINDEX for production.
+- Production is Vercel (project linked to this repo; `main` deploys to https://cb-lp.vercel.app). When the domain is bought, add it in Vercel and update `site` in `astro.config.mjs`.
+- The old Vite site is kept at tag `old-content-brewer`.
