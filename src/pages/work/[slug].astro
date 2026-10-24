@@ -12,7 +12,7 @@ const { r, next } = Astro.props;
 <Base title={`${r.org}: ${r.title}`} description={`${r.org} (${r.sector}), ${r.dates}. ${r.points[0]}`}>
   <section class="case-hero">
     <div class="wrap" style="display:grid;gap:24px">
-      <p class="eyebrow"><a href="/#record" style="text-decoration:none">Experience</a> · {r.dates}</p>
+      <p class="eyebrow"><a href="/#work" style="text-decoration:none">Work</a> · {r.dates}</p>
       <h1 class="h2 rv">{r.org}</h1>
       <p class="lead rv">{r.title} · {r.sector}</p>
       {r.metrics && <div class="metrics">{r.metrics.map(([v, l]) => <div><b data-count>{v}</b><span>{l}</span></div>)}</div>}
@@ -25,11 +25,11 @@ const { r, next } = Astro.props;
   </div>
   <section>
     <div class="wrap two">
-      <div><p class="eyebrow" style="margin-bottom:20px">What I did</p><div class="role" style="opacity:1;border:0;padding:0"><ul>{r.points.map((p) => <li>{p}</li>)}</ul><div class="tags">{r.tags.map((t) => <span>{t}</span>)}</div></div></div>
+      <div><p class="eyebrow" style="margin-bottom:24px">What I did</p><ul class="points">{r.points.map((p) => <li>{p}</li>)}</ul><div class="chips">{r.tags.map((t) => <span>{t}</span>)}</div></div>
       <div style="display:grid;gap:18px;align-content:start">
         <p class="eyebrow">Next</p>
         <a href={`/work/${next.slug}/`} class="h2 next-link" data-cursor-text="NEXT" style="text-decoration:none;font-size:clamp(36px,5vw,72px)">{next.org} <em>→</em></a>
-        <a class="btn sig" href={me.cv} download data-magnet style="justify-self:start">Download CV ↓</a>
+        <a class="btn gold" href={me.cv} download data-magnet style="justify-self:start">Download CV ↓</a>
       </div>
     </div>
   </section>

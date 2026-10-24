@@ -113,19 +113,6 @@ if (hover) {
     el.addEventListener('pointerleave', () => (el.style.transform = ''));
   });
 
-  // Work cards tilt in 3D with a moving glare.
-  $$('[data-tilt]').forEach((el) => {
-    el.addEventListener('pointermove', (e) => {
-      const r = el.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
-      el.classList.add('tilting');
-      el.style.setProperty('--rx', `${(0.5 - py) * 9}deg`);
-      el.style.setProperty('--ry', `${(px - 0.5) * 12}deg`);
-      el.style.setProperty('--gx', `${px * 100}%`);
-      el.style.setProperty('--gy', `${py * 100}%`);
-    });
-    el.addEventListener('pointerleave', () => { el.classList.remove('tilting'); el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); });
-  });
-
   // Big letters lift and swell as the pointer passes over them.
   $$('[data-lean]').forEach((box) => {
     const chs = $$('.ch', box).map((el) => ({ el, f: 0 }));
@@ -156,4 +143,51 @@ if (hover) {
     el.addEventListener('click', (e) => { if (moved) e.preventDefault(); }, true);
     el.addEventListener('dragstart', (e) => e.preventDefault());
   });
+}
+
+// Results ticker: one outcome at a time, rolling up.
+const tk = $('[data-ticker]');
+if (tk && !reduce) {
+  const items = $$(':scope > span', tk);
+  let i = 0;
+  items[0].classList.add('on');
+  setInterval(() => {
+    const cur = items[i], nxt = items[(i = (i + 1) % items.length)];
+    cur.classList.replace('on', 'out');
+    // Park the next line below the window without animating, then roll it in.
+    nxt.style.transition = 'none'; nxt.classList.remove('out'); void nxt.offsetHeight; nxt.style.transition = '';
+    nxt.classList.add('on');
+  }, 2800);
+}
+
+if (hover) {
+  // Hero tiles float against the pointer, each at its own depth.
+  const tiles = $$('[data-depth]');
+  if (tiles.length) {
+    let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
+    const run = () => {
+      cx += (tx - cx) * 0.06; cy += (ty - cy) * 0.06;
+      tiles.forEach((t) => { const d = Number(t.dataset.depth); t.style.translate = `${cx * d * -26}px ${cy * d * -20}px`; t.style.rotate = `${cx * d * 2}deg`; });
+      raf = Math.abs(tx - cx) + Math.abs(ty - cy) > 0.001 ? requestAnimationFrame(run) : 0;
+    };
+    addEventListener('pointermove', (e) => { if (scrollY > innerHeight) return; tx = e.clientX / innerWidth - 0.5; ty = e.clientY / innerHeight - 0.5; if (!raf) raf = requestAnimationFrame(run); }, { passive: true });
+  }
+
+  // Capabilities: the hovered row's work floats beside the cursor.
+  const box = $('[data-peekbox]');
+  if (box) {
+    const imgs = $$('img', box);
+    let x = 0, y = 0, bx = 0, by = 0, raf = 0;
+    const run = () => { bx += (x - bx) * 0.15; by += (y - by) * 0.15; box.style.translate = `${bx}px ${by}px`; raf = box.classList.contains('on') || Math.abs(x - bx) > 0.5 ? requestAnimationFrame(run) : 0; };
+    $$('[data-peek]').forEach((row) => {
+      row.addEventListener('pointerenter', (e) => {
+        if (!box.classList.contains('on')) { bx = x = e.clientX + 40; by = y = e.clientY; }
+        imgs.forEach((im, k) => im.classList.toggle('on', k === Number(row.dataset.peek)));
+        box.classList.add('on');
+        if (!raf) raf = requestAnimationFrame(run);
+      });
+      row.addEventListener('pointermove', (e) => { x = e.clientX + 40; y = e.clientY; });
+      row.addEventListener('pointerleave', () => box.classList.remove('on'));
+    });
+  }
 }

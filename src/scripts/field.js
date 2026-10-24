@@ -67,7 +67,7 @@ export default function field(canvas) {
         float d = length(gl_PointCoord - 0.5);
         if (d > 0.5) discard;
         float a = smoothstep(0.5, 0.0, d);
-        vec3 bone = vec3(0.95, 0.94, 0.91); vec3 sig = vec3(0.83, 1.0, 0.25);
+        vec3 bone = vec3(0.95, 0.92, 0.86); vec3 sig = vec3(0.92, 0.78, 0.52);
         gl_FragColor = vec4(mix(bone, sig, max(vSig, vHot)), a * (0.35 + 0.45 * vSeed + 0.4 * vHot));
       }`,
   });

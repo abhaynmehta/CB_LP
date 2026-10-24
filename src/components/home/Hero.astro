@@ -1,32 +1,52 @@
 ---
-// Hero: a WebGL field of points (the noise) that settles into a rising growth curve and scatters
-// away from the cursor. The name is split into letters that rise in and lean toward the pointer.
+// Hero: the gold growth field behind, the name in Bodoni, and real work floating around it
+// (each tile carries the result it produced). A ticker underneath cycles through outcomes.
 import { me, stats } from '../../data/me';
 import { letters } from '../../data/text';
+const proof = [
+  ['₹45K → ₹13.2L', 'in 28 days for Dohful, 28.9x ROAS'],
+  ['₹1.2L → ₹1.4 Cr+', 'in direct bookings for Machan & Earavat'],
+  ['₹22.4 Cr+', 'qualified real estate pipeline in 90 days'],
+  ['10,500+', 'trip enquiries for 12+ tour operators'],
+  ['5.9% → 17.9%', 'Meta lead qualification at County Group'],
+  ['1.09B', 'views on lenses I made at Snapchat India'],
+];
 ---
 <section class="hero" id="top">
   <canvas data-field aria-hidden="true"></canvas>
   <div class="hero-glow" aria-hidden="true"></div>
-  <div class="hero-corner" aria-hidden="true">
+  <div class="tiles" aria-hidden="true" data-tiles>
+    <figure class="tile t1" style="--k:0" data-depth="0.6"><img src="/work/hosp/stays.webp" alt="" fetchpriority="high" /><figcaption><b>₹1.4 Cr+</b> bookings · Machan</figcaption></figure>
+    <figure class="tile t2" style="--k:1" data-depth="1.2"><video muted loop playsinline autoplay preload="metadata" poster="/work/ads/reel-maldives.jpg" src="/work/ads/reel-maldives.mp4"></video><figcaption><b>$1</b> a lead</figcaption></figure>
+    <figure class="tile t3" style="--k:2" data-depth="0.9"><img src="/work/show/dohful/01.w700.webp" alt="" /><figcaption><b>28.9x</b> ROAS · Dohful</figcaption></figure>
+    <div class="tile tile-stat t4" style="--k:3" data-depth="1.6"><b>116x</b><span>Return on ad spend</span></div>
+  </div>
+  <div class="hero-meta cap" aria-hidden="true">
+    <span>Portfolio <b>’26</b></span>
     <span>Delhi <b data-clock>--:--</b> IST</span>
-    <span class="scroll-cue">Scroll <i></i></span>
   </div>
   <div class="hero-in">
-    <p class="eyebrow rv">Delhi NCR · Performance marketing, SEO and automation</p>
+    <p class="eyebrow rv">Performance marketing · SEO & AI search · Automation</p>
     <h1 class="display" data-hero-name data-lean aria-label={me.name}>
       <span class="ln" aria-hidden="true"><span set:html={letters('Abhay')} /></span>
       <span class="ln" aria-hidden="true"><span><em set:html={letters('Mehta')} /></span></span>
     </h1>
-    <div class="hero-role rv">
-      <p>{me.role}. {me.short} Five years, 40+ clients, one rule: report what moved.</p>
+    <div class="hero-sub rv">
+      <p><b>I turn ad spend into revenue, and prove it.</b> Five years, 40+ brands, ₹5 Cr+ managed. A performance marketer who writes his own code.</p>
       <div class="ctas">
-        <a class="btn sig" href={me.cv} download data-magnet>Download CV ↓</a>
-        <a class="btn" href={`mailto:${me.email}`} data-magnet>Email me</a>
+        <a class="btn gold" href="#work" data-magnet>See the work</a>
+        <a class="btn" href={me.cv} download data-magnet>CV ↓</a>
         <a class="btn" href={me.linkedin} target="_blank" rel="noopener" data-magnet>LinkedIn ↗</a>
       </div>
     </div>
+    <div class="ticker rv">
+      <span class="cap">Results</span>
+      <div class="tk" data-ticker>
+        {proof.map(([n, t]) => <span><b>{n}</b> {t}</span>)}
+      </div>
+    </div>
     <div class="stats">
-      {stats.map(([v, l]) => <div class="stat rv"><b data-count>{v}</b><span>{l}</span></div>)}
+      {stats.map(([v, l]) => <div class="stat rv"><b data-count>{v}</b><span class="cap">{l}</span></div>)}
     </div>
   </div>
 </section>

@@ -43,23 +43,66 @@ if (!reduce) {
     onUpdate: (st) => { const n = Math.round(st.progress * words.length); words.forEach((w, i) => w.classList.toggle('on', i < n)); },
   });
 
-  // Work cards: media wipes open; cards bend with scroll speed on desktop.
-  $$('[data-reveal]').forEach((m) => {
-    gsap.fromTo(m, { clipPath: 'inset(14% 10% 14% 10% round 20px)' }, { clipPath: 'inset(0% 0% 0% 0% round 20px)', ease: 'none', scrollTrigger: { trigger: m, start: 'top 95%', end: 'top 45%', scrub: 0.6 } });
-    const inner = m.querySelector('img, video');
-    if (inner) gsap.fromTo(inner, { scale: 1.22 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: m, start: 'top 95%', end: 'bottom 20%', scrub: 0.6 } });
-  });
-  const bendEls = $$('[data-bend]');
-  if (bendEls.length && desk) {
-    let target = 0, cur = 0;
-    lenis.on('scroll', (e) => { target = Math.max(-1, Math.min(1, e.velocity / 40)); });
-    gsap.ticker.add(() => {
-      target *= 0.9; cur += (target - cur) * 0.14;
-      if (Math.abs(cur) < 0.002) { if (cur) { cur = 0; bendEls.forEach((el) => (el.style.transform = '')); } return; }
-      const t = `perspective(1400px) rotateX(${(-cur * 9).toFixed(2)}deg) skewY(${(cur * 1.6).toFixed(2)}deg)`;
-      bendEls.forEach((el) => (el.style.transform = t));
-    });
+  // Hero tiles drift up at their own depth as you leave the hero.
+  $$('[data-depth]').forEach((t) => gsap.to(t, { yPercent: -60 * Number(t.dataset.depth), ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } }));
+
+  // IMPACT: desktop pins the section and travels along a curve that draws itself; phones fill a line.
+  const growth = $('[data-growth]');
+  if (growth) {
+    const pts = $$('[data-gpt]', growth);
+    const year = $('[data-gyear]', growth);
+    if (desk) {
+      growth.classList.add('pinned');
+      const wrap = $('[data-gwrap]', growth), plot = $('.g-plot', growth), svg = $('[data-gsvg]', growth);
+      const path = $('[data-gpath]', growth), area = $('[data-garea]', growth), clip = $('[data-gclip]', growth), tip = $('[data-gtip]', growth);
+      let len = 1, W = 1, H = 1, prog = 0;
+      // Smooth curve through the points (Catmull-Rom as cubic Béziers), in the plot's own pixels.
+      const build = () => {
+        W = plot.offsetWidth; H = plot.offsetHeight;
+        svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+        const P = pts.map((el) => [(Number(el.dataset.x) / 100) * W, (Number(el.dataset.y) / 100) * H]);
+        let d = `M${P[0][0]},${P[0][1]}`;
+        for (let i = 0; i < P.length - 1; i++) {
+          const p0 = P[i - 1] || P[i], p1 = P[i], p2 = P[i + 1], p3 = P[i + 2] || P[i + 1];
+          d += ` C${p1[0] + (p2[0] - p0[0]) / 6},${p1[1] + (p2[1] - p0[1]) / 6} ${p2[0] - (p3[0] - p1[0]) / 6},${p2[1] - (p3[1] - p1[1]) / 6} ${p2[0]},${p2[1]}`;
+        }
+        path.setAttribute('d', d);
+        area.setAttribute('d', `${d} L${P[P.length - 1][0]},${H} L${P[0][0]},${H} Z`);
+        len = path.getTotalLength();
+        path.style.strokeDasharray = `${len} ${len}`;
+        set(prog);
+      };
+      const set = (p) => {
+        prog = p;
+        if (!path.getAttribute('d')) return;
+        const q = Math.min(1, p * 1.06);
+        const pt = path.getPointAtLength(len * q);
+        path.style.strokeDashoffset = len * (1 - q);
+        clip.setAttribute('width', pt.x);
+        tip.style.left = `${pt.x}px`; tip.style.top = `${pt.y}px`;
+        const max = wrap.offsetWidth - innerWidth;
+        wrap.style.transform = `translate3d(${-Math.max(0, Math.min(max, plot.offsetLeft + pt.x - innerWidth * 0.45))}px,0,0)`;
+        let cur = pts[0];
+        pts.forEach((el) => { const on = (pt.x / W) * 100 >= Number(el.dataset.x) - 0.5; el.classList.toggle('on', on); if (on) cur = el; });
+        if (year.textContent !== cur.dataset.yr) year.textContent = cur.dataset.yr;
+      };
+      build();
+      const o = { p: 0 };
+      gsap.to(o, { p: 1, ease: 'none', onUpdate: () => set(o.p), scrollTrigger: { trigger: growth, start: 'top top', end: () => `+=${wrap.offsetWidth * 1.15}`, pin: true, scrub: 0.8, invalidateOnRefresh: true, onRefresh: build } });
+    } else {
+      gsap.fromTo('[data-gline]', { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: $('.g-pts', growth), start: 'top 70%', end: 'bottom 70%', scrub: true } });
+      pts.forEach((el) => ScrollTrigger.create({ trigger: el, start: 'top 72%', end: 'top -9999', toggleClass: 'on' }));
+    }
   }
+
+  // WORK: each card sinks back and darkens as the next one slides over it; media drifts inside.
+  const cards = $$('[data-case]');
+  cards.forEach((card, i) => {
+    const next = cards[i + 1];
+    if (next) gsap.to(card, { scale: 0.9, '--dim': 0.6, ease: 'none', scrollTrigger: { trigger: next.parentElement, start: 'top bottom', end: 'top 15%', scrub: true } });
+    const m = card.querySelector('.case-media > img');
+    if (m) gsap.fromTo(m, { yPercent: -6, scale: 1.14 }, { yPercent: 6, scale: 1.14, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true } });
+  });
 
   // Terminal types itself out line by line.
   const tl = $$('[data-tl]');
@@ -119,27 +162,6 @@ if (!reduce) {
     $$('.reel', reels).forEach((r, i) => gsap.fromTo(r, { y: i % 2 ? 60 : -20, rotate: i % 2 ? 2 : -2 }, { y: i % 2 ? -20 : 40, rotate: 0, ease: 'none', scrollTrigger: { trigger: films, start: 'top top', end: () => `+=${dist()}`, scrub: true, invalidateOnRefresh: true } }));
   }
 }
-
-// THE RECORD: the role in view lights up; the pinned side shows its date and company; a line fills with progress.
-const rolesEls = $$('[data-role]');
-const dateEl = $('[data-rec-date]');
-const orgEl = $('[data-rec-org]');
-const idxEl = $('[data-rec-idx]');
-const bar = $('[data-rec-bar]');
-rolesEls.forEach((el, i) => ScrollTrigger.create({
-  trigger: el, start: 'top 55%', end: 'bottom 45%',
-  onToggle: (st) => {
-    el.classList.toggle('on', st.isActive);
-    if (!st.isActive || !dateEl) return;
-    if (dateEl.textContent !== el.dataset.date) {
-      if (!reduce) gsap.fromTo([dateEl, orgEl], { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, ease: HEAVY });
-      dateEl.textContent = el.dataset.date;
-      orgEl.textContent = el.dataset.org;
-      if (idxEl) idxEl.textContent = el.dataset.idx;
-    }
-  },
-}));
-if (bar && rolesEls.length) gsap.to(bar, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: rolesEls[0], start: 'top 55%', endTrigger: rolesEls[rolesEls.length - 1], end: 'bottom 45%', scrub: true } });
 
 // Numbers count up from zero, keeping prefix and suffix.
 function countUp(el) {

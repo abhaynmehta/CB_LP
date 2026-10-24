@@ -1,0 +1,53 @@
+---
+// Impact: the career drawn as a rising curve. On desktop the section pins and you travel along the
+// line while it draws itself; each result lights up as the line reaches it. On phones it is a
+// vertical line that fills as you read. Every figure is from the CV.
+const pts = [
+  { yr: '2023', org: 'Snapchat India', big: '1.09B', h: 'lens views', p: 'Viral lenses for Snapchat India: 92 crore plays and a Letter of Recommendation.' },
+  { yr: '2024', org: 'Dohful', big: '28.9x', h: 'return on ad spend', p: '₹45K of Diwali ads became ₹13.2L in 28 days. 28% of buyers reordered within 45 days.' },
+  { yr: '2025', org: 'Machan & Earavat', big: '116x', h: 'return on ad spend', p: '₹1.2L of ads became ₹1.4 Cr+ in direct bookings. 22% of WhatsApp chats booked.' },
+  { yr: '2025', org: 'Lucentia Digital', big: '₹22.4 Cr+', h: 'qualified pipeline in 90 days', p: 'Real estate pipeline across 12+ accounts and ₹30L+ of spend, with CAPI and WhatsApp bots.' },
+  { yr: '2026', org: '12+ tour operators', big: '10,500+', h: 'trip enquiries', p: 'Bali leads at ₹50, Maldives at about $1, group trips at ₹37.' },
+  { yr: '2026', org: 'County Group', big: '17.9%', h: 'Meta lead qualification', p: 'Up from a 5.9% account average, on ₹50L+ a month across 6 luxury projects.' },
+];
+// Points on a 0–100 plot (x right, y down), rising faster as the career compounds.
+const xy = [[2, 90], [20, 77], [38, 62], [56, 44], [74, 26], [93, 6]];
+---
+<section class="growth" id="impact" data-growth>
+  <div class="g-viewport">
+    <div class="g-wrap" data-gwrap>
+      <div class="g-head wrap">
+        <div class="sec-head" style="margin:0">
+          <p class="eyebrow rv">Impact</p>
+          <h2 class="h2 rv">Five years. <em>One curve.</em></h2>
+          <p class="lead rv">Every point is a result on the record, not a promise.</p>
+        </div>
+      </div>
+      <span class="g-year" aria-hidden="true" data-gyear>{pts[0].yr}</span>
+      <div class="g-plot">
+        <div class="g-line-v" aria-hidden="true"><i data-gline></i></div>
+        <svg class="g-svg" aria-hidden="true" data-gsvg>
+          <defs>
+            <linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfae74" stop-opacity="0.22" /><stop offset="1" stop-color="#cfae74" stop-opacity="0" /></linearGradient>
+            <clipPath id="gc"><rect x="0" y="-50" width="0" height="4000" data-gclip /></clipPath>
+          </defs>
+          <path class="g-area" clip-path="url(#gc)" data-garea />
+          <path class="g-path" data-gpath />
+        </svg>
+        <span class="g-tip" data-gtip aria-hidden="true"></span>
+        <ol class="g-pts">
+          {pts.map((p, i) => (
+            <li class={`g-pt ${xy[i][1] > 50 ? 'up' : 'down'}`} style={`--x:${xy[i][0]}%;--y:${xy[i][1]}%`} data-gpt data-x={xy[i][0]} data-y={xy[i][1]} data-yr={p.yr}>
+              <div class="g-card" style={i === pts.length - 1 ? 'left:auto;right:-8px' : undefined}>
+                <span class="cap">{p.yr} · {p.org}</span>
+                <span class="g-big">{p.big}</span>
+                <h3>{p.h}</h3>
+                <p>{p.p}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>

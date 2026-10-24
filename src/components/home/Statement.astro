@@ -1,18 +1,18 @@
 ---
-// One sentence that lights up word by word as you scroll; key words turn signal-lime.
+// One sentence that lights up word by word as you scroll; key words turn gold.
 const words = 'I turn ad spend into pipeline, and pipeline into revenue. Meta, Google, DV360, SEO and AI search, WhatsApp automation and the code that ties them together.'.split(' ');
 const sig = new Set(['pipeline,', 'revenue.', 'code']);
 ---
 <section id="about">
   <div class="wrap">
-    <p class="eyebrow rv" style="margin-bottom:28px">What I do</p>
+    <p class="eyebrow rv">The short version</p>
     <p class="statement" data-statement>
       <Fragment set:html={words.map((wd) => `<span class="w${sig.has(wd) ? ' sig' : ''}">${wd}</span>`).join(' ')} />
     </p>
     <svg class="badge" data-badge viewBox="0 0 200 200" aria-hidden="true">
       <defs><path id="bp" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" /></defs>
-      <text><textPath href="#bp">PERFORMANCE ✳ SEO ✳ AI SEARCH ✳ AUTOMATION ✳ CODE ✳ </textPath></text>
-      <text class="badge-c" x="100" y="116" text-anchor="middle">✳</text>
+      <text><textPath href="#bp">PERFORMANCE ✦ SEO ✦ AI SEARCH ✦ AUTOMATION ✦ CODE ✦ </textPath></text>
+      <text class="badge-c" x="100" y="116" text-anchor="middle">✦</text>
     </svg>
   </div>
 </section>

@@ -1,0 +1,9 @@
+---
+// Brands I have grown, as a slow endless strip (pauses on hover).
+const logos = [['machaan', 'Corbett Machaan'], ['earavat', 'Earavat Resort'], ['tbb', 'The Better Beings'], ['dohful', 'Dohful'], ['wanderlynk', 'WanderLynk'], ['canopy', 'Canopy & Sky'], ['pushpak', 'Pushpak Tours'], ['omkarix', 'Omkarix Global Exim'], ['printculture', 'The Print Culture'], ['digitalfutur', 'The Digital Futur']];
+const row = logos.map(([f, n]) => `<img src="/work/logos/${f}.webp" alt="${n}" loading="lazy" />`).join('');
+---
+<div class="logos">
+  <p class="cap">Brands I have grown</p>
+  <div class="logo-row"><div set:html={row} /><div set:html={row} aria-hidden="true" /></div>
+</div>

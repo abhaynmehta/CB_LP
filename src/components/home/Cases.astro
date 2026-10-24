@@ -1,0 +1,52 @@
+---
+// Selected work as a stack of cards: each one sticks, the next slides over it, the one beneath
+// sinks back. Media on one side, the business result (before → after) on the other.
+import { roles } from '../../data/me';
+import { small } from '../../data/img';
+type C = { slug: string; img?: string; video?: string; vert?: boolean; h: string; ba?: [[string, string], [string, string]]; chips: string[] };
+const list: C[] = [
+  { slug: 'machan-earavat', img: 'hosp/weddings.webp', h: 'Two jungle resorts, filled from <em>their own ads.</em>', ba: [['₹1.2L', 'ad spend'], ['₹1.4 Cr+', 'direct bookings']], chips: ['116x ROAS', '22% WhatsApp → booking', 'Weddings', 'Retreats'] },
+  { slug: 'dohful', video: 'drive/dohful/10', vert: true, h: 'A Diwali campaign that <em>paid back 28 times.</em>', ba: [['₹45K', 'ad spend'], ['₹13.2L', 'revenue, 28 days']], chips: ['28.9x ROAS', '28% reordered', 'Instagram', 'Brand'] },
+  { slug: 'lucentia-digital', img: 'sites/lucentiadigital-desktop.webp', h: 'Twelve real estate accounts, <em>one pipeline.</em>', ba: [['₹30L+', 'spend, 3 months'], ['₹22.4 Cr+', 'qualified pipeline']], chips: ['Meta CAPI', 'Wati bots', 'Offline conversions'] },
+  { slug: 'travel', video: 'ads/reel-maldives', vert: true, h: 'Six destinations, <em>10,500+ enquiries.</em>', ba: [['₹50', 'per Bali lead'], ['10,500+', 'trip enquiries']], chips: ['$1 Maldives leads', '₹37 group CPL', 'Video ads'] },
+  { slug: 'the-better-beings', img: 'show/the-better-beings/01.webp', h: 'A Shopify store rebuilt for <em>a 90% mobile audience.</em>', chips: ['Shopify', 'Meta Ads', 'WhatsApp', 'Creatives'] },
+  { slug: 'web-and-motion', video: 'motion/omkarix-brand-film', h: 'Websites that score <em>94 to 99</em>, with films made in code.', chips: ['Astro', 'GSAP', 'Cloudflare', 'Motion'] },
+];
+const cards = list.map((c) => ({ ...c, r: roles.find((r) => r.slug === c.slug)! }));
+---
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow rv">Selected work</p>
+      <h2 class="h2 rv">Spend in. <em>Revenue out.</em></h2>
+    </div>
+    <div class="cases" data-cases>
+      {cards.map((c, i) => (
+        <div class="case" style={`--i:${i}`}>
+          <a class="case-card" href={`/work/${c.slug}/`} data-case data-cursor-text="OPEN">
+            <span class={`case-media${c.vert ? ' vert' : ''}`} style={`view-transition-name:m-${c.slug};${c.vert ? `--poster:url(/work/${c.video}.jpg)` : ''}`}>
+              {c.video
+                ? <video muted loop playsinline preload="none" poster={`/work/${c.video}.jpg`} data-src={`/work/${c.video}.mp4`} aria-hidden="true"></video>
+                : <img src={small(c.img!)} srcset={`${small(c.img!)} 700w, /work/${c.img} 1400w`} sizes="(max-width: 900px) 92vw, 50vw" alt={`${c.r.org} work`} loading="lazy" decoding="async" />}
+            </span>
+            <span class="case-body">
+              <span class="case-top"><span class="cap">{String(i + 1).padStart(2, '0')} · {c.r.org}</span><span class="cap">{c.r.sector.split(' · ')[0]}</span></span>
+              <h3 set:html={c.h} />
+              {c.ba && (
+                <span class="ba">
+                  <span><b>{c.ba[0][0]}</b><span class="cap">{c.ba[0][1]}</span></span>
+                  <span class="arrow">→</span>
+                  <span><b>{c.ba[1][0]}</b><span class="cap">{c.ba[1][1]}</span></span>
+                </span>
+              )}
+              <span class="case-foot">
+                <span class="chips">{c.chips.map((t, k) => <span class={k === 0 && c.ba ? 'hot' : ''}>{t}</span>)}</span>
+                <span class="go">Open case →</span>
+              </span>
+            </span>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

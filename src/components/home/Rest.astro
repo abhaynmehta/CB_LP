@@ -1,52 +1,51 @@
 ---
-import { me, skills, education, more, films } from '../../data/me';
+import { me, roles, skills, education, films } from '../../data/me';
 import { letters } from '../../data/text';
+const tools = skills.flatMap(([, xs]) => xs).slice(0, 34);
 ---
-<section id="skills">
-  <div class="wrap">
-    <div style="display:grid;gap:22px;margin-bottom:56px">
-      <p class="eyebrow rv">Toolkit</p>
-      <h2 class="h2 rv">The <em>stack.</em></h2>
-    </div>
-    <div class="skills">
-      {skills.map(([h, xs]) => <div class="sk rv"><h3>{h}</h3><div>{xs.map((x) => <span>{x}</span>)}</div></div>)}
-    </div>
-  </div>
-</section>
-
 <section id="films" data-films>
-  <div class="wrap" style="display:grid;gap:18px;margin-bottom:40px">
+  <div class="wrap sec-head" style="margin-bottom:44px">
     <p class="eyebrow rv">Motion, made in code</p>
     <h2 class="h2 rv">Ads that <em>move.</em></h2>
     <p class="lead rv">Spec concepts I built in code for brands I admire: scripted, cut to the beat and scored. Not commissioned work.</p>
   </div>
   <div class="reels" data-reels>
     {films.map((f) => (
-      <figure class="reel" data-cursor-text="PLAY"><video muted loop playsinline preload="none" poster={`/work/${f.src}.jpg`} data-src={`/work/${f.src}.mp4`} aria-label={f.title}></video><figcaption>{f.title}<small>Spec concept</small></figcaption></figure>
+      <figure class="reel" data-cursor-text="PLAY"><video muted loop playsinline preload="none" poster={`/work/${f.src}.jpg`} data-src={`/work/${f.src}.mp4`} aria-label={f.title}></video><figcaption>{f.title}<small class="cap">Spec concept</small></figcaption></figure>
     ))}
   </div>
 </section>
 
-<section style="padding-top:0">
+<section id="career">
   <div class="wrap two">
     <div>
-      <p class="eyebrow rv" style="margin-bottom:24px">Education</p>
-      <ul class="list">{education.map(([d, s, y, g]) => <li class="rv"><b>{d}</b><span>{s} · {y}{g && ` · ${g}`}</span></li>)}</ul>
+      <div class="sec-head" style="margin-bottom:40px">
+        <p class="eyebrow rv">Career at a glance</p>
+        <h2 class="h2 rv">Where the <em>numbers</em> came from.</h2>
+      </div>
+      <ul class="career">
+        {roles.map((r) => <li class="rv"><span><b>{r.org}</b><br /><span>{r.title}</span></span><span class="cap">{r.dates}</span></li>)}
+      </ul>
     </div>
     <div>
-      <p class="eyebrow rv" style="margin-bottom:24px">Also</p>
-      <ul class="list">{more.map(([t, d]) => <li class="rv"><b>{t}</b><span>{d}</span></li>)}</ul>
+      <p class="eyebrow rv">Toolkit</p>
+      <div class="tool rv">{tools.map((t) => <span>{t}</span>)}</div>
+      <div class="edu rv">
+        <p class="eyebrow" style="margin-bottom:14px">Education</p>
+        {education.map(([d, s, y, g]) => <><b>{d}</b><span>{s} · {y}{g && ` · ${g}`}</span></>)}
+      </div>
+      <div class="ctas rv" style="margin-top:36px"><a class="btn gold" href={me.cv} download data-magnet>Full CV ↓</a></div>
     </div>
   </div>
 </section>
 
 <section id="contact">
   <div class="wrap contact">
-    <p class="eyebrow rv">Let’s talk</p>
+    <p class="eyebrow rv">Let’s talk growth</p>
     <p class="display" data-lean><a href={`mailto:${me.email}`} data-cursor-text="MAIL" aria-label="Email Abhay"><span set:html={letters('Say')} /> <em set:html={letters('hello.')} /></a></p>
     <div class="ctas">
-      <a class="btn sig" href={me.cv} download data-magnet>Download CV ↓</a>
-      <a class="btn" href={`https://wa.me/${me.wa}`} data-magnet>WhatsApp {me.phone}</a>
+      <a class="btn gold" href={`mailto:${me.email}`} data-magnet>{me.email}</a>
+      <a class="btn" href={`https://wa.me/${me.wa}`} data-magnet>WhatsApp</a>
       <a class="btn" href={me.linkedin} target="_blank" rel="noopener" data-magnet>LinkedIn ↗</a>
       <button class="copy" type="button" data-copy={me.email}>Copy email</button>
     </div>
