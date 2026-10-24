@@ -1,5 +1,6 @@
 ---
 import { me, skills, education, more, films } from '../../data/me';
+import { letters } from '../../data/text';
 ---
 <section id="skills">
   <div class="wrap">
@@ -13,15 +14,15 @@ import { me, skills, education, more, films } from '../../data/me';
   </div>
 </section>
 
-<section id="films" style="padding-top:0">
+<section id="films" data-films>
   <div class="wrap" style="display:grid;gap:18px;margin-bottom:40px">
     <p class="eyebrow rv">Motion, made in code</p>
     <h2 class="h2 rv">Ads that <em>move.</em></h2>
     <p class="lead rv">Spec concepts I built in code for brands I admire: scripted, cut to the beat and scored. Not commissioned work.</p>
   </div>
-  <div class="reels">
+  <div class="reels" data-reels>
     {films.map((f) => (
-      <figure class="reel"><video muted loop playsinline preload="none" poster={`/work/${f.src}.jpg`} data-src={`/work/${f.src}.mp4`} aria-label={f.title}></video><figcaption>{f.title}<small>Spec concept</small></figcaption></figure>
+      <figure class="reel" data-cursor-text="PLAY"><video muted loop playsinline preload="none" poster={`/work/${f.src}.jpg`} data-src={`/work/${f.src}.mp4`} aria-label={f.title}></video><figcaption>{f.title}<small>Spec concept</small></figcaption></figure>
     ))}
   </div>
 </section>
@@ -42,11 +43,11 @@ import { me, skills, education, more, films } from '../../data/me';
 <section id="contact">
   <div class="wrap contact">
     <p class="eyebrow rv">Let’s talk</p>
-    <p class="display" data-magnet-area><a href={`mailto:${me.email}`} data-cursor-text="MAIL">Say <em>hello.</em></a></p>
+    <p class="display" data-lean><a href={`mailto:${me.email}`} data-cursor-text="MAIL" aria-label="Email Abhay"><span set:html={letters('Say')} /> <em set:html={letters('hello.')} /></a></p>
     <div class="ctas">
-      <a class="btn sig" href={me.cv} download>Download CV ↓</a>
-      <a class="btn" href={`https://wa.me/${me.wa}`}>WhatsApp {me.phone}</a>
-      {me.linkedin && <a class="btn" href={me.linkedin}>LinkedIn</a>}
+      <a class="btn sig" href={me.cv} download data-magnet>Download CV ↓</a>
+      <a class="btn" href={`https://wa.me/${me.wa}`} data-magnet>WhatsApp {me.phone}</a>
+      <a class="btn" href={me.linkedin} target="_blank" rel="noopener" data-magnet>LinkedIn ↗</a>
       <button class="copy" type="button" data-copy={me.email}>Copy email</button>
     </div>
   </div>

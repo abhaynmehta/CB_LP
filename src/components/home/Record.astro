@@ -15,11 +15,12 @@ const m = (s: string) => `/work/${s}`;
       <aside class="rec-side" aria-hidden="true">
         <span class="rec-date" data-rec-date>{roles[0].dates.split(' – ')[0]}</span>
         <span class="rec-org" data-rec-org>{roles[0].org}</span>
+        <span class="rec-idx"><b data-rec-idx>01</b> / {String(roles.length).padStart(2, '0')}</span>
         <div class="rec-bar"><i data-rec-bar></i></div>
       </aside>
       <div>
-        {roles.map((r) => (
-          <article class="role" data-role data-date={r.dates.split(' – ')[0]} data-org={r.org} id={r.slug}>
+        {roles.map((r, i) => (
+          <article class="role" data-role data-date={r.dates.split(' – ')[0]} data-org={r.org} data-idx={String(i + 1).padStart(2, '0')} id={r.slug}>
             <div class="role-top">
               <h3><small>{r.title}</small>{r.org}</h3>
               <span class="dates">{r.dates}</span>

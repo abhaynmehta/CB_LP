@@ -9,5 +9,10 @@ const sig = new Set(['pipeline,', 'revenue.', 'code']);
     <p class="statement" data-statement>
       <Fragment set:html={words.map((wd) => `<span class="w${sig.has(wd) ? ' sig' : ''}">${wd}</span>`).join(' ')} />
     </p>
+    <svg class="badge" data-badge viewBox="0 0 200 200" aria-hidden="true">
+      <defs><path id="bp" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" /></defs>
+      <text><textPath href="#bp">PERFORMANCE ✳ SEO ✳ AI SEARCH ✳ AUTOMATION ✳ CODE ✳ </textPath></text>
+      <text class="badge-c" x="100" y="116" text-anchor="middle">✳</text>
+    </svg>
   </div>
 </section>

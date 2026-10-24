@@ -13,23 +13,23 @@ const { r, next } = Astro.props;
   <section class="case-hero">
     <div class="wrap" style="display:grid;gap:24px">
       <p class="eyebrow"><a href="/#record" style="text-decoration:none">Experience</a> · {r.dates}</p>
-      <h1 class="h2">{r.org}</h1>
-      <p class="lead">{r.title} · {r.sector}</p>
+      <h1 class="h2 rv">{r.org}</h1>
+      <p class="lead rv">{r.title} · {r.sector}</p>
       {r.metrics && <div class="metrics">{r.metrics.map(([v, l]) => <div><b data-count>{v}</b><span>{l}</span></div>)}</div>}
     </div>
   </section>
-  <div class="strip" data-cursor-text="DRAG">
-    {r.media!.map((x) => x.startsWith('video:')
-      ? <video muted loop playsinline preload="none" poster={`/work/${x.slice(6)}.jpg`} data-src={`/work/${x.slice(6)}.mp4`} aria-hidden="true"></video>
-      : <img src={small(x)} srcset={`${small(x)} 700w, /work/${x} 1400w`} sizes="(max-width: 860px) 86vw, 60vw" alt={`${r.org} work`} loading="eager" decoding="async" />)}
+  <div class="strip" data-cursor-text="DRAG" data-drag>
+    {r.media!.map((x, i) => x.startsWith('video:')
+      ? <video muted loop playsinline preload="none" poster={`/work/${x.slice(6)}.jpg`} data-src={`/work/${x.slice(6)}.mp4`} aria-hidden="true" style={i === 0 ? `view-transition-name:m-${r.slug}` : undefined}></video>
+      : <img style={i === 0 ? `view-transition-name:m-${r.slug}` : undefined} src={small(x)} srcset={`${small(x)} 700w, /work/${x} 1400w`} sizes="(max-width: 860px) 86vw, 60vw" alt={`${r.org} work`} loading="eager" decoding="async" />)}
   </div>
   <section>
     <div class="wrap two">
       <div><p class="eyebrow" style="margin-bottom:20px">What I did</p><div class="role" style="opacity:1;border:0;padding:0"><ul>{r.points.map((p) => <li>{p}</li>)}</ul><div class="tags">{r.tags.map((t) => <span>{t}</span>)}</div></div></div>
       <div style="display:grid;gap:18px;align-content:start">
         <p class="eyebrow">Next</p>
-        <a href={`/work/${next.slug}/`} class="h2" style="text-decoration:none;font-size:clamp(36px,5vw,72px)">{next.org} <em>→</em></a>
-        <a class="btn sig" href={me.cv} download style="justify-self:start">Download CV ↓</a>
+        <a href={`/work/${next.slug}/`} class="h2 next-link" data-cursor-text="NEXT" style="text-decoration:none;font-size:clamp(36px,5vw,72px)">{next.org} <em>→</em></a>
+        <a class="btn sig" href={me.cv} download data-magnet style="justify-self:start">Download CV ↓</a>
       </div>
     </div>
   </section>

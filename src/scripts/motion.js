@@ -68,14 +68,63 @@ if (!reduce) {
     ScrollTrigger.create({ trigger: '[data-term]', start: 'top 75%', once: true, onEnter: () => gsap.to(tl, { opacity: 1, duration: 0.05, stagger: 0.22 }) });
   }
 
-  // Footer name slides in from the right as the page ends.
-  gsap.fromTo('.ft-big', { xPercent: 12 }, { xPercent: -4, ease: 'none', scrollTrigger: { trigger: '.ft', start: 'top bottom', end: 'bottom bottom', scrub: true } });
+  // Footer name slides in from the right and fills with lime as the page ends.
+  gsap.fromTo('.ft-big', { xPercent: 12, '--f': '0%' }, { xPercent: -4, '--f': '100%', ease: 'none', scrollTrigger: { trigger: '.ft', start: 'top bottom', end: 'bottom bottom', scrub: true } });
+
+  // Hero content sinks and fades as you leave it.
+  gsap.to('.hero-in', { yPercent: 12, opacity: 0.15, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  // Marquee: always moving; scroll speed pushes it faster and scroll direction flips it.
+  const rows = $$('[data-mq]').map((el) => ({ el, x: 0, dir: Number(el.dataset.dir || 1), w: el.firstElementChild.offsetWidth }));
+  if (rows.length) {
+    let lastY = scrollY, boost = 0, sign = 1;
+    addEventListener('resize', () => rows.forEach((r) => (r.w = r.el.firstElementChild.offsetWidth)));
+    gsap.ticker.add((t, dt) => {
+      const dy = scrollY - lastY; lastY = scrollY;
+      if (dy) sign = dy > 0 ? 1 : -1;
+      boost += (Math.min(40, Math.abs(dy)) - boost) * 0.1;
+      rows.forEach((r) => {
+        r.x -= (0.6 + boost * 0.5) * r.dir * sign * (dt / 16.7);
+        if (r.x <= -r.w) r.x += r.w; else if (r.x > 0) r.x -= r.w;
+        r.el.style.transform = `translate3d(${r.x}px,0,0)`;
+      });
+    });
+  }
+
+  // Statement badge spins with the scroll.
+  gsap.to('[data-badge]', { rotate: 540, ease: 'none', scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'bottom top', scrub: 0.5 } });
+
+  // Snapchat panel: the lime panel opens out of a rounded card, then the odometer rolls to the real number.
+  const big = $('[data-big]');
+  if (big) {
+    gsap.fromTo(big, { clipPath: 'inset(8% 5% 8% 5% round 48px)' }, { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none', scrollTrigger: { trigger: big, start: 'top bottom', end: 'top top', scrub: true } });
+    const ds = $$('.odo-d', big).map((el, i, a) => ({ s: el.firstElementChild, t: Number(el.dataset.d), turns: a.length - i, i }));
+    const set = (p) => ds.forEach((d) => {
+      const local = Math.max(0, Math.min(1, (p - d.i * 0.035) / 0.6));
+      const e = 1 - Math.pow(1 - local, 3);
+      const v = (d.t + 10 * d.turns) * e;
+      d.s.style.transform = `translateY(${-(v % 10)}em)`;
+    });
+    set(0);
+    ScrollTrigger.create({ trigger: big, start: desk ? 'top top' : 'top 70%', end: desk ? '+=120%' : 'bottom 60%', pin: desk, scrub: true, onUpdate: (st) => set(st.progress), onLeave: () => set(1) });
+    gsap.from($$('.snap-cap, .snap .eyebrow', big), { y: 30, opacity: 0, duration: 1, ease: HEAVY, stagger: 0.1, scrollTrigger: { trigger: big, start: 'top 40%' } });
+  }
+
+  // Films: on desktop the reel row is pinned and slides sideways as you scroll down.
+  const films = $('[data-films]'), reels = $('[data-reels]');
+  if (films && reels && desk) {
+    films.classList.add('pinx');
+    const dist = () => Math.max(0, reels.scrollWidth - innerWidth + 40);
+    gsap.to(reels, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: films, start: 'top top', end: () => `+=${dist()}`, pin: true, scrub: 0.6, invalidateOnRefresh: true } });
+    $$('.reel', reels).forEach((r, i) => gsap.fromTo(r, { y: i % 2 ? 60 : -20, rotate: i % 2 ? 2 : -2 }, { y: i % 2 ? -20 : 40, rotate: 0, ease: 'none', scrollTrigger: { trigger: films, start: 'top top', end: () => `+=${dist()}`, scrub: true, invalidateOnRefresh: true } }));
+  }
 }
 
 // THE RECORD: the role in view lights up; the pinned side shows its date and company; a line fills with progress.
 const rolesEls = $$('[data-role]');
 const dateEl = $('[data-rec-date]');
 const orgEl = $('[data-rec-org]');
+const idxEl = $('[data-rec-idx]');
 const bar = $('[data-rec-bar]');
 rolesEls.forEach((el, i) => ScrollTrigger.create({
   trigger: el, start: 'top 55%', end: 'bottom 45%',
@@ -86,6 +135,7 @@ rolesEls.forEach((el, i) => ScrollTrigger.create({
       if (!reduce) gsap.fromTo([dateEl, orgEl], { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, ease: HEAVY });
       dateEl.textContent = el.dataset.date;
       orgEl.textContent = el.dataset.org;
+      if (idxEl) idxEl.textContent = el.dataset.idx;
     }
   },
 }));
@@ -103,4 +153,5 @@ function countUp(el) {
 }
 $$('[data-count], .metrics b').forEach((el) => ScrollTrigger.create({ trigger: el, start: 'top 92%', once: true, onEnter: () => countUp(el) }));
 
+ScrollTrigger.sort();
 addEventListener('load', () => ScrollTrigger.refresh());

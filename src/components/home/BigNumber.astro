@@ -1,0 +1,16 @@
+---
+// One pinned moment: the Snapchat lens views roll up digit by digit as you scroll.
+// Numbers from the Snapchat dashboard (Oct 2026), confirmed by Abhay.
+const views = '1,095,033,497';
+---
+<section class="snap" data-big>
+  <div class="snap-in">
+    <p class="eyebrow">Snapchat India · Lenses</p>
+    <p class="odo" aria-label={`${views} views`}>
+      {views.split('').map((c) => c === ','
+        ? <span class="odo-c" aria-hidden="true">,</span>
+        : <span class="odo-d" aria-hidden="true" data-d={c} style={`--t:${c}`}><span>{'01234567890'.split('').map((n) => <i>{n}</i>)}</span></span>)}
+    </p>
+    <p class="snap-cap">views on lenses I made. <em>92 crore plays.</em> One Letter of Recommendation.</p>
+  </div>
+</section>

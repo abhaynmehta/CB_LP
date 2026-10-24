@@ -59,7 +59,7 @@ section { position: relative; padding: clamp(80px, 12vw, 160px) 0; }
 .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
 .hero-glow { position: absolute; inset: 0; z-index: 1; background: radial-gradient(60% 50% at 70% 30%, rgba(212, 255, 63, 0.08), transparent 70%); pointer-events: none; }
 .hero-in { position: relative; z-index: 2; padding: 140px var(--pad) clamp(28px, 5vw, 56px); max-width: var(--maxw); margin: 0 auto; width: 100%; display: grid; gap: 28px; }
-.hero h1 .ln { display: block; overflow: hidden; padding-bottom: 0.04em; }
+.hero h1 .ln { display: block; overflow: hidden; padding: 0.12em 0 0.04em; margin-top: -0.12em; }
 .hero h1 .ln > span { display: inline-block; }
 .hero-role { display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: center; justify-content: space-between; }
 .hero-role p { margin: 0; font: 400 14px/1.5 var(--mono); color: var(--bone-2); letter-spacing: 0.02em; max-width: 52ch; }
@@ -191,9 +191,10 @@ section { position: relative; padding: clamp(80px, 12vw, 160px) 0; }
 /* Motion states (only when motion is allowed) */
 .motion .rv { opacity: 0; transform: translateY(32px); }
 .motion .rv.in { opacity: 1; transform: none; transition: opacity 1s var(--ease), transform 1s var(--ease); }
-.motion .hero h1 .ln > span { animation: rise 1.3s var(--ease) both; }
-.motion .hero h1 .ln:nth-child(2) > span { animation-delay: 0.1s; }
-@keyframes rise { from { transform: translateY(105%); } }
+.motion .hero h1 .ch { animation: chrise 1.25s var(--ease) both; animation-delay: calc(var(--d0, 0.15s) + var(--i) * 55ms); }
+.motion .hero h1 .ln:nth-child(2) .ch { animation-delay: calc(var(--d0, 0.15s) + 0.18s + var(--i) * 55ms); }
+.motion:not(.seen) { --d0: 1.75s; }
+@keyframes chrise { from { translate: 0 110%; rotate: 9deg; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .motion .rv { opacity: 1; transform: none; } }
 
 .cursor.live { opacity: 1; }
@@ -205,3 +206,132 @@ section { position: relative; padding: clamp(80px, 12vw, 160px) 0; }
 .wstats > span:first-child b { color: var(--sig); }
 .wstats small { margin-top: 8px; font: 400 11px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
 @media (max-width: 860px) { .term pre { white-space: pre; overflow-x: auto; font-size: 12px; min-height: 0; } }
+
+/* ---------- V2: the crazy layer ---------- */
+
+/* Letters: each one can rise in and lean toward the pointer */
+.ch { display: inline-block; transform-origin: 50% 100%; will-change: transform; }
+
+/* Preloader: first visit per session only, pure CSS so it can never get stuck */
+@property --n { syntax: '<integer>'; inherits: false; initial-value: 0; }
+.ld { display: none; }
+.motion:not(.seen) .ld { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; background: var(--bg); padding: var(--pad); animation: ldout 0.9s cubic-bezier(0.77, 0, 0.18, 1) 1.35s forwards; }
+.ld-mark { font: italic 400 clamp(90px, 16vw, 220px)/1 var(--serif); letter-spacing: -0.04em; animation: ldmark 1.3s var(--ease) both; }
+.ld-mark i { color: var(--sig); font-style: normal; }
+.ld-n { position: absolute; left: var(--pad); bottom: calc(var(--pad) + 14px); font: 400 clamp(40px, 6vw, 88px)/1 var(--mono); letter-spacing: -0.04em; counter-reset: n var(--n); animation: ldn 1.25s cubic-bezier(0.6, 0, 0.2, 1) forwards; }
+.ld-n::after { content: counter(n) '%'; }
+.ld-cap { position: absolute; right: var(--pad); bottom: calc(var(--pad) + 18px); font: 400 12px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); }
+.ld-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--sig); transform-origin: 0 50%; animation: ldbar 1.25s cubic-bezier(0.6, 0, 0.2, 1) both; }
+@keyframes ldn { to { --n: 100; } }
+@keyframes ldbar { from { transform: scaleX(0); } }
+@keyframes ldmark { from { opacity: 0; transform: translateY(30%) scale(0.92); filter: blur(12px); } }
+@keyframes ldout { to { clip-path: inset(0 0 100% 0); visibility: hidden; } }
+.motion:not(.seen) .hero canvas { animation: fadein 1.6s ease 1.6s both; }
+@keyframes fadein { from { opacity: 0; } }
+
+/* Film grain and scroll progress */
+.grain { position: fixed; inset: -50%; z-index: 80; pointer-events: none; opacity: 0.07; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+@media (hover: hover) { .motion .grain { animation: grain 0.9s steps(6) infinite; } }
+@keyframes grain { 0% { transform: translate(0, 0); } 20% { transform: translate(-6%, 4%); } 40% { transform: translate(5%, -7%); } 60% { transform: translate(-3%, 8%); } 80% { transform: translate(7%, 2%); } 100% { transform: translate(0, 0); } }
+.prog { display: none; }
+@supports (animation-timeline: scroll()) {
+  .motion .prog { display: block; position: fixed; left: 0; right: 0; top: 0; height: 2px; z-index: 60; background: var(--sig); transform-origin: 0 50%; animation: prog linear both; animation-timeline: scroll(root); }
+  @keyframes prog { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+}
+
+/* Cursor ring that trails the dot */
+.cursor-ring { position: fixed; left: 0; top: 0; z-index: 89; pointer-events: none; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; border: 1px solid rgba(242, 239, 233, 0.45); opacity: 0; transition: width 0.35s var(--ease), height 0.35s var(--ease), margin 0.35s var(--ease), opacity 0.3s, border-color 0.3s; }
+.cursor-ring.live { opacity: 1; }
+.cursor-ring.hot { width: 64px; height: 64px; margin: -32px 0 0 -32px; border-color: var(--sig); }
+.cursor-ring.gone { opacity: 0; }
+@media (hover: none) { .cursor-ring { display: none; } }
+
+/* Hero corner: local time and a scroll cue */
+.hero-corner { position: absolute; z-index: 2; top: 96px; right: var(--pad); display: grid; gap: 10px; justify-items: end; font: 400 12px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); }
+.hero-corner b { color: var(--bone); font-weight: 400; }
+.scroll-cue { display: flex; align-items: center; gap: 10px; }
+.scroll-cue i { width: 1px; height: 46px; background: linear-gradient(var(--sig), transparent); transform-origin: top; animation: cue 1.8s var(--ease) infinite; }
+@keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+@media (max-width: 859px) { .hero-corner { top: 84px; } .scroll-cue { display: none; } }
+
+/* Marquee */
+.mq { padding: 26px 0; border-block: 1px solid var(--line); overflow: hidden; display: grid; gap: 6px; background: var(--bg); position: relative; z-index: 3; }
+.mq-row { display: flex; width: max-content; will-change: transform; }
+.mq-row > div { display: flex; align-items: center; flex: none; }
+.mq-row span { font: 400 clamp(40px, 6vw, 92px)/1 var(--serif); letter-spacing: -0.02em; padding: 0 0.28em; white-space: nowrap; }
+.mq-row.alt span { color: transparent; -webkit-text-stroke: 1px rgba(242, 239, 233, 0.35); font-style: italic; }
+.mq-row i { font-style: normal; color: var(--sig); font-size: clamp(22px, 3vw, 44px); }
+
+/* Statement badge */
+#about .wrap { position: relative; }
+.badge { position: absolute; right: var(--pad); top: -40px; width: clamp(110px, 13vw, 190px); height: auto; overflow: visible; }
+.badge text { font: 500 13.2px var(--mono); letter-spacing: 0.19em; fill: var(--bone-2); }
+.badge .badge-c { font: 400 52px var(--serif); fill: var(--sig); letter-spacing: 0; }
+@media (max-width: 859px) { .badge { position: static; display: block; margin: 28px 0 0 auto; width: 92px; } }
+@media (max-width: 600px) { .hero .display { font-size: clamp(76px, 27vw, 120px); } }
+
+/* Split headings: word masks */
+.wd { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.wd > span { display: inline-block; }
+.motion .split.rv { opacity: 1; transform: none; }
+.motion .split .wd > span { transform: translateY(105%) rotate(4deg); transition: transform 1.1s var(--ease); transition-delay: calc(var(--w) * 60ms); }
+.motion .split.in .wd > span { transform: none; }
+
+/* Record: big index in the pinned side */
+.rec-idx { font: 400 13px var(--mono); letter-spacing: 0.1em; color: var(--mute); }
+.rec-idx b { color: var(--sig); font-weight: 400; }
+
+/* Work cards: 3D tilt and glare */
+.wgrid { perspective: 1600px; }
+.wmedia { transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 0.6s var(--ease); transform-style: preserve-3d; }
+.wcard.tilting .wmedia { transition: transform 0.12s linear; }
+.wglare { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 0.4s; background: radial-gradient(500px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, 0.16), transparent 45%); mix-blend-mode: overlay; }
+.wcard.tilting .wglare { opacity: 1; }
+.wmeta b i { font-style: normal; color: var(--mute); margin-right: 8px; }
+
+/* Snapchat odometer */
+.snap { min-height: 100svh; display: grid; place-items: center; padding: 0; overflow: hidden; background: var(--sig); color: var(--bg); }
+.snap .eyebrow { color: rgba(10, 10, 11, 0.6); }
+.snap .eyebrow::before { background: var(--bg); }
+.snap ::selection { background: var(--bg); color: var(--sig); }
+.snap-in { display: grid; gap: 22px; justify-items: center; text-align: center; padding: 0 var(--pad); }
+.odo { margin: 0; display: flex; font: 400 clamp(46px, 11.5vw, 210px)/1 var(--serif); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.odo-d { display: inline-block; height: 1em; overflow: hidden; }
+.odo-d > span { display: grid; transform: translateY(calc(var(--t, 0) * -1em)); will-change: transform; }
+.odo-d i { font-style: normal; height: 1em; line-height: 1; display: block; }
+.odo-c { opacity: 0.45; }
+.snap-cap { font-size: clamp(18px, 2vw, 26px); color: rgba(10, 10, 11, 0.72); max-width: 36ch; margin: 0; }
+.snap-cap em { font-family: var(--serif); color: var(--bg); font-size: 1.2em; }
+
+/* Films: pinned horizontal reel on desktop */
+@media (min-width: 860px) and (hover: hover) {
+  .motion #films.pinx .reels { overflow: visible; scroll-snap-type: none; width: max-content; }
+  .motion #films.pinx { padding: 90px 0 40px; min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; overflow: hidden; }
+  .motion #films.pinx .reel { flex-basis: clamp(190px, min(21vw, (100svh - 330px) * 0.5625), 330px); }
+}
+.reel { transition: transform 0.6s var(--ease); }
+.reel video { transition: transform 0.8s var(--ease), filter 0.5s; }
+.reel:hover video { transform: scale(1.03); }
+
+/* Skills rows fill on hover */
+.sk { position: relative; isolation: isolate; }
+.sk::before { content: ''; position: absolute; inset: 0 calc(var(--pad) * -1); z-index: -1; background: var(--bg-2); transform: scaleY(0); transform-origin: bottom; transition: transform 0.5s var(--ease); }
+.sk:hover::before { transform: scaleY(1); }
+.sk:hover h3 { color: var(--sig); font-style: italic; }
+.sk span { transition: border-color 0.3s, transform 0.3s var(--ease); }
+.sk span:hover { border-color: var(--sig); transform: translateY(-2px); }
+
+/* Footer name fills with lime as the page ends */
+.ft-big { background: linear-gradient(90deg, var(--sig) var(--f, 0%), transparent var(--f, 0%)); -webkit-background-clip: text; background-clip: text; }
+
+/* Magnetic buttons */
+[data-magnet] { transition: transform 0.5s var(--ease), background 0.25s, border-color 0.25s; }
+
+/* Page transitions between home and case pages (native, no JS) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out 0.5s cubic-bezier(0.7, 0, 0.3, 1) both; }
+::view-transition-new(root) { animation: vt-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+::view-transition-group(*) { animation-duration: 0.7s; animation-timing-function: cubic-bezier(0.7, 0, 0.2, 1); }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-4%) scale(0.98); } }
+@keyframes vt-in { from { clip-path: inset(100% 0 0 0); } }
+@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } .grain { display: none; } }

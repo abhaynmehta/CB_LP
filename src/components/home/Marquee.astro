@@ -1,0 +1,9 @@
+---
+// A band of what I do that runs forever and speeds up, slows down and flips with your scroll.
+const items = ['Meta Ads', 'Google Ads', 'DV360', 'SEO', 'AI search', 'WhatsApp automation', 'Shopify', 'Conversions API', 'Python', 'Astro + GSAP'];
+const row = items.map((t) => `<span>${t}</span><i>✳</i>`).join('');
+---
+<div class="mq" aria-hidden="true">
+  <div class="mq-row" data-mq><div set:html={row} /><div set:html={row} /></div>
+  <div class="mq-row alt" data-mq data-dir="-1"><div set:html={row} /><div set:html={row} /></div>
+</div>

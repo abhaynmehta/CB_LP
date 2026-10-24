@@ -174,4 +174,7 @@ export const films = [
   { src: 'motion/perfora-purple-cancels-yellow-spec', title: 'Perfora' },
   { src: 'motion/youthiapa-raised-right-spec', title: 'Youthiapa' },
   { src: 'motion/sult-season-your-water', title: 'Sult' },
+  { src: 'motion/olaplex-no7-spec', title: 'Olaplex No.7' },
+  { src: 'motion/sleepy-owl-five-more-minutes-spec', title: 'Sleepy Owl' },
+  { src: 'motion/summer-fridays-spec', title: 'Summer Fridays' },
 ];

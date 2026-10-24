@@ -37,16 +37,24 @@ const person = {
   <meta property="og:image" content={new URL('/og.jpg', Astro.site).href} />
   <meta name="twitter:card" content="summary_large_image" />
   {[{ ...person, sameAs: [me.linkedin] }, ...schema].map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
-  <script is:inline>document.documentElement.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion');</script>
+  <script is:inline>var d=document.documentElement;d.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('motion');try{if(sessionStorage.getItem('am-seen'))d.classList.add('seen');sessionStorage.setItem('am-seen','1')}catch(e){d.classList.add('seen')}</script>
 </head>
 <body>
+  <div class="ld" aria-hidden="true">
+    <span class="ld-mark">AM<i>.</i></span>
+    <span class="ld-n"></span>
+    <span class="ld-cap">Performance marketer who codes</span>
+    <span class="ld-bar"></span>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="prog" aria-hidden="true"></div>
   <a class="skip" href="#main">Skip to content</a>
   <header class="hd" data-hd>
     <a href="/" class="hd-mark" aria-label="Abhay Mehta, home">AM<span>.</span></a>
     <nav class="hd-nav" aria-label="Main">
       <a href="/#record">Experience</a><a href="/#work">Work</a><a href="/#build">Build</a><a href="/#contact">Contact</a><a href={me.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
     </nav>
-    <a class="pill" href={me.cv} download>CV ↓</a>
+    <a class="pill" href={me.cv} download data-magnet>CV ↓</a>
   </header>
   <main id="main"><slot /></main>
   <footer class="ft">
@@ -54,6 +62,7 @@ const person = {
     <div class="ft-row"><span>© {new Date().getFullYear()} {me.name} · {me.city}</span><span><a href={me.linkedin} target="_blank" rel="noopener">LinkedIn</a> · <a href={`mailto:${me.email}`}>{me.email}</a></span></div>
   </footer>
   <div class="cursor" aria-hidden="true" data-cursor><span></span></div>
+  <div class="cursor-ring" aria-hidden="true" data-ring></div>
   <script>
     import '../scripts/ui.js';
     const go = () => import('../scripts/motion.js');

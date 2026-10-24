@@ -1,22 +1,28 @@
 ---
-// Hero: a WebGL field of points (the noise) that settles into a rising growth curve as you scroll.
+// Hero: a WebGL field of points (the noise) that settles into a rising growth curve and scatters
+// away from the cursor. The name is split into letters that rise in and lean toward the pointer.
 import { me, stats } from '../../data/me';
+import { letters } from '../../data/text';
 ---
 <section class="hero" id="top">
   <canvas data-field aria-hidden="true"></canvas>
   <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-corner" aria-hidden="true">
+    <span>Delhi <b data-clock>--:--</b> IST</span>
+    <span class="scroll-cue">Scroll <i></i></span>
+  </div>
   <div class="hero-in">
     <p class="eyebrow rv">Delhi NCR · Performance marketing, SEO and automation</p>
-    <h1 class="display" data-hero-name>
-      <span class="ln"><span>Abhay</span></span>
-      <span class="ln"><span><em>Mehta</em></span></span>
+    <h1 class="display" data-hero-name data-lean aria-label={me.name}>
+      <span class="ln" aria-hidden="true"><span set:html={letters('Abhay')} /></span>
+      <span class="ln" aria-hidden="true"><span><em set:html={letters('Mehta')} /></span></span>
     </h1>
     <div class="hero-role rv">
       <p>{me.role}. {me.short} Five years, 40+ clients, one rule: report what moved.</p>
       <div class="ctas">
-        <a class="btn sig" href={me.cv} download>Download CV ↓</a>
-        <a class="btn" href={`mailto:${me.email}`}>Email me</a>
-        <a class="btn" href={me.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn sig" href={me.cv} download data-magnet>Download CV ↓</a>
+        <a class="btn" href={`mailto:${me.email}`} data-magnet>Email me</a>
+        <a class="btn" href={me.linkedin} target="_blank" rel="noopener" data-magnet>LinkedIn ↗</a>
       </div>
     </div>
     <div class="stats">
