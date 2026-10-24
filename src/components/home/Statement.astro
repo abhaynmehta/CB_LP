@@ -1,0 +1,13 @@
+---
+// One sentence that lights up word by word as you scroll; key words turn signal-lime.
+const words = 'I turn ad spend into pipeline, and pipeline into revenue. Meta, Google, DV360, SEO and AI search, WhatsApp automation and the code that ties them together.'.split(' ');
+const sig = new Set(['pipeline,', 'revenue.', 'code']);
+---
+<section id="about">
+  <div class="wrap">
+    <p class="eyebrow rv" style="margin-bottom:28px">What I do</p>
+    <p class="statement" data-statement>
+      <Fragment set:html={words.map((wd) => `<span class="w${sig.has(wd) ? ' sig' : ''}">${wd}</span>`).join(' ')} />
+    </p>
+  </div>
+</section>

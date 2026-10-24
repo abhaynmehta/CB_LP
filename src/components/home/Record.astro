@@ -1,0 +1,44 @@
+---
+// The record: every role is its own entry (as on the CV). The left column stays pinned and shows
+// the dates and company of the role you are reading; a line fills as you move through the career.
+import { roles } from '../../data/me';
+import { small } from '../../data/img';
+const m = (s: string) => `/work/${s}`;
+---
+<section id="record">
+  <div class="wrap">
+    <div style="display:grid;gap:22px;margin-bottom:64px">
+      <p class="eyebrow rv">The record</p>
+      <h2 class="h2 rv">Five years, <em>every number</em> on file.</h2>
+    </div>
+    <div class="rec">
+      <aside class="rec-side" aria-hidden="true">
+        <span class="rec-date" data-rec-date>{roles[0].dates.split(' – ')[0]}</span>
+        <span class="rec-org" data-rec-org>{roles[0].org}</span>
+        <div class="rec-bar"><i data-rec-bar></i></div>
+      </aside>
+      <div>
+        {roles.map((r) => (
+          <article class="role" data-role data-date={r.dates.split(' – ')[0]} data-org={r.org} id={r.slug}>
+            <div class="role-top">
+              <h3><small>{r.title}</small>{r.org}</h3>
+              <span class="dates">{r.dates}</span>
+            </div>
+            <p class="org" style="margin:0"><span>{r.sector}</span></p>
+            <ul>{r.points.map((p) => <li>{p}</li>)}</ul>
+            {r.metrics && <div class="metrics">{r.metrics.map(([v, l]) => <div><b>{v}</b><span>{l}</span></div>)}</div>}
+            {r.media && (
+              <div class="thumbs">
+                {r.media.map((x) => x.startsWith('video:')
+                  ? <video muted loop playsinline preload="none" poster={`/work/${x.slice(6)}.jpg`} data-src={`/work/${x.slice(6)}.mp4`} aria-hidden="true"></video>
+                  : <img src={small(x)} alt={`${r.org} work`} loading="lazy" decoding="async" />)}
+              </div>
+            )}
+            <div class="tags">{r.tags.map((t) => <span>{t}</span>)}</div>
+            {r.media && <a class="role-link" href={m(r.slug) + '/'}>Open case →</a>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

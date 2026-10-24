@@ -1,0 +1,53 @@
+---
+import { me, skills, education, more, films } from '../../data/me';
+---
+<section id="skills">
+  <div class="wrap">
+    <div style="display:grid;gap:22px;margin-bottom:56px">
+      <p class="eyebrow rv">Toolkit</p>
+      <h2 class="h2 rv">The <em>stack.</em></h2>
+    </div>
+    <div class="skills">
+      {skills.map(([h, xs]) => <div class="sk rv"><h3>{h}</h3><div>{xs.map((x) => <span>{x}</span>)}</div></div>)}
+    </div>
+  </div>
+</section>
+
+<section id="films" style="padding-top:0">
+  <div class="wrap" style="display:grid;gap:18px;margin-bottom:40px">
+    <p class="eyebrow rv">Motion, made in code</p>
+    <h2 class="h2 rv">Ads that <em>move.</em></h2>
+    <p class="lead rv">Spec concepts I built in code for brands I admire: scripted, cut to the beat and scored. Not commissioned work.</p>
+  </div>
+  <div class="reels">
+    {films.map((f) => (
+      <figure class="reel"><video muted loop playsinline preload="none" poster={`/work/${f.src}.jpg`} data-src={`/work/${f.src}.mp4`} aria-label={f.title}></video><figcaption>{f.title}<small>Spec concept</small></figcaption></figure>
+    ))}
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap two">
+    <div>
+      <p class="eyebrow rv" style="margin-bottom:24px">Education</p>
+      <ul class="list">{education.map(([d, s, y, g]) => <li class="rv"><b>{d}</b><span>{s} · {y}{g && ` · ${g}`}</span></li>)}</ul>
+    </div>
+    <div>
+      <p class="eyebrow rv" style="margin-bottom:24px">Also</p>
+      <ul class="list">{more.map(([t, d]) => <li class="rv"><b>{t}</b><span>{d}</span></li>)}</ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact">
+    <p class="eyebrow rv">Let’s talk</p>
+    <p class="display" data-magnet-area><a href={`mailto:${me.email}`} data-cursor-text="MAIL">Say <em>hello.</em></a></p>
+    <div class="ctas">
+      <a class="btn sig" href={me.cv} download>Download CV ↓</a>
+      <a class="btn" href={`https://wa.me/${me.wa}`}>WhatsApp {me.phone}</a>
+      {me.linkedin && <a class="btn" href={me.linkedin}>LinkedIn</a>}
+      <button class="copy" type="button" data-copy={me.email}>Copy email</button>
+    </div>
+  </div>
+</section>

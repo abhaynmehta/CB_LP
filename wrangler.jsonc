@@ -1,0 +1,7 @@
+{
+  // Cloudflare preview (noindex): `npm run deploy:preview`.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "abhay-mehta",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "dist", "not_found_handling": "404-page" }
+}

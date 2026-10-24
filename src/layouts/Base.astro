@@ -1,0 +1,63 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
+import '@fontsource/instrument-serif/400.css';
+import '@fontsource/instrument-serif/400-italic.css';
+import '../styles/global.css';
+import { me } from '../data/me';
+
+interface Props { title?: string; description?: string; schema?: object[] }
+const { title, description = me.summary, schema = [] } = Astro.props;
+const fullTitle = title ? `${title} · ${me.name}` : `${me.name} · Performance Marketing, SEO & AI Search`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const noindex = process.env.NOINDEX === '1';
+const person = {
+  '@context': 'https://schema.org', '@type': 'Person', '@id': `${Astro.site}#me`, name: me.name, url: Astro.site?.href,
+  jobTitle: 'Performance Marketing Specialist', description: me.summary, email: `mailto:${me.email}`,
+  address: { '@type': 'PostalAddress', addressRegion: 'Delhi NCR', addressCountry: 'IN' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Guru Gobind Singh Indraprastha University' },
+  knowsAbout: ['Performance marketing', 'Meta Ads', 'Google Ads', 'DV360', 'SEO', 'Answer engine optimisation', 'Generative engine optimisation', 'WhatsApp automation', 'Python', 'Astro'],
+};
+---
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description.slice(0, 158)} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+  <meta name="theme-color" content="#0a0a0b" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description.slice(0, 200)} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={new URL('/og.jpg', Astro.site).href} />
+  <meta name="twitter:card" content="summary_large_image" />
+  {[person, ...schema].map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+  <script is:inline>document.documentElement.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion');</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="hd" data-hd>
+    <a href="/" class="hd-mark" aria-label="Abhay Mehta, home">AM<span>.</span></a>
+    <nav class="hd-nav" aria-label="Main">
+      <a href="/#record">Experience</a><a href="/#work">Work</a><a href="/#build">Build</a><a href="/#contact">Contact</a>
+    </nav>
+    <a class="pill" href={me.cv} download>CV ↓</a>
+  </header>
+  <main id="main"><slot /></main>
+  <footer class="ft">
+    <p class="ft-big" aria-hidden="true">Abhay Mehta</p>
+    <div class="ft-row"><span>© {new Date().getFullYear()} {me.name} · {me.city}</span><a href={`mailto:${me.email}`}>{me.email}</a></div>
+  </footer>
+  <div class="cursor" aria-hidden="true" data-cursor><span></span></div>
+  <script>
+    import '../scripts/ui.js';
+    const go = () => import('../scripts/motion.js');
+    'requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 1200 }) : setTimeout(go, 300);
+  </script>
+</body>
+</html>
