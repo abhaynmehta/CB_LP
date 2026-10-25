@@ -217,6 +217,10 @@ export default function hero3d(canvas, opts = {}) {
     raf = visible ? requestAnimationFrame(loop) : 0;
   };
   raf = requestAnimationFrame(loop);
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible && !raf) { last = performance.now(); raf = requestAnimationFrame(loop); } }).observe(canvas);
+  // Runs only while on screen and while the showreel dialog is closed (ui.js sends the 'reel' event).
+  let onScreen = true, held = false;
+  const wake = () => { visible = onScreen && !held; if (visible && !raf) { last = performance.now(); raf = requestAnimationFrame(loop); } };
+  new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; wake(); }).observe(canvas);
+  addEventListener('reel', (e) => { held = e.detail; wake(); });
   return { setProgress: (p) => (prog = p) };
 }

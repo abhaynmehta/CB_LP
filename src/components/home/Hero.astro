@@ -35,6 +35,7 @@ const proof = [
       <p><b>I turn ad spend into revenue, and prove it.</b> Five years, 40+ brands, ₹5 Cr+ managed. A performance marketer who writes his own code.</p>
       <div class="ctas">
         <a class="btn gold" href="#work" data-magnet>See the work</a>
+        <button class="btn" type="button" data-reel data-magnet>▶ Showreel</button>
         <a class="btn" href={me.cv} download data-magnet>CV ↓</a>
         <a class="btn" href={me.linkedin} target="_blank" rel="noopener" data-magnet>LinkedIn ↗</a>
       </div>
@@ -49,4 +50,8 @@ const proof = [
       {stats.map(([v, l]) => <div class="stat rv"><b data-count>{v}</b><span class="cap">{l}</span></div>)}
     </div>
   </div>
+  <dialog class="showreel" data-reel-dlg aria-label="Showreel">
+    <video controls playsinline preload="none" poster="/work/motion/showreel-16x9.jpg" data-wide="/work/motion/showreel-16x9.mp4" data-tall="/work/motion/showreel-9x16.mp4"></video>
+    <button class="btn showreel-x" type="button" data-reel-close>Close ✕</button>
+  </dialog>
 </section>

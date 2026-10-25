@@ -20,6 +20,21 @@ const vio = new IntersectionObserver((es) => es.forEach(({ target: v, isIntersec
 }), { threshold: 0.2 });
 $$('video[data-src]').forEach((v) => vio.observe(v));
 
+// Showreel: a click-to-play film in a dialog (the 9:16 cut on portrait phones). The hero sculpture pauses while it plays.
+const reel = $('[data-reel-dlg]');
+if (reel) {
+  const v = $('video', reel);
+  $$('[data-reel]').forEach((b) => b.addEventListener('click', () => {
+    const src = matchMedia('(max-aspect-ratio: 3/4)').matches ? v.dataset.tall : v.dataset.wide;
+    if (v.getAttribute('src') !== src) { v.poster = src.replace('.mp4', '.jpg'); v.src = src; }
+    reel.showModal(); dispatchEvent(new CustomEvent('reel', { detail: true }));
+    v.play().catch(() => {});
+  }));
+  $('[data-reel-close]', reel).addEventListener('click', () => reel.close());
+  reel.addEventListener('click', (e) => { if (e.target === reel) reel.close(); });
+  reel.addEventListener('close', () => { v.pause(); dispatchEvent(new CustomEvent('reel', { detail: false })); });
+}
+
 // Cursor: a small lime dot that grows into a label over links that ask for one.
 const cur = $('[data-cursor]');
 if (cur && matchMedia('(hover: hover)').matches && !reduce) {
