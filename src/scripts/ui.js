@@ -5,7 +5,7 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Reveals (hidden state only exists under .motion, set in <head>).
 const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
-$$('.rv').forEach((el) => io.observe(el));
+$$('.rv, [data-gauge]').forEach((el) => io.observe(el));
 
 // Header hides on the way down, returns on the way up.
 const hd = $('[data-hd]');
@@ -15,6 +15,7 @@ addEventListener('scroll', () => { const y = scrollY; hd.classList.toggle('hide'
 // Videos load and play only while visible.
 const vio = new IntersectionObserver((es) => es.forEach(({ target: v, isIntersecting: on }) => {
   if (on && !v.src) v.src = v.dataset.src;
+  if (v.closest('.cf')) return; // the films coverflow decides which one plays
   if (on && !reduce) v.play().catch(() => {}); else v.pause();
 }), { threshold: 0.2 });
 $$('video[data-src]').forEach((v) => vio.observe(v));
@@ -55,6 +56,7 @@ function scramble(el) {
   tick();
 }
 const sio = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { scramble(e.target); sio.unobserve(e.target); } }), { threshold: 1 });
+$$('.eyebrow').forEach((el) => el.setAttribute('data-scramble', ''));
 $$('[data-scramble]').forEach((el) => { sio.observe(el); el.closest('a')?.addEventListener('pointerenter', () => scramble(el)); });
 
 const hover = matchMedia('(hover: hover)').matches && !reduce;
@@ -190,4 +192,11 @@ if (hover) {
       row.addEventListener('pointerleave', () => box.classList.remove('on'));
     });
   }
+}
+
+// The lab's shader and globe load only when the visitor gets close to them.
+const labEl = $('#lab');
+if (labEl) {
+  const lo = new IntersectionObserver(([e]) => { if (e.isIntersecting) { lo.disconnect(); import('./lab.js').then((m) => m.default()); } }, { rootMargin: '600px 0px' });
+  lo.observe(labEl);
 }

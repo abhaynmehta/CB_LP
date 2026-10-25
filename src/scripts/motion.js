@@ -11,12 +11,20 @@ const desk = matchMedia('(min-width: 860px) and (hover: hover)').matches;
 const spring = (wT) => (p) => (p >= 1 ? 1 : 1 - (1 + p * wT) * Math.exp(-p * wT));
 const HEAVY = spring(9);
 
-// HERO FIELD (WebGL): only when the browser can do it, and never for reduced motion.
+// HERO (WebGL): the liquid-gold sculpture with real work orbiting it. Falls back to the DOM tiles.
 const canvas = $('[data-field]');
 if (canvas && !reduce) {
-  import('./field.js').then(({ default: field }) => {
-    const f = field(canvas);
-    if (f) ScrollTrigger.create({ trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true, onUpdate: (st) => f.setProgress(st.progress) });
+  import('./hero3d.js').then(({ default: hero3d }) => {
+    const h = hero3d(canvas, { cards: [
+      { src: '/work/hosp/stays.webp', value: '₹1.4 Cr+', label: 'Direct bookings · Machan' },
+      { src: '/work/ads/static-01.webp', value: '$1', label: 'Per Maldives lead' },
+      { src: '/work/show/dohful/01.webp', value: '28.9x', label: 'ROAS · Dohful' },
+      { src: '/work/ads/static-05.webp', value: '10,500+', label: 'Trip enquiries' },
+      { src: '/work/show/omkarix-global-exim/01.webp', value: '94–99', label: 'Mobile Lighthouse' },
+    ] });
+    if (!h) return canvas.remove();
+    canvas.closest('.hero').classList.add('gl');
+    ScrollTrigger.create({ trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true, onUpdate: (st) => h.setProgress(st.progress) });
   }).catch(() => canvas.remove());
 }
 
@@ -83,7 +91,11 @@ if (!reduce) {
         const max = wrap.offsetWidth - innerWidth;
         wrap.style.transform = `translate3d(${-Math.max(0, Math.min(max, plot.offsetLeft + pt.x - innerWidth * 0.45))}px,0,0)`;
         let cur = pts[0];
-        pts.forEach((el) => { const on = (pt.x / W) * 100 >= Number(el.dataset.x) - 0.5; el.classList.toggle('on', on); if (on) cur = el; });
+        pts.forEach((el) => {
+          const on = (pt.x / W) * 100 >= Number(el.dataset.x) - 0.5;
+          if (on && !el.dataset.counted) { el.dataset.counted = '1'; countUp(el.querySelector('.g-big')); }
+          el.classList.toggle('on', on); if (on) cur = el;
+        });
         if (year.textContent !== cur.dataset.yr) year.textContent = cur.dataset.yr;
       };
       build();
@@ -104,12 +116,46 @@ if (!reduce) {
     if (m) gsap.fromTo(m, { yPercent: -6, scale: 1.14 }, { yPercent: 6, scale: 1.14, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true } });
   });
 
-  // Terminal types itself out line by line.
-  const tl = $$('[data-tl]');
-  if (tl.length) {
-    gsap.set(tl, { opacity: 0 });
-    ScrollTrigger.create({ trigger: '[data-term]', start: 'top 75%', once: true, onEnter: () => gsap.to(tl, { opacity: 1, duration: 0.05, stagger: 0.22 }) });
+  // IVORY ROOM: the wall's columns travel in opposite directions and each page scrolls in its window.
+  const wall = $('[data-wall]');
+  if (wall) {
+    $$('[data-wcol]', wall).forEach((c) => {
+      const d = Number(c.dataset.wcol);
+      gsap.fromTo(c, { yPercent: d > 0 ? 8 : -30 }, { yPercent: d > 0 ? -30 : 8, ease: 'none', scrollTrigger: { trigger: wall, start: 'top bottom', end: 'bottom top', scrub: 0.6 } });
+    });
+    $$('[data-wimg]', wall).forEach((img, i) => gsap.fromTo(img, { yPercent: 0 }, { yPercent: -Number(img.dataset.wimg) * (0.55 + (i % 3) * 0.15), ease: 'none', scrollTrigger: { trigger: wall, start: 'top bottom', end: 'bottom top', scrub: 1 } }));
   }
+
+  // LAB: the code reveals line by line, the current line marked in gold.
+  const cl = $$('[data-cl]');
+  if (cl.length) ScrollTrigger.create({
+    trigger: '[data-code]', start: 'top 80%', end: 'bottom 35%', scrub: true,
+    onUpdate: (st) => { const k = Math.round(st.progress * cl.length); cl.forEach((l, i) => { l.classList.toggle('on', i < k); l.classList.toggle('cur', i === k - 1); }); },
+  });
+
+  // ROOMS: the ivory and green rooms open like a curtain rising from the bottom edge.
+  ['[data-wall]', '#lab'].forEach((sel) => {
+    const el = $(sel);
+    if (el) gsap.fromTo(el, { clipPath: 'circle(18% at 50% 100%)' }, { clipPath: 'circle(150% at 50% 100%)', ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'top 20%', scrub: true } });
+  });
+
+  // LIQUID: work images ripple like heated metal when you hover them.
+  const liquid = $('[data-liquid]');
+  if (liquid && desk) {
+    const o = { s: 0 };
+    const go = (to, d) => gsap.to(o, { s: to, duration: d, ease: 'power3.out', overwrite: true, onUpdate: () => liquid.setAttribute('scale', o.s.toFixed(1)) });
+    const ripple = (m) => { m.style.filter = 'url(#liquid)'; gsap.timeline().add(go(46, 0.35)).add(go(0, 1.1)).call(() => (m.style.filter = '')); };
+    $$('[data-case]').forEach((c) => c.addEventListener('pointerenter', () => ripple(c.querySelector('.case-media'))));
+    const peek = $('[data-peekbox]');
+    if (peek) $$('[data-peek]').forEach((r) => r.addEventListener('pointerenter', () => ripple(peek)));
+  }
+
+  // CONTACT: "Say hello." gathers out of gold dust as the section arrives.
+  const contactSec = $('#contact'), hello = $('#contact .display');
+  if (contactSec && hello) import('./contact.js').then(({ default: contact }) => {
+    const c = contact(contactSec, hello);
+    if (c) ScrollTrigger.create({ trigger: contactSec, start: 'top 85%', end: 'top 15%', scrub: 0.8, onUpdate: (st) => c.setIn(st.progress), onLeave: () => c.setIn(1) });
+  });
 
   // Footer name slides in from the right and fills with lime as the page ends.
   gsap.fromTo('.ft-big', { xPercent: 12, '--f': '0%' }, { xPercent: -4, '--f': '100%', ease: 'none', scrollTrigger: { trigger: '.ft', start: 'top bottom', end: 'bottom bottom', scrub: true } });
@@ -153,13 +199,33 @@ if (!reduce) {
     gsap.from($$('.snap-cap, .snap .eyebrow', big), { y: 30, opacity: 0, duration: 1, ease: HEAVY, stagger: 0.1, scrollTrigger: { trigger: big, start: 'top 40%' } });
   }
 
-  // Films: on desktop the reel row is pinned and slides sideways as you scroll down.
+  // FILMS: a 3D coverflow. The section pins; scrolling turns the wheel and the film in front plays.
   const films = $('[data-films]'), reels = $('[data-reels]');
-  if (films && reels && desk) {
-    films.classList.add('pinx');
-    const dist = () => Math.max(0, reels.scrollWidth - innerWidth + 40);
-    gsap.to(reels, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: films, start: 'top top', end: () => `+=${dist()}`, pin: true, scrub: 0.6, invalidateOnRefresh: true } });
-    $$('.reel', reels).forEach((r, i) => gsap.fromTo(r, { y: i % 2 ? 60 : -20, rotate: i % 2 ? 2 : -2 }, { y: i % 2 ? -20 : 40, rotate: 0, ease: 'none', scrollTrigger: { trigger: films, start: 'top top', end: () => `+=${dist()}`, scrub: true, invalidateOnRefresh: true } }));
+  if (films && reels) {
+    films.classList.add('cf');
+    const items = $$('.reel', reels);
+    const vids = items.map((r) => r.querySelector('video'));
+    let cur = -1;
+    const set = (a) => {
+      items.forEach((el, i) => {
+        const d = i - a, ad = Math.abs(d);
+        el.style.transform = `translateX(${d * (desk ? 64 : 56)}%) translateZ(${-ad * 200}px) rotateY(${Math.max(-62, Math.min(62, -d * 44))}deg) scale(${1 - Math.min(ad, 3) * 0.05})`;
+        el.style.zIndex = 100 - Math.round(ad * 10);
+        el.style.opacity = ad > 3.4 ? 0 : 1 - ad * 0.14;
+      });
+      const k = Math.max(0, Math.min(items.length - 1, Math.round(a)));
+      if (k === cur) return;
+      cur = k;
+      items.forEach((el, i) => el.classList.toggle('on', i === k));
+      vids.forEach((v, i) => {
+        if (i !== k) return v.pause();
+        if (!v.src) v.src = v.dataset.src;
+        v.play().catch(() => {});
+      });
+    };
+    set(0);
+    const o = { a: 0 };
+    gsap.to(o, { a: items.length - 1, ease: 'none', onUpdate: () => set(o.a), scrollTrigger: { trigger: films, start: 'top top', end: () => `+=${items.length * innerHeight * 0.42}`, pin: true, scrub: 0.7, invalidateOnRefresh: true } });
   }
 }
 

@@ -1,0 +1,74 @@
+---
+// The green room: proof that the marketer writes the code. A live raymarched shader you can push
+// around, the real shader behind this page's hero, a draggable globe of the stack, and the tools I built.
+const code = `// hero.glsl: the liquid gold at the top of this page
+uniform float uTime, uAmp, uFreq, uPull;
+uniform vec3 uMouse;
+
+float disp(vec3 p) {
+  vec3 q = p * uFreq;
+  float n = snoise(q + vec3(uTime * 0.16, uTime * 0.12, -uTime * 0.1));
+  n += 0.18 * snoise(q * 2.1 - vec3(uTime * 0.22));
+  // the cursor pulls a bulge out of the metal
+  float pull = pow(max(dot(normalize(p), uMouse), 0.0), 6.0) * uPull;
+  return n * uAmp + pull * 0.42;
+}
+
+// rebuild the normal per vertex so reflections stay true
+vec3 dP0 = displaced(position);
+vec3 objectNormal = normalize(cross(
+  displaced(position + tng * 0.012) - dP0,
+  displaced(position + btn * 0.012) - dP0));`;
+const esc = (s: string) => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+const paint = (line: string) => {
+  if (line.trim().startsWith('//')) return `<span class="k-c">${esc(line)}</span>`;
+  return esc(line)
+    .replace(/\b(uniform|float|vec3|vec2|return)\b/g, '<span class="k-k">$1</span>')
+    .replace(/\b(snoise|pow|max|dot|normalize|cross|displaced|disp)\b(?=\()/g, '<span class="k-f">$1</span>')
+    .replace(/\b(\d+\.\d+|\d+)\b/g, '<span class="k-n">$1</span>');
+};
+const lines = code.split('\n').map((l, i) => `<span class="cl" data-cl><i>${String(i + 1).padStart(2, ' ')}</i>${paint(l) || ' '}</span>`).join('');
+const stack = ['Astro', 'GSAP', 'three.js', 'GLSL', 'WebGL', 'Lenis', 'ScrollTrigger', 'Shopify Liquid', 'Python', 'React', 'Cloudflare', 'Vercel', 'Playwright', 'ffmpeg', 'Node', 'Meta CAPI', 'GA4', 'GTM', 'Wati', 'WhatFlow', 'Claude Code', 'Local LLMs', 'Schema.org', 'llms.txt', 'Core Web Vitals', 'Search Console', 'DV360', 'Google Ads', 'Meta Ads', 'Code-made films'];
+const gauges: [number, string][] = [[94, 'Lowest'], [99, 'Best']];
+const gaugeHtml = gauges.map(([v, l]) => `<div class="gauge" data-gauge="${v}"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" /><circle class="gv" cx="60" cy="60" r="52" pathLength="100" style="--v:${v}" /></svg><b data-count>${v}</b><span class="cap">${l} mobile Lighthouse</span></div>`).join('');
+const tools = [
+  ['blog-audit-checker', 'Python + AI', '25–30 min → 6–8 min per blog'],
+  ['site-health-check', 'weekly', 'prices, forms, OTP, WhatsApp, RERA'],
+  ['whatsapp-flows', 'Wati', 'qualify, tag, nurture, hand over'],
+  ['capi-pipelines', 'Meta', 'offline conversions, lookalikes'],
+  ['motion-films', 'code', 'beat-synced brand films and ads'],
+];
+const toolHtml = tools.map(([n, k, d]) => `<li><b>${n}</b><span>${k}</span><em>${d}</em></li>`).join('');
+---
+<section class="lab" id="lab">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow rv">The lab</p>
+      <h2 class="h2 rv">A marketer who <em>ships code.</em></h2>
+      <p class="lead rv">Most marketers wait for a developer. I write the shaders, the tracking, the automations and the audit tools myself. Everything on this page, including the gold, is hand-written.</p>
+    </div>
+    <div class="lab-grid">
+      <figure class="lab-live rv" data-cursor-text="PUSH">
+        <canvas data-lab aria-label="A live raymarched gold shader that follows your cursor"></canvas>
+        <figcaption><span class="cap">Live · raymarched in your browser</span><span>Move through it. The gold blobs melt into each other and into your cursor.</span></figcaption>
+      </figure>
+      <div class="lab-code rv" data-code>
+        <div class="lab-tabs"><span class="on">hero.glsl</span><span>motion.js</span><span>schema.json</span></div>
+        <pre set:html={lines} />
+      </div>
+      <div class="lab-globe rv" data-globe aria-label="My stack">
+        {stack.map((s) => <span>{s}</span>)}
+        <span class="cap globe-hint">Drag to spin · the stack</span>
+      </div>
+      <div class="lab-side">
+        <div class="gauges rv">
+          <Fragment set:html={gaugeHtml} />
+        </div>
+        <ul class="tools rv">
+          <li class="cap">Tools I built</li>
+          <Fragment set:html={toolHtml} />
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

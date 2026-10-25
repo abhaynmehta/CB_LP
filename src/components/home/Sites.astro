@@ -1,0 +1,42 @@
+---
+// The ivory room: a gallery wall of websites I designed and coded, tilted in 3D. Columns travel in
+// opposite directions with the scroll and every page scrolls inside its own browser window.
+const sites = [
+  { n: 'Omkarix Global Exim', u: 'omkarixglobal.com', img: 'omkarix-full', href: 'https://omkarixglobal.com' },
+  { n: 'CTRL the Funnel', u: 'ctrlthefunnel', img: 'ctf-full' },
+  { n: 'The Better Beings', u: 'thebetterbeings.in', img: 'tbb-full', href: 'https://thebetterbeings.in' },
+  { n: 'Earavat Resort', u: 'earavat resort', img: 'earavat-new-full' },
+  { n: 'The Lead Miles', u: 'theleadmiles', img: 'theleadmiles-full' },
+  { n: 'Lucentia Digital', u: 'lucentiadigital', img: 'lucentiadigital-full' },
+  { n: '73 Dotts', u: '73dotts', img: '73dotts-full' },
+];
+// Height / width of each full-page capture, so each page can scroll inside its window without measuring.
+const ratio: Record<string, number> = { 'omkarix-full': 7.03, 'ctf-full': 7.03, 'tbb-full': 4.7, 'earavat-new-full': 6.01, 'theleadmiles-full': 11.52, 'lucentiadigital-full': 3.61, '73dotts-full': 5.39 };
+const cols = [[0, 3, 6, 1], [2, 5, 0, 4], [4, 1, 3, 2], [6, 0, 5, 3]].map((c) => c.map((i) => sites[i]));
+---
+<section class="wall" id="sites" data-wall>
+  <div class="wall-stage">
+    <div class="wall-plane" aria-hidden="true">
+      {cols.map((col, c) => (
+        <div class="wall-col" data-wcol={c % 2 ? -1 : 1}>
+          {col.map((s) => (
+            <span class="bw">
+              <span class="bw-bar"><i></i><i></i><i></i><span>{s.u}</span></span>
+              <span class="bw-view"><img src={`/work/sites/${s.img}.webp`} alt="" loading="lazy" decoding="async" data-wimg={Math.round((1 - 0.6875 / ratio[s.img]) * 100)} /></span>
+            </span>
+          ))}
+        </div>
+      ))}
+    </div>
+  <div class="wall-copy wrap">
+    <div class="wall-card">
+      <p class="eyebrow rv">Websites, designed and coded</p>
+      <h2 class="h2 rv">I build the <em>storefront</em> too.</h2>
+      <p class="lead rv">Astro, GSAP, three.js and Shopify, by hand. Fast enough to score 94 to 99 on mobile, and built to turn the traffic I buy into customers.</p>
+      <div class="ctas rv">
+        {sites.filter((s) => s.href).map((s) => <a class="btn dark" href={s.href} target="_blank" rel="noopener" data-magnet>{s.n} ↗</a>)}
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
