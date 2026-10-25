@@ -12,12 +12,12 @@ export const me = {
   city: 'Delhi NCR, India',
   cv: '/Abhay_Mehta_CV.pdf',
   summary:
-    'Performance marketing specialist and AdTech professional with 5+ years of experience and 40+ clients across real estate, D2C, hospitality, travel, EdTech, Fintech and B2B SaaS. I have managed ₹5 Crore+ in ad spend across Meta, Google, DV360 and Snapchat, and today oversee a ₹50 Lakh+ monthly digital budget for a luxury NCR developer. With a B.Tech in Computer Science, I build my own tracking, automation and AI tools.',
+    'Performance marketing specialist and AdTech professional with 5+ years of experience and 40+ clients across real estate, D2C, hospitality, travel, EdTech, Fintech and B2B SaaS. I have managed ₹5 Crore+ in ad spend across Meta, Google, DV360 and Snapchat, have run monthly budgets of ₹50 Lakh to ₹1 Crore, and today oversee a ₹50 Lakh+ monthly digital budget for a luxury NCR developer. With a B.Tech in Computer Science, I build my own tracking, automation and AI tools.',
 };
 
 export const stats: [string, string][] = [
   ['₹5 Cr+', 'ad spend managed'],
-  ['₹50L+', 'monthly budget I oversee'],
+  ['₹1 Cr', 'monthly budget, the most I have run'],
   ['40+', 'clients across 8 industries'],
   ['5+', 'years in performance marketing'],
 ];
