@@ -5,7 +5,7 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Reveals (hidden state only exists under .motion, set in <head>).
 const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
-$$('.rv, [data-gauge]').forEach((el) => io.observe(el));
+$$('.rv').forEach((el) => io.observe(el));
 
 // Header hides on the way down, returns on the way up.
 const hd = $('[data-hd]');
@@ -20,7 +20,7 @@ const vio = new IntersectionObserver((es) => es.forEach(({ target: v, isIntersec
 }), { threshold: 0.2 });
 $$('video[data-src]').forEach((v) => vio.observe(v));
 
-// Showreel: a click-to-play film in a dialog (the 9:16 cut on portrait phones). The hero sculpture pauses while it plays.
+// Showreel: the full film with sound in a dialog (the 9:16 cut on portrait phones). The hero's silent loop pauses while it plays.
 const reel = $('[data-reel-dlg]');
 if (reel) {
   const v = $('video', reel);
@@ -33,6 +33,38 @@ if (reel) {
   $('[data-reel-close]', reel).addEventListener('click', () => reel.close());
   reel.addEventListener('click', (e) => { if (e.target === reel) reel.close(); });
   reel.addEventListener('close', () => { v.pause(); dispatchEvent(new CustomEvent('reel', { detail: false })); });
+}
+
+// Hero film: plays silently while on screen (not for reduced motion or data saver: the poster stays).
+// The chapter bar follows the film, and a click jumps to that chapter.
+const cine = $('[data-cine]');
+if (cine) {
+  const v = $('video', cine);
+  const items = $$('[data-chapters] li', cine);
+  const tall = matchMedia('(max-aspect-ratio: 4/5)').matches;
+  if (tall) { v.poster = v.dataset.tallPoster; v.parentElement.style.backgroundImage = `url(${v.dataset.tallPoster})`; }
+  const still = reduce || navigator.connection?.saveData;
+  let on = true, held = false, raf = 0;
+  const load = () => { if (!v.src) v.src = tall ? v.dataset.tall : v.dataset.wide; };
+  const run = () => { if (on && !held && !still) { load(); v.play().catch(() => {}); } else v.pause(); };
+  const paint = () => {
+    const t = v.currentTime;
+    items.forEach((li) => {
+      const b = $('button', li), s = +b.dataset.t, e = +b.dataset.e;
+      li.style.setProperty('--p', Math.max(0, Math.min(1, (t - s) / (e - s))).toFixed(3));
+      li.classList.toggle('on', t >= s && t < e);
+    });
+    raf = v.paused ? 0 : requestAnimationFrame(paint);
+  };
+  v.addEventListener('play', () => { if (!raf) raf = requestAnimationFrame(paint); });
+  v.addEventListener('seeked', paint);
+  items[0]?.classList.add('on');
+  items.forEach((li) => $('button', li).addEventListener('click', (e) => {
+    load(); v.currentTime = +e.currentTarget.dataset.t; paint();
+    if (!still) v.play().catch(() => {});
+  }));
+  new IntersectionObserver(([e]) => { on = e.isIntersecting; run(); }, { threshold: 0.1 }).observe(cine);
+  addEventListener('reel', (e) => { held = e.detail; run(); });
 }
 
 // Cursor: a small lime dot that grows into a label over links that ask for one.
@@ -178,18 +210,6 @@ if (tk && !reduce) {
 }
 
 if (hover) {
-  // Hero tiles float against the pointer, each at its own depth.
-  const tiles = $$('[data-depth]');
-  if (tiles.length) {
-    let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
-    const run = () => {
-      cx += (tx - cx) * 0.06; cy += (ty - cy) * 0.06;
-      tiles.forEach((t) => { const d = Number(t.dataset.depth); t.style.translate = `${cx * d * -26}px ${cy * d * -20}px`; t.style.rotate = `${cx * d * 2}deg`; });
-      raf = Math.abs(tx - cx) + Math.abs(ty - cy) > 0.001 ? requestAnimationFrame(run) : 0;
-    };
-    addEventListener('pointermove', (e) => { if (scrollY > innerHeight) return; tx = e.clientX / innerWidth - 0.5; ty = e.clientY / innerHeight - 0.5; if (!raf) raf = requestAnimationFrame(run); }, { passive: true });
-  }
-
   // Capabilities: the hovered row's work floats beside the cursor.
   const box = $('[data-peekbox]');
   if (box) {
@@ -209,9 +229,12 @@ if (hover) {
   }
 }
 
-// The lab's shader and globe load only when the visitor gets close to them.
-const labEl = $('#lab');
-if (labEl) {
-  const lo = new IntersectionObserver(([e]) => { if (e.isIntersecting) { lo.disconnect(); import('./lab.js').then((m) => m.default()); } }, { rootMargin: '600px 0px' });
-  lo.observe(labEl);
-}
+// Systems: the chat and the checker replay every few seconds while on screen.
+$$('.sys-chat, .sys-qc').forEach((el) => {
+  let t = 0;
+  const play = () => { el.classList.remove('play'); void el.offsetWidth; el.classList.add('play'); };
+  new IntersectionObserver(([e]) => {
+    clearInterval(t);
+    if (e.isIntersecting && !reduce) { play(); t = setInterval(play, el.classList.contains('sys-chat') ? 9500 : 6500); }
+  }, { threshold: 0.3 }).observe(el);
+});

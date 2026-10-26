@@ -1,0 +1,58 @@
+---
+// The green room: systems I built, in plain words. Ads bring the lead; these turn it into a sale and
+// keep every number checkable. Each panel shows the system working and the result it produced.
+// The chat and the checklist are illustrations of the real flows; the results are from the CV.
+const chat: [string, string][] = [
+  ['in', 'Hi! Looking at Machan for a wedding in February 🌿'],
+  ['out', 'Congratulations! Here is our wedding brochure 📎 Weddings-at-Machan.pdf'],
+  ['out', 'How many guests are you planning for?'],
+  ['in', 'Around 120'],
+  ['out', 'Lovely. Which dates are you considering?'],
+  ['in', '14 to 16 Feb'],
+];
+const flow = ['Meta ad', 'Instant form', 'WhatsApp bot', 'Sales call', 'Site visit', 'Conversions API'];
+// Node places on the loop (x %, y %) and when the travelling light reaches each (s, in a 6 s loop).
+const pos = [[10, 27, 0], [50, 27, 1.2], [90, 27, 2.4], [90, 73, 3], [50, 73, 4.2], [10, 73, 5.4]];
+const checks = ['Facts match the project sheet', 'Schema and FAQ markup present', 'Answers an AI engine can quote', 'Internal links and CTAs', 'Prices, forms and WhatsApp live'];
+---
+<section class="lab sys" id="systems">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow rv">Systems I built</p>
+      <h2 class="h2 rv">Automation that <em>pays for itself.</em></h2>
+      <p class="lead rv">Ads bring the lead. These systems turn it into a sale, and make every number checkable. I design them, build them and run them.</p>
+    </div>
+    <div class="sys-grid">
+      <article class="sys-card sys-chat rv" data-sys>
+        <div class="sys-head"><span class="cap">01 · WhatsApp concierge</span><span class="cap">Machan & Earavat</span></div>
+        <div class="wa" aria-hidden="true">
+          <div class="wa-top"><i>M</i><span><b>Machan Concierge</b><small>Usually replies instantly</small></span></div>
+          <div class="wa-body">
+            {chat.map(([d, t], i) => <p class={`wa-m ${d}`} style={`--k:${i}`}>{t}</p>)}
+            <p class="wa-tag" style={`--k:${chat.length}`}>Tagged <b>HOT</b> · Wedding · 120 guests · sent to sales</p>
+          </div>
+        </div>
+        <div class="sys-res"><b>22%</b><span>of WhatsApp chats became bookings, against a 4 to 8% hospitality benchmark</span></div>
+      </article>
+      <article class="sys-card sys-flow rv" data-sys>
+        <div class="sys-head"><span class="cap">02 · Lead-to-sale pipeline</span><span class="cap">Real estate</span></div>
+        <div class="flow" aria-hidden="true">
+          <svg class="flow-line" viewBox="0 0 600 260" preserveAspectRatio="none"><path d="M60,70 H300 H540 V190 H300 H60 Z" pathLength="100" /><path class="flow-run" d="M60,70 H300 H540 V190 H300 H60 Z" pathLength="100" /></svg>
+          {flow.map((f, i) => <span class="flow-n" style={`--x:${pos[i][0]}%;--y:${pos[i][1]}%;--d:${pos[i][2]}s`}><i>{String(i + 1).padStart(2, '0')}</i>{f}</span>)}
+          <span class="flow-mid">Meta learns who actually buys, and finds more of them</span>
+        </div>
+        <div class="sys-res"><b>₹22.4 Cr+</b><span>qualified pipeline in 90 days across 12+ accounts, with CAPI and WhatsApp bots</span></div>
+      </article>
+      <article class="sys-card sys-qc rv" data-sys>
+        <div class="sys-head"><span class="cap">03 · QC tools in Python and AI</span><span class="cap">County Group</span></div>
+        <div class="qc" aria-hidden="true">
+          <div class="qc-bar"><span>blog-audit-checker</span><span class="qc-t">running</span></div>
+          <ul>{checks.map((c, i) => <li style={`--k:${i}`}><i>✓</i>{c}</li>)}</ul>
+          <div class="qc-prog"><i></i></div>
+        </div>
+        <div class="sys-res two"><div><b>25–30 → 6–8 min</b><span>per blog audit</span></div><div><b>~20 h</b><span>of QC saved a month</span></div></div>
+      </article>
+    </div>
+    <p class="sys-note cap rv">The chat and the checklist illustrate the real flows. The results are from the work.</p>
+  </div>
+</section>

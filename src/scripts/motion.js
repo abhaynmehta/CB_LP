@@ -11,23 +11,6 @@ const desk = matchMedia('(min-width: 860px) and (hover: hover)').matches;
 const spring = (wT) => (p) => (p >= 1 ? 1 : 1 - (1 + p * wT) * Math.exp(-p * wT));
 const HEAVY = spring(9);
 
-// HERO (WebGL): the liquid-gold sculpture with real work orbiting it. Falls back to the DOM tiles.
-const canvas = $('[data-field]');
-if (canvas && !reduce) {
-  import('./hero3d.js').then(({ default: hero3d }) => {
-    const h = hero3d(canvas, { cards: [
-      { src: '/work/hosp/stays.webp', value: '₹1.4 Cr+', label: 'Direct bookings · Machan' },
-      { src: '/work/ads/static-01.webp', value: '$1', label: 'Per Maldives lead' },
-      { src: '/work/show/dohful/01.webp', value: '28.9x', label: 'ROAS · Dohful' },
-      { src: '/work/ads/static-05.webp', value: '10,500+', label: 'Trip enquiries' },
-      { src: '/work/show/omkarix-global-exim/01.webp', value: '94–99', label: 'Mobile Lighthouse' },
-    ] });
-    if (!h) return canvas.remove();
-    canvas.closest('.hero').classList.add('gl');
-    ScrollTrigger.create({ trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true, onUpdate: (st) => h.setProgress(st.progress) });
-  }).catch(() => canvas.remove());
-}
-
 if (!reduce) {
   const lenis = new Lenis({ smoothWheel: true, syncTouch: false, lerp: 0.09 });
   lenis.on('scroll', ScrollTrigger.update);
@@ -41,8 +24,10 @@ if (!reduce) {
   });
 
   // Hero name drifts apart as you scroll away.
-  gsap.to('[data-hero-name] .ln:first-child', { xPercent: -8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-  gsap.to('[data-hero-name] .ln:last-child', { xPercent: 10, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  // Hero exit: the film sinks into a rounded frame and dims while the name and chapters lift away.
+  const cineHero = { trigger: '.cine', start: 'top top', end: 'bottom top', scrub: true };
+  gsap.to('[data-cine-media]', { scale: 0.9, borderRadius: 28, opacity: 0.35, ease: 'none', scrollTrigger: cineHero });
+  gsap.to('[data-cine-dock]', { yPercent: -18, opacity: 0, ease: 'none', scrollTrigger: { ...cineHero, end: '60% top' } });
 
   // Statement lights word by word with the scroll.
   const words = $$('[data-statement] .w');
@@ -51,8 +36,6 @@ if (!reduce) {
     onUpdate: (st) => { const n = Math.round(st.progress * words.length); words.forEach((w, i) => w.classList.toggle('on', i < n)); },
   });
 
-  // Hero tiles drift up at their own depth as you leave the hero.
-  $$('[data-depth]').forEach((t) => gsap.to(t, { yPercent: -60 * Number(t.dataset.depth), ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } }));
 
   // IMPACT: desktop pins the section and travels along a curve that draws itself; phones fill a line.
   const growth = $('[data-growth]');
@@ -126,15 +109,8 @@ if (!reduce) {
     $$('[data-wimg]', wall).forEach((img, i) => gsap.fromTo(img, { yPercent: 0 }, { yPercent: -Number(img.dataset.wimg) * (0.55 + (i % 3) * 0.15), ease: 'none', scrollTrigger: { trigger: wall, start: 'top bottom', end: 'bottom top', scrub: 1 } }));
   }
 
-  // LAB: the code reveals line by line, the current line marked in gold.
-  const cl = $$('[data-cl]');
-  if (cl.length) ScrollTrigger.create({
-    trigger: '[data-code]', start: 'top 80%', end: 'bottom 35%', scrub: true,
-    onUpdate: (st) => { const k = Math.round(st.progress * cl.length); cl.forEach((l, i) => { l.classList.toggle('on', i < k); l.classList.toggle('cur', i === k - 1); }); },
-  });
-
   // ROOMS: the ivory and green rooms open like a curtain rising from the bottom edge.
-  ['[data-wall]', '#lab'].forEach((sel) => {
+  ['[data-wall]', '#systems'].forEach((sel) => {
     const el = $(sel);
     if (el) gsap.fromTo(el, { clipPath: 'circle(18% at 50% 100%)' }, { clipPath: 'circle(150% at 50% 100%)', ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'top 20%', scrub: true } });
   });
@@ -161,7 +137,6 @@ if (!reduce) {
   gsap.fromTo('.ft-big', { xPercent: 12, '--f': '0%' }, { xPercent: -4, '--f': '100%', ease: 'none', scrollTrigger: { trigger: '.ft', start: 'top bottom', end: 'bottom bottom', scrub: true } });
 
   // Hero content sinks and fades as you leave it.
-  gsap.to('.hero-in', { yPercent: 12, opacity: 0.15, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 
   // Marquee: always moving; scroll speed pushes it faster and scroll direction flips it.
   const rows = $$('[data-mq]').map((el) => ({ el, x: 0, dir: Number(el.dataset.dir || 1), w: el.firstElementChild.offsetWidth }));
