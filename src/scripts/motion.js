@@ -109,8 +109,8 @@ if (!reduce) {
     $$('[data-wimg]', wall).forEach((img, i) => gsap.fromTo(img, { yPercent: 0 }, { yPercent: -Number(img.dataset.wimg) * (0.55 + (i % 3) * 0.15), ease: 'none', scrollTrigger: { trigger: wall, start: 'top bottom', end: 'bottom top', scrub: 1 } }));
   }
 
-  // ROOMS: the ivory and green rooms open like a curtain rising from the bottom edge.
-  ['[data-wall]', '#systems'].forEach((sel) => {
+  // ROOMS: the ivory, night and green rooms open like a curtain rising from the bottom edge.
+  ['[data-wall]', '#veyra', '#systems'].forEach((sel) => {
     const el = $(sel);
     if (el) gsap.fromTo(el, { clipPath: 'circle(18% at 50% 100%)' }, { clipPath: 'circle(150% at 50% 100%)', ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'top 20%', scrub: true } });
   });

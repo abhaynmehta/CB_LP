@@ -8,6 +8,16 @@ Rebuilt in Oct 2026 from the old Vite/React "Content Brewer" site (kept at tag `
 - CV download: `public/Abhay_Mehta_CV.pdf` (replace it when the CV changes).
 - Media comes from the CTRL the Funnel site (`public/work/`).
 
+## Veyra concept (`/veyra/`)
+A real estate launch concept for a fictional developer, on one page in three acts: a night journey
+through a WebGL city (native scroll drives the camera), the Veyra Skyline launch over fixed 3D towers
+(floors, home picker with cost sheet, sunlight, EMI, sample answers, site-visit booking), and the
+developer (live numbers, project arc, partners).
+- Page: `src/pages/veyra/index.astro`; styles and scripts: `src/veyra/` (uses the `three` dependency).
+- Portfolio section: `src/components/home/Veyra.astro` (the night room, after the websites wall).
+- Card images: `public/work/veyra/` are screenshots of the page. Retake them if the page changes.
+- Always `noindex` and kept out of the sitemap, because Veyra is not a real company.
+
 ## Run
 ```
 npm install

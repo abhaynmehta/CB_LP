@@ -1,0 +1,36 @@
+---
+// The night room: Veyra, a real estate launch I designed and coded as a concept (/veyra/).
+// Three acts on one page: a night journey through a city generated in WebGL, the Skyline launch
+// over 3D towers, and the developer behind it. Veyra is fictional; its prices and figures are examples.
+const acts = [
+  { n: '01 · Night journey', h: 'A city made in code, flown through by scroll.', p: 'Window lights, traffic and fog are shaders. The camera drops from the skyline to street level, then rises to the towers.', img: 'journey', href: '/veyra/#journey', u: 'veyra · journey' },
+  { n: '02 · The towers', h: 'Taken apart floor by floor.', p: 'The towers come apart as you read, light the zone you are on, and follow a sun-path slider through the day.', img: 'floors', href: '/veyra/#floors', u: 'veyra · floors' },
+  { n: '03 · Inventory', h: 'A page that books site visits.', p: 'Live availability, a cost sheet for every home, an EMI calculator and visit booking, ready to feed a CRM.', img: 'homes', href: '/veyra/#homes', u: 'veyra · homes' },
+];
+const chips = ['three.js', 'GLSL shaders', 'Scroll-driven 3D', 'Astro', 'Lead capture'];
+---
+<section class="night-room" id="veyra">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow rv">Concept · Real estate launch</p>
+      <h2 class="h2 rv">One launch, <em>built end to end.</em></h2>
+      <p class="lead rv">My ads send buyers to a launch page. Veyra is my concept for that page, designed and coded by hand: a night journey, 3D towers you can take apart, and the tools that turn a visitor into a site visit.</p>
+    </div>
+    <div class="vy-grid">
+      {acts.map((a) => (
+        <a class="vy-card rv" href={a.href} data-cursor-text="OPEN">
+          <span class="bw vy-frame">
+            <span class="bw-bar"><i></i><i></i><i></i><span>{a.u}</span></span>
+            <span class="vy-view"><img src={`/work/veyra/${a.img}.w700.webp`} srcset={`/work/veyra/${a.img}.w700.webp 700w, /work/veyra/${a.img}.webp 1440w`} sizes="(max-width: 900px) 92vw, 30vw" alt={`Veyra concept: ${a.h}`} loading="lazy" decoding="async" /></span>
+          </span>
+          <span class="vy-body"><span class="cap">{a.n}</span><h3>{a.h}</h3><p>{a.p}</p></span>
+        </a>
+      ))}
+    </div>
+    <div class="vy-foot">
+      <div class="ctas rv"><a class="btn gold" href="/veyra/" data-magnet>Open the live concept ↗</a></div>
+      <div class="chips rv">{chips.map((c) => <span>{c}</span>)}</div>
+    </div>
+    <p class="cap vy-note rv">Veyra is a fictional developer. Prices, inventory and figures in the concept are examples.</p>
+  </div>
+</section>

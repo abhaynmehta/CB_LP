@@ -521,3 +521,25 @@ em .ch, em .wd > span { background: var(--gold-grad); background-size: 600% 100%
   .cine-media video { object-fit: contain; object-position: 50% 0; }
 }
 @media (prefers-reduced-motion: reduce) { .cine-watch svg { animation: none; } }
+
+/* ---------- Veyra: the night room ----------
+   Midnight blue with the sodium light of the concept's streets. Each act of /veyra/ sits in a dark
+   browser window; the live concept opens from the gold button. */
+.night-room { --sodium: #ffb45e; background: radial-gradient(90% 70% at 80% 0%, #1b1a2c, #07080d 70%); }
+.night-room .eyebrow { color: var(--sodium); }
+.vy-grid { display: grid; gap: clamp(28px, 3vw, 22px); }
+@media (min-width: 900px) { .vy-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.vy-card { display: grid; gap: 18px; align-content: start; text-decoration: none; min-width: 0; }
+.vy-frame { background: #0c1017; box-shadow: 0 40px 70px -34px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 180, 94, 0.14); }
+.vy-frame .bw-bar { background: #121722; border-bottom-color: rgba(255, 255, 255, 0.06); }
+.vy-frame .bw-bar i { background: #2a3040; }
+.vy-frame .bw-bar span { color: #8e94a1; }
+.vy-view { display: block; aspect-ratio: 16 / 10; overflow: hidden; }
+.vy-view img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 1.2s var(--ease); }
+.vy-card:hover .vy-view img { transform: scale(1.04); }
+.vy-body { display: grid; gap: 8px; }
+.vy-body .cap { color: var(--sodium); }
+.vy-body h3 { font: 400 clamp(24px, 2vw, 32px)/1.05 var(--serif); font-optical-sizing: auto; letter-spacing: -0.01em; }
+.vy-body p { margin: 0; color: var(--ivory-2); font-size: 15px; max-width: 38ch; }
+.vy-foot { display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center; justify-content: space-between; margin-top: clamp(40px, 5vw, 64px); }
+.vy-note { margin: 22px 0 0; color: #6d6a78; }

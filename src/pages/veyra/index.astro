@@ -1,0 +1,386 @@
+---
+// Veyra: a real estate launch concept (fictional developer). Three acts on one page:
+// a night journey in WebGL, the Veyra Skyline launch over fixed 3D towers, and the company.
+// Always noindex: Veyra is not a real company and its prices and figures are examples.
+import '../../veyra/veyra.css';
+const title = 'Veyra Skyline · a real estate launch concept by Abhay Mehta';
+const description = 'Concept launch site for a fictional developer: a night journey through the city in WebGL, a 3D tower that comes apart floor by floor, live inventory, sunlight, EMI and site-visit booking.';
+const canonical = new URL('/veyra/', Astro.site).href;
+const og = new URL('/work/veyra/journey.webp', Astro.site).href;
+---
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href={canonical} />
+  <meta name="theme-color" content="#06080c" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={og} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=DM+Mono:wght@400;500&family=Figtree:wght@400;500;600;700&display=swap" />
+</head>
+<body>
+  <a class="skip" href="#skyline">Skip the night journey</a>
+  <div id="sky" aria-hidden="true"></div>
+  <canvas id="tower" aria-hidden="true"></canvas>
+
+  <header class="top night" id="top">
+    <div class="inner">
+      <a class="brand" href="#journey"><b>Veyra</b><span>Concept</span></a>
+      <nav class="nav" id="nav" aria-label="Sections">
+        <a href="#journey">Journey</a><a href="#skyline">Skyline</a><a href="#floors">Floors</a><a href="#homes">Homes</a><a href="#sun">Sunlight</a><a href="#emi">EMI</a><a href="#projects">Projects</a><a href="#visit">Visit</a>
+      </nav>
+      <a class="home-link" href="/">Abhay Mehta ↗</a>
+      <a class="btn sm green" href="#visit">Book a visit</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Act 1: the night journey -->
+    <section class="journey" id="journey" aria-label="A night in Northbank">
+      <div class="j-stage">
+        <canvas id="night" aria-hidden="true"></canvas>
+        <div class="j-ui">
+          <div class="j-chapters" aria-live="polite">
+            <article class="chapter" data-at="0">
+              <p class="num">Veyra · Northbank, 10:40 pm</p>
+              <h1>The city is already here. We build into it.</h1>
+              <p>Scroll to travel through one night in the neighbourhood where Veyra is building next.</p>
+            </article>
+            <article class="chapter" data-at="0.27">
+              <p class="num">01 / Land</p>
+              <h2>A year of study before we draw a line.</h2>
+              <p>Soil tests, sun paths, traffic counts, the school run. A plot becomes a Veyra project only when the numbers work for the people who will live there.</p>
+            </article>
+            <article class="chapter" data-at="0.52">
+              <p class="num">02 / Street</p>
+              <h2>Design starts at street level.</h2>
+              <p>Shaded footpaths, a lit walk to the metro, shops on the ground floor. The tower is the last thing we design, not the first.</p>
+            </article>
+            <article class="chapter" data-at="0.78">
+              <p class="num">03 / Tower</p>
+              <h2>Veyra Skyline. Booking open.</h2>
+              <ul class="facts"><li><b>2 towers</b>, G+24</li><li><b>2 &amp; 3 BHK</b> from ₹78 L</li><li>Possession <b>Dec 2028</b></li></ul>
+              <div class="actions"><a class="cta" href="#skyline">See it in daylight</a></div>
+            </article>
+            <article class="chapter" data-at="1">
+              <p class="num">04 / Morning</p>
+              <h2>Now see it in daylight.</h2>
+              <p>Floors, homes, prices and the sun path. Keep scrolling.</p>
+            </article>
+          </div>
+          <div class="j-foot">
+            <nav class="chap-nav" id="chapNav" aria-label="Chapters"></nav>
+            <p class="hint" id="hint"><span>Scroll to explore</span><i aria-hidden="true"></i></p>
+            <div class="j-right">
+              <p class="readout">Elevation <b id="alt">0</b> m<br />Northbank grid</p>
+              <button class="pill" id="soundBtn" aria-pressed="false" aria-label="Sound"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="lbl" id="soundLbl">Sound off</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="tag3d" id="tag3d" aria-hidden="true">
+          <strong>Skyline · Tower B</strong>
+          <span>G+24 · 2 &amp; 3 BHK</span>
+          <span class="live">Booking open</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Act 2 and 3: daylight. Every direct child carries a scene key for the towers. -->
+    <div id="dayside">
+      <section id="skyline" data-scene="hero">
+        <div class="dawn" aria-hidden="true"></div>
+        <div class="hero">
+          <div class="inner">
+            <div class="col">
+              <p class="mono">Northbank · Tower B now booking</p>
+              <h1>Veyra Skyline</h1>
+              <p class="tagline">Two towers, 24 floors, and every home gets light from two sides.</p>
+              <div class="hero-card">
+                <h4>Booking open · Tower B</h4>
+                <dl>
+                  <div><dt>Homes</dt><dd>2 &amp; 3 BHK</dd></div>
+                  <div><dt>From</dt><dd>₹78 L*</dd></div>
+                  <div><dt>Possession</dt><dd>Dec 2028</dd></div>
+                </dl>
+                <div class="row"><a class="btn sm" href="#homes">Pick a home</a><a class="btn sm alt" href="#visit">Book a site visit</a></div>
+              </div>
+              <p class="note">*Example pricing for a 2 BHK on floor 5, before GST and registration.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="floors" class="floors" data-scene="floors">
+        <div class="sticky">
+          <div class="inner">
+            <div class="col">
+              <p class="mono">Floors</p>
+              <h2>Every floor, explained.</h2>
+              <p class="lead">Keep scrolling to take the towers apart, from the street up.</p>
+              <ul class="zones" id="zones">
+                <li data-z="4"><span class="lvl">L24</span><strong>Sky lounge</strong><p>Residents' lounge, a terrace garden and a viewing deck across the river.</p></li>
+                <li data-z="3"><span class="lvl">L5–L23</span><strong>Homes</strong><p>Four homes per floor and two lifts per tower. Bedrooms never share a wall with the neighbours.</p></li>
+                <li data-z="2"><span class="lvl">L4</span><strong>Amenity deck</strong><p>A 25 m lap pool, gym, crèche and a covered play area on the podium roof.</p></li>
+                <li data-z="1"><span class="lvl">P1–P3</span><strong>Parking</strong><p>Three podium levels with one covered slot per home and EV charging on every level.</p></li>
+                <li data-z="0"><span class="lvl">G</span><strong>Arrival</strong><p>Covered drop-off, a double-height lobby and six shops on the street side.</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="homes" class="sec" data-scene="homes">
+        <div class="inner">
+          <div class="picker card">
+            <div class="col" style="max-width:none;gap:10px">
+              <p class="mono">Homes <span class="tag">Example inventory</span></p>
+              <h2>Pick a home.</h2>
+              <p class="lead" style="font-size:16px">Tap a cell to see that home's price. Green is available, amber is on hold for another buyer, grey is booked.</p>
+            </div>
+            <div class="controls">
+              <div class="seg" role="group" aria-label="Tower"><button type="button" aria-pressed="false" data-tower="A">Tower A</button><button type="button" aria-pressed="true" data-tower="B">Tower B</button></div>
+              <div class="seg" role="group" aria-label="Home type"><button type="button" aria-pressed="true" data-type="all">All</button><button type="button" aria-pressed="false" data-type="2">2 BHK</button><button type="button" aria-pressed="false" data-type="3">3 BHK</button></div>
+            </div>
+            <div class="grid-wrap">
+              <div>
+                <div class="inv" id="inv" aria-label="Availability by floor and unit"></div>
+                <div class="legend" style="margin-top:10px"><span><i style="background:var(--accent)"></i>Available</span><span><i style="background:var(--hold)"></i>On hold</span><span><i style="background:var(--booked)"></i>Booked</span></div>
+                <p class="note" style="margin-top:8px">Sky Duplexes on L22–L23: ask an advisor.</p>
+              </div>
+              <div class="unit" id="unit" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sun" class="sec" data-scene="sun">
+        <div class="inner">
+          <div class="sunbox card">
+            <p class="mono">Sunlight</p>
+            <h2 style="font-size:clamp(32px,4vw,48px)">Where the sun is, hour by hour.</h2>
+            <div class="clock"><b id="clockT">7:30 am</b><span id="clockS">Sun in the east</span></div>
+            <div>
+              <input type="range" id="sunRange" min="330" max="1200" step="10" value="450" aria-label="Time of day" />
+              <div class="ticks"><span>5:30</span><span>9 am</span><span>Noon</span><span>3 pm</span><span>8 pm</span></div>
+            </div>
+            <p class="sunsay" id="sunSay"></p>
+            <dl class="sunfacts">
+              <div><dt>Sun height</dt><dd id="sunAlt">22°</dd></div>
+              <div><dt>Direction</dt><dd id="sunDir">East</dd></div>
+              <div><dt>Direct sun on</dt><dd id="sunOn">Units 01, 02</dd></div>
+            </dl>
+            <p class="note">Units 01 and 02 face east, 03 and 04 face west. Sun path for the equinox at about 21°N, for illustration.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="compare" class="sec veil" data-scene="side">
+        <div class="inner">
+          <div class="col" style="max-width:720px">
+            <p class="mono">Compare <span class="tag">Example pricing</span></p>
+            <h2>Three ways to live at Skyline.</h2>
+          </div>
+          <div class="tiers">
+            <article class="card tier">
+              <p class="mono">Most homes</p>
+              <h3>2 BHK</h3>
+              <p class="price"><small>from</small>₹78 L</p>
+              <dl><div><dt>Carpet area</dt><dd>780 sq ft</dd></div><div><dt>Balconies</dt><dd>1</dd></div><div><dt>Covered parking</dt><dd>1</dd></div><div><dt>Floors</dt><dd>L5–L21</dd></div></dl>
+              <p class="best"><b>Best for</b>First homes and young families</p>
+              <button class="btn sm alt" type="button" data-pick="2">See 2 BHK homes</button>
+            </article>
+            <article class="card tier feature">
+              <p class="mono">Most asked about</p>
+              <h3>3 BHK</h3>
+              <p class="price"><small>from</small>₹1.12 Cr</p>
+              <dl><div><dt>Carpet area</dt><dd>1,140 sq ft</dd></div><div><dt>Balconies</dt><dd>2</dd></div><div><dt>Covered parking</dt><dd>1 (+1 optional)</dd></div><div><dt>Floors</dt><dd>L5–L21</dd></div></dl>
+              <p class="best"><b>Best for</b>Families with parents at home, or a home office</p>
+              <button class="btn sm" type="button" data-pick="3">See 3 BHK homes</button>
+            </article>
+            <article class="card tier">
+              <p class="mono">8 homes only</p>
+              <h3>Sky Duplex</h3>
+              <p class="price"><small>from</small>₹2.17 Cr</p>
+              <dl><div><dt>Carpet area</dt><dd>2,050 sq ft</dd></div><div><dt>Balconies</dt><dd>3 + terrace</dd></div><div><dt>Covered parking</dt><dd>2</dd></div><div><dt>Floors</dt><dd>L22–L23</dd></div></dl>
+              <p class="best"><b>Best for</b>Large families who want a private terrace</p>
+              <a class="btn sm alt" href="#visit">Ask an advisor</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="emi" class="sec veil" data-scene="side">
+        <div class="inner">
+          <div class="col" style="max-width:720px">
+            <p class="mono">Home loan</p>
+            <h2>What you'd pay each month.</h2>
+            <p class="lead">Starts with the home you picked above. Your bank sets the final rate and how much it lends.</p>
+          </div>
+          <div class="card emi">
+            <div>
+              <div class="sl"><label for="eP">Home price <output id="oP"></output></label><input type="range" id="eP" min="4000000" max="25000000" step="100000" /></div>
+              <div class="sl"><label for="eD">Down payment <output id="oD"></output></label><input type="range" id="eD" min="10" max="50" step="1" value="20" /></div>
+              <div class="sl"><label for="eR">Interest rate <output id="oR"></output></label><input type="range" id="eR" min="7" max="12" step="0.05" value="8.5" /></div>
+              <div class="sl"><label for="eT">Loan tenure <output id="oT"></output></label><input type="range" id="eT" min="5" max="30" step="1" value="20" /></div>
+            </div>
+            <div class="res">
+              <p class="mono">Monthly EMI</p>
+              <p class="big" id="emiOut">₹0</p>
+              <div class="donut-row">
+                <canvas id="donut" width="150" height="150" aria-label="Principal versus interest"></canvas>
+                <div class="kv">
+                  <div><span><i style="background:var(--accent)"></i>Loan amount</span><b id="kL"></b></div>
+                  <div><span><i style="background:var(--sun)"></i>Total interest</span><b id="kI"></b></div>
+                  <div><span>Total you repay</span><b id="kT"></b></div>
+                  <div><span>Down payment</span><b id="kD"></b></div>
+                </div>
+              </div>
+              <p class="note">Example rates for illustration. Not a loan offer.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="company" data-scene="away">
+        <section id="numbers" class="sec">
+          <div class="inner">
+            <div class="sec-head">
+              <div class="col"><p class="mono">The developer</p><h2>Live numbers.</h2></div>
+              <p>Pulled from the CRM and site reports every night, so buyers can check the record before they visit. <span class="tag">Example figures</span></p>
+            </div>
+            <div class="stats" id="stats"></div>
+          </div>
+        </section>
+
+        <section id="projects" class="sec arc-section" aria-roledescription="carousel" aria-label="Projects">
+          <div class="inner">
+            <div class="sec-head">
+              <div class="col"><p class="mono">Projects</p><h2>Every Veyra project, and where it stands.</h2></div>
+              <p>Drag the arc or use the arrows. Each card shows the stage a project is at today. <span class="tag">Sample projects</span></p>
+            </div>
+          </div>
+          <div class="arc-stage" id="arc" tabindex="0" aria-label="Project cards. Use the left and right arrow keys to move."></div>
+          <div class="arc-controls">
+            <button class="round" type="button" id="prev" aria-label="Previous project">←</button>
+            <span class="arc-count" id="count" aria-live="polite">1 / 6</span>
+            <button class="round" type="button" id="next" aria-label="Next project">→</button>
+          </div>
+        </section>
+
+        <section class="sec" id="trust">
+          <div class="inner">
+            <div class="sec-head"><div class="col"><p class="mono">Why buyers check Veyra first</p><h2>Numbers you can check.</h2></div></div>
+            <div class="trust">
+              <article><p class="mono">RERA No. on every page</p><h3>Registered before we advertise</h3><p>A project is listed only after its RERA registration is approved. The number, approved plan and carpet areas are on each project page.</p></article>
+              <article><p class="mono">Slab photos every Friday</p><h3>Construction you can follow</h3><p>Buyers get a weekly site photo and slab count on WhatsApp. If a milestone slips, they hear the new date and the reason.</p></article>
+              <article><p class="mono">One price sheet</p><h3>No surprise charges</h3><p>Base price, floor rise, parking, club and GST sit on a single cost sheet. What you sign is what you pay, plus registration.</p></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec" id="partners">
+          <div class="inner duo">
+            <article class="card panel">
+              <p class="mono">Channel partners</p>
+              <h3>Register a buyer once. Get paid on time.</h3>
+              <ul>
+                <li><span>Lead protection</span><span>90 days from registration</span></li>
+                <li><span>Site visit check-in</span><span>OTP at the sales office</span></li>
+                <li><span>Brokerage payout</span><span>Within 7 days of agreement</span></li>
+              </ul>
+              <a class="btn sm alt" href="#visit" style="justify-self:start">Become a partner</a>
+            </article>
+            <article class="card panel">
+              <p class="mono">Careers</p>
+              <h3>Open roles</h3>
+              <ul>
+                <li><span>Presales executive</span><span>Sales office · 2 roles</span></li>
+                <li><span>Site engineer, civil</span><span>Veyra Courtyard</span></li>
+                <li><span>CRM and data analyst</span><span>Head office</span></li>
+              </ul>
+              <a class="btn sm alt" href="#visit" style="justify-self:start">Send your CV</a>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <section id="ask" class="sec veil" data-scene="side">
+        <div class="inner">
+          <div class="col" style="max-width:720px">
+            <p class="mono">Ask <span class="tag">Sample answers</span></p>
+            <h2>Questions buyers ask first.</h2>
+          </div>
+          <div class="card ask">
+            <div class="log" id="log" aria-live="polite">
+              <p class="msg a">Hi, I can answer common questions about Veyra Skyline. Tap a question or type your own.</p>
+            </div>
+            <div class="chips" id="chips"></div>
+            <form class="askbar" id="askForm"><input id="askIn" type="text" placeholder="Ask about possession, parking, the metro…" autocomplete="off" aria-label="Your question" /><button class="btn" type="submit">Send</button></form>
+          </div>
+        </div>
+      </section>
+
+      <section id="visit" class="sec" data-scene="visit">
+        <div class="inner">
+          <div class="visit card">
+            <div id="visitForm">
+              <div class="col" style="max-width:none;gap:10px;margin-bottom:16px">
+                <p class="mono">Site visit</p>
+                <h2 style="font-size:clamp(32px,4vw,48px)">See the sample flat.</h2>
+                <p class="lead" style="font-size:16px">Visits take about 45 minutes, including the sample flat on L5 and the construction viewing deck.</p>
+              </div>
+              <form id="vForm" novalidate style="display:grid;gap:16px">
+                <div class="fl-label">Day<div class="days" id="days" role="group" aria-label="Day"></div></div>
+                <div class="fl-label">Time<div class="slots" id="slots" role="group" aria-label="Time"></div></div>
+                <div class="f2">
+                  <label class="fl-label" for="vName">Name<input id="vName" autocomplete="name" placeholder="e.g. Priya Nair" /></label>
+                  <label class="fl-label" for="vPhone">Mobile number<input id="vPhone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="10-digit mobile" maxlength="14" /></label>
+                </div>
+                <label class="fl-label" for="vUnit">Home or project you're interested in<input id="vUnit" type="text" /></label>
+                <label class="check" for="vPick"><input type="checkbox" id="vPick" /> Pick me up from Northbank metro (free)</label>
+                <p class="err" id="vErr" aria-live="polite"></p>
+                <button class="btn green" type="submit" style="justify-self:start">Confirm visit</button>
+              </form>
+            </div>
+            <div class="done" id="vDone" hidden aria-live="polite">
+              <p class="mono">Visit requested</p>
+              <h3 id="vDoneT"></h3>
+              <p id="vDoneP"></p>
+              <p class="note">Concept site: nothing was sent. On a live site this creates a lead in the CRM, assigns an advisor and sends a WhatsApp confirmation.</p>
+              <button class="btn sm alt" type="button" id="vAgain" style="justify-self:start">Book another visit</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="vfoot">
+    <div class="inner">
+      <div class="foot-top">
+        <b>Veyra</b>
+        <div class="row"><button class="btn sm" type="button" id="copyBtn">Copy link</button><a class="btn sm alt" href="/">Abhay Mehta's portfolio ↗</a></div>
+      </div>
+      <input id="copyFallback" type="text" readonly hidden aria-label="Page link" />
+      <div class="foot-grid">
+        <div><strong>Concept by Abhay Mehta</strong>Designed and coded in Astro and three.js. <a href="/#veyra">Read about it on the portfolio</a>.</div>
+        <div><strong>About this page</strong>Veyra is a fictional developer. Prices, inventory, figures and answers are examples. The city and the towers are generated in code.</div>
+        <div><strong>What it shows</strong>A launch film made in code, live inventory with a cost sheet, an EMI calculator and site-visit booking ready to feed a CRM.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    import '../../veyra/main.js';
+  </script>
+</body>
+</html>
