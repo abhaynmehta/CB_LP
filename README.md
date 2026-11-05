@@ -1,5 +1,13 @@
 # Abhay Mehta: personal portfolio
 
+**Branch `ctf-preview` (v6):** the home page is CTRL the Funnel and Abhay together, in the agency's
+brand (ink, paper, amber, keycaps, Michroma and Jost) with the Veyra concept's motion: a WebGL funnel
+that scroll falls through (`src/ctf/funnel.js`), a 3D services keyboard (`src/ctf/keys.js`), a work
+arc and a WhatsApp brief (`src/ctf/ui.js`). Page: `src/pages/index.astro`; styles: `src/ctf/ctf.css`;
+agency facts: `src/data/agency.ts` (copied from the CtrlTheFunnel repo, every number sourced there).
+Case pages take the same tokens from the v6 block at the end of `src/styles/global.css`. The v5 home
+components are still in `src/components/home/`.
+
 Astro 5 static site with GSAP, Lenis and a three.js hero (points that settle from noise into a growth curve).
 Rebuilt in Oct 2026 from the old Vite/React "Content Brewer" site (kept at tag `old-content-brewer`).
 

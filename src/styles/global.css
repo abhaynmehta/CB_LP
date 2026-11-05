@@ -543,3 +543,18 @@ em .ch, em .wd > span { background: var(--gold-grad); background-size: 600% 100%
 .vy-body p { margin: 0; color: var(--ivory-2); font-size: 15px; max-width: 38ch; }
 .vy-foot { display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center; justify-content: space-between; margin-top: clamp(40px, 5vw, 64px); }
 .vy-note { margin: 22px 0 0; color: #6d6a78; }
+
+/* ---------- v6: case pages take the agency brand ----------
+   The home page is now CTRL the Funnel's (src/ctf/ctf.css). These tokens bring the case pages and
+   the 404 into the same ink, amber, Jost and Michroma. Delete this block to restore noir and gold. */
+:root {
+  --bg: #111113; --bg-2: #1b1b1f; --bg-3: #26262b;
+  --ivory: #ecebe6; --ivory-2: #a9a7a0; --mute: #8b8983; --line: rgba(255, 255, 255, 0.12);
+  --gold: #e8b45c; --gold-hi: #f0c77c; --gold-lo: #a8741c;
+  --serif: 'Jost Variable', 'Jost', system-ui, sans-serif;
+  --sans: 'Jost Variable', 'Jost', system-ui, sans-serif;
+  --mono: 'Michroma', ui-monospace, monospace;
+  --gold-grad: linear-gradient(100deg, #e8b45c, #e8b45c);
+}
+.h2, .display { font-weight: 500; }
+.h2 em, .display em { font-style: normal; }

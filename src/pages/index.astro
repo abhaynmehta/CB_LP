@@ -1,29 +1,242 @@
 ---
-import Base from '../layouts/Base.astro';
-import Hero from '../components/home/Hero.astro';
-import Logos from '../components/home/Logos.astro';
-import Statement from '../components/home/Statement.astro';
-import Growth from '../components/home/Growth.astro';
-import Cases from '../components/home/Cases.astro';
-import BigNumber from '../components/home/BigNumber.astro';
-import Capabilities from '../components/home/Capabilities.astro';
-import Marquee from '../components/home/Marquee.astro';
-import Sites from '../components/home/Sites.astro';
-import Systems from '../components/home/Systems.astro';
-import Veyra from '../components/home/Veyra.astro';
-import Rest from '../components/home/Rest.astro';
+// Home (v6): CTRL the Funnel and Abhay Mehta on one page. The agency's brand and tone
+// (ink, paper, amber, keycaps, Michroma and Jost) with the Veyra concept's motion: a WebGL funnel
+// that scroll falls through, a 3D keyboard that comes apart row by row, and a drag arc of work.
+// The previous home (v5, noir and gold) is kept in src/components/home and in git history.
+import '@fontsource-variable/jost';
+import '@fontsource/michroma';
+import '../ctf/ctf.css';
+import Logo from '../components/ctf/Logo.astro';
+import { agency, heroStats, stages, keyRows, work, caseHref } from '../data/agency';
+import { me, stats as myStats } from '../data/me';
+
+const title = `${agency.name} · growth agency led by ${me.name}`;
+const description = agency.description;
+const canonical = new URL('/', Astro.site).href;
+const noindex = process.env.NOINDEX === '1';
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'Organization', name: agency.name, url: agency.url, email: `mailto:${agency.email}`, telephone: agency.phone, description, address: { '@type': 'PostalAddress', addressLocality: 'New Delhi', addressCountry: 'IN' }, founder: { '@type': 'Person', name: me.name } },
+  { '@context': 'https://schema.org', '@type': 'Person', '@id': `${Astro.site}#me`, name: me.name, url: Astro.site?.href, jobTitle: 'Performance Marketing Specialist', worksFor: { '@type': 'Organization', name: agency.name }, sameAs: [me.linkedin] },
+];
+const stops = [0, 0.25, 0.5, 0.75, 1];
+const keyData = keyRows.map((r) => ({ name: r.name, keys: r.keys.map(([k, p, s]) => ({ k, p, href: caseHref(s) })) }));
+const year = new Date().getFullYear();
 ---
-<Base>
-  <Hero />
-  <Logos />
-  <Statement />
-  <Growth />
-  <Cases />
-  <BigNumber />
-  <Sites />
-  <Veyra />
-  <Systems />
-  <Capabilities />
-  <Marquee />
-  <Rest />
-</Base>
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{title}</title>
+  <meta name="description" content={description.slice(0, 158)} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+  <meta name="theme-color" content="#111113" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description.slice(0, 200)} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={new URL('/og.jpg', Astro.site).href} />
+  <meta name="twitter:card" content="summary_large_image" />
+  {schema.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+  <script is:inline>var d=document.documentElement;d.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('motion');</script>
+</head>
+<body>
+  <a class="skip" href="#services">Skip the funnel animation</a>
+
+  <header class="hd" id="hd">
+    <div class="wrap">
+      <a class="hd-mark" href="#funnel" aria-label={`${agency.name}, top`}><Logo size={40} /><span>Growth agency<br />New Delhi</span></a>
+      <nav class="hd-nav" id="nav" aria-label="Main">
+        <a href="#funnel">Funnel</a><a href="#services">Services</a><a href="#work">Work</a><a href="#founder">Founder</a><a href="#concept">Concept</a>
+      </nav>
+      <span class="keys-hint" aria-hidden="true"><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd></span>
+      <a class="key key-sm" href="#contact"><span class="key-cap">Let’s talk</span></a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. The funnel: scroll falls from the feed to the sale -->
+    <section class="journey" id="funnel" data-tone="ink" aria-label="The funnel">
+      <div class="j-stage">
+        <canvas id="funnelgl" aria-hidden="true"></canvas>
+        <div class="j-glow" aria-hidden="true"></div>
+        <div class="j-ui">
+          <div class="j-chapters" aria-live="polite">
+            <article class="chapter" data-at="0">
+              <p class="lbl">Growth agency · New Delhi · 6+ years</p>
+              <h1 class="h1">We own every step between a scroll and a <span class="amb">sale.</span></h1>
+              <div class="hero-sub">
+                <p>Scroll to fall through the funnel we build for every client. Four stages, each with the numbers to prove it.</p>
+                <a class="key amber" href="#contact"><span class="key-cap">Start a project <span class="ar">→</span></span></a>
+              </div>
+              <div class="ticker">{heroStats.map(([v, l]) => <div><b>{v}</b><span>{l}</span></div>)}</div>
+            </article>
+            {stages.map((s, i) => (
+              <article class="chapter" data-at={stops[i + 1]}>
+                <p class="stage-no"><kbd>{s.key}</kbd><span class="lbl">Stage {s.key} · {s.name}</span></p>
+                <h2>{s.verb}</h2>
+                <p class="line">{s.line}</p>
+                <div class="proofs">{s.proof.map(([v, l]) => <div><b>{v}</b><span>{l}</span></div>)}</div>
+                {i === stages.length - 1 && <div class="hero-sub"><a class="key amber" href="#contact"><span class="key-cap">Start a project <span class="ar">→</span></span></a><a class="tlink" href="#work">See the work</a></div>}
+              </article>
+            ))}
+          </div>
+          <div class="j-foot">
+            <nav class="st-nav" id="stNav" aria-label="Funnel stages">
+              {['Top', ...stages.map((s) => s.name)].map((n, i) => <button type="button" data-p={stops[i]} aria-label={`Go to ${n}`}><i></i><span>{String(i).padStart(2, '0')} {n}</span></button>)}
+            </nav>
+            <p class="hint" id="hint"><span>Scroll</span><i aria-hidden="true"></i></p>
+            <p class="readout" id="readout">Stage <b>0</b> / 4<br />Press 1 to 4</p>
+          </div>
+        </div>
+        {stages.map((s) => <span class="ring-tag" data-ring aria-hidden="true"><kbd>{s.key}</kbd>{s.name}</span>)}
+      </div>
+    </section>
+
+    <!-- 2. Services keyboard: assembles, then lights one funnel row at a time -->
+    <section class="keys ppr" id="services" data-tone="paper">
+      <div class="k-stage">
+        <canvas id="keysgl" aria-hidden="true"></canvas>
+        <div class="k-copy">
+          <p class="lbl">Everything we do</p>
+          <h2 class="h2">Every service is <span class="amb">a key.</span></h2>
+          <p class="lead">Each one links to the work that proves it. Keep scrolling and the keyboard lights up one funnel stage at a time.</p>
+          <ul class="rows" id="rows">
+            {keyRows.map((r, i) => (
+              <li data-r={i}>
+                <div class="rh"><b>{r.name}</b><span>{r.line}</span></div>
+                <div class="rk">{r.keys.map(([k, p, s]) => <a href={caseHref(s)}>{k}<small>{p}</small></a>)}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="k-tip" id="ktip" aria-hidden="true"></div>
+      </div>
+      <script type="application/json" id="keydata" set:html={JSON.stringify(keyData)} />
+    </section>
+
+    <!-- 3. Work -->
+    <section class="pad ink grain" id="work" data-tone="ink">
+      <div class="wrap">
+        <div class="sec-head split">
+          <div style="display:grid;gap:18px"><p class="lbl rv">Featured work</p><h2 class="h2 rv">34 clients. <span class="amb">Real numbers.</span></h2></div>
+          <p class="lead rv">Every figure comes from an ad account, a report or a public count. Drag the arc, use the arrows, or open a case.</p>
+        </div>
+      </div>
+      <div class="arc-stage" id="arc" tabindex="0" aria-roledescription="carousel" aria-label="Featured work. Use the left and right arrow keys to move.">
+        {work.map((w, i) => (
+          <article class="wcard" data-i={i} aria-label={w.client}>
+            <div class="wcard-img"><img src={`/work/${w.img}.w700.webp`} alt={`${w.client} work`} loading="lazy" decoding="async" draggable="false" /></div>
+            <div class="wcard-body">
+              <div class="wcard-top"><b>{w.client}</b><span>{w.sector}</span></div>
+              <h3>{w.head}</h3>
+              <div class="kpis">{w.kpi.map(([v, l]) => <div><b>{v}</b><span>{l}</span></div>)}</div>
+              <a class="key key-sm amber go" href={caseHref(w.slug)}><span class="key-cap">Open case <span class="ar">→</span></span></a>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="arc-controls">
+        <button class="round" type="button" id="prev" aria-label="Previous case">←</button>
+        <span class="arc-count" id="count" aria-live="polite">01 / {String(work.length).padStart(2, '0')}</span>
+        <button class="round" type="button" id="next" aria-label="Next case">→</button>
+      </div>
+      <div class="work-foot"><a class="key" href={`${agency.url}/work/`}><span class="key-cap">All 34 clients <span class="ar">→</span></span></a></div>
+    </section>
+
+    <!-- 4. Founder -->
+    <section class="pad ppr" id="founder" data-tone="paper">
+      <div class="wrap founder-grid">
+        <div style="display:grid;gap:24px;align-content:start">
+          <p class="lbl rv">Who runs it</p>
+          <h2 class="h2 rv">Led by <span class="amb">{me.name}.</span></h2>
+          <p class="lead rv">A performance marketer who codes. Abhay has managed ₹5 Crore+ in ad spend across Meta, Google, DV360 and Snapchat for 40+ clients, and builds his own tracking, automation and AI tools. Today he also runs a ₹50 Lakh+ monthly budget for a luxury NCR developer.</p>
+          <div class="ctas rv"><a class="key solid" href={me.cv} download><span class="key-cap">Download CV ↓</span></a><a class="tlink" href={me.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a></div>
+        </div>
+        <div>
+          <div class="f-stats rv">{myStats.map(([v, l]) => <div><b>{v}</b><span>{l}</span></div>)}</div>
+          <div class="systems">
+            <div class="sys rv"><small>WhatsApp concierge · resorts</small><b>22%</b><span>of WhatsApp chats became bookings, against a 4 to 8% hospitality benchmark</span></div>
+            <div class="sys rv"><small>Lead-to-sale pipeline · real estate</small><b>₹22.4 Cr+</b><span>qualified pipeline in 90 days across 12+ accounts, with CAPI and WhatsApp bots</span></div>
+            <div class="sys rv"><small>QC tools in Python and AI</small><b>25–30 → 6–8 min</b><span>per blog audit, about 20 hours of QC saved a month</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Concept: Veyra -->
+    <section class="pad ink grain" id="concept" data-tone="ink">
+      <div class="wrap">
+        <div class="sec-head split">
+          <div style="display:grid;gap:18px"><p class="lbl rv">Concept · Real estate launch</p><h2 class="h2 rv">One launch, <span class="amb">built end to end.</span></h2></div>
+          <p class="lead rv">Our ads send buyers to a launch page. Veyra is our concept for that page, designed and coded by hand: a night journey, 3D towers you can take apart, and the tools that turn a visitor into a site visit.</p>
+        </div>
+        <div class="vy-grid">
+          {[
+            ['01 · Night journey', 'A city made in code, flown through by scroll.', 'journey', '/veyra/#journey'],
+            ['02 · The towers', 'Taken apart floor by floor.', 'floors', '/veyra/#floors'],
+            ['03 · Inventory', 'A page that books site visits.', 'homes', '/veyra/#homes'],
+          ].map(([n, h, img, href]) => (
+            <a class="vy-card rv" href={href}>
+              <span class="bw"><span class="bw-bar"><i></i><i></i><i></i><span>veyra · {img}</span></span><span class="bw-view"><img src={`/work/veyra/${img}.w700.webp`} srcset={`/work/veyra/${img}.w700.webp 700w, /work/veyra/${img}.webp 1440w`} sizes="(max-width: 900px) 92vw, 30vw" alt={`Veyra concept: ${h}`} loading="lazy" decoding="async" /></span></span>
+              <span class="cap">{n}</span><h3>{h}</h3>
+            </a>
+          ))}
+        </div>
+        <div class="vy-foot">
+          <a class="key amber" href="/veyra/"><span class="key-cap">Open the live concept <span class="ar">→</span></span></a>
+          <div class="chips">{['three.js', 'GLSL shaders', 'Scroll-driven 3D', 'Astro', 'Lead capture'].map((c) => <span>{c}</span>)}</div>
+        </div>
+        <p class="fine">Veyra is a fictional developer. Prices, inventory and figures in the concept are examples.</p>
+      </div>
+    </section>
+
+    <!-- 6. Contact -->
+    <section class="pad ink" id="contact" data-tone="ink" style="border-top:1px solid var(--line-ink)">
+      <div class="wrap contact-grid">
+        <div style="display:grid;gap:22px;align-content:start">
+          <p class="lbl rv">Start a project</p>
+          <h2 class="h2 rv">Tell us what you sell. <span class="amb">We’ll map the funnel.</span></h2>
+          <p class="lead rv">Pick the stages that leak. The brief opens in WhatsApp, written out, so nothing is stored anywhere else.</p>
+          <div class="direct rv">
+            <a href={`https://wa.me/${agency.wa}`} target="_blank" rel="noopener"><span>WhatsApp</span><span>{agency.phone}</span></a>
+            <a href={`mailto:${agency.email}`}><span>Email</span><span>{agency.email}</span></a>
+            <a href={`tel:${agency.phone.replace(/\s/g, '')}`}><span>Call</span><span>{agency.phone}</span></a>
+          </div>
+        </div>
+        <form class="brief rv" id="brief" data-wa={agency.wa} novalidate>
+          <div class="two">
+            <label for="bName">Your name<input id="bName" autocomplete="name" placeholder="e.g. Riya Kapoor" /></label>
+            <label for="bBiz">Business<input id="bBiz" autocomplete="organization" placeholder="Brand, website or Instagram" /></label>
+          </div>
+          <div class="fl">Where does it leak?
+            <div class="picks" id="picks">{stages.map((s) => <button type="button" aria-pressed="false" data-stage={s.name}><kbd>{s.key}</kbd>{s.name}</button>)}</div>
+          </div>
+          <label for="bBudget">Monthly budget
+            <select id="bBudget"><option>Under ₹50K</option><option selected>₹50K – ₹2L</option><option>₹2L – ₹10L</option><option>Above ₹10L</option><option>Not sure yet</option></select>
+          </label>
+          <label for="bNote">Anything else? <span style="font-weight:300;color:var(--on-ink-2)">(optional)</span><textarea id="bNote" placeholder="Goal, timeline, links"></textarea></label>
+          <p class="err" id="bErr" aria-live="polite"></p>
+          <button class="key amber" type="submit" style="justify-self:start"><span class="key-cap">Send the brief on WhatsApp <span class="ar">→</span></span></button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ft">
+    <div class="wrap">
+      <p class="ft-big" aria-hidden="true">CTRL the Funnel</p>
+      <div class="ft-row">
+        <span>© {year} {agency.name} · {agency.city} · led by {me.name}</span>
+        <span><a href={agency.url} target="_blank" rel="noopener">Agency site ↗</a> · <a href={me.cv} download>Abhay’s CV</a> · <a href={me.linkedin} target="_blank" rel="noopener">LinkedIn</a> · <a href="/veyra/">Veyra concept</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    import '../ctf/main.js';
+  </script>
+</body>
+</html>
