@@ -10,9 +10,53 @@ export const agency = {
   wa: '919289086239',
   city: 'New Delhi, India',
   tagline: 'We own every step between a scroll and a sale.',
+  kind: 'One-stop business solutions',
+  years: '6 years',
   description:
-    'CTRL the Funnel is a founder-led growth agency from New Delhi. Reels, podcasts, Meta and Google ads, websites, SEO, AEO and GEO, and WhatsApp automation, built as one funnel for D2C, real estate, travel, hospitality, creators and B2B.',
+    'CTRL the Funnel is a one-stop business solutions team from New Delhi, six years in the market. Strategy, content and production, ads, websites, SEO, AEO and GEO, and WhatsApp automation, run as one system for real estate, hospitality, D2C, B2B SaaS, travel, education and creators.',
 };
+
+// The close of the funnel: what every business gets, whatever it sells.
+export const close = {
+  label: 'One team · every stage',
+  head: 'Whatever you sell, we take CTRL.',
+  line: 'Strategy, content, production, ads, websites, search and automation, run as one system for your business, from day one or from wherever you are today.',
+};
+
+// Clients for the keycap strip. img = a logo in /work/logos, otherwise the name is set in type.
+export const clients: { name: string; img?: string }[] = [
+  { name: 'Snapchat India' }, { name: 'Masters’ Union' }, { name: 'Dohful', img: 'dohful' }, { name: 'The Better Beings', img: 'tbb' },
+  { name: 'Earavat Resort', img: 'earavat' }, { name: 'IONA.AI' }, { name: 'Corbett Machaan', img: 'machaan' }, { name: 'Omkarix Global Exim', img: 'omkarix' },
+  { name: 'TestPrepKart' }, { name: 'Avinash Kumar' }, { name: 'Nachiket Bhatia' }, { name: 'The Good Parent' },
+  { name: 'The Print Culture', img: 'printculture' }, { name: 'WanderLynk', img: 'wanderlynk' }, { name: 'Canopy & Sky', img: 'canopy' }, { name: 'Pushpak Tours', img: 'pushpak' },
+  { name: 'The Digital Futur', img: 'digitalfutur' }, { name: 'Soho Shades' }, { name: 'Nyoma' }, { name: 'Robbin Motors' },
+];
+
+// Industries: one proof each, from the agency's case pages.
+export const industries: { name: string; short: string; num: string; what: string; who: string; img: string }[] = [
+  { name: 'Real estate', short: 'Real estate', num: '₹22.4Cr', what: 'qualified pipeline in 90 days, ₹2Cr+ homes', who: 'NCR developers and channel partners', img: 'show/real-estate/02' },
+  { name: 'Hospitality & events', short: 'Hospitality', num: '1,784', what: 'WhatsApp enquiries at ₹13.42 each', who: 'Earavat Resort · Corbett Machaan · 73 Dotts', img: 'show/earavat-resort/01' },
+  { name: 'D2C & e-commerce', short: 'D2C', num: '₹13.2L', what: 'sales in 28 days from ₹45K of ads', who: 'Dohful · The Better Beings · Soho Shades', img: 'show/dohful/01' },
+  { name: 'Travel', short: 'Travel', num: '₹4.62', what: 'per WhatsApp chat, 10,694 chats in one campaign', who: 'WanderLynk · Canopy & Sky · Pushpak Tours', img: 'show/travel-operators/03' },
+  { name: 'Creators & personal brands', short: 'Creators', num: '50M+', what: 'Instagram views for one creator', who: 'Nachiket Bhatia · Avinash Kumar · The Good Parent', img: 'show/nachiket-bhatia/01' },
+  { name: 'Education', short: 'Education', num: '₹1,530', what: 'per booked call, down from ₹3,150', who: 'TestPrepKart · Masters’ Union · Explorer Academy', img: 'show/testprepkart/01' },
+  { name: 'B2B, SaaS & AI', short: 'B2B & AI', num: '2 weeks', what: 'to a new website and brand for an AI hiring platform', who: 'IONA.AI · Omkarix Global Exim · The Digital Futur', img: 'show/iona-ai/01' },
+  { name: 'Local businesses', short: 'Local', num: '2', what: 'salons found on Google with clean Business Profiles', who: 'Deeluxe Nails & Lashes · Robbin Motors · Devi Store', img: 'show/robbin-motors/01' },
+];
+
+// The team, by discipline. Each one is a keycap.
+export const disciplines: [string, string][] = [
+  ['Strategy', 'Business model, margins and the plan, before any channel'],
+  ['Pre-production', 'Scripts, hooks, shot lists and casting'],
+  ['Production', 'Shoots, podcasts and product films'],
+  ['Post-production', 'Edits, reels, motion and sound'],
+  ['Design', 'Brand, statics, thumbnails and ad creatives'],
+  ['Performance', 'Meta, Google, Amazon and LinkedIn ads'],
+  ['Web & engineering', 'Astro, Shopify, three.js and speed'],
+  ['Search', 'SEO, AEO, GEO and Google Business'],
+  ['Automation', 'Wati, WhatFlow, CRM and lead routing'],
+];
+export const teamStats: [string, string][] = [['6', 'years in the market'], ['34', 'clients'], ['8', 'industries'], ['1.09B', 'views on Snapchat']];
 
 export const heroStats: [string, string][] = [
   ['1.09B', 'views on Snapchat'],
@@ -29,7 +73,7 @@ export const stages = [
     proof: [['49 → 99', 'PageSpeed, NCR developer'], ['7 days', 'Omkarix, brief to launch'], ['2 weeks', 'IONA.AI rebuild']] },
   { key: '3', name: 'Lead', verb: 'Capture the lead.', line: 'Meta and Google campaigns judged on qualified leads, not cheap ones.',
     proof: [['₹4.62', 'per WhatsApp chat'], ['₹75', 'qualified lead, ₹2Cr+ homes'], ['₹96', 'per Maldives lead']] },
-  { key: '4', name: 'Sale', verb: 'Close the sale.', line: 'WhatsApp flows, follow-up and retention that turn interest into revenue.',
+  { key: '4', name: 'Sale', verb: 'Turn interest into revenue.', line: 'WhatsApp flows, CRM and follow-up, so every enquiry gets an answer and every customer comes back.',
     proof: [['₹13.2L', 'Dohful sales in 28 days'], ['₹22.4Cr', 'real estate pipeline, 90 days'], ['₹1,530', 'per booked call, from ₹3,150']] },
 ] as const;
 

@@ -1,9 +1,11 @@
 # Abhay Mehta: personal portfolio
 
-**Branch `ctf-preview` (v6):** the home page is CTRL the Funnel and Abhay together, in the agency's
-brand (ink, paper, amber, keycaps, Michroma and Jost) with the Veyra concept's motion: a WebGL funnel
-that scroll falls through (`src/ctf/funnel.js`), a 3D services keyboard (`src/ctf/keys.js`), a work
-arc and a WhatsApp brief (`src/ctf/ui.js`). Page: `src/pages/index.astro`; styles: `src/ctf/ctf.css`;
+**Branch `ctf-preview` (v7):** the home page is CTRL the Funnel, a one-stop business solutions team, in
+the agency's brand (ink, paper, amber, keycaps, Michroma and Jost) with the Veyra concept's motion: a
+WebGL funnel that ends by building the CTRL keycap from particles (`src/ctf/funnel.js`), a client
+keycap strip, a 3D services keyboard (`src/ctf/keys.js`), an industries reel and a work arc that both
+turn with the scroll, team keycaps and a WhatsApp brief (`src/ctf/ui.js`). Lenis smooths desktop scroll.
+Public preview: https://abhay-mehta.abhaynmehta.workers.dev (home and /veyra/; case links go to the agency site). Page: `src/pages/index.astro`; styles: `src/ctf/ctf.css`;
 agency facts: `src/data/agency.ts` (copied from the CtrlTheFunnel repo, every number sourced there).
 Case pages take the same tokens from the v6 block at the end of `src/styles/global.css`. The v5 home
 components are still in `src/components/home/`.

@@ -1,7 +1,8 @@
 // 1. The funnel. A ring of feed cards turns around the mouth of a funnel; attention (particles)
-// leaves the cards, spirals down and thins out at every stage, and what survives lands as coins.
-// The section is tall and its stage sticks, so ordinary scrolling flies the camera from the feed to
-// the sale. Keys 1–4 jump to a stage. The thinning shows the idea of a funnel, not client data.
+// leaves the cards, spirals down and thins out at every stage. At the close every particle flies out
+// and builds the CTRL keycap: whatever the business, one team in control. The section is tall and
+// its stage sticks, so ordinary scrolling flies the camera from the feed to that close.
+// Keys 0–5 jump to a chapter. The thinning shows the idea of a funnel, not client data.
 import * as THREE from 'three';
 
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -10,16 +11,16 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 export function initFunnel() {
   const section = document.getElementById('funnel'), stage = section.querySelector('.j-stage'), canvas = document.getElementById('funnelgl');
   const chapters = [...section.querySelectorAll('.chapter')], stops = chapters.map((c) => +c.dataset.at);
-  const NAMES = ['Top', 'Scroll', 'Click', 'Lead', 'Sale'];
+  const NAMES = ['Top', 'Scroll', 'Click', 'Lead', 'Sale', 'CTRL'];
   const progress = () => { const r = section.getBoundingClientRect(); return clamp(-r.top / Math.max(1, section.offsetHeight - innerHeight)); };
   const scrollFor = (p) => section.getBoundingClientRect().top + scrollY + p * (section.offsetHeight - innerHeight) + 2;
-  const go = (p) => scrollTo({ top: scrollFor(p), behavior: reduce ? 'auto' : 'smooth' });
+  const go = (p) => (window.ctfScrollTo ? window.ctfScrollTo(scrollFor(p)) : scrollTo({ top: scrollFor(p), behavior: reduce ? 'auto' : 'smooth' }));
 
   const nav = document.getElementById('stNav'), navBtns = [...nav.children];
   nav.addEventListener('click', (e) => { const b = e.target.closest('[data-p]'); if (b) go(+b.dataset.p); });
   addEventListener('keydown', (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest?.('input,textarea,select,[contenteditable]')) return;
-    if (/^[0-4]$/.test(e.key)) { go(stops[+e.key]); e.preventDefault(); }
+    if (/^[0-5]$/.test(e.key)) { go(stops[+e.key]); e.preventDefault(); }
   });
 
   const hint = document.getElementById('hint'), readout = document.getElementById('readout'), tags = [...section.querySelectorAll('[data-ring]')];
@@ -35,7 +36,7 @@ export function initFunnel() {
     let k = 0; stops.forEach((s, i) => { if (p >= s - 0.06) k = i; });
     navBtns.forEach((b, i) => { b.classList.toggle('on', i === k); const a = stops[i], z = stops[i + 1] ?? 1.0001; b.querySelector('i').style.setProperty('--fill', i < k ? 1 : i === k ? clamp((p - a) / Math.max(0.0001, z - a)).toFixed(3) : 0); });
     hint.style.opacity = clamp(1 - p * 14).toFixed(2);
-    if (k !== lastK) { lastK = k; readout.innerHTML = k ? `Stage <b>${k}</b> / 4 · ${NAMES[k]}<br>Press 1 to 4` : 'The whole funnel<br>Press 1 to 4'; }
+    if (k !== lastK) { lastK = k; readout.innerHTML = k === 5 ? 'One team<br>Every stage' : k ? `Stage <b>${k}</b> / 4 · ${NAMES[k]}<br>Press 1 to 4` : 'The whole funnel<br>Press 1 to 4'; }
   }
 
   let renderer = null;
@@ -100,7 +101,8 @@ export function initFunnel() {
 
   // attention: particles from the feed into the funnel, thinning at each ring
   const N = narrowScreen ? 7000 : 14000;
-  const timeU = { value: 0 }, rotU = { value: 0 };
+  const timeU = { value: 0 }, rotU = { value: 0 }, morphU = { value: 0 }, LOGO_Y = -26;
+  let targetAttr = null;
   {
     const pos = new Float32Array(N * 3), seed = new Float32Array(N * 4), lvl = new Float32Array(N), fd = new Float32Array(N * 2);
     for (let i = 0; i < N; i++) {
@@ -109,10 +111,11 @@ export function initFunnel() {
       const a = Math.random() * Math.PI * 2, r = 19 + Math.random() * 14; fd.set([a, r], i * 2);
     }
     const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('aSeed', new THREE.BufferAttribute(seed, 4)); g.setAttribute('aLvl', new THREE.BufferAttribute(lvl, 1)); g.setAttribute('aFeed', new THREE.BufferAttribute(fd, 2));
+    targetAttr = new THREE.BufferAttribute(new Float32Array(N * 4), 4); g.setAttribute('aTarget', targetAttr);
     const pts = new THREE.Points(g, new THREE.ShaderMaterial({
       transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-      uniforms: { uTime: timeU, uRot: rotU, uPR: { value: renderer.getPixelRatio() }, uAmber: { value: AMBER }, uIvory: { value: IVORY } },
-      vertexShader: `uniform float uTime,uRot,uPR; attribute vec4 aSeed; attribute float aLvl; attribute vec2 aFeed; varying float vA; varying float vDepth; varying float vHot;
+      uniforms: { uTime: timeU, uRot: rotU, uMorph: morphU, uPR: { value: renderer.getPixelRatio() }, uAmber: { value: AMBER }, uIvory: { value: IVORY } },
+      vertexShader: `uniform float uTime,uRot,uPR,uMorph; attribute vec4 aSeed; attribute float aLvl; attribute vec2 aFeed; attribute vec4 aTarget; varying float vA; varying float vDepth; varying float vHot; varying float vM; varying float vKind;
         float R(float y){ float k=clamp((y+14.0)/24.0,0.0,1.0); return 1.3+14.7*pow(k,1.7); }
         void main(){
           float s=fract(aSeed.z+uTime*aSeed.w);
@@ -134,43 +137,49 @@ export function initFunnel() {
             alive=smoothstep(dieY-1.4, dieY+0.2, y);
             vHot=0.4+0.6*clamp((10.0-y)/22.0,0.0,1.0);
           }
-          vA=alive; vec4 mv=modelViewMatrix*vec4(p,1.0); vDepth=-mv.z;
-          float sz=(aLvl>3.5 && vHot>0.8) ? 2.0 : 1.0;
+          // the close: every particle leaves the funnel and takes its place in the CTRL keycap
+          float d0=aSeed.y*0.45; float m=smoothstep(d0,d0+0.55,uMorph); vM=m; vKind=aTarget.w;
+          vec3 tp=aTarget.xyz+vec3(sin(uTime*0.9+aSeed.z*40.0),cos(uTime*0.8+aSeed.x*40.0),sin(uTime*0.7+aSeed.y*40.0))*0.05;
+          vec3 arc=vec3(0.0,sin(m*3.14159)*4.0*(aSeed.x-0.3),sin(m*3.14159)*3.0*(aSeed.z-0.5));
+          p=mix(p,tp,m)+arc*(1.0-m*m);
+          vA=mix(alive,1.0,m); vec4 mv=modelViewMatrix*vec4(p,1.0); vDepth=-mv.z;
+          float sz=mix((aLvl>3.5 && vHot>0.8) ? 2.0 : 1.0, 1.25, m);
           gl_PointSize=clamp(uPR*sz*64.0/vDepth,1.2,11.0);
           gl_Position=projectionMatrix*mv;
         }`,
-      fragmentShader: `uniform vec3 uAmber,uIvory; varying float vA; varying float vDepth; varying float vHot;
-        void main(){ float d=length(gl_PointCoord-0.5); float a=smoothstep(0.5,0.05,d)*vA; a*=1.0-smoothstep(70.0,130.0,vDepth);
-          vec3 c=mix(uIvory*0.75,uAmber,vHot); gl_FragColor=vec4(c*a*1.15,a); }`,
+      fragmentShader: `uniform vec3 uAmber,uIvory; varying float vA; varying float vDepth; varying float vHot; varying float vM; varying float vKind;
+        void main(){ float d=length(gl_PointCoord-0.5); float a=smoothstep(0.5,0.05,d)*vA; a*=1.0-smoothstep(70.0,130.0,vDepth)*(1.0-vM);
+          vec3 c=mix(uIvory*0.75,uAmber,vHot); c=mix(c, vKind>0.5 ? uAmber : uIvory, vM); gl_FragColor=vec4(c*a*1.15,a); }`,
     }));
     pts.frustumCulled = false; scene.add(pts);
   }
 
-  // the sale: coins stacking under the funnel
-  scene.add(new THREE.HemisphereLight(0xfff1d6, 0x111113, 0.7 * Math.PI));
-  const lamp = new THREE.PointLight(0xffd28a, 140, 34, 2); lamp.position.set(5, -10, 8); scene.add(lamp);
-  const key = new THREE.DirectionalLight(0xfff3dc, 1.4 * Math.PI); key.position.set(6, 4, 10); scene.add(key);
-  const STACKS = [5, 9, 14], COINS = STACKS.reduce((a, b) => a + b, 0), coinGeo = new THREE.CylinderGeometry(1.05, 1.05, 0.16, 56);
-  const coins = new THREE.InstancedMesh(coinGeo, new THREE.MeshStandardMaterial({ color: 0xe8b45c, metalness: 0.25, roughness: 0.38, emissive: 0x3a2508 }), COINS);
-  const coinAt = []; STACKS.forEach((n, st) => { for (let h = 0; h < n; h++) coinAt.push({ x: [-2.5, 0, 2.5][st] + (Math.random() - 0.5) * 0.08, z: [0.5, -0.2, 0.4][st], y: -15.9 + h * 0.17, rot: Math.random() * 6, order: h * 3 + st }); });
-  coinAt.sort((a, b) => a.order - b.order);
-  scene.add(coins);
-  const glow = new THREE.Mesh(new THREE.CircleGeometry(6, 48), new THREE.ShaderMaterial({ transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, uniforms: { uI: { value: 0 }, uC: { value: AMBER } },
-    vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
-    fragmentShader: `uniform float uI; uniform vec3 uC; varying vec2 vUv; void main(){ float d=length(vUv-0.5)*2.0; float a=pow(1.0-clamp(d,0.0,1.0),2.5)*uI*0.5; gl_FragColor=vec4(uC*a,a); }` }));
-  glow.rotation.x = -Math.PI / 2; glow.position.y = -16.0; scene.add(glow);
-  const cm = new THREE.Matrix4(), cq = new THREE.Quaternion(), cs = new THREE.Vector3(), cp = new THREE.Vector3(), yAxis = new THREE.Vector3(0, 1, 0);
-  function placeCoins(f) {
-    const shown = f * COINS;
-    coinAt.forEach((c, i) => { const k = clamp(shown - i); cq.setFromAxisAngle(yAxis, c.rot); cs.setScalar(k < 0.01 ? 0.0001 : 1); cp.set(c.x, c.y + (1 - k) * 2.5, c.z); cm.compose(cp, cq, cs); coins.setMatrixAt(i, cm); });
-    coins.instanceMatrix.needsUpdate = true;
+  // the CTRL keycap, sampled from a drawing into one target point per particle
+  function roundRect(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+  async function buildLogo() {
+    try { await Promise.all([document.fonts.load('400 190px "Michroma"'), document.fonts.load('400 90px "Jost Variable"')]); } catch { /* fallback faces */ }
+    const CW = 960, CH = 820, c = document.createElement('canvas'); c.width = CW; c.height = CH; const g = c.getContext('2d', { willReadFrequently: true });
+    g.fillStyle = '#000'; g.fillRect(0, 0, CW, CH); g.lineWidth = 11;
+    g.strokeStyle = '#f00'; roundRect(g, 40, 130, 820, 650, 92); g.stroke();
+    g.fillStyle = '#000'; roundRect(g, 100, 50, 820, 650, 88); g.fill();
+    g.strokeStyle = '#0f0'; roundRect(g, 100, 50, 820, 650, 88); g.stroke();
+    g.fillStyle = '#0f0'; g.textAlign = 'center'; g.font = '400 196px Michroma, sans-serif'; g.fillText('CTRL', 510, 370);
+    g.fillRect(215, 430, 590, 15);
+    g.font = '400 96px "Jost Variable", Jost, sans-serif'; if ('letterSpacing' in g) g.letterSpacing = '10px'; g.fillText('the Funnel', 516, 600);
+    const px = g.getImageData(0, 0, CW, CH).data, pts = [];
+    for (let y = 0; y < CH; y += 2) for (let x = 0; x < CW; x += 2) { const i = (y * CW + x) * 4; if (px[i + 1] > 140) pts.push(x, y, 0); else if (px[i] > 140) pts.push(x, y, 1); }
+    const n = pts.length / 3, arr = targetAttr.array, S = 18 / CW;
+    for (let i = 0; i < N; i++) { const j = Math.floor(Math.random() * n) * 3, kind = pts[j + 2];
+      arr.set([(pts[j] - CW / 2 + Math.random() * 2) * S, LOGO_Y - (pts[j + 1] - CH / 2 + Math.random() * 2) * S, kind ? -0.5 : (Math.random() - 0.5) * 0.15, kind], i * 4); }
+    targetAttr.needsUpdate = true;
   }
+  buildLogo();
 
-  // camera path: one keypoint per chapter (hero, scroll, click, lead, sale)
+  // camera path: one keypoint per chapter (hero, scroll, click, lead, sale, the CTRL close)
   const V = (x, y, z) => new THREE.Vector3(x, y, z);
-  const camPath = new THREE.CatmullRomCurve3([V(36, 15, 46), V(12, 18.5, 30), V(0.6, 25, 4), V(1.4, 1, 1.4), V(9, -12.6, 12.5)]);
-  const lookPath = new THREE.CatmullRomCurve3([V(-9, 1, 0), V(0, 11.5, 14), V(0, 3, 0), V(0, -12, 0), V(0, -14.6, 0)]);
-  if (narrowScreen) { camPath.points[0].set(30, 20, 52); lookPath.points[0].set(-1, -2, 0); }
+  const camPath = new THREE.CatmullRomCurve3([V(36, 15, 46), V(12, 18.5, 30), V(0.6, 25, 4), V(1.4, 1, 1.4), V(9, -12.6, 12.5), V(2, LOGO_Y + 3, 33)]);
+  const lookPath = new THREE.CatmullRomCurve3([V(-9, 1, 0), V(0, 11.5, 14), V(0, 3, 0), V(0, -12, 0), V(0, -14.6, 0), V(-8.5, LOGO_Y, 0)]);
+  if (narrowScreen) { camPath.points[0].set(30, 20, 52); lookPath.points[0].set(-1, -2, 0); camPath.points[5].set(0, LOGO_Y + 2, 46); lookPath.points[5].set(0, LOGO_Y - 9, 0); }
   const camP = new THREE.Vector3(), lookP = new THREE.Vector3(), right = new THREE.Vector3(), tagV = new THREE.Vector3();
   let mx = 0, my = 0, smx = 0, smy = 0;
   stage.addEventListener('pointermove', (e) => { mx = (e.clientX / innerWidth) * 2 - 1; my = (e.clientY / innerHeight) * 2 - 1; });
@@ -191,16 +200,16 @@ export function initFunnel() {
     const tt = reduce ? 4 : t;
     // a negative turn of the feed group moves its cards to angle a + tt·0.03, which the particles follow
     timeU.value = tt; rotU.value = tt * 0.03; feed.rotation.y = -tt * 0.03; feed.userData.mat.uniforms.uTime.value = tt;
-    ringMats.forEach((m, i) => { const near = 1 - clamp(Math.abs(cur * 4 - (i + 1)) / 0.9); m.opacity = 0.3 + 0.7 * near; });
-    const sale = clamp((cur - 0.8) / 0.2);
-    placeCoins(sale); glow.material.uniforms.uI.value = 0.25 + 0.75 * sale;
+    const fadeOut = 1 - clamp((cur - 0.84) / 0.12);
+    ringMats.forEach((m, i) => { const near = 1 - clamp(Math.abs(cur * 5 - (i + 1)) / 0.9); m.opacity = (0.3 + 0.7 * near) * (0.15 + 0.85 * fadeOut); });
+    morphU.value = clamp((cur - 0.82) / 0.16);
     renderer.render(scene, camera);
     // stage labels sit on each ring, on the side facing the camera's right
     right.set(1, 0, 0).applyQuaternion(camera.quaternion); right.y = 0; right.normalize();
     tags.forEach((tag, i) => {
       const r = R(RINGS[i]); tagV.set(right.x * r, RINGS[i], right.z * r).project(camera);
-      const on = tagV.z < 1 && Math.abs(tagV.x) < 1.05 && Math.abs(tagV.y) < 1.05 && cur < 0.9 && !(W < 700 && cur < 0.14);
-      const near = 1 - clamp(Math.abs(cur * 4 - (i + 1)) / 1.2);
+      const on = tagV.z < 1 && Math.abs(tagV.x) < 1.05 && Math.abs(tagV.y) < 1.05 && cur < 0.84 && !(W < 700 && cur < 0.12);
+      const near = 1 - clamp(Math.abs(cur * 5 - (i + 1)) / 1.2);
       tag.style.opacity = on ? (0.45 + 0.55 * near).toFixed(2) : '0';
       if (on) tag.style.transform = `translate(${Math.min((tagV.x * 0.5 + 0.5) * W + 12, W - 96).toFixed(0)}px,${((-tagV.y * 0.5 + 0.5) * H - 12).toFixed(0)}px)`;
     });

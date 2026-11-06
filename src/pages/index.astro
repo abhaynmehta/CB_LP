@@ -1,25 +1,26 @@
 ---
-// Home (v6): CTRL the Funnel and Abhay Mehta on one page. The agency's brand and tone
-// (ink, paper, amber, keycaps, Michroma and Jost) with the Veyra concept's motion: a WebGL funnel
-// that scroll falls through, a 3D keyboard that comes apart row by row, and a drag arc of work.
+// Home (v7): CTRL the Funnel, a one-stop business solutions team, in its own brand and tone
+// (ink, paper, amber, keycaps, Michroma and Jost) with the Veyra concept's motion. Scroll drives
+// everything: a WebGL funnel that ends by building the CTRL keycap, a 3D services keyboard, a
+// rolling industries reel, a work arc that turns as you scroll, and a team of keycaps.
 // The previous home (v5, noir and gold) is kept in src/components/home and in git history.
 import '@fontsource-variable/jost';
 import '@fontsource/michroma';
 import '../ctf/ctf.css';
 import Logo from '../components/ctf/Logo.astro';
-import { agency, heroStats, stages, keyRows, work, caseHref } from '../data/agency';
-import { me, stats as myStats } from '../data/me';
+import { agency, heroStats, stages, close, clients, keyRows, industries, work, disciplines, teamStats, caseHref } from '../data/agency';
+import { me } from '../data/me';
 
-const title = `${agency.name} · growth agency led by ${me.name}`;
+const title = `${agency.name} · ${agency.kind}, New Delhi`;
 const description = agency.description;
 const canonical = new URL('/', Astro.site).href;
 const noindex = process.env.NOINDEX === '1';
-const schema = [
-  { '@context': 'https://schema.org', '@type': 'Organization', name: agency.name, url: agency.url, email: `mailto:${agency.email}`, telephone: agency.phone, description, address: { '@type': 'PostalAddress', addressLocality: 'New Delhi', addressCountry: 'IN' }, founder: { '@type': 'Person', name: me.name } },
-  { '@context': 'https://schema.org', '@type': 'Person', '@id': `${Astro.site}#me`, name: me.name, url: Astro.site?.href, jobTitle: 'Performance Marketing Specialist', worksFor: { '@type': 'Organization', name: agency.name }, sameAs: [me.linkedin] },
-];
-const stops = [0, 0.25, 0.5, 0.75, 1];
+const schema = [{ '@context': 'https://schema.org', '@type': 'Organization', name: agency.name, url: agency.url, email: `mailto:${agency.email}`, telephone: agency.phone, description, address: { '@type': 'PostalAddress', addressLocality: 'New Delhi', addressCountry: 'IN' }, founder: { '@type': 'Person', name: me.name, sameAs: [me.linkedin] } }];
+const stops = [0, 0.2, 0.4, 0.6, 0.8, 1];
+const chapterNames = ['Top', ...stages.map((s) => s.name), 'CTRL'];
 const keyData = keyRows.map((r) => ({ name: r.name, keys: r.keys.map(([k, p, s]) => ({ k, p, href: caseHref(s) })) }));
+const half = Math.ceil(clients.length / 2), clientRows = [clients.slice(0, half), clients.slice(half)];
+const pad = (n: number) => String(n).padStart(2, '0');
 const year = new Date().getFullYear();
 ---
 <!doctype html>
@@ -47,9 +48,9 @@ const year = new Date().getFullYear();
 
   <header class="hd" id="hd">
     <div class="wrap">
-      <a class="hd-mark" href="#funnel" aria-label={`${agency.name}, top`}><Logo size={40} /><span>Growth agency<br />New Delhi</span></a>
+      <a class="hd-mark" href="#funnel" aria-label={`${agency.name}, top`}><Logo size={40} /><span>Business solutions<br />New Delhi</span></a>
       <nav class="hd-nav" id="nav" aria-label="Main">
-        <a href="#funnel">Funnel</a><a href="#services">Services</a><a href="#work">Work</a><a href="#founder">Founder</a><a href="#concept">Concept</a>
+        <a href="#funnel">Funnel</a><a href="#services">Services</a><a href="#industries">Industries</a><a href="#work">Work</a><a href="#team">Team</a><a href="#concept">Concept</a>
       </nav>
       <span class="keys-hint" aria-hidden="true"><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd></span>
       <a class="key key-sm" href="#contact"><span class="key-cap">Let’s talk</span></a>
@@ -57,7 +58,7 @@ const year = new Date().getFullYear();
   </header>
 
   <main>
-    <!-- 1. The funnel: scroll falls from the feed to the sale -->
+    <!-- 1. The funnel: scroll falls from the feed to the sale, then every particle builds the CTRL key -->
     <section class="journey" id="funnel" data-tone="ink" aria-label="The funnel">
       <div class="j-stage">
         <canvas id="funnelgl" aria-hidden="true"></canvas>
@@ -65,10 +66,10 @@ const year = new Date().getFullYear();
         <div class="j-ui">
           <div class="j-chapters" aria-live="polite">
             <article class="chapter" data-at="0">
-              <p class="lbl">Growth agency · New Delhi · 6+ years</p>
+              <p class="lbl">{agency.kind} · New Delhi · {agency.years}</p>
               <h1 class="h1">We own every step between a scroll and a <span class="amb">sale.</span></h1>
               <div class="hero-sub">
-                <p>Scroll to fall through the funnel we build for every client. Four stages, each with the numbers to prove it.</p>
+                <p>One team for strategy, content, production, ads, websites, search and automation. Scroll down through the funnel we build for every client.</p>
                 <a class="key amber" href="#contact"><span class="key-cap">Start a project <span class="ar">→</span></span></a>
               </div>
               <div class="ticker">{heroStats.map(([v, l]) => <div><b>{v}</b><span>{l}</span></div>)}</div>
@@ -79,23 +80,44 @@ const year = new Date().getFullYear();
                 <h2>{s.verb}</h2>
                 <p class="line">{s.line}</p>
                 <div class="proofs">{s.proof.map(([v, l]) => <div><b>{v}</b><span>{l}</span></div>)}</div>
-                {i === stages.length - 1 && <div class="hero-sub"><a class="key amber" href="#contact"><span class="key-cap">Start a project <span class="ar">→</span></span></a><a class="tlink" href="#work">See the work</a></div>}
               </article>
             ))}
+            <article class="chapter finale" data-at="1">
+              <p class="lbl">{close.label}</p>
+              <h2>Whatever you sell, we take <span class="amb">CTRL.</span></h2>
+              <p class="line">{close.line}</p>
+              <div class="hero-sub"><a class="key amber" href="#contact"><span class="key-cap">Start a project <span class="ar">→</span></span></a><a class="tlink" href="#services">See everything we do</a></div>
+            </article>
           </div>
           <div class="j-foot">
-            <nav class="st-nav" id="stNav" aria-label="Funnel stages">
-              {['Top', ...stages.map((s) => s.name)].map((n, i) => <button type="button" data-p={stops[i]} aria-label={`Go to ${n}`}><i></i><span>{String(i).padStart(2, '0')} {n}</span></button>)}
+            <nav class="st-nav" id="stNav" aria-label="Funnel chapters">
+              {chapterNames.map((n, i) => <button type="button" data-p={stops[i]} aria-label={`Go to ${n}`}><i></i><span>{pad(i)} {n}</span></button>)}
             </nav>
             <p class="hint" id="hint"><span>Scroll</span><i aria-hidden="true"></i></p>
-            <p class="readout" id="readout">Stage <b>0</b> / 4<br />Press 1 to 4</p>
+            <p class="readout" id="readout">The whole funnel<br />Press 1 to 4</p>
           </div>
         </div>
         {stages.map((s) => <span class="ring-tag" data-ring aria-hidden="true"><kbd>{s.key}</kbd>{s.name}</span>)}
       </div>
     </section>
 
-    <!-- 2. Services keyboard: assembles, then lights one funnel row at a time -->
+    <!-- 2. Trusted by: client keycaps in two strips -->
+    <section class="clients ink" data-tone="ink" aria-label="Clients">
+      <p class="lbl clients-lbl">Trusted by brands, creators and institutions</p>
+      {clientRows.map((row, r) => (
+        <div class={`crow${r ? ' rev' : ''}`}>
+          <div class="ctrack">
+            {[...row, ...row].map((c, k) => (
+              <span class="ckey" aria-hidden={k >= row.length ? 'true' : undefined}>
+                {c.img ? <img src={`/work/logos/${c.img}.webp`} alt={k >= row.length ? '' : c.name} loading="lazy" decoding="async" /> : <span>{c.name}</span>}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <!-- 3. Services keyboard: assembles, then lights one funnel row at a time -->
     <section class="keys ppr" id="services" data-tone="paper">
       <div class="k-stage">
         <canvas id="keysgl" aria-hidden="true"></canvas>
@@ -117,56 +139,78 @@ const year = new Date().getFullYear();
       <script type="application/json" id="keydata" set:html={JSON.stringify(keyData)} />
     </section>
 
-    <!-- 3. Work -->
-    <section class="pad ink grain" id="work" data-tone="ink">
+    <!-- 4. Industries: one reel, rolled by scroll -->
+    <section class="ind ink" id="industries" data-tone="ink" style={`--n:${industries.length}`}>
+      <div class="ind-stage">
+        <div class="ind-bg" aria-hidden="true">{industries.map((x, i) => <img src={`/work/${x.img}.w700.webp`} srcset={`/work/${x.img}.w700.webp 700w, /work/${x.img}.webp 1400w`} sizes="100vw" alt="" data-i={i} loading="lazy" decoding="async" />)}</div>
+        <div class="ind-ui">
+          <div class="ind-top">
+            <p class="lbl">Not one niche</p>
+            <h2 class="ind-head">{industries.length} industries. <span class="amb">Results in every one.</span></h2>
+          </div>
+          <div class="ind-roll" aria-hidden="true"><div class="ind-track" id="indTrack">{industries.map((x) => <span>{x.short}</span>)}</div></div>
+          <div class="ind-proofs" aria-live="polite">
+            {industries.map((x, i) => (
+              <div class="ind-p" data-i={i}>
+                <p class="ind-name">{pad(i + 1)} · {x.name}</p>
+                <b>{x.num}</b>
+                <span>{x.what}</span>
+                <small>{x.who}</small>
+              </div>
+            ))}
+          </div>
+          <div class="ind-foot"><div class="ind-bar"><i id="indBar"></i></div><span class="ind-count" id="indCount">01 / {pad(industries.length)}</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Work: the arc turns as you scroll -->
+    <section class="work ink grain" id="work" data-tone="ink" style={`--n:${work.length}`}>
+      <div class="w-stage">
+        <div class="wrap w-head">
+          <div style="display:grid;gap:14px"><p class="lbl">Featured work</p><h2 class="h2">34 clients. <span class="amb">Real numbers.</span></h2></div>
+          <p class="lead">Every figure comes from an ad account, a report or a public count. Keep scrolling and the cases come to you.</p>
+        </div>
+        <div class="arc-stage" id="arc" tabindex="0" aria-roledescription="carousel" aria-label="Featured work. Use the left and right arrow keys to move.">
+          {work.map((w, i) => (
+            <article class="wcard" data-i={i} aria-label={w.client}>
+              <div class="wcard-img"><img src={`/work/${w.img}.w700.webp`} alt={`${w.client} work`} loading="lazy" decoding="async" draggable="false" /></div>
+              <div class="wcard-body">
+                <div class="wcard-top"><b>{w.client}</b><span>{w.sector}</span></div>
+                <h3>{w.head}</h3>
+                <div class="kpis">{w.kpi.map(([v, l]) => <div><b>{v}</b><span>{l}</span></div>)}</div>
+                <a class="key key-sm amber go" href={caseHref(w.slug)}><span class="key-cap">Open case <span class="ar">→</span></span></a>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="arc-controls">
+          <button class="round" type="button" id="prev" aria-label="Previous case">←</button>
+          <span class="arc-count" id="count" aria-live="polite">01 / {pad(work.length)}</span>
+          <button class="round" type="button" id="next" aria-label="Next case">→</button>
+          <a class="tlink all-link" href={`${agency.url}/work/`}>All 34 clients ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Team -->
+    <section class="pad ppr team" id="team" data-tone="paper">
       <div class="wrap">
         <div class="sec-head split">
-          <div style="display:grid;gap:18px"><p class="lbl rv">Featured work</p><h2 class="h2 rv">34 clients. <span class="amb">Real numbers.</span></h2></div>
-          <p class="lead rv">Every figure comes from an ad account, a report or a public count. Drag the arc, use the arrows, or open a case.</p>
+          <div style="display:grid;gap:18px"><p class="lbl rv">Who you work with</p><h2 class="h2 rv">Led by a team of <span class="amb">specialists.</span></h2></div>
+          <p class="lead rv">Six years in the market. Every discipline a business needs sits in one room, so nothing gets lost between agencies and every number has one owner.</p>
         </div>
-      </div>
-      <div class="arc-stage" id="arc" tabindex="0" aria-roledescription="carousel" aria-label="Featured work. Use the left and right arrow keys to move.">
-        {work.map((w, i) => (
-          <article class="wcard" data-i={i} aria-label={w.client}>
-            <div class="wcard-img"><img src={`/work/${w.img}.w700.webp`} alt={`${w.client} work`} loading="lazy" decoding="async" draggable="false" /></div>
-            <div class="wcard-body">
-              <div class="wcard-top"><b>{w.client}</b><span>{w.sector}</span></div>
-              <h3>{w.head}</h3>
-              <div class="kpis">{w.kpi.map(([v, l]) => <div><b>{v}</b><span>{l}</span></div>)}</div>
-              <a class="key key-sm amber go" href={caseHref(w.slug)}><span class="key-cap">Open case <span class="ar">→</span></span></a>
-            </div>
-          </article>
-        ))}
-      </div>
-      <div class="arc-controls">
-        <button class="round" type="button" id="prev" aria-label="Previous case">←</button>
-        <span class="arc-count" id="count" aria-live="polite">01 / {String(work.length).padStart(2, '0')}</span>
-        <button class="round" type="button" id="next" aria-label="Next case">→</button>
-      </div>
-      <div class="work-foot"><a class="key" href={`${agency.url}/work/`}><span class="key-cap">All 34 clients <span class="ar">→</span></span></a></div>
-    </section>
-
-    <!-- 4. Founder -->
-    <section class="pad ppr" id="founder" data-tone="paper">
-      <div class="wrap founder-grid">
-        <div style="display:grid;gap:24px;align-content:start">
-          <p class="lbl rv">Who runs it</p>
-          <h2 class="h2 rv">Led by <span class="amb">{me.name}.</span></h2>
-          <p class="lead rv">A performance marketer who codes. Abhay has managed ₹5 Crore+ in ad spend across Meta, Google, DV360 and Snapchat for 40+ clients, and builds his own tracking, automation and AI tools. Today he also runs a ₹50 Lakh+ monthly budget for a luxury NCR developer.</p>
-          <div class="ctas rv"><a class="key solid" href={me.cv} download><span class="key-cap">Download CV ↓</span></a><a class="tlink" href={me.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a></div>
+        <div class="t-stats rv">{teamStats.map(([v, l]) => <div><b data-count={v}>{v}</b><span>{l}</span></div>)}</div>
+        <div class="t-keys" id="tkeys">
+          {disciplines.map(([h, p], i) => (
+            <button class="tkey" type="button" style={`--k:${i}`}><span class="tkey-cap"><small>{pad(i + 1)}</small><b>{h}</b><span>{p}</span></span></button>
+          ))}
         </div>
-        <div>
-          <div class="f-stats rv">{myStats.map(([v, l]) => <div><b>{v}</b><span>{l}</span></div>)}</div>
-          <div class="systems">
-            <div class="sys rv"><small>WhatsApp concierge · resorts</small><b>22%</b><span>of WhatsApp chats became bookings, against a 4 to 8% hospitality benchmark</span></div>
-            <div class="sys rv"><small>Lead-to-sale pipeline · real estate</small><b>₹22.4 Cr+</b><span>qualified pipeline in 90 days across 12+ accounts, with CAPI and WhatsApp bots</span></div>
-            <div class="sys rv"><small>QC tools in Python and AI</small><b>25–30 → 6–8 min</b><span>per blog audit, about 20 hours of QC saved a month</span></div>
-          </div>
-        </div>
+        <p class="t-note rv">Founded in New Delhi by {me.name}. <a class="tlink" href={me.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a></p>
       </div>
     </section>
 
-    <!-- 5. Concept: Veyra -->
+    <!-- 7. Concept: Veyra -->
     <section class="pad ink grain" id="concept" data-tone="ink">
       <div class="wrap">
         <div class="sec-head split">
@@ -193,13 +237,13 @@ const year = new Date().getFullYear();
       </div>
     </section>
 
-    <!-- 6. Contact -->
+    <!-- 8. Contact -->
     <section class="pad ink" id="contact" data-tone="ink" style="border-top:1px solid var(--line-ink)">
       <div class="wrap contact-grid">
         <div style="display:grid;gap:22px;align-content:start">
           <p class="lbl rv">Start a project</p>
           <h2 class="h2 rv">Tell us what you sell. <span class="amb">We’ll map the funnel.</span></h2>
-          <p class="lead rv">Pick the stages that leak. The brief opens in WhatsApp, written out, so nothing is stored anywhere else.</p>
+          <p class="lead rv">From a first idea to a business that needs its next level. Pick the stages that leak; the brief opens in WhatsApp, written out, so nothing is stored anywhere else.</p>
           <div class="direct rv">
             <a href={`https://wa.me/${agency.wa}`} target="_blank" rel="noopener"><span>WhatsApp</span><span>{agency.phone}</span></a>
             <a href={`mailto:${agency.email}`}><span>Email</span><span>{agency.email}</span></a>
@@ -229,8 +273,8 @@ const year = new Date().getFullYear();
     <div class="wrap">
       <p class="ft-big" aria-hidden="true">CTRL the Funnel</p>
       <div class="ft-row">
-        <span>© {year} {agency.name} · {agency.city} · led by {me.name}</span>
-        <span><a href={agency.url} target="_blank" rel="noopener">Agency site ↗</a> · <a href={me.cv} download>Abhay’s CV</a> · <a href={me.linkedin} target="_blank" rel="noopener">LinkedIn</a> · <a href="/veyra/">Veyra concept</a></span>
+        <span>© {year} {agency.name} · {agency.kind} · {agency.city}</span>
+        <span><a href={agency.url} target="_blank" rel="noopener">Agency site ↗</a> · <a href="/veyra/">Veyra concept</a> · <a href={me.linkedin} target="_blank" rel="noopener">Founder on LinkedIn</a></span>
       </div>
     </div>
   </footer>
