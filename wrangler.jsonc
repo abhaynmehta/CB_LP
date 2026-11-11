@@ -1,7 +1,8 @@
 {
-  // Cloudflare preview (noindex): `npm run deploy:preview`.
+  // Live site: https://anm.abhaynmehta.workers.dev  ->  `npm run deploy`
+  // Hidden preview (noindex): https://abhay-luxury.abhaynmehta.workers.dev  ->  `npm run deploy:preview`
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "abhay-mehta",
+  "name": "anm",
   "compatibility_date": "2026-10-01",
   "assets": { "directory": "dist", "not_found_handling": "404-page" }
 }

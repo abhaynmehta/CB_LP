@@ -3,7 +3,8 @@
 Astro 5 static site with GSAP, Lenis and a three.js hero (points that settle from noise into a growth curve).
 Rebuilt in Oct 2026 from the old Vite/React site (kept at a git tag; run `git tag`).
 
-- Preview (noindex): https://abhay-mehta.abhaynmehta.workers.dev, deployed with `npm run deploy:preview`
+- Live: https://anm.abhaynmehta.workers.dev (Cloudflare Worker `anm`), deployed with `npm run deploy`
+- Preview (noindex): https://abhay-luxury.abhaynmehta.workers.dev, deployed with `npm run deploy:preview`
 - Content: `src/data/me.ts`, which mirrors the CV (`~/Desktop/CV 2026/Abhay_Mehta_CV_PM.tex`). Keep both in sync.
 - CV download: `public/Abhay_Mehta_CV.pdf` (replace it when the CV changes).
 - Media comes from the CTRL the Funnel site (`public/work/`).
@@ -12,9 +13,10 @@ Rebuilt in Oct 2026 from the old Vite/React site (kept at a git tag; run `git ta
 ```
 npm install
 npm run dev            # http://localhost:4333 (launch config "abhay-portfolio")
-npm run deploy:preview # noindex build to Cloudflare
+npm run deploy         # live site to Cloudflare (anm)
+npm run deploy:preview # noindex build to the Cloudflare preview
 ```
 
 ## Before launch
-- Production is Vercel (project linked to this repo; `main` deploys to https://abhaymehta.vercel.app; it was cb-lp.vercel.app until 26 Oct 2026). When the domain is bought, add it in Vercel and update `site` in `astro.config.mjs`.
+- Production is Cloudflare (Worker `anm`, deployed by hand with `npm run deploy`; Vercel was used until Nov 2026). For a custom domain, add it to the `anm` Worker in Cloudflare and update `site` in `astro.config.mjs`.
 - The old Vite site is kept at a git tag (run `git tag`).
