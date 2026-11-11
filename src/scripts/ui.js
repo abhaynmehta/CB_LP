@@ -19,6 +19,8 @@ const vio = new IntersectionObserver((es) => es.forEach(({ target: v, isIntersec
   if (on && !reduce) v.play().catch(() => {}); else v.pause();
 }), { threshold: 0.2 });
 $$('video[data-src]').forEach((v) => vio.observe(v));
+const pio = new IntersectionObserver((es) => es.forEach(({ target: v, isIntersecting: on }) => { if (on) { v.poster = v.dataset.poster; pio.unobserve(v); } }), { rootMargin: '900px 0px' });
+$$('video[data-poster]').forEach((v) => pio.observe(v));
 
 // Showreel: the full film with sound in a dialog (the 9:16 cut on portrait phones). The hero's silent loop pauses while it plays.
 const reel = $('[data-reel-dlg]');
@@ -42,11 +44,13 @@ if (cine) {
   const v = $('video', cine);
   const items = $$('[data-chapters] li', cine);
   const tall = matchMedia('(max-aspect-ratio: 4/5)').matches;
-  if (tall) { v.poster = v.dataset.tallPoster; v.parentElement.style.backgroundImage = `url(${v.dataset.tallPoster})`; }
   const still = reduce || navigator.connection?.saveData;
-  let on = true, held = false, raf = 0;
+  let on = true, held = false, raf = 0, ready = document.readyState === 'complete';
   const load = () => { if (!v.src) v.src = tall ? v.dataset.tall : v.dataset.wide; };
-  const run = () => { if (on && !held && !still) { load(); v.play().catch(() => {}); } else v.pause(); };
+  const run = () => { if (on && !held && !still && ready) { load(); v.play().catch(() => {}); } else v.pause(); };
+  v.addEventListener('playing', () => v.classList.add('live'), { once: true });
+  // The poster is the first paint; the film (1.5–1.8 MB) waits until everything else has loaded.
+  if (!ready) addEventListener('load', () => setTimeout(() => { ready = true; run(); }, 600), { once: true });
   const paint = () => {
     const t = v.currentTime;
     items.forEach((li) => {
@@ -60,7 +64,7 @@ if (cine) {
   v.addEventListener('seeked', paint);
   items[0]?.classList.add('on');
   items.forEach((li) => $('button', li).addEventListener('click', (e) => {
-    load(); v.currentTime = +e.currentTarget.dataset.t; paint();
+    ready = true; load(); v.currentTime = +e.currentTarget.dataset.t; paint();
     if (!still) v.play().catch(() => {});
   }));
   new IntersectionObserver(([e]) => { on = e.isIntersecting; run(); }, { threshold: 0.1 }).observe(cine);
@@ -229,12 +233,12 @@ if (hover) {
   }
 }
 
-// Systems: the chat and the checker replay every few seconds while on screen.
-$$('.sys-chat, .sys-qc').forEach((el) => {
+// Systems: the chat, the lead sort and the checker replay every few seconds while on screen.
+$$('.sys-chat, .sys-sort, .sys-qc').forEach((el) => {
   let t = 0;
   const play = () => { el.classList.remove('play'); void el.offsetWidth; el.classList.add('play'); };
   new IntersectionObserver(([e]) => {
     clearInterval(t);
-    if (e.isIntersecting && !reduce) { play(); t = setInterval(play, el.classList.contains('sys-chat') ? 9500 : 6500); }
+    if (e.isIntersecting && !reduce) { play(); t = setInterval(play, el.classList.contains('sys-qc') ? 6500 : 9500); }
   }, { threshold: 0.3 }).observe(el);
 });

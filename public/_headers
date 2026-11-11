@@ -1,0 +1,7 @@
+# Cloudflare preview: same caching as vercel.json.
+/work/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

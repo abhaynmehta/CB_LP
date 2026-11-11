@@ -11,7 +11,7 @@ const tools = skills.flatMap(([, xs]) => xs).slice(0, 34);
   </div>
   <div class="reels" data-reels>
     {films.map((f) => (
-      <figure class="reel" data-cursor-text="PLAY"><video muted loop playsinline preload="none" poster={`/work/${f.src}.jpg`} data-src={`/work/${f.src}.mp4`} aria-label={f.title}></video><figcaption>{f.title}<small class="cap">Spec concept</small></figcaption></figure>
+      <figure class="reel" data-cursor-text="PLAY"><video muted loop playsinline preload="none" data-poster={`/work/${f.src}.jpg`} data-src={`/work/${f.src}.mp4`} aria-label={f.title}></video><figcaption>{f.title}<small class="cap">Spec concept</small></figcaption></figure>
     ))}
   </div>
 </section>
@@ -42,7 +42,7 @@ const tools = skills.flatMap(([, xs]) => xs).slice(0, 34);
 <section id="contact">
   <div class="wrap contact">
     <p class="eyebrow rv">Let’s talk growth</p>
-    <p class="display" data-lean><a href={`mailto:${me.email}`} data-cursor-text="MAIL" aria-label="Email Abhay"><span set:html={letters('Say')} /> <em set:html={letters('hello.')} /></a></p>
+    <p class="display" data-lean><a href={`mailto:${me.email}`} data-cursor-text="MAIL" aria-label="Say hello: email Abhay"><span set:html={letters('Say')} /> <em set:html={letters('hello.')} /></a></p>
     <div class="ctas">
       <a class="btn gold" href={`mailto:${me.email}`} data-magnet>{me.email}</a>
       <a class="btn" href={`https://wa.me/${me.wa}`} data-magnet>WhatsApp</a>

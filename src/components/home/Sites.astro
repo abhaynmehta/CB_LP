@@ -22,7 +22,7 @@ const cols = [[0, 3, 6, 1], [2, 5, 0, 4], [4, 1, 3, 2], [6, 0, 5, 3]].map((c) =>
           {col.map((s) => (
             <span class="bw">
               <span class="bw-bar"><i></i><i></i><i></i><span>{s.u}</span></span>
-              <span class="bw-view"><img src={`/work/sites/${s.img}.webp`} alt="" loading="lazy" decoding="async" data-wimg={Math.round((1 - 0.6875 / ratio[s.img]) * 100)} /></span>
+              <span class="bw-view"><img src={`/work/sites/${s.img}.webp`} alt="" width="800" height={Math.round(800 * ratio[s.img])} loading="lazy" decoding="async" data-wimg={Math.round((1 - 0.6875 / ratio[s.img]) * 100)} /></span>
             </span>
           ))}
         </div>

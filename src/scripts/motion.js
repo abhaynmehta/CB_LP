@@ -128,10 +128,17 @@ if (!reduce) {
 
   // CONTACT: "Say hello." gathers out of gold dust as the section arrives.
   const contactSec = $('#contact'), hello = $('#contact .display');
-  if (contactSec && hello) import('./contact.js').then(({ default: contact }) => {
-    const c = contact(contactSec, hello);
-    if (c) ScrollTrigger.create({ trigger: contactSec, start: 'top 85%', end: 'top 15%', scrub: 0.8, onUpdate: (st) => c.setIn(st.progress), onLeave: () => c.setIn(1) });
-  });
+  if (contactSec && hello) {
+    const co = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      co.disconnect();
+      import('./contact.js').then(({ default: contact }) => {
+        const c = contact(contactSec, hello);
+        if (c) ScrollTrigger.create({ trigger: contactSec, start: 'top 85%', end: 'top 15%', scrub: 0.8, onUpdate: (st) => c.setIn(st.progress), onLeave: () => c.setIn(1) });
+      });
+    }, { rootMargin: '1200px 0px' });
+    co.observe(contactSec);
+  }
 
   // Footer name slides in from the right and fills with lime as the page ends.
   gsap.fromTo('.ft-big', { xPercent: 12, '--f': '0%' }, { xPercent: -4, '--f': '100%', ease: 'none', scrollTrigger: { trigger: '.ft', start: 'top bottom', end: 'bottom bottom', scrub: true } });
@@ -180,7 +187,7 @@ if (!reduce) {
     films.classList.add('cf');
     const items = $$('.reel', reels);
     const vids = items.map((r) => r.querySelector('video'));
-    let cur = -1;
+    let cur = -1, near = false;
     const set = (a) => {
       items.forEach((el, i) => {
         const d = i - a, ad = Math.abs(d);
@@ -192,12 +199,14 @@ if (!reduce) {
       if (k === cur) return;
       cur = k;
       items.forEach((el, i) => el.classList.toggle('on', i === k));
-      vids.forEach((v, i) => {
-        if (i !== k) return v.pause();
-        if (!v.src) v.src = v.dataset.src;
-        v.play().catch(() => {});
-      });
+      playFront();
     };
+    const playFront = () => vids.forEach((v, i) => {
+      if (i !== cur || !near) return v.pause();
+      if (!v.src) v.src = v.dataset.src;
+      v.play().catch(() => {});
+    });
+    new IntersectionObserver(([e]) => { near = e.isIntersecting; playFront(); }, { rootMargin: '300px 0px' }).observe(films);
     set(0);
     const o = { a: 0 };
     gsap.to(o, { a: items.length - 1, ease: 'none', onUpdate: () => set(o.a), scrollTrigger: { trigger: films, start: 'top top', end: () => `+=${items.length * innerHeight * 0.42}`, pin: true, scrub: 0.7, invalidateOnRefresh: true } });

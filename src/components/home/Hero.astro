@@ -17,8 +17,11 @@ const chapters: [number, number, string, string][] = [
 ---
 <section class="hero cine" id="top" data-cine>
   <div class="cine-media" data-cine-media aria-hidden="true">
-    <video muted loop playsinline preload="metadata" poster="/work/motion/showreel-16x9.jpg"
-      data-wide="/work/motion/showreel-bg-16x9.mp4" data-tall="/work/motion/showreel-bg-9x16.mp4" data-tall-poster="/work/motion/showreel-9x16.jpg"></video>
+    <picture>
+      <source media="(max-aspect-ratio: 4/5)" srcset="/work/motion/showreel-9x16.webp" width="720" height="1280" />
+      <img src="/work/motion/showreel-16x9.webp" width="1600" height="900" alt="" fetchpriority="high" decoding="async" />
+    </picture>
+    <video muted loop playsinline preload="none" data-wide="/work/motion/showreel-bg-16x9.mp4" data-tall="/work/motion/showreel-bg-9x16.mp4"></video>
   </div>
   <div class="cine-shade" aria-hidden="true"></div>
   <div class="hero-meta cap" aria-hidden="true">
@@ -37,20 +40,20 @@ const chapters: [number, number, string, string][] = [
           <a class="btn gold" href="#work" data-magnet>See the work</a>
           <a class="btn" href={me.cv} download data-magnet>CV ↓</a>
         </div>
-        <button class="cine-watch" type="button" data-reel data-magnet aria-label="Watch the showreel with sound">
+        <button class="cine-watch" type="button" data-reel data-magnet>
           <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="wr" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" /></defs><text textLength="286" lengthAdjust="spacing"><textPath href="#wr">WATCH WITH SOUND ✦ SHOWREEL ✦ </textPath></text></svg>
-          <span>▶</span>
+          <span aria-hidden="true"></span><span class="sr">Watch the showreel with sound</span>
         </button>
       </div>
     </div>
     <ol class="cine-chap" data-chapters aria-label="Showreel chapters">
       {chapters.map(([s, e, n, m]) => (
-        <li><button type="button" data-t={s} data-e={e}><i><b></b></i><span class="cap">{n}</span><em>{m}</em></button></li>
+        <li><button type="button" data-t={s} data-e={e}><i><b></b></i><span class="cap">{n}</span> <em>{m}</em></button></li>
       ))}
     </ol>
   </div>
   <dialog class="showreel" data-reel-dlg aria-label="Showreel">
-    <video controls playsinline preload="none" poster="/work/motion/showreel-16x9.jpg" data-wide="/work/motion/showreel-16x9.mp4" data-tall="/work/motion/showreel-9x16.mp4"></video>
+    <video controls playsinline preload="none" data-wide="/work/motion/showreel-16x9.mp4" data-tall="/work/motion/showreel-9x16.mp4"></video>
     <button class="btn showreel-x" type="button" data-reel-close>Close ✕</button>
   </dialog>
 </section>

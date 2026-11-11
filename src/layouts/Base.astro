@@ -1,8 +1,4 @@
 ---
-import '@fontsource-variable/bodoni-moda/opsz.css';
-import '@fontsource-variable/bodoni-moda/opsz-italic.css';
-import '@fontsource-variable/hanken-grotesk';
-import '@fontsource-variable/geist-mono';
 import '../styles/global.css';
 import { me } from '../data/me';
 
@@ -29,6 +25,9 @@ const person = {
   <link rel="canonical" href={canonical} />
   {noindex && <meta name="robots" content="noindex, nofollow" />}
   <meta name="theme-color" content="#0b0a08" />
+  <link rel="preload" href="/fonts/bodoni-moda-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/bodoni-moda-latin-opsz-italic.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <meta property="og:type" content="profile" />
   <meta property="og:title" content={fullTitle} />
@@ -51,7 +50,7 @@ const person = {
   <div class="prog" aria-hidden="true"></div>
   <a class="skip" href="#main">Skip to content</a>
   <header class="hd" data-hd>
-    <a href="/" class="hd-mark" aria-label="Abhay Mehta, home">AM<span>.</span></a>
+    <a href="/" class="hd-mark">AM<span>.</span><span class="sr"> Abhay Mehta, home</span></a>
     <nav class="hd-nav" aria-label="Main">
       <a href="/#impact">Impact</a><a href="/#work">Work</a><a href="/#services">Services</a><a href="/#contact">Contact</a><a href={me.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
     </nav>

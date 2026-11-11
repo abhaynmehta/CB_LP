@@ -6,7 +6,7 @@ const views = '1,095,033,497';
 <section class="snap" data-big>
   <div class="snap-in">
     <p class="eyebrow">Snapchat India · Lenses</p>
-    <p class="odo" aria-label={`${views} views`}>
+    <p class="odo" role="img" aria-label={`${views} views`}>
       {views.split('').map((c) => c === ','
         ? <span class="odo-c" aria-hidden="true">,</span>
         : <span class="odo-d" aria-hidden="true" data-d={c} style={`--t:${c}`}><span>{'01234567890'.split('').map((n) => <i>{n}</i>)}</span></span>)}

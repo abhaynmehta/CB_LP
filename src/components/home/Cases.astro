@@ -26,9 +26,9 @@ const cards = list.map((c) => ({ ...c, r: roles.find((r) => r.slug === c.slug)! 
           <a class="case-card" href={`/work/${c.slug}/`} data-case data-cursor-text="OPEN">
             <span class={`case-media${c.vert ? ' vert' : ''}${c.shot ? ' shot' : ''}`} style={`view-transition-name:m-${c.slug};${c.vert ? `--poster:url(/work/${c.video}.jpg)` : ''}${c.shot ? `--poster:url(${small(c.img!)})` : ''}`}>
               {c.shot ? (
-                <span class="case-shot"><span class="bw-bar"><i></i><i></i><i></i><span>{c.shot}</span></span><img src={`/work/${c.img}`} alt={`${c.r.org} work`} loading="lazy" decoding="async" /></span>
+                <span class="case-shot"><span class="bw-bar"><i></i><i></i><i></i><span>{c.shot}</span></span><img src={small(c.img!)} alt={`${c.r.org} work`} width="700" height="560" loading="lazy" decoding="async" /></span>
               ) : c.video
-                ? <video muted loop playsinline preload="none" poster={`/work/${c.video}.jpg`} data-src={`/work/${c.video}.mp4`} aria-hidden="true"></video>
+                ? <video muted loop playsinline preload="none" data-poster={`/work/${c.video}.jpg`} data-src={`/work/${c.video}.mp4`} aria-hidden="true"></video>
                 : <img src={small(c.img!)} srcset={`${small(c.img!)} 700w, /work/${c.img} 1400w`} sizes="(max-width: 900px) 92vw, 50vw" alt={`${c.r.org} work`} loading="lazy" decoding="async" />}
             </span>
             <span class="case-body">
