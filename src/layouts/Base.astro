@@ -3,17 +3,21 @@ import '../styles/global.css';
 import { me } from '../data/me';
 
 interface Props { title?: string; description?: string; schema?: object[] }
-const { title, description = me.summary, schema = [] } = Astro.props;
-const fullTitle = title ? `${title} · ${me.name}` : `${me.name} · Performance Marketing, SEO & AI Search`;
+const { title, description = me.seo, schema = [] } = Astro.props;
+const fullTitle = title ? `${title} · ${me.name}` : `${me.name} · Performance Marketer in Delhi NCR | Meta, Google, SEO`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const noindex = process.env.NOINDEX === '1';
+// The person this site is about, referenced by @id from every other piece of structured data.
 const person = {
-  '@context': 'https://schema.org', '@type': 'Person', '@id': `${Astro.site}#me`, name: me.name, url: Astro.site?.href,
-  jobTitle: 'Performance Marketing Specialist', description: me.summary, email: `mailto:${me.email}`,
-  address: { '@type': 'PostalAddress', addressRegion: 'Delhi NCR', addressCountry: 'IN' },
+  '@context': 'https://schema.org', '@type': 'Person', '@id': `${Astro.site}#me`, name: me.name, givenName: 'Abhay', familyName: 'Mehta',
+  alternateName: ['ANM', 'Abhay N Mehta'], url: Astro.site?.href, jobTitle: 'Performance Marketer', description: me.summary,
+  email: `mailto:${me.email}`, sameAs: [me.linkedin, me.github],
+  worksFor: { '@type': 'Organization', name: 'County Group', description: 'Luxury real estate developer, Delhi NCR' },
+  address: { '@type': 'PostalAddress', addressLocality: 'Delhi NCR', addressCountry: 'IN' },
   alumniOf: { '@type': 'CollegeOrUniversity', name: 'Guru Gobind Singh Indraprastha University' },
-  knowsAbout: ['Performance marketing', 'Meta Ads', 'Google Ads', 'DV360', 'SEO', 'Answer engine optimisation', 'Generative engine optimisation', 'WhatsApp automation', 'Python', 'Astro'],
+  knowsAbout: ['Performance marketing', 'Meta Ads', 'Google Ads', 'DV360', 'Conversions API', 'SEO', 'Answer engine optimisation', 'Generative engine optimisation', 'WhatsApp automation', 'Shopify', 'Python', 'Astro'],
 };
+const website = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${Astro.site}#site`, name: me.name, url: Astro.site?.href, inLanguage: 'en-IN', publisher: { '@id': `${Astro.site}#me` } };
 ---
 <!doctype html>
 <html lang="en-IN">
@@ -35,7 +39,7 @@ const person = {
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={new URL('/og.jpg', Astro.site).href} />
   <meta name="twitter:card" content="summary_large_image" />
-  {[{ ...person, sameAs: [me.linkedin] }, ...schema].map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+  {[person, website, ...schema].map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
   <script is:inline>var d=document.documentElement;d.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('motion');try{if(sessionStorage.getItem('am-seen'))d.classList.add('seen');sessionStorage.setItem('am-seen','1')}catch(e){d.classList.add('seen')}</script>
 </head>
 <body>

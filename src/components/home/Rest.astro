@@ -1,6 +1,7 @@
 ---
 import { me, roles, skills, education, films } from '../../data/me';
 import { letters } from '../../data/text';
+import { faq, faqUpdated } from '../../data/faq';
 const tools = skills.flatMap(([, xs]) => xs).slice(0, 34);
 ---
 <section id="films" data-films>
@@ -36,6 +37,19 @@ const tools = skills.flatMap(([, xs]) => xs).slice(0, 34);
       </div>
       <div class="ctas rv" style="margin-top:36px"><a class="btn gold" href={me.cv} download data-magnet>Full CV ↓</a></div>
     </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:44px">
+      <p class="eyebrow rv">Questions</p>
+      <h2 class="h2 rv">The short <em>answers.</em></h2>
+    </div>
+    <dl class="faq">
+      {faq.map(([q, a]) => <div class="rv"><dt>{q}</dt><dd>{a}</dd></div>)}
+    </dl>
+    <p class="cap faq-date rv">Last updated {faqUpdated}</p>
   </div>
 </section>
 

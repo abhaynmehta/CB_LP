@@ -1,9 +1,17 @@
-// Plain-text profile for AI assistants, built from the same data as the site.
+// Plain-text profile for AI assistants (llmstxt.org), built from the same data as the site.
 import type { APIRoute } from 'astro';
 import { me, roles, skills, education } from '../data/me';
-export const GET: APIRoute = () => new Response([
-  `# ${me.name}`, '', `> ${me.summary}`, '', `Contact: ${me.email} · ${me.city}`, '',
-  '## Experience', ...roles.map((r) => `- ${r.title}, ${r.org} (${r.dates}): ${r.points[0]}`), '',
-  '## Skills', ...skills.map(([h, xs]) => `- ${h}: ${xs.join(', ')}`), '',
-  '## Education', ...education.map(([d, s, y]) => `- ${d}, ${s}, ${y}`),
-].join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+import { faq, faqUpdated } from '../data/faq';
+export const GET: APIRoute = ({ site }) => {
+  const u = (p: string) => new URL(p, site).href;
+  return new Response([
+    `# ${me.name}`, '', `> ${me.summary}`, '',
+    `Performance marketer in ${me.city}. Updated ${faqUpdated}.`, '',
+    '## Questions', ...faq.flatMap(([q, a]) => [`### ${q}`, a, '']),
+    '## Work (case pages)', ...roles.filter((r) => r.media).map((r) => `- [${r.org}: ${r.title}](${u(`/work/${r.slug}/`)}): ${r.points[0]}`), '',
+    '## Experience', ...roles.map((r) => `- ${r.title}, ${r.org} (${r.dates}): ${r.points[0]}`), '',
+    '## Skills', ...skills.map(([h, xs]) => `- ${h}: ${xs.join(', ')}`), '',
+    '## Education', ...education.map(([d, s, y]) => `- ${d}, ${s}, ${y}`), '',
+    '## Links', `- Website: ${u('/')}`, `- CV (PDF): ${u(me.cv)}`, `- LinkedIn: ${me.linkedin}`, `- GitHub: ${me.github}`, `- Email: ${me.email}`,
+  ].join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+};

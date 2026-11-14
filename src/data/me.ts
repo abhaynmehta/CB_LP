@@ -9,6 +9,9 @@ export const me = {
   phone: '+91 95996 49609',
   wa: '919599649609',
   linkedin: 'https://www.linkedin.com/in/abhay-mehta-4b93a2206/',
+  github: 'https://github.com/abhaynmehta',
+  // Search result description (under 160 characters): who, where, proof.
+  seo: 'Abhay Mehta, performance marketer in Delhi NCR: ₹1.4 Cr+ bookings on ₹1.2L of ads, 28.9x ROAS, ₹22.4 Cr+ pipeline. Meta, Google, DV360, SEO and AI search.',
   city: 'Delhi NCR, India',
   cv: '/Abhay_Mehta_CV.pdf',
   summary:
