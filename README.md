@@ -18,5 +18,5 @@ npm run deploy:preview # noindex build to the Cloudflare preview
 ```
 
 ## Before launch
-- Production is Cloudflare (Worker `anm`, deployed by hand with `npm run deploy`; Vercel was used until Nov 2026). For a custom domain, add it to the `anm` Worker in Cloudflare and update `site` in `astro.config.mjs`.
+- Production is Cloudflare (Worker `anm`, deployed by hand with `npm run deploy`; Vercel was used until Nov 2026; cb-lp.vercel.app now only redirects here, see vercel.json). For a custom domain, add it to the `anm` Worker in Cloudflare and update `site` in `astro.config.mjs`.
 - The old Vite site is kept at a git tag (run `git tag`).

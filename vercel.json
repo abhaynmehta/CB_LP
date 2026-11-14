@@ -1,34 +1,9 @@
 {
-  "framework": "astro",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "headers": [
-    {
-      "source": "/work/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=2592000, stale-while-revalidate=86400"
-        }
-      ]
-    },
-    {
-      "source": "/fonts/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(favicon.svg|og.jpg|Abhay_Mehta_CV.pdf)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400"
-        }
-      ]
-    }
+  "framework": null,
+  "installCommand": "echo 'redirect only: the site lives on Cloudflare (npm run deploy)'",
+  "buildCommand": "mkdir -p vercel-redirect && echo ok > vercel-redirect/index.html",
+  "outputDirectory": "vercel-redirect",
+  "redirects": [
+    { "source": "/:path*", "destination": "https://anm.abhaynmehta.workers.dev/:path*", "permanent": true }
   ]
 }
