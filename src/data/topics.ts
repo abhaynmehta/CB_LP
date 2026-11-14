@@ -10,5 +10,16 @@ export const topics = {
   career: { name: 'Career notes', blurb: 'What I learned along the way, from Snapchat lenses to managing ₹50L+ a month.' },
 } as const;
 
+// What each topic is about, as named things search engines and AI tools already know.
+export const topicAbout: Record<string, string[]> = {
+  'real-estate': ['Real estate marketing', 'Lead generation', 'Meta Ads', 'WhatsApp Business'],
+  hospitality: ['Hotel marketing', 'Direct booking', 'WhatsApp Business', 'Meta Ads'],
+  travel: ['Travel agency marketing', 'Meta Ads', 'Cost per lead', 'WhatsApp Business'],
+  d2c: ['Direct-to-consumer brands', 'Meta Ads', 'Return on advertising spend', 'Shopify'],
+  'seo-ai-search': ['Search engine optimization', 'Generative engine optimization', 'ChatGPT', 'Google AI Overviews'],
+  automation: ['Marketing automation', 'Python', 'Artificial intelligence'],
+  career: ['Performance marketing', 'Career development'],
+};
+
 export type TopicId = keyof typeof topics;
 export const topicIds = Object.keys(topics) as [TopicId, ...TopicId[]];

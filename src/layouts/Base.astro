@@ -12,7 +12,6 @@ const person = {
   '@context': 'https://schema.org', '@type': 'Person', '@id': `${Astro.site}#me`, name: me.name, givenName: 'Abhay', familyName: 'Mehta',
   alternateName: ['ANM', 'Abhay N Mehta'], url: Astro.site?.href, jobTitle: 'Performance Marketer', description: me.summary,
   email: `mailto:${me.email}`, sameAs: [me.linkedin, me.github],
-  worksFor: { '@type': 'Organization', name: 'County Group', description: 'Luxury real estate developer, Delhi NCR' },
   address: { '@type': 'PostalAddress', addressLocality: 'Delhi NCR', addressCountry: 'IN' },
   alumniOf: { '@type': 'CollegeOrUniversity', name: 'Guru Gobind Singh Indraprastha University' },
   knowsAbout: ['Performance marketing', 'Meta Ads', 'Google Ads', 'DV360', 'Conversions API', 'SEO', 'Answer engine optimisation', 'Generative engine optimisation', 'WhatsApp automation', 'Shopify', 'Python', 'Astro'],
@@ -69,6 +68,13 @@ const website = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `
   </footer>
   <div class="cursor" aria-hidden="true" data-cursor><span></span></div>
   <div class="cursor-ring" aria-hidden="true" data-ring></div>
+  {me.ga4 && !noindex && (
+    <script is:inline define:vars={{ id: me.ga4 }}>
+      window.dataLayer = window.dataLayer || []; window.gtag = function () { dataLayer.push(arguments); };
+      gtag('js', new Date()); gtag('config', id);
+      addEventListener('load', () => setTimeout(() => { const s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id; document.head.append(s); }, 1500));
+    </script>
+  )}
   <script>
     import '../scripts/ui.js';
     const go = () => import('../scripts/motion.js');

@@ -4,7 +4,7 @@
 import Base from '../../layouts/Base.astro';
 import { render } from 'astro:content';
 import { getPosts, minutes, fmt, iso } from '../../data/posts';
-import { topics } from '../../data/topics';
+import { topics, topicAbout } from '../../data/topics';
 import { roles, me } from '../../data/me';
 
 export async function getStaticPaths() {
@@ -22,7 +22,7 @@ const schema = [
   { '@context': 'https://schema.org', '@type': 'BlogPosting', '@id': `${url}#post`, headline: data.title, description: data.description, abstract: data.summary,
     datePublished: iso(data.pubDate), dateModified: iso(data.updated ?? data.pubDate), url, mainEntityOfPage: url, inLanguage: 'en-IN',
     author: { '@id': `${site}#me` }, publisher: { '@id': `${site}#me` }, image: `${site}og.jpg`, keywords: data.keyphrase,
-    articleSection: topic.name, wordCount: (post.body ?? '').split(/\s+/).length, isPartOf: { '@id': `${site}blog/#blog` } },
+    articleSection: topic.name, about: topicAbout[data.topic].map((name) => ({ '@type': 'Thing', name })), wordCount: (post.body ?? '').split(/\s+/).length, isPartOf: { '@id': `${site}blog/#blog` } },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Abhay Mehta', item: site },
     { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site}blog/` },

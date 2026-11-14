@@ -8,7 +8,7 @@ Rules for every post:
 - Numbers only from the current CV. Never invent a number, price, client detail or quote.
 - Frame every engagement exactly as the CV does (role, contract, project, dates).
 - Keep campaign audiences and structures out of posts; share principles, not playbooks.
-- Current employer: only what is on the CV.
+- Current employer: never named. Say "a premium Delhi NCR real estate developer"; no project names or identifying figures.
 - Answer first (the "In short" summary), plain language, a numbers table where there is data, 3 questions at the end.
 
 Status: ✅ published · 🟡 next · ⬜ planned
@@ -19,7 +19,7 @@ Status: ✅ published · 🟡 next · ⬜ planned
 | ✅ | Hot, warm, cold: WhatsApp qualification to 44% site visits | real estate lead qualification whatsapp | 44% vs 8%, ₹22.4 Cr+ pipeline, 6+ Wati flows |
 | 🟡 | Meta Conversions API and offline conversions for real estate, explained | meta conversions api real estate | CAPI, offline conversions, lookalikes from buyer lists |
 | 🟡 | Lead to site visit: the real estate number that matters more than CPL | real estate lead to site visit ratio | 44% vs 8% |
-| ⬜ | Launching a ₹4,500 Crore project: evaluating 16 ad platforms | real estate pre launch marketing plan | 16 platforms, DV360, Uber, MagicBricks, 108/168 qualified |
+| ⬜ | Planning a luxury pre-launch: evaluating 16 ad platforms | real estate pre launch marketing plan | 16 platforms, DV360, Uber, MagicBricks, 108/168 qualified |
 | ⬜ | DV360 for real estate: when programmatic beats Meta | dv360 real estate india | DV360 onboarding |
 | ⬜ | MagicBricks vs Meta vs Google for real estate leads | magicbricks vs facebook ads real estate | platform mix |
 | ⬜ | Uber Ads for real estate: what it is and who it suits | uber ads india real estate | Uber onboarding |
@@ -70,7 +70,7 @@ Status: ✅ published · 🟡 next · ⬜ planned
 | Status | Post | Main search phrase | Proof |
 |---|---|---|---|
 | ✅ | Can a personal website get cited by ChatGPT? Week 1 | how to get cited by chatgpt | this site |
-| 🟡 | Are blogs still worth it in 2026? | are blogs still worth it | County 16 sites, this experiment |
+| 🟡 | Are blogs still worth it in 2026? | are blogs still worth it | 16 real estate sites, this experiment |
 | ⬜ | SEO vs AEO vs GEO, in plain English | seo vs aeo vs geo | — |
 | ⬜ | ChatGPT referrals up 18% in a month: what we changed | increase chatgpt referrals | +18%, branded +33.4%, organic +19.3% |
 | ⬜ | Structured data for small businesses: a starter kit | schema markup small business | this site, Omkarix, Earavat |
