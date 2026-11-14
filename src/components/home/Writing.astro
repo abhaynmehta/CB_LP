@@ -1,0 +1,21 @@
+---
+// Latest posts on the home page, so the blog is one click from the most linked page on the site.
+import { getPosts } from '../../data/posts';
+import { topics } from '../../data/topics';
+const posts = (await getPosts()).slice(0, 4);
+---
+{posts.length > 0 && (
+  <section id="writing" class="writing">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:40px">
+        <p class="eyebrow rv">Writing</p>
+        <h2 class="h2 rv">Notes from <em>the work.</em></h2>
+        <p class="lead rv">What I ran, what it cost and what it returned, with the numbers.</p>
+      </div>
+      <ul class="post-list">{posts.map((p) => (
+        <li class="rv"><a href={`/blog/${p.id}/`}><span class="cap">{topics[p.data.topic].name}</span><b>{p.data.title}</b><span>{p.data.description}</span></a></li>
+      ))}</ul>
+      <div class="ctas rv"><a class="btn gold" href="/blog/" data-magnet>All posts</a></div>
+    </div>
+  </section>
+)}

@@ -1,0 +1,51 @@
+---
+// A topic hub: one page per subject, listing its posts and the matching case studies.
+import Base from '../../../layouts/Base.astro';
+import { getPosts, minutes, fmt, iso } from '../../../data/posts';
+import { topics, type TopicId } from '../../../data/topics';
+import { roles } from '../../../data/me';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  const used = [...new Set(posts.map((p) => p.data.topic))] as TopicId[];
+  return used.map((t) => ({ params: { topic: t }, props: { t, posts: posts.filter((p) => p.data.topic === t) } }));
+}
+const { t, posts } = Astro.props;
+const topic = topics[t as TopicId];
+const cases = [...new Set(posts.map((p) => p.data.related).filter(Boolean))].map((s) => roles.find((r) => r.slug === s)).filter((r) => r?.media);
+const site = Astro.site!.href, url = new URL(Astro.url.pathname, Astro.site).href;
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'CollectionPage', name: topic.name, description: topic.blurb, url, isPartOf: { '@id': `${site}blog/#blog` }, author: { '@id': `${site}#me` } },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Abhay Mehta', item: site },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site}blog/` },
+    { '@type': 'ListItem', position: 3, name: topic.name, item: url },
+  ] },
+];
+---
+<Base title={`${topic.name}: posts and case studies`} description={topic.blurb} schema={schema}>
+  <section class="blog-hero">
+    <div class="wrap sec-head">
+      <p class="eyebrow"><a href="/blog/">Blog</a> · Topic</p>
+      <h1 class="h2">{topic.name}</h1>
+      <p class="lead">{topic.blurb}</p>
+    </div>
+  </section>
+  <section class="blog-list">
+    <div class="wrap">
+      <ul class="post-list big">{posts.map((p) => (
+        <li><a href={`/blog/${p.id}/`}>
+          <span class="cap"><time datetime={iso(p.data.pubDate)}>{fmt(p.data.pubDate)}</time> · {minutes(p)} min</span>
+          <b>{p.data.title}</b>
+          <span>{p.data.description}</span>
+        </a></li>
+      ))}</ul>
+      {cases.length > 0 && (
+        <div class="topic-cases">
+          <p class="eyebrow">Case studies</p>
+          <ul class="post-list">{cases.map((r) => <li><a href={`/work/${r!.slug}/`}><span class="cap">{r!.sector}</span><b>{r!.org}</b><span>{r!.points[0]}</span></a></li>)}</ul>
+        </div>
+      )}
+    </div>
+  </section>
+</Base>

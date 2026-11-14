@@ -1,0 +1,39 @@
+---
+// The blog home: every post, newest first, with the topic hubs on top.
+import Base from '../../layouts/Base.astro';
+import { getPosts, minutes, fmt, iso } from '../../data/posts';
+import { topics, type TopicId } from '../../data/topics';
+
+const posts = await getPosts();
+const used = [...new Set(posts.map((p) => p.data.topic))] as TopicId[];
+const site = Astro.site!.href;
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'Blog', '@id': `${site}blog/#blog`, name: 'Abhay Mehta: notes from the work', url: `${site}blog/`, inLanguage: 'en-IN', author: { '@id': `${site}#me` },
+    blogPost: posts.map((p) => ({ '@type': 'BlogPosting', headline: p.data.title, url: `${site}blog/${p.id}/`, datePublished: iso(p.data.pubDate) })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Abhay Mehta', item: site },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site}blog/` },
+  ] },
+];
+---
+<Base title="Blog: real numbers from performance marketing" description="Case-led notes on Meta Ads, real estate and travel lead generation, resort direct bookings, D2C growth, SEO and AI search, by Abhay Mehta." schema={schema}>
+  <section class="blog-hero">
+    <div class="wrap sec-head">
+      <p class="eyebrow">Blog</p>
+      <h1 class="h2">Notes from <em>the work.</em></h1>
+      <p class="lead">What I ran, what it cost and what it returned, written down while the numbers are fresh. Every figure comes from my own campaigns.</p>
+      <ul class="topic-chips">{used.map((t) => <li><a href={`/blog/topic/${t}/`}>{topics[t].name}</a></li>)}</ul>
+    </div>
+  </section>
+  <section class="blog-list">
+    <div class="wrap">
+      <ul class="post-list big">{posts.map((p) => (
+        <li><a href={`/blog/${p.id}/`}>
+          <span class="cap">{topics[p.data.topic].name} · <time datetime={iso(p.data.pubDate)}>{fmt(p.data.pubDate)}</time> · {minutes(p)} min</span>
+          <b>{p.data.title}</b>
+          <span>{p.data.description}</span>
+        </a></li>
+      ))}</ul>
+    </div>
+  </section>
+</Base>

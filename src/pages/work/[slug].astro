@@ -3,11 +3,13 @@
 import Base from '../../layouts/Base.astro';
 import { roles, me } from '../../data/me';
 import { small } from '../../data/img';
+import { getPosts } from '../../data/posts';
 export function getStaticPaths() {
   const list = roles.filter((r) => r.media);
   return list.map((r, i) => ({ params: { slug: r.slug }, props: { r, next: list[(i + 1) % list.length] } }));
 }
 const { r, next } = Astro.props;
+const writeups = (await getPosts()).filter((p) => p.data.related === r.slug);
 const site = Astro.site!.href, url = new URL(Astro.url.pathname, Astro.site).href;
 const schema = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -42,4 +44,12 @@ const schema = [
       </div>
     </div>
   </section>
+  {writeups.length > 0 && (
+    <section style="padding-top:0">
+      <div class="wrap">
+        <p class="eyebrow" style="margin-bottom:22px">Written up in detail</p>
+        <ul class="post-list">{writeups.map((p) => <li><a href={`/blog/${p.id}/`}><span class="cap">Blog</span><b>{p.data.title}</b><span>{p.data.description}</span></a></li>)}</ul>
+      </div>
+    </section>
+  )}
 </Base>

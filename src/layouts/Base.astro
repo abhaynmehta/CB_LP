@@ -34,6 +34,7 @@ const website = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `
   <link rel="preload" href="/fonts/bodoni-moda-latin-opsz-italic.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate" type="application/rss+xml" title="Abhay Mehta: notes from the work" href="/rss.xml" />
   <meta property="og:type" content="profile" />
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description.slice(0, 200)} />
@@ -57,7 +58,7 @@ const website = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `
   <header class="hd" data-hd>
     <a href="/" class="hd-mark">AM<span>.</span><span class="sr"> Abhay Mehta, home</span></a>
     <nav class="hd-nav" aria-label="Main">
-      <a href="/#impact">Impact</a><a href="/#work">Work</a><a href="/#services">Services</a><a href="/#contact">Contact</a><a href={me.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="/#impact">Impact</a><a href="/#work">Work</a><a href="/blog/">Blog</a><a href="/#services">Services</a><a href="/#contact">Contact</a><a href={me.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
     </nav>
     <a class="pill" href={me.cv} download data-magnet>CV ↓</a>
   </header>
