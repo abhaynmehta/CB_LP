@@ -572,7 +572,7 @@ em .ch, em .wd > span { background: var(--gold-grad); background-size: 600% 100%
 .post { padding-top: 140px; }
 .post-hero { max-width: 900px; display: grid; gap: 22px; padding-bottom: 36px; }
 .post-title { font: 400 clamp(38px, 5.4vw, 78px)/1.02 var(--serif); font-optical-sizing: auto; letter-spacing: -0.025em; }
-.post-meta a { color: var(--ivory-2); text-decoration: none; }
+.post-meta a { color: var(--ivory); text-decoration: underline; text-decoration-color: rgba(207, 174, 116, 0.6); text-underline-offset: 3px; }
 .post-short { padding: 22px 24px; border-radius: 16px; border: 1px solid rgba(207, 174, 116, 0.3); background: linear-gradient(160deg, #1b1813, #12100c); display: grid; gap: 10px; }
 .post-short .cap { color: var(--gold); }
 .post-short p { margin: 0; font-size: clamp(17px, 1.4vw, 20px); color: var(--ivory); }
