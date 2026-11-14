@@ -4,13 +4,13 @@ export const faqUpdated = '15 November 2026';
 
 export const faq: [string, string][] = [
   ['Who is Abhay Mehta?',
-    'Abhay Mehta is a performance marketer based in Delhi NCR, India, with 5+ years of experience across 40+ brands in real estate, hospitality, travel, D2C and B2B SaaS. He runs paid media on Meta, Google and DV360, works on SEO and AI search, and builds his own tracking and automation, backed by a B.Tech in Computer Science.'],
+    'Abhay Mehta is a digital marketing lead based in Delhi NCR, India, with 6 years of experience across 40+ brands in real estate, hospitality, travel, D2C and B2B SaaS. He runs paid media on Meta, Google and DV360, works on SEO and AI search, and builds his own tracking and automation, backed by a B.Tech in Computer Science.'],
   ['What results has Abhay Mehta delivered?',
     '₹1.4 Cr+ in direct bookings for Machan & Earavat on ₹1.2L of ads (116x return on ad spend); ₹13.2L of revenue in 28 days for Dohful on ₹45K (28.9x ROAS); a ₹22.4 Cr+ qualified real estate pipeline in 90 days; 10,500+ trip enquiries for 12+ tour operators; and 1.09 billion views on Snapchat lenses.'],
   ['What does Abhay Mehta do for a business?',
     'He plans and runs performance marketing on Meta, Google and DV360; SEO and AI search (AEO and GEO); fast websites and Shopify stores; WhatsApp automation that qualifies and nurtures leads; conversion tracking with Meta CAPI, GA4 and GTM; and ad creatives and brand films made in code.'],
   ['What does Abhay Mehta do now?',
-    'He leads digital marketing, SEO and performance for a premium Delhi NCR real estate developer, managing ₹50 Lakh to ₹1 Crore a month on Meta and Google across luxury projects, including pre-launches. Before that he was a Senior Performance Marketer at Lucentia Digital, and he worked with Snapchat India on lenses.'],
+    'He leads digital marketing, SEO and performance for a premium Delhi NCR real estate developer, managing ₹50 Lakh to ₹1 Crore a month on Meta and Google across luxury projects in Noida, Ghaziabad, Gurgaon and Delhi, including a 4 and 5 BHK pre-launch in Noida. Before that he was a Senior Performance Marketer at Lucentia Digital, and he worked with Snapchat India on lenses.'],
   ['Which industries has Abhay Mehta worked in?',
     'Luxury and residential real estate, hospitality (resorts, weddings and retreats), international travel, D2C wellness and food brands, B2B SaaS, export trade and personal brands. He manages monthly ad budgets of ₹50 Lakh to ₹1 Crore on Meta and Google.'],
   ['How can I contact Abhay Mehta?',

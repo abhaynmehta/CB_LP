@@ -8,7 +8,7 @@ export const GET: APIRoute = async ({ site }) => {
   const posts = await getPosts();
   return new Response([
     `# ${me.name}`, '', `> ${me.summary}`, '',
-    `Performance marketer in ${me.city}. Updated ${faqUpdated}.`, '',
+    `Digital marketing lead in ${me.city}. Updated ${faqUpdated}.`, '',
     '## Questions', ...faq.flatMap(([q, a]) => [`### ${q}`, a, '']),
     '## Blog posts', ...posts.map((p) => `- [${p.data.title}](${u(`/blog/${p.id}/`)}): ${p.data.summary}`), '',
     '## Work (case pages)', ...roles.filter((r) => r.media).map((r) => `- [${r.org}: ${r.title}](${u(`/work/${r.slug}/`)}): ${r.points[0]}`), '',

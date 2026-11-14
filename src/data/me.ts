@@ -3,8 +3,8 @@
 
 export const me = {
   name: 'Abhay Mehta',
-  role: 'Performance Marketing · SEO & AI Search · AdTech · Automation',
-  short: 'Performance marketer who codes.',
+  role: 'Digital Marketing Lead · Performance · SEO & AI Search · Automation',
+  short: 'Digital marketing lead who codes.',
   email: 'abhaynmehta03@gmail.com',
   phone: '+91 95996 49609',
   wa: '919599649609',
@@ -12,18 +12,18 @@ export const me = {
   github: 'https://github.com/abhaynmehta',
   ga4: '', // Google Analytics 4 Measurement ID (G-XXXXXXXXXX); empty = analytics off
   // Search result description (under 160 characters): who, where, proof.
-  seo: 'Abhay Mehta, performance marketer in Delhi NCR: ₹1.4 Cr+ bookings on ₹1.2L of ads, 28.9x ROAS, ₹22.4 Cr+ pipeline. Meta, Google, DV360, SEO and AI search.',
+  seo: 'Abhay Mehta, digital marketing lead in Delhi NCR: ₹1.4 Cr+ bookings on ₹1.2L of ads, 28.9x ROAS, ₹22.4 Cr+ pipeline. Meta, Google, DV360, SEO and AI search.',
   city: 'Delhi NCR, India',
   cv: '/Abhay_Mehta_CV.pdf',
   summary:
-    'Performance marketing specialist and AdTech professional with 5+ years of experience and 40+ clients across real estate, D2C, hospitality, travel, EdTech, Fintech and B2B SaaS. I have managed ₹5 Crore+ in ad spend across Meta, Google, DV360 and Snapchat, and today manage ₹50 Lakh to ₹1 Crore a month on Meta and Google for a premium Delhi NCR real estate developer. With a B.Tech in Computer Science, I build my own tracking, automation and AI tools.',
+    'Digital marketing lead with 6 years of experience and 40+ clients across real estate, D2C, hospitality, travel, EdTech, Fintech and B2B SaaS. I have managed ₹5 Crore+ in ad spend across Meta, Google, DV360 and Snapchat, and today manage ₹50 Lakh to ₹1 Crore a month on Meta and Google for a premium Delhi NCR real estate developer. With a B.Tech in Computer Science, I build my own tracking, automation and AI tools.',
 };
 
 export const stats: [string, string][] = [
   ['₹5 Cr+', 'ad spend managed'],
   ['₹1 Cr', 'monthly budget, the most I have run'],
   ['40+', 'clients across 8 industries'],
-  ['5+', 'years in performance marketing'],
+  ['6', 'years in digital marketing'],
 ];
 
 export type Role = {
@@ -42,10 +42,10 @@ export type Role = {
 // Order and wording follow the CV: every role and client is its own entry.
 export const roles: Role[] = [
   {
-    slug: 'real-estate-developer', title: 'Digital Marketing, SEO and Performance', org: 'A premium Delhi NCR real estate developer', sector: 'Luxury real estate · Delhi NCR', dates: '2026 – Present', current: true,
+    slug: 'real-estate-developer', title: 'Digital Marketing Lead: Performance, SEO and AI Search', org: 'A premium Delhi NCR real estate developer', sector: 'Luxury real estate · Delhi NCR', dates: '2026 – Present', current: true,
     points: [
-      'Manage ₹50 Lakh to ₹1 Crore a month on Meta and Google combined, plus programmatic and property portals, across several luxury projects with a cross-agency team.',
-      'Led digital for a luxury pre-launch: evaluated 16 platforms and onboarded programmatic and partner channels; the launch delivered 108 of 168 qualified leads in its first month.',
+      'Manage ₹50 Lakh to ₹1 Crore a month on Meta and Google combined, plus programmatic and property portals, across luxury residential and commercial projects in Noida, Ghaziabad, Gurgaon and Delhi, leading a cross-agency team.',
+      'Led digital for a 4 and 5 BHK luxury pre-launch in Noida: evaluated 16 platforms and onboarded programmatic and partner channels; the launch delivered 108 of 168 qualified leads in its first month.',
       'Lifted Meta lead qualification to 17.9% (account average 5.9%) and cut Meta CPL by 15.7% in a month.',
       'Own SEO, AEO and GEO across 16 websites: organic leads up 19.3%, branded clicks up 33.4% and ChatGPT referrals up 18% in one month; organic leads qualify at up to 45%.',
       'Built Python and AI tools (blog audits, weekly site and lead form checks) that save about 20 hours of QC a month.',

@@ -54,8 +54,8 @@ They are not separate jobs. A fast, clear, honest page with real information hel
 - **Google Search Console**: pages indexed, searches shown for, clicks.
 - **Bing Webmaster Tools**: the same for Bing.
 - **Prompts, run monthly**, three times each on ChatGPT, Perplexity and Google:
-  - "Who is Abhay Mehta, performance marketer?"
-  - "Performance marketer in Delhi NCR for real estate"
+  - "Who is Abhay Mehta, digital marketing lead?"
+  - "Digital marketing lead in Delhi NCR for real estate"
   - "What does a travel lead cost on Meta Ads in India?"
   - "How can a resort get more direct bookings than OTAs?"
   - "Real estate WhatsApp lead qualification case study"
