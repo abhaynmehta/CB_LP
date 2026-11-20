@@ -8,7 +8,7 @@ Rules for every post:
 - Numbers only from the current CV. Never invent a number, price, client detail or quote.
 - Frame every engagement exactly as the CV does (role, contract, project, dates).
 - Keep campaign audiences and structures out of posts; share principles, not playbooks.
-- Current employer: never named. Say "a premium Delhi NCR real estate developer"; no project names or identifying figures.
+- Current employer: never named, nor its project names. Real data is fine: cities (Noida, Ghaziabad, Gurgaon, Delhi), configurations (4 and 5 BHK), tickets ₹2.5 Cr to ₹30 Cr, budgets and results. Earlier Gurgaon work with builders and channel partners may name the projects (Westin Residences, Tonino Lamborghini Residences).
 - Answer first (the "In short" summary), plain language, a numbers table where there is data, 3 questions at the end.
 
 Status: ✅ published · 🟡 next · ⬜ planned
@@ -19,11 +19,11 @@ Status: ✅ published · 🟡 next · ⬜ planned
 | ✅ | Hot, warm, cold: WhatsApp qualification to 44% site visits | real estate lead qualification whatsapp | 44% vs 8%, ₹22.4 Cr+ pipeline, 6+ Wati flows |
 | 🟡 | Meta Conversions API and offline conversions for real estate, explained | meta conversions api real estate | CAPI, offline conversions, lookalikes from buyer lists |
 | 🟡 | Lead to site visit: the real estate number that matters more than CPL | real estate lead to site visit ratio | 44% vs 8% |
-| ⬜ | Planning a luxury pre-launch: evaluating 16 ad platforms | real estate pre launch marketing plan | 16 platforms, DV360, Uber, MagicBricks, 108/168 qualified |
+| ✅ | Planning a luxury pre-launch: evaluating 16 ad platforms | real estate pre launch marketing plan | 16 platforms, DV360, Uber, MagicBricks, 108/168 qualified |
 | ⬜ | DV360 for real estate: when programmatic beats Meta | dv360 real estate india | DV360 onboarding |
 | ⬜ | MagicBricks vs Meta vs Google for real estate leads | magicbricks vs facebook ads real estate | platform mix |
 | ⬜ | Uber Ads for real estate: what it is and who it suits | uber ads india real estate | Uber onboarding |
-| ⬜ | Lifting Meta lead qualification from 5.9% to 17.9% | improve lead quality facebook ads real estate | 17.9% vs 5.9%, CPL −15.7% |
+| ✅ | Lifting Meta lead qualification from 5.9% to 17.9% | improve lead quality facebook ads real estate | 17.9% vs 5.9%, CPL −15.7% |
 | ⬜ | Marketing ultra luxury homes above ₹8 Crore | luxury real estate marketing india | ₹8 Cr+ proposals |
 | ⬜ | The 60 day real estate marketing plan (template) | real estate digital marketing plan | 60 day strategy documents |
 | ⬜ | Managing ₹50 Lakh a month across 6 projects | real estate ad budget allocation | ₹50L+/month, 8 member team |
@@ -34,7 +34,7 @@ Status: ✅ published · 🟡 next · ⬜ planned
 | Status | Post | Main search phrase | Proof |
 |---|---|---|---|
 | ✅ | From 18% to 41% direct: two Corbett resorts | how to get direct bookings for resort | ₹1.4 Cr+, 116x, 18→41%, 22% |
-| 🟡 | WhatsApp concierge for hotels: 22% of chats to bookings | whatsapp automation for hotels | 22% vs 4–8% |
+| ✅ | WhatsApp concierge for hotels: 22% of chats to bookings | whatsapp automation for hotels | 22% vs 4–8% |
 | ⬜ | Marketing destination weddings (₹18 Lakh tickets) | destination wedding marketing resort | ₹18L average ticket |
 | ⬜ | Selling corporate retreats to HR teams | corporate offsite marketing resort | ₹6L average group booking |
 | ⬜ | A resort website with one page per search intent | resort website seo | 14 pages, schema, llms.txt, 95 mobile |
@@ -46,7 +46,7 @@ Status: ✅ published · 🟡 next · ⬜ planned
 | Status | Post | Main search phrase | Proof |
 |---|---|---|---|
 | ✅ | What a travel lead really costs on Meta in India | meta ads cost per lead travel agency india | ₹50 Bali, ₹96 Maldives, ₹44.87 Vietnam, ₹4.62 chat |
-| 🟡 | Click to WhatsApp ads for travel: 10,694 chats at ₹4.62 | click to whatsapp ads travel agency | ₹4.62/chat |
+| ✅ | Click to WhatsApp ads for travel: 10,694 chats at ₹4.62 | click to whatsapp ads travel agency | ₹4.62/chat |
 | ⬜ | Group departure ads at ₹37 a lead | group tour marketing facebook ads | ₹37 CPL |
 | ⬜ | Selling the Maldives at $1 a lead | maldives package facebook ads | 183 leads at ₹96 |
 | ⬜ | Bali lead generation: 1,471 leads at ₹50 | bali tour package leads | 1,471 at ₹50 |
@@ -71,7 +71,7 @@ Status: ✅ published · 🟡 next · ⬜ planned
 |---|---|---|---|
 | ✅ | Can a personal website get cited by ChatGPT? Week 1 | how to get cited by chatgpt | this site |
 | 🟡 | Are blogs still worth it in 2026? | are blogs still worth it | 16 real estate sites, this experiment |
-| ⬜ | SEO vs AEO vs GEO, in plain English | seo vs aeo vs geo | — |
+| ✅ | SEO vs AEO vs GEO, in plain English | seo vs aeo vs geo | — |
 | ⬜ | ChatGPT referrals up 18% in a month: what we changed | increase chatgpt referrals | +18%, branded +33.4%, organic +19.3% |
 | ⬜ | Structured data for small businesses: a starter kit | schema markup small business | this site, Omkarix, Earavat |
 | ⬜ | llms.txt: what it is and whether you need one | what is llms.txt | this site |

@@ -44,7 +44,7 @@ export const roles: Role[] = [
   {
     slug: 'real-estate-developer', title: 'Digital Marketing Lead: Performance, SEO and AI Search', org: 'A premium Delhi NCR real estate developer', sector: 'Luxury real estate · Delhi NCR', dates: '2026 – Present', current: true,
     points: [
-      'Manage ₹50 Lakh to ₹1 Crore a month on Meta and Google combined, plus programmatic and property portals, across luxury residential and commercial projects in Noida, Ghaziabad, Gurgaon and Delhi, leading a cross-agency team.',
+      'Manage ₹50 Lakh to ₹1 Crore a month on Meta and Google combined, plus programmatic and property portals, across luxury residential and commercial projects in Noida, Ghaziabad, Gurgaon and Delhi, with tickets from ₹2.5 Crore to ₹30 Crore, leading a cross-agency team.',
       'Led digital for a 4 and 5 BHK luxury pre-launch in Noida: evaluated 16 platforms and onboarded programmatic and partner channels; the launch delivered 108 of 168 qualified leads in its first month.',
       'Lifted Meta lead qualification to 17.9% (account average 5.9%) and cut Meta CPL by 15.7% in a month.',
       'Own SEO, AEO and GEO across 16 websites: organic leads up 19.3%, branded clicks up 33.4% and ChatGPT referrals up 18% in one month; organic leads qualify at up to 45%.',
@@ -67,7 +67,7 @@ export const roles: Role[] = [
   {
     slug: 'lucentia-digital', title: 'Senior Performance Marketer', org: 'Lucentia Digital', sector: 'Real estate performance marketing agency · NCR', dates: '03/2026 – 06/2026',
     points: [
-      'Managed 12+ active client accounts simultaneously across premium NCR real estate, with a combined ad spend of ₹30 Lakh+ across 50+ campaigns in three months.',
+      'Managed 12+ active client accounts simultaneously across premium NCR real estate for builders and channel partners, including branded luxury residences in Gurgaon such as Westin Residences and Tonino Lamborghini Residences, with a combined ad spend of ₹30 Lakh+ across 50+ campaigns in three months.',
       'Contributed to a total qualified sales pipeline of ₹22.4 Crore+ across active real estate accounts in a 90 day period, with 44% lead to site visit against an 8% industry average.',
       'Built and deployed Wati WhatsApp chatbot flows for 6+ projects covering lead qualification, hot, warm and cold tagging, automated brochure delivery, and 1 day and 3 day inactivity nurture sequences.',
       'Configured Meta Conversion API, offline conversion tracking and lookalikes from verified buyer lists; produced 60 day strategy documents, campaign audits and proposals for ultra luxury inventory above ₹8 Crore.',

@@ -2,8 +2,9 @@
 import '../styles/global.css';
 import { me } from '../data/me';
 
-interface Props { title?: string; description?: string; schema?: object[] }
-const { title, description = me.seo, schema = [] } = Astro.props;
+interface Props { title?: string; description?: string; schema?: object[]; keywords?: string[]; article?: { published: string; modified: string; section: string } }
+const { title, description = me.seo, schema = [], keywords = [], article } = Astro.props;
+const kw = [...keywords, 'Abhay Mehta', 'digital marketing lead Delhi NCR', 'real estate digital marketing', 'Meta Ads', 'Google Ads', 'SEO', 'AEO', 'GEO'];
 const fullTitle = title ? `${title} · ${me.name}` : `${me.name} · Digital Marketing Lead in Delhi NCR | Meta, Google, SEO`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const noindex = process.env.NOINDEX === '1';
@@ -25,6 +26,9 @@ const website = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{fullTitle}</title>
   <meta name="description" content={description.slice(0, 158)} />
+  <meta name="keywords" content={[...new Set(kw)].join(', ')} />
+  <meta name="author" content={me.name} />
+  {!noindex && <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
   <link rel="canonical" href={canonical} />
   <meta name="google-site-verification" content="sMgUnVdlVc6JxjbMYWYwDwdEYXCpDVagrPXCI1ecwUo" />
   {noindex && <meta name="robots" content="noindex, nofollow" />}
@@ -34,12 +38,18 @@ const website = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `
   <link rel="preload" href="/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="alternate" type="application/rss+xml" title="Abhay Mehta: notes from the work" href="/rss.xml" />
-  <meta property="og:type" content="profile" />
+  <meta property="og:type" content={article ? 'article' : 'profile'} />
+  <meta property="og:site_name" content={me.name} />
+  <meta property="og:locale" content="en_IN" />
+  {article && <><meta property="article:published_time" content={article.published} /><meta property="article:modified_time" content={article.modified} /><meta property="article:section" content={article.section} /><meta property="article:author" content={me.linkedin} /></>}
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description.slice(0, 200)} />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={new URL('/og.jpg', Astro.site).href} />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description.slice(0, 200)} />
+  <meta name="twitter:image" content={new URL('/og.jpg', Astro.site).href} />
   {[person, website, ...schema].map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
   <script is:inline>var d=document.documentElement;d.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('motion');try{if(sessionStorage.getItem('am-seen'))d.classList.add('seen');sessionStorage.setItem('am-seen','1')}catch(e){d.classList.add('seen')}</script>
 </head>

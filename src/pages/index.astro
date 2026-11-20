@@ -15,7 +15,7 @@ import Writing from '../components/home/Writing.astro';
 import { faq } from '../data/faq';
 const site = Astro.site!.href;
 const schema = [
-  { '@context': 'https://schema.org', '@type': 'ProfilePage', '@id': `${site}#page`, url: site, name: 'Abhay Mehta, digital marketing lead', mainEntity: { '@id': `${site}#me` }, isPartOf: { '@id': `${site}#site` }, dateModified: '2026-11-14' },
+  { '@context': 'https://schema.org', '@type': 'ProfilePage', '@id': `${site}#page`, url: site, name: 'Abhay Mehta, digital marketing lead', mainEntity: { '@id': `${site}#me` }, isPartOf: { '@id': `${site}#site` }, dateModified: '2026-11-21' },
   { '@context': 'https://schema.org', '@type': 'VideoObject', name: 'Abhay Mehta: showreel', description: 'A 24-second showreel of results: ₹13.2L in 28 days for Dohful, ₹1.4 Cr+ bookings for Machan & Earavat, a ₹22.4 Cr+ pipeline, 10,500+ trip enquiries and 1.09B Snapchat lens views.', thumbnailUrl: [`${site}work/motion/showreel-16x9.jpg`], contentUrl: `${site}work/motion/showreel-16x9.mp4`, uploadDate: '2026-10-26', duration: 'PT24S', creator: { '@id': `${site}#me` } },
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
 ];

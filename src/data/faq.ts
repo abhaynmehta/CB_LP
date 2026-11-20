@@ -1,6 +1,6 @@
 // Plain answers about Abhay, written to be quoted on their own. Used by the visible Questions section,
 // the FAQPage structured data and llms.txt, so all three always say the same thing. Every figure is from the CV.
-export const faqUpdated = '15 November 2026';
+export const faqUpdated = '21 November 2026';
 
 export const faq: [string, string][] = [
   ['Who is Abhay Mehta?',
@@ -10,7 +10,7 @@ export const faq: [string, string][] = [
   ['What does Abhay Mehta do for a business?',
     'He plans and runs performance marketing on Meta, Google and DV360; SEO and AI search (AEO and GEO); fast websites and Shopify stores; WhatsApp automation that qualifies and nurtures leads; conversion tracking with Meta CAPI, GA4 and GTM; and ad creatives and brand films made in code.'],
   ['What does Abhay Mehta do now?',
-    'He leads digital marketing, SEO and performance for a premium Delhi NCR real estate developer, managing ₹50 Lakh to ₹1 Crore a month on Meta and Google across luxury projects in Noida, Ghaziabad, Gurgaon and Delhi, including a 4 and 5 BHK pre-launch in Noida. Before that he was a Senior Performance Marketer at Lucentia Digital, and he worked with Snapchat India on lenses.'],
+    'He leads digital marketing, SEO and performance for a premium Delhi NCR real estate developer, managing ₹50 Lakh to ₹1 Crore a month on Meta and Google across luxury projects in Noida, Ghaziabad, Gurgaon and Delhi with tickets from ₹2.5 Crore to ₹30 Crore, including a 4 and 5 BHK pre-launch in Noida. Earlier, with builders and channel partners, he marketed branded Gurgaon residences such as Westin Residences and Tonino Lamborghini Residences. Before that he was a Senior Performance Marketer at Lucentia Digital, and he worked with Snapchat India on lenses.'],
   ['Which industries has Abhay Mehta worked in?',
     'Luxury and residential real estate, hospitality (resorts, weddings and retreats), international travel, D2C wellness and food brands, B2B SaaS, export trade and personal brands. He manages monthly ad budgets of ₹50 Lakh to ₹1 Crore on Meta and Google.'],
   ['How can I contact Abhay Mehta?',

@@ -32,7 +32,8 @@ const schema = [
   ...(data.faq.length ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: data.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }] : []),
 ];
 ---
-<Base title={data.seoTitle ?? data.title} description={data.description} schema={schema}>
+<Base title={data.seoTitle ?? data.title} description={data.description} schema={schema} keywords={[data.keyphrase, ...topicAbout[data.topic]]}
+  article={{ published: iso(data.pubDate), modified: iso(data.updated ?? data.pubDate), section: topic.name }}>
   <article class="post">
     <header class="post-hero wrap">
       <p class="eyebrow"><a href="/blog/">Blog</a> <span aria-hidden="true">·</span> <a href={`/blog/topic/${data.topic}/`}>{topic.name}</a></p>
