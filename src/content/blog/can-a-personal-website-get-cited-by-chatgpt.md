@@ -4,6 +4,8 @@ seoTitle: "Can a personal website get cited by ChatGPT?"
 description: "I'm testing whether a one-person portfolio can rank on Google and get cited by ChatGPT and Perplexity. Week 1: what I set up, why, and how I'll measure it."
 summary: "I'm running an open experiment: can a personal portfolio on a free subdomain rank on Google and get cited by ChatGPT, Perplexity and Google's AI answers? In week 1 I made the site fast, wrote plain answers about my work, added structured data, an llms.txt file and a sitemap, verified it with Google and Bing, and submitted every page. Results will be posted here as they come in."
 pubDate: 2026-11-15
+stat: "Week 1"
+statLabel: "of a public SEO, AEO and GEO experiment"
 topic: seo-ai-search
 keyphrase: "how to get cited by chatgpt"
 faq:

@@ -4,6 +4,8 @@ seoTitle: "WhatsApp automation for hotels: 22% chat to booking"
 description: "A WhatsApp concierge for two Jim Corbett resorts: instant brochures, pre-qualification and follow-up. 22% of chats became bookings against a 4–8% benchmark."
 summary: "For two resorts in Jim Corbett, I built a WhatsApp concierge that replies instantly with the right brochure, asks a few questions to understand the trip, and hands serious guests to the team. 22% of WhatsApp conversations became bookings, against a 4 to 8% hospitality benchmark, and direct booking share grew from 18% to 41% as campaign traffic moved from OTAs to WhatsApp."
 pubDate: 2026-11-21
+stat: "22%"
+statLabel: "of WhatsApp chats became bookings"
 topic: hospitality
 keyphrase: "whatsapp automation for hotels"
 related: machan-earavat
@@ -21,6 +23,9 @@ Most resort enquiries arrive at the worst time: late at night, on weekends, in t
 Between August 2025 and February 2026 I worked as paid media and automation consultant for Machan Corbett Resort and Earavat Resort in Jim Corbett. The WhatsApp concierge was the part that turned ad clicks into bookings.
 
 ## What the concierge does
+
+![Resort lawn at dusk with tables set out, the kind of venue shown in the destination wedding campaigns](/work/hosp/weddings.w480.webp)
+*Wedding enquiries start with a photo like this and continue on WhatsApp.*
 
 1. **Replies instantly**, at any hour, so the guest never waits.
 2. **Sends the right brochure.** A couple planning a weekend gets a different brochure from a family planning a wedding or an HR team planning an offsite.

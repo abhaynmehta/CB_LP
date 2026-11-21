@@ -14,6 +14,8 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     updated: z.coerce.date().optional(),
     topic: z.enum(topicIds),
+    stat: z.string().optional(), // the headline number on the cover image
+    statLabel: z.string().optional(),
     keyphrase: z.string(), // the main search phrase this post is written for
     related: z.string().optional(), // slug of the matching case study under /work/
     faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),

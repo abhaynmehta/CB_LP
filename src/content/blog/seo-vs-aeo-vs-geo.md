@@ -4,6 +4,8 @@ seoTitle: "SEO vs AEO vs GEO explained in plain English"
 description: "SEO ranks you on Google, AEO gets your answer quoted, GEO gets you cited by ChatGPT, Gemini and Perplexity. What each means, with results from 16 sites."
 summary: "SEO gets a page ranked in search results. AEO (answer engine optimisation) shapes the page so its answer can be quoted directly. GEO (generative engine optimisation) helps AI tools like ChatGPT, Gemini, Claude and Perplexity find, trust and cite it. They build on each other. Across 16 real estate websites, working on all three moved organic leads up 19.3%, branded clicks up 33.4% and ChatGPT referrals up 18% in one month."
 pubDate: 2026-11-21
+stat: "+18%"
+statLabel: "ChatGPT referrals in a month"
 topic: seo-ai-search
 keyphrase: "seo vs aeo vs geo"
 faq:

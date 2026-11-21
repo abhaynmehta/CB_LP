@@ -5,10 +5,10 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/covers.mjs && astro build",
     "preview": "astro preview",
-    "deploy:preview": "NOINDEX=1 astro build && wrangler deploy --name abhay-luxury",
-    "deploy": "astro build && wrangler deploy"
+    "deploy:preview": "node scripts/covers.mjs && NOINDEX=1 astro build && wrangler deploy --name abhay-luxury",
+    "deploy": "node scripts/covers.mjs && astro build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

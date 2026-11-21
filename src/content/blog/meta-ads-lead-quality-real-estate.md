@@ -4,6 +4,8 @@ seoTitle: "Improve Meta Ads lead quality for real estate: 5.9% to 17.9%"
 description: "Meta lead qualification rose to 17.9% from a 5.9% average and cost per lead fell 15.7% in a month, on luxury Delhi NCR real estate. The principles."
 summary: "Meta lead forms bring lots of real estate leads, but few qualify. On luxury projects in Delhi NCR with tickets from ₹2.5 Crore to ₹30 Crore, Meta lead qualification rose to 17.9% against a 5.9% account average, and Meta cost per lead fell 15.7% in a month. The changes were about telling Meta what a good lead looks like, filtering earlier, and judging ads on qualified leads instead of cheap ones."
 pubDate: 2026-11-21
+stat: "5.9% → 17.9%"
+statLabel: "Meta lead qualification"
 topic: real-estate
 keyphrase: "improve lead quality facebook ads real estate"
 faq:

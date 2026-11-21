@@ -4,6 +4,8 @@ seoTitle: "Luxury real estate pre-launch marketing plan (Noida, 2026)"
 description: "How I planned digital for a 4 and 5 BHK luxury pre-launch in Noida: 16 platforms evaluated, programmatic added, 108 of 168 qualified leads in month one."
 summary: "For a 4 and 5 BHK luxury pre-launch in Noida, I evaluated 16 ad platforms before spending, kept Meta and Google as the base, and added programmatic and partner channels only where buyers at this price actually are. In its first month the launch delivered 108 of 168 qualified leads. The plan matters more than any single channel: decide what a qualified lead is, measure it from day one, and move money weekly."
 pubDate: 2026-11-21
+stat: "108 / 168"
+statLabel: "qualified leads in month one"
 topic: real-estate
 keyphrase: "real estate pre launch marketing plan"
 faq:

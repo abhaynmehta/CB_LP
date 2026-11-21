@@ -17,8 +17,8 @@ Status: ✅ published · 🟡 next · ⬜ planned
 | Status | Post | Main search phrase | Proof from the CV |
 |---|---|---|---|
 | ✅ | Hot, warm, cold: WhatsApp qualification to 44% site visits | real estate lead qualification whatsapp | 44% vs 8%, ₹22.4 Cr+ pipeline, 6+ Wati flows |
-| 🟡 | Meta Conversions API and offline conversions for real estate, explained | meta conversions api real estate | CAPI, offline conversions, lookalikes from buyer lists |
-| 🟡 | Lead to site visit: the real estate number that matters more than CPL | real estate lead to site visit ratio | 44% vs 8% |
+| ✅ | Meta Conversions API and offline conversions for real estate, explained | meta conversions api real estate | CAPI, offline conversions, lookalikes from buyer lists |
+| ✅ | Lead to site visit: the real estate number that matters more than CPL | real estate lead to site visit ratio | 44% vs 8% |
 | ✅ | Planning a luxury pre-launch: evaluating 16 ad platforms | real estate pre launch marketing plan | 16 platforms, DV360, Uber, MagicBricks, 108/168 qualified |
 | ⬜ | DV360 for real estate: when programmatic beats Meta | dv360 real estate india | DV360 onboarding |
 | ⬜ | MagicBricks vs Meta vs Google for real estate leads | magicbricks vs facebook ads real estate | platform mix |
@@ -58,7 +58,7 @@ Status: ✅ published · 🟡 next · ⬜ planned
 | Status | Post | Main search phrase | Proof |
 |---|---|---|---|
 | ✅ | ₹45K to ₹13.2L in 28 days: the Diwali campaign | diwali campaign roas d2c brand | 28.9x, 28% reorder |
-| 🟡 | Same sales on 12% less spend: consolidating Meta Ads | meta ads campaign consolidation | −12% spend, AOV +14%, visitors +56% |
+| ✅ | Same sales on 12% less spend: consolidating Meta Ads | meta ads campaign consolidation | −12% spend, AOV +14%, visitors +56% |
 | ⬜ | Shopify for a 90% mobile audience: what to change | shopify mobile conversion | TBB storefront |
 | ⬜ | WhatsApp automation for Shopify: checkout to reorder | whatsapp automation shopify india | TBB flows |
 | ⬜ | Cutting CAC from ₹2,000 to ₹700 (The Print Culture) | reduce customer acquisition cost d2c | CAC ₹2,000→₹700, 4.8x |
@@ -70,7 +70,7 @@ Status: ✅ published · 🟡 next · ⬜ planned
 | Status | Post | Main search phrase | Proof |
 |---|---|---|---|
 | ✅ | Can a personal website get cited by ChatGPT? Week 1 | how to get cited by chatgpt | this site |
-| 🟡 | Are blogs still worth it in 2026? | are blogs still worth it | 16 real estate sites, this experiment |
+| ✅ | Are blogs still worth it in 2026? | are blogs still worth it | 16 real estate sites, this experiment |
 | ✅ | SEO vs AEO vs GEO, in plain English | seo vs aeo vs geo | — |
 | ⬜ | ChatGPT referrals up 18% in a month: what we changed | increase chatgpt referrals | +18%, branded +33.4%, organic +19.3% |
 | ⬜ | Structured data for small businesses: a starter kit | schema markup small business | this site, Omkarix, Earavat |

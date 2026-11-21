@@ -4,6 +4,8 @@ seoTitle: "How resorts get direct bookings: 18% to 41% via WhatsApp"
 description: "How two Corbett resorts grew direct bookings from 18% to 41%: separate funnels for weddings, retreats and stays, and a WhatsApp concierge converting 22%."
 summary: "For Machan Corbett Resort and Earavat Resort, I routed ad traffic to WhatsApp instead of booking sites, ran separate campaigns for weddings, corporate retreats, leisure stays and wildlife packages, and set up a WhatsApp concierge that converted 22% of chats against a 4 to 8% benchmark. Direct bookings went from 18% to 41% of the total, and ₹1.2 Lakh of ads produced ₹1.4 Crore+ in confirmed bookings."
 pubDate: 2026-11-15
+stat: "18% → 41%"
+statLabel: "direct bookings · ₹1.4 Cr+"
 topic: hospitality
 keyphrase: "how to get direct bookings for resort"
 related: machan-earavat

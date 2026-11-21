@@ -17,11 +17,13 @@ const { Content } = await render(post);
 const site = Astro.site!.href, url = new URL(Astro.url.pathname, Astro.site).href;
 const topic = topics[data.topic];
 const caseRole = data.related ? roles.find((r) => r.slug === data.related) : undefined;
+const cover = `/blog/${post.id}.jpg`;
+const coverAlt = `Cover: ${data.title}${data.stat ? ` (${data.stat} ${data.statLabel ?? ''})`.trimEnd() : ''}`;
 const more = [...posts.filter((p) => p.id !== post.id && p.data.topic === data.topic), ...posts.filter((p) => p.id !== post.id && p.data.topic !== data.topic)].slice(0, 3);
 const schema = [
   { '@context': 'https://schema.org', '@type': 'BlogPosting', '@id': `${url}#post`, headline: data.title, description: data.description, abstract: data.summary,
     datePublished: iso(data.pubDate), dateModified: iso(data.updated ?? data.pubDate), url, mainEntityOfPage: url, inLanguage: 'en-IN',
-    author: { '@id': `${site}#me` }, publisher: { '@id': `${site}#me` }, image: `${site}og.jpg`, keywords: data.keyphrase,
+    author: { '@id': `${site}#me` }, publisher: { '@id': `${site}#me` }, image: { '@type': 'ImageObject', url: `${site}blog/${post.id}.jpg`, width: 1200, height: 630 }, keywords: data.keyphrase,
     articleSection: topic.name, about: topicAbout[data.topic].map((name) => ({ '@type': 'Thing', name })), wordCount: (post.body ?? '').split(/\s+/).length, isPartOf: { '@id': `${site}blog/#blog` } },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Abhay Mehta', item: site },
@@ -33,12 +35,13 @@ const schema = [
 ];
 ---
 <Base title={data.seoTitle ?? data.title} description={data.description} schema={schema} keywords={[data.keyphrase, ...topicAbout[data.topic]]}
-  article={{ published: iso(data.pubDate), modified: iso(data.updated ?? data.pubDate), section: topic.name }}>
+  article={{ published: iso(data.pubDate), modified: iso(data.updated ?? data.pubDate), section: topic.name }} image={cover} imageAlt={coverAlt}>
   <article class="post">
     <header class="post-hero wrap">
       <p class="eyebrow"><a href="/blog/">Blog</a> <span aria-hidden="true">·</span> <a href={`/blog/topic/${data.topic}/`}>{topic.name}</a></p>
       <h1 class="post-title">{data.title}</h1>
       <p class="post-meta cap">By <a href="/">Abhay Mehta</a> · <time datetime={iso(data.pubDate)}>{fmt(data.pubDate)}</time>{data.updated && <> · Updated <time datetime={iso(data.updated)}>{fmt(data.updated)}</time></>} · {minutes(post)} min read</p>
+      <img class="post-cover" src={cover} alt={coverAlt} width="1200" height="630" fetchpriority="high" decoding="async" />
       <div class="post-short"><span class="cap">In short</span><p>{data.summary}</p></div>
     </header>
     <div class="post-body wrap"><Content /></div>

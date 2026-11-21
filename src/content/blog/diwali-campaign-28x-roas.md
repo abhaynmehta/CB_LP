@@ -4,6 +4,8 @@ seoTitle: "Diwali campaign playbook: ₹45K to ₹13.2L at 28.9x ROAS"
 description: "How a handcrafted cookie brand turned ₹45,000 of Diwali ads into ₹13.2 Lakh in 28 days (28.9x ROAS), and why 28% of buyers came back within 45 days."
 summary: "For Dohful, a premium handcrafted cookie brand, a Diwali campaign turned ₹45,000 of ad spend into ₹13.2 Lakh of revenue in 28 days, a 28.9x return on ad spend. It worked because the brand and Instagram were built first (22K to 27K followers, 2.24M views in a month), the ads sold a gift rather than cookies, and 28% of Diwali buyers reordered within 45 days."
 pubDate: 2026-11-15
+stat: "28.9x"
+statLabel: "ROAS · ₹45K to ₹13.2L in 28 days"
 topic: d2c
 keyphrase: "diwali campaign roas d2c brand"
 related: dohful

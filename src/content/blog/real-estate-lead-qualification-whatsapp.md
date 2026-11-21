@@ -4,6 +4,8 @@ seoTitle: "Real estate lead qualification on WhatsApp: 44% site visits"
 description: "WhatsApp bots for 6+ NCR real estate projects: qualifying questions, hot/warm/cold tags, brochures and nurture. 44% lead to site visit against an 8% average."
 summary: "Real estate leads from Meta are cheap and mostly unqualified. With Wati WhatsApp bots on 6+ NCR projects, every lead got an instant reply and brochure, a few qualifying questions and a hot, warm or cold tag. Across 12+ accounts that meant 44% lead to site visit against an 8% industry average, and ₹22.4 Cr+ of qualified pipeline in 90 days."
 pubDate: 2026-11-15
+stat: "44%"
+statLabel: "lead to site visit, against 8%"
 topic: real-estate
 keyphrase: "real estate lead qualification whatsapp"
 related: lucentia-digital

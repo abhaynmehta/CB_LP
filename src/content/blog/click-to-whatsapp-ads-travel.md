@@ -4,6 +4,8 @@ seoTitle: "Click to WhatsApp ads for travel agencies: ₹4.62 a chat"
 description: "One Meta click to WhatsApp campaign for a tour operator brought 10,694 chats at ₹4.62 each. When chat ads beat lead forms for travel, and how to follow up."
 summary: "For international trips, a WhatsApp chat is often a better first step than a lead form, because travellers want to ask questions before they share details. One Meta click to WhatsApp campaign brought 10,694 chats at ₹4.62 each. Chat ads win on cost and conversation; lead forms win when the sales team works from a call list. Most tour operators need both."
 pubDate: 2026-11-21
+stat: "₹4.62"
+statLabel: "per WhatsApp chat · 10,694 chats"
 topic: travel
 keyphrase: "click to whatsapp ads travel agency"
 related: travel
@@ -32,6 +34,9 @@ From 2024 to 2026 I ran Meta Ads for 12+ tour operators selling international tr
 The numbers are not directly comparable, because a chat is a conversation and a lead is a contact, but the pattern held across operators: chats cost far less and start warmer.
 
 ## What makes chat ads work
+
+![Vertical travel reel for the Maldives with the starting price of ₹99,000 per person for two nights in a beach villa and two in a water villa](/work/ads/reel-maldives.jpg)
+*A destination reel with the starting price on screen, which filters out people the package does not suit.*
 
 - **Answer within minutes.** A chat that waits until morning goes cold. Saved replies with the itinerary and price range help.
 - **One destination per ad.** "Bali, 5 nights" brings people who want Bali, not people browsing.

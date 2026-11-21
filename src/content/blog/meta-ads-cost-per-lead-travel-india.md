@@ -4,6 +4,8 @@ seoTitle: "Meta Ads cost per lead for travel agencies in India"
 description: "Real Meta Ads costs from 12+ Indian tour operators: Bali leads at ₹50, Maldives at ₹96 (about $1), WhatsApp chats at ₹4.62, and what drove them."
 summary: "Across 12+ Indian tour operators between 2024 and 2026, Meta Ads brought 10,500+ international trip enquiries. My best runs: 1,471 Bali leads at ₹50, 1,025 Vietnam leads at ₹44.87, 183 Maldives leads at ₹96 (about $1), group trips at ₹37 per lead, and 10,694 WhatsApp chats at ₹4.62 each."
 pubDate: 2026-11-15
+stat: "10,500+"
+statLabel: "trip enquiries on Meta"
 topic: travel
 keyphrase: "meta ads cost per lead travel agency india"
 related: travel

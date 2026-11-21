@@ -2,8 +2,9 @@
 import '../styles/global.css';
 import { me } from '../data/me';
 
-interface Props { title?: string; description?: string; schema?: object[]; keywords?: string[]; article?: { published: string; modified: string; section: string } }
-const { title, description = me.seo, schema = [], keywords = [], article } = Astro.props;
+interface Props { title?: string; description?: string; schema?: object[]; keywords?: string[]; article?: { published: string; modified: string; section: string }; image?: string; imageAlt?: string }
+const { title, description = me.seo, schema = [], keywords = [], article, image = '/og.jpg', imageAlt } = Astro.props;
+const ogImage = new URL(image, Astro.site).href;
 const kw = [...keywords, 'Abhay Mehta', 'digital marketing lead Delhi NCR', 'real estate digital marketing', 'Meta Ads', 'Google Ads', 'SEO', 'AEO', 'GEO'];
 const fullTitle = title ? `${title} · ${me.name}` : `${me.name} · Digital Marketing Lead in Delhi NCR | Meta, Google, SEO`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -45,11 +46,14 @@ const website = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description.slice(0, 200)} />
   <meta property="og:url" content={canonical} />
-  <meta property="og:image" content={new URL('/og.jpg', Astro.site).href} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={description.slice(0, 200)} />
-  <meta name="twitter:image" content={new URL('/og.jpg', Astro.site).href} />
+  <meta name="twitter:image" content={ogImage} />
   {[person, website, ...schema].map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
   <script is:inline>var d=document.documentElement;d.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('motion');try{if(sessionStorage.getItem('am-seen'))d.classList.add('seen');sessionStorage.setItem('am-seen','1')}catch(e){d.classList.add('seen')}</script>
 </head>

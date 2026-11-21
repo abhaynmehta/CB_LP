@@ -612,3 +612,7 @@ em .ch, em .wd > span { background: var(--gold-grad); background-size: 600% 100%
 .writing .ctas { margin-top: 28px; }
 /* One reading column for every part of a post */
 .post-hero, .post-body, .post-faq, .post-end, .post-more { max-width: 860px; }
+.post-cover { width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); margin: 8px 0 22px; }
+.post-body img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); }
+.post-body figure { margin: 28px 0; }
+.post-body figcaption, .post-body img + em { display: block; font-size: 14px; color: var(--mute); margin-top: 8px; }
