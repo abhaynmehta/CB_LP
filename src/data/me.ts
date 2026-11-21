@@ -10,7 +10,7 @@ export const me = {
   wa: '919599649609',
   linkedin: 'https://www.linkedin.com/in/abhay-mehta-4b93a2206/',
   github: 'https://github.com/abhaynmehta',
-  ga4: '', // Google Analytics 4 Measurement ID (G-XXXXXXXXXX); empty = analytics off
+  ga4: 'G-4CJEM1BT74', // Google Analytics 4 Measurement ID (G-XXXXXXXXXX); empty = analytics off
   // Search result description (under 160 characters): who, where, proof.
   seo: 'Abhay Mehta, digital marketing lead in Delhi NCR: ₹1.4 Cr+ bookings on ₹1.2L of ads, 28.9x ROAS, ₹22.4 Cr+ pipeline. Meta, Google, DV360, SEO and AI search.',
   city: 'Delhi NCR, India',
